@@ -5,13 +5,22 @@
  */
 package servlet;
 
+import dao.DriverDAO;
+import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import util.Validation;
 
 /**
  *
@@ -30,19 +39,32 @@ public class SignupServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SignupServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SignupServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        HttpSession session = request.getSession(true);
+        String fullname = request.getParameter("fullname");
+        String email = request.getParameter("email");
+        String passwordEntered = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+
+        Validation validation = new Validation();
+        String err = validation.isValidPassword(passwordEntered, confirmPassword);
+        if (err != null && err.length() > 0) {
+            request.setAttribute("fullname", fullname);
+            request.setAttribute("email", email);
+            request.setAttribute("err", err);
+            RequestDispatcher view = request.getRequestDispatcher("Signup.jsp");
+            view.forward(request, response);
+        } else {
+            DriverDAO driverDAO = new DriverDAO();
+            ArrayList<String> errors = driverDAO.addDriver(fullname, email, passwordEntered);
+            if (errors == null || errors.size() == 0) {
+                response.sendRedirect("Request.jsp");
+            } else {
+                RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
+                request.setAttribute("errors", errors);
+                view.forward(request, response);
+            }
         }
     }
 
@@ -58,7 +80,11 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -72,7 +98,11 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -31,6 +31,9 @@
 
                     <div class="inside-block">
                         <h2><strong>Sign Up</strong></h2>
+                        <%
+                        
+                        %>
 
                         <form id="form-signin" class="form-signin" action = "SignupServlet" method= "post">
                             <section>
@@ -39,16 +42,21 @@
                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                 </div>
                                 <div class="input-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Email">
+                                    <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
+                                </div>
+                                <div class="input-group">
                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="email" class="form-control" name="email" placeholder="Email">
-                                    <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
+                                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
+                                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                 </div>
 
                             </section>
                             <section class="log-in">
+                                <a href="Login.jsp" class="btn btn-blue">Back</a>
                                 <button class="btn btn-greensea">Submit</button>
                             </section>
                         </form>

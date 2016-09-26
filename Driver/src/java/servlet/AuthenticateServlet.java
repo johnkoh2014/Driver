@@ -5,11 +5,8 @@
  */
 package servlet;
 
-import dao.ChatDAO;
-import dao.QuotationRequestDAO;
-import dao.WebUserDAO;
-import entity.Chat;
-import entity.WebUser;
+import dao.DriverDAO;
+import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -49,31 +46,12 @@ public class AuthenticateServlet extends HttpServlet {
         String email = request.getParameter("email");
         String passwordEntered = request.getParameter("password");
 
-        WebUserDAO dao = new WebUserDAO();
-        WebUser user = dao.authenticateUser(email, passwordEntered);
-        int staffType = user.getStaffType();
+        DriverDAO dao = new DriverDAO();
+        Driver user = dao.authenticateUser(email, passwordEntered);
         if (user != null) {
             session.setAttribute("loggedInUser", user);
-            int userType = user.getUserType();
-            if (userType == 1) {
-                session.setAttribute("loggedInUserType", "Workshop");
-                response.sendRedirect("New_Request.jsp");
-            } else if (userType == 2) {
-                session.setAttribute("loggedInUserType", "Admin");
-                response.sendRedirect("Admin_Dashboard.jsp");
-                return;
-            } else if (userType == 3) {
-                session.setAttribute("loggedInUserType", "Groomer");
-                response.sendRedirect("Groomer.jsp");
-            } else if (userType == 4 && staffType == 2) {
-                session.setAttribute("loggedInUserType", "Valet");
-                session.setAttribute("staffType", "Staff");
-                response.sendRedirect("Valet.jsp");
-            } else if (userType == 4 && staffType == 1) {
-                session.setAttribute("loggedInUserType", "Valet");
-                session.setAttribute("staffType", "Admin");
-                response.sendRedirect("ValetAdminRequest.jsp");
-            }
+            response.sendRedirect("Request.jsp");
+            return;
 
         } else {
             request.setAttribute("errMsg", "Invalid Email/Password");
