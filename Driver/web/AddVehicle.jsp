@@ -79,12 +79,14 @@
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label for="input03" class="col-sm-2 control-label">Transmission Type</label>
+                                                <label class="col-sm-2 control-label">Transmission Type</label>
                                                 <div class="col-sm-2">
-                                                    <input type="radio"  id="input03" value="auto" name="transmission">Auto
+                                                    <input type="radio"  id="input06" value="Automatic" name="transmission">
+                                                    <label for="input06" class="control-label">Automatic</label>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <input type="radio" id="input03" value="manual" name="transmission">Manual
+                                                    <input type="radio" id="input07" value="Manual" name="transmission">
+                                                    <label for="input07" class="control-label">Manual</label>
                                                 </div>
                                             </div>
                                             

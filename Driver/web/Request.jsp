@@ -34,7 +34,7 @@
                             <!-- col 12 -->
                             <div>
                                 <div class="margin-top-15 text-center">
-                                    <a href="AddCar.jsp" class="btn btn-primary" role="button">Add Car</a>
+                                    <a href="AddVehicle.jsp" class="btn btn-primary" role="button">Add Car</a>
                                 </div>
                                 <div class="text-center margin-15 full-width">
                                     <div class="btn-group margin-bottom-20" style="width:100%">
@@ -43,7 +43,7 @@
                                         </button>
                                         <ul class="dropdown-menu" role="menu" style="width:100%">
                                             <li>
-                                                <a href="#">
+                                                <a href="Service.jsp">
                                                     <div class="carItem">
                                                         <div class="col-sm-6 car">
                                                             AUDI TT
@@ -57,7 +57,7 @@
                                             </li>
                                             <li class="line-across-dark"></li>
                                             <li>
-                                                <a href="#">
+                                                <a href="Service.jsp">
                                                     <div class="carItem">
                                                         <div class="col-sm-6 car">
                                                             AUDI TT

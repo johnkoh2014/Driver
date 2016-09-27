@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile</title>
+        <title>Add Car</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-1">
@@ -23,7 +23,7 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center">
-                            <h2>My Profile</h2>
+                            <h2>Add New Car</h2>
                         </div>
                     </div>
                     <!-- /page header -->
@@ -32,11 +32,10 @@
                         <!-- row -->
                         <div class="row">
                             <!-- col 12 -->
-                            <div>
+                          <div>
 
                                 <section class="tile color transparent-black">
                                     <div class="tile-header text-center">
-                                        <h3>Account Information</h3>
                                     </div>
                                     <!--end tile header-->
 
@@ -46,24 +45,55 @@
                                         <form class="form-horizontal" role="form" action="" method="POST">
 
                                             <div class="form-group">
-                                                <label for="input02" class="col-sm-2 control-label">Email</label>
+                                                <label for="input01" class="col-sm-2 control-label">Make</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="email" readonly>
+                                                    <input type="text" class="form-control" id="input01" name="carMake">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="input03" class="col-sm-2 control-label">Mobile Number</label>
+                                                <label for="input02" class="col-sm-2 control-label">Model</label>
                                                 <div class="col-sm-10">
-                                                    <input type="tel" class="form-control" id="input03" name="hpNo"readonly>
+                                                    <input type="text" class="form-control" id="input02" name="carModel">
                                                 </div>
                                             </div>
 
+                                            <div class="form-group">
+                                                <label for="input03" class="col-sm-2 control-label">Year of Manufacture</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" id="input03" name="manufactureYear">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="input04" class="col-sm-2 control-label">Plate Number</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" id="input04" name="plateNumber">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="input05" class="col-sm-2 control-label">Car Color</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="input05" name="carColor">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Transmission Type</label>
+                                                <div class="col-sm-2">
+                                                    <input type="radio"  id="input06" value="Automatic" name="transmission">
+                                                    <label for="input06" class="control-label">Automatic</label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="radio" id="input07" value="Manual" name="transmission">
+                                                    <label for="input07" class="control-label">Manual</label>
+                                                </div>
+                                            </div>
+                                            
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
-                                                <a href="ChangePassword.jsp" class="btn btn-blue">Change Password</a>
-                                                <a href="EditProfile.jsp" class="btn btn-default">Edit Profile</a>
-
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="reset" class="btn btn-default">Reset</button>
                                             </div>
                                             <!--end form footer-->
                                         </form>
@@ -74,47 +104,6 @@
 
 
                                 </section>
-
-
-                                <section class="tile color transparent-black">
-                                    <div class="tile-header text-center">
-                                        <h3>Vehicles</h3>
-                                    </div>
-                                    <!--end tile header-->
-
-                                    <!-- /tile body -->
-                                    <div class="tile-body">
-                                        <div class="carItem">
-                                            <div class="col-sm-6 car">
-                                                AUDI TT
-                                            </div>
-                                            <div class="col-sm-4 car">
-                                                SKJ 1234 Z
-                                            </div>
-                                            <div class="col-sm-2 car">
-                                                <a href="EditVehicle.jsp" class="btn btn-blue">Edit Car</a>
-                                            </div>
-                                        </div>
-                                        <!--<div class="line-across-dark"></div>-->
-
-                                        <div class="carItem">
-                                            <div class="col-sm-6 car">
-                                                AUDI TT
-                                            </div>
-                                            <div class="col-sm-4 car">
-                                                SKJ 1234 Z
-                                            </div>
-                                            <div class="col-sm-2 car">
-                                                <a href="EditVehicle.jsp" class="btn btn-blue">Edit Car</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end tile body-->
-
-
-                                </section>
-
-
 
                             </div>
                             <!-- /col 12 -->

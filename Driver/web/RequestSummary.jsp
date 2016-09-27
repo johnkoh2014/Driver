@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile</title>
+        <title>Request Summary</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-1">
@@ -23,10 +23,18 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center">
-                            <h2>My Profile</h2>
+                            <h1>REQUEST SUMMARY</h1>
+                            <h4>Service</h4>
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%
+                        String service = request.getParameter("service");
+                        String type = request.getParameter("type");
+                        if (type == null) {
+                            type = "";
+                        }
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -35,35 +43,42 @@
                             <div>
 
                                 <section class="tile color transparent-black">
-                                    <div class="tile-header text-center">
-                                        <h3>Account Information</h3>
+                                    <div class="tile-header">
+                                        <h3><%=service%>
+                                            <%if (type.length() > 0) {%>
+                                            - <%=type%>
+                                            <%
+                                                }
+                                            %>    
+                                        </h3>
                                     </div>
                                     <!--end tile header-->
-
+                                    <div class="line-across"></div>
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
                                         <form class="form-horizontal" role="form" action="" method="POST">
 
                                             <div class="form-group">
-                                                <label for="input02" class="col-sm-2 control-label">Email</label>
+                                                <label for="input02" class="col-sm-2 control-label">Additional Description</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="email" readonly>
+                                                    <textarea class="form-control" id="input02" rows="5" name="description"></textarea>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="input03" class="col-sm-2 control-label">Mobile Number</label>
+                                                <label for="input03" class="col-sm-2 control-label">Mileage</label>
                                                 <div class="col-sm-10">
-                                                    <input type="tel" class="form-control" id="input03" name="hpNo"readonly>
+                                                    <input type="number" class="form-control" id="input03" name="mileage">
                                                 </div>
                                             </div>
 
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
-                                                <a href="ChangePassword.jsp" class="btn btn-blue">Change Password</a>
-                                                <a href="EditProfile.jsp" class="btn btn-default">Edit Profile</a>
-
+                                                <input type="hidden" name="service"value="<%=service%>">
+                                                <input type="hidden" name="type" value="<%=type%>">
+                                                <button type="submit" class="btn btn-primary">Get Offers</button>
+                                                <button type="reset" class="btn btn-default">Reset</button>
                                             </div>
                                             <!--end form footer-->
                                         </form>
@@ -74,48 +89,6 @@
 
 
                                 </section>
-
-
-                                <section class="tile color transparent-black">
-                                    <div class="tile-header text-center">
-                                        <h3>Vehicles</h3>
-                                    </div>
-                                    <!--end tile header-->
-
-                                    <!-- /tile body -->
-                                    <div class="tile-body">
-                                        <div class="carItem">
-                                            <div class="col-sm-6 car">
-                                                AUDI TT
-                                            </div>
-                                            <div class="col-sm-4 car">
-                                                SKJ 1234 Z
-                                            </div>
-                                            <div class="col-sm-2 car">
-                                                <a href="EditVehicle.jsp" class="btn btn-blue">Edit Car</a>
-                                            </div>
-                                        </div>
-                                        <!--<div class="line-across-dark"></div>-->
-
-                                        <div class="carItem">
-                                            <div class="col-sm-6 car">
-                                                AUDI TT
-                                            </div>
-                                            <div class="col-sm-4 car">
-                                                SKJ 1234 Z
-                                            </div>
-                                            <div class="col-sm-2 car">
-                                                <a href="EditVehicle.jsp" class="btn btn-blue">Edit Car</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end tile body-->
-
-
-                                </section>
-
-
-
                             </div>
                             <!-- /col 12 -->
                         </div>
