@@ -391,3 +391,13 @@ textarea.form-control{
     border-bottom-width: 1px;
     width: 100% !important;
 }
+
+.w50 {
+    width: 49.5%;    
+}
+
+.arrange-center {
+    float: none !important; 
+    display: inline-block !important;
+    margin: 0 auto !important;
+}
