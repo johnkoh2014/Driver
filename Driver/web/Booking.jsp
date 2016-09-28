@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>All Requests</title>
+        <title>Profile</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
@@ -23,7 +23,7 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
-                            <h1>ALL REQUESTS</h1>
+                            <h1>MY BOOKING</h1>
                         </div>
                     </div>
                     <!-- /page header -->
@@ -32,56 +32,62 @@
                         <!-- row -->
                         <div class="row">
                             <!-- col 12 -->
-                            <div>
 
-                                <section class="tile color transparent-black">
-                                    <div class="tile-header">
-                                        <div class="tile-widget">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-xs-12 text-right">
-                                                    <div class="btn-group btn-group-justified table-options desktopOnly">
-                                                        <ul class="nav nav-pills tabpager text-center">
-                                                            <li class="w50 active arrange-center"><a href="#Requests" data-toggle="pill">REQUESTS</a></li>
-                                                            <li class="w50 arrange-center"><a href="#Offers" data-toggle="pill">OFFERS</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                            <form class="form-horizontal" role="form" action="" method="POST">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div style="color:white"><b>Service Date & Time</b></div>
+                                        <div class="form-group col-sm-12">
+                                            <div class='input-group date' id='enddatetimepicker'>
+                                                <!--<form id='' action="" role="form">-->
+                                                <input type='text' name="endTime" class="form-control dt" readonly/>
+                                                <!--</form>-->
+
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <section class="tile color transparent-white">
+                                    <div class="tile-header">
+                                        Would you like to have Valet?
                                     </div>
                                     <!--end tile header-->
 
                                     <!-- /tile body -->
                                     <div class="tile-body">
-                                        <div class="tab-content">
-
-                                            <div class="tab-pane fade active in" id="Requests" >
-                                                <ul class="list-group">
-                                                    <li class="list-group-item"><b>General Diagnostic</b><br/><i>No offer at the moment</i></li>
-                                                    <li class="list-group-item"><b>General Diagnostic</b><br/><i>There are offers for your request</i></li>
-                                                </ul>
-                                            </div><!--Requests-->
 
 
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <input type="radio"  id="input06" value="Yes" name="valet">
+                                                <label for="input06" class="control-label">YES</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <input type="radio" id="input07" value="No" name="valet">
+                                                <label for="input07" class="control-label">NO</label>
+                                            </div>
+                                        </div>
 
-                                            <div class="tab-pane fade " id="Offers" >
-                                                <div class="list-group">
-                                                    <a href="OfferDetails.jsp?id=" class="list-group-item"><b>AH HUAT WORKSHOP PTE LTD</b><br/><span style="color:blue">$60 - $80</span><br/><i>Click to view profile and quote</i></a>
-                                                    <a href="OfferDetails.jsp?id=" class="list-group-item"><b>DYNAMICS MECHANICS</b><br/><span style="color:blue">$70 - $120</span><br/><i>Click to view profile and quote</i></a>
-                                                </div>
-                                            </div><!--Offers-->
 
-
+                                        <!--form footer for submit-->
+                                        <div class="form-group form-footer text-center">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="reset" class="btn btn-default">Reset</button>
 
                                         </div>
+
 
                                     </div>
                                     <!--end tile body-->
 
 
                                 </section>
-                            </div>
-                            <!-- /col 12 -->
+                                <!-- /col 12 -->
+                                <!--end form footer-->
+                            </form>
                         </div>
                         <!-- /row -->
                     </div>
@@ -104,6 +110,8 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="js/moment.js"></script> 
+        <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
 
         <script src="js/minimal.min.js"></script>
 
@@ -115,5 +123,15 @@
             })
 
         </script>
+        <!--DATETIME-->
+        <script type="text/javascript">
+            $(".date").each(function () {
+                $(this).datetimepicker({
+                    format: 'YYYY-MM-DD HH:mm',
+                    minDate: new Date(),
+                    sideBySide: true,
+                    ignoreReadonly: true
+                });
+            });</script>
     </body>
 </html>

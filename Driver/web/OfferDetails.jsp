@@ -5,7 +5,7 @@
         <title>Booking</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-1">
+    <body class="bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -22,7 +22,7 @@
                     <div class="pageheader">
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
-                        <div class="margin-top-15 text-center">
+                        <div class="margin-top-15 text-center" style="color:white">
                             <h1>BOOKING</h1>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                                             <h5>General Diagnostic</h5>
                                                         </div>
                                                         <div class="margin-top-15 text-center">
-                                                            <a href="Booking.jsp" class="btn btn-blue">Book an Appointment</a>
+                                                            <a href="Booking.jsp" class="btn btn-blue">BOOK AN APPOINTMENT</a>
                                                         </div>
 
                                                     </div>
@@ -84,14 +84,38 @@
                                                 <section class="tile color transparent-black">
                                                     <div class="tile-header">
                                                         <h3>AH HUAT WORKSHOP PTE LTD</h3>
-                                                        <a href="Booking.jsp" class="btn btn-blue">BOOK</a>
+                                                        <a href="Booking.jsp" class="btn btn-blue pull-right">BOOK AN APPOINTMENT</a>
 
                                                     </div>
                                                     <!--end tile header-->
                                                     <div class="line-across"></div>
                                                     <!-- /tile body -->
                                                     <div class="tile-body">
-                                                        
+                                                        <div>
+                                                            <h5><b>OPENING HOURS</b></h5>
+                                                            10am - 7pm (Mon - Sat), By Appt only (Sun). Closed on PHs.
+                                                        </div>
+                                                            <br/>
+                                                        <div>
+                                                            <h5><b>ADDRESS</b></h5>
+                                                            338 Circuit Road S(379489)
+                                                        </div>
+                                                            <br/>
+                                                        <div>
+                                                            <h5><b>PROVIDING SERVICES</b></h5>
+                                                            Maintenance, Repair & Servicing
+                                                        </div>
+                                                            <br/>
+                                                        <div>
+                                                            <h5><b>OTHER BRANDS</b></h5>
+                                                            GlassMechanix
+                                                        </div>
+                                                            <br/>
+                                                        <div>
+                                                            <h5><b>WEBSITE</b></h5>
+                                                            <a href="http://www.ahhuatworkshop.com.sg" target="_blank">www.ahhuatworkshop.com.sg</a>
+                                                        </div>
+                                                            <br/>
 
                                                     </div>
                                                     <!--end tile body-->

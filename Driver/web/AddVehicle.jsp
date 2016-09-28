@@ -5,7 +5,7 @@
         <title>Add Car</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-1">
+    <body class="bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>

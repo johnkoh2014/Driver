@@ -5,7 +5,7 @@
         <title>Get Offers - Maintenance</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-1">
+    <body class="bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -25,8 +25,8 @@
                     <div class="pageheader">
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
-                        <div class="margin-top-15 text-center">
-                            <h2>Get Offers</h2>
+                        <div class="margin-top-15 text-center" style="color:white">
+                            <h1>GET OFFERS</h1>
                             <%if (service.equals("Maintenance")) {%>
                             <h5>What maintenance can we do for you?</h5>
                             <%} else if (service.equals("Tyre / Wheel Service")) {%>

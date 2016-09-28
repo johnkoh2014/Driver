@@ -5,7 +5,7 @@
         <title>Get Offers</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-1">
+    <body class="bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -22,9 +22,9 @@
                     <div class="pageheader">
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
-                        <div class="margin-top-15 text-center">
-                            <h2>Get Offers</h2>
-                            <h5 style="font: white">Hi, what can we help you with today?</h5>
+                        <div class="margin-top-15 text-center" style="color:white">
+                            <h1>GET OFFERS</h1>
+                            <h5>Hi, what can we help you with today?</h5>
                         </div>
                     </div>
                     <!-- /page header -->

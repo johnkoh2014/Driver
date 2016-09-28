@@ -20,7 +20,7 @@
         <link href="css/minimal.css" rel="stylesheet">
         <title>Sign Up</title>
     </head>
-    <body class="bg-1">
+    <body class="bg-3">
         <!-- Wrap all page content here -->
         <div id="wrap">
             <!-- Make page fluid -->

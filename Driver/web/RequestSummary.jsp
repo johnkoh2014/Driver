@@ -5,7 +5,7 @@
         <title>Request Summary</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-1">
+    <body class="bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -22,7 +22,7 @@
                     <div class="pageheader">
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
-                        <div class="margin-top-15 text-center">
+                        <div class="margin-top-15 text-center" style="color:white">
                             <h1>REQUEST SUMMARY</h1>
                             <h4>Service</h4>
                         </div>
