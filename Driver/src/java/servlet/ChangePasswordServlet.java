@@ -5,8 +5,8 @@
  */
 package servlet;
 
-import dao.WebUserDAO;
-import entity.WebUser;
+import dao.DriverDAO;
+import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -43,17 +43,17 @@ public class ChangePasswordServlet extends HttpServlet {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmNewPassword");
-        WebUser user = (WebUser)session.getAttribute("loggedInUser");
-        String email = user.getEmail();
-        WebUserDAO uDAO = new WebUserDAO();
+        Driver driver = (Driver)session.getAttribute("loggedInUser");
+        String email = driver.getEmail();
+        DriverDAO uDAO = new DriverDAO();
         if (!newPassword.equals(confirmPassword)) {
             request.setAttribute("errMsg", "Incorrect password / New passwords do not match.");
             request.setAttribute("email", email);
             RequestDispatcher view = request.getRequestDispatcher("ChangePassword.jsp");
             view.forward(request, response);
         }
-        boolean isSuccess = uDAO.updateUserPassword(user.getStaffId(), user.getToken(), oldPassword, newPassword);
-        
+        //boolean isSuccess = uDAO.updateUserPassword(driver.getId(), driver.getToken(), oldPassword, newPassword);
+        boolean isSuccess = false;
         if (isSuccess) {
             try {
                 request.setAttribute("successChangePasswordMsg", "Your password has been changed!");

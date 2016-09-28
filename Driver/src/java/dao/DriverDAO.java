@@ -31,7 +31,7 @@ import org.apache.http.message.BasicNameValuePair;
  */
 public class DriverDAO {
 
-    private static final String USER_AGENT = "Mozilla/5.0";
+    private final String USER_AGENT = "Mozilla/5.0";
 
     public ArrayList<String> addDriver(String name, String email, String password) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/user/signup";
@@ -84,7 +84,7 @@ public class DriverDAO {
 
     public Driver authenticateUser(String loginEmail, String password) throws UnsupportedEncodingException, IOException {
 
-        Driver webUser = null;
+        Driver driver = null;
         String url = "http://119.81.43.85/user/login";
 
         HttpClient client = new DefaultHttpClient();
@@ -94,7 +94,7 @@ public class DriverDAO {
         post.setHeader("User-Agent", USER_AGENT);
 
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("email", loginEmail));
+        urlParameters.add(new BasicNameValuePair("username", loginEmail));
         urlParameters.add(new BasicNameValuePair("password", password));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
@@ -115,11 +115,13 @@ public class DriverDAO {
         JsonObject jobj = element.getAsJsonObject();
         JsonElement isSuccess = jobj.get("is_success");
         if (isSuccess.getAsString().equals("false")) {
-            return webUser;
+            return driver;
         } else {
-            JsonElement userElement = jobj.get("payload");
-            JsonObject user = userElement.getAsJsonObject();
-            JsonElement attElement = user.get("id");
+            JsonElement payload = jobj.get("payload");
+            JsonObject userObj = payload.getAsJsonObject();
+            JsonElement attElement = userObj.get("userData");
+            JsonObject user = attElement.getAsJsonObject();
+            attElement = user.get("id");
             int id = 0;
             if (!attElement.isJsonNull()) {
                 id = attElement.getAsInt();
@@ -136,7 +138,6 @@ public class DriverDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 email = attElement.getAsString();
             }
-
             String handphone = "";
             attElement = user.get("handphone");
             if (attElement != null && !attElement.isJsonNull()) {
@@ -149,7 +150,7 @@ public class DriverDAO {
                 token = attElement.getAsString();
             }
             ArrayList<Vehicle> vList = new ArrayList<Vehicle>();
-            JsonArray arr = (JsonArray) user.get("vehicleData");
+            JsonArray arr = (JsonArray) userObj.get("vehicleData");
             int arrSize = arr.size();
             for (int i = 0; i < arrSize; i++) {
 //        for (int i = 0; i < arr.size(); i++) {
@@ -159,6 +160,11 @@ public class DriverDAO {
                 int vid = 0;
                 if (!attElement.isJsonNull()) {
                     vid = attElement.getAsInt();
+                }
+                attElement = qrObj.get("make");
+                String make = "";
+                if (!attElement.isJsonNull()) {
+                    make = attElement.getAsString();
                 }
                 attElement = qrObj.get("model");
                 String model = "";
@@ -192,13 +198,17 @@ public class DriverDAO {
                 if (!attElement.isJsonNull()) {
                     control = attElement.getAsString();
                 }
-                Vehicle vehicle = new Vehicle(id, model, model, year, plate_number, user_id, car_color, control);
+                Vehicle vehicle = new Vehicle(id, make, model, year, plate_number, user_id, car_color, control);
                 vList.add(vehicle);
             }
 
-            webUser = new Driver(id, name, email, password, handphone, token, vList);
+            driver = new Driver(id, name, email, password, handphone, token, vList);
         }
-        return webUser;
+        return driver;
+    }
+    
+    public static void main(String[] args) throws IOException {
+        //authenticateUser("james@james.com", "12345678");
     }
 
 }
