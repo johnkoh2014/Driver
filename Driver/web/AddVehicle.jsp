@@ -1,3 +1,11 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="dao.VehicleDAO"%>
+<%@page import="dao.DriverDAO"%>
+<%@page import="entity.Driver"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,61 +35,107 @@
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%
+                        ArrayList<String> fail = (ArrayList<String>) request.getAttribute("errMsg");
+                        if (fail != null && fail.size() > 0) {
+                    %>
+                    <div class="alert alert-danger">
+                        <ul>
+                            <%
+                                for (String error : fail) {
+                            %>
+                            <li><%=error%></li>
+                                <%
+                                    }
+                                %>
+                        </ul>
+                    </div>
+                    <%
+                        }
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
                         <div class="row">
                             <!-- col 12 -->
-                          <div>
+                            <div>
 
                                 <section class="tile color transparent-black">
                                     <div class="tile-header text-center">
                                     </div>
                                     <!--end tile header-->
-
+                                    <%
+                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
+                                        int id = driver.getId();
+                                        String token = driver.getToken();
+                                        VehicleDAO vDAO = new VehicleDAO();
+                                        HashMap<Integer, ArrayList<String>> list = vDAO.retrieveAllCarBrands(id, token);
+                                        ArrayList<String> carBrands = new ArrayList<String>();
+                                        ArrayList<String> carModels = new ArrayList<String>();
+                                        ArrayList<String> carYears = new ArrayList<String>();
+                                        carBrands = list.get(1);
+                                        carModels = list.get(2);
+                                        carYears = list.get(3);
+                                    %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
-                                        <form class="form-horizontal" role="form" action="" method="POST">
+                                        <form class="form-horizontal" role="form" action="AddVehicle" method="POST">
 
                                             <div class="form-group">
                                                 <label for="input01" class="col-sm-2 control-label">Make</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input01" name="carMake">
+                                                    <!--<input type="text" class="form-control" id="input01" name="carMake" required>-->
+                                                    <select class="chosen-select chosen-transparent form-control" id="input01" name="carMake">
+                                                        <%    
+                                                            for (String s : carBrands) {
+                                                                out.println("<option>" + s + "</option>");
+                                                            }
+
+                                                        %>
+                                                    </select>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input02" class="col-sm-2 control-label">Model</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="carModel">
+                                                    <input type="text" class="form-control" id="input02" name="carModel" required>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input03" class="col-sm-2 control-label">Year of Manufacture</label>
                                                 <div class="col-sm-10">
-                                                    <input type="number" class="form-control" id="input03" name="manufactureYear">
+                                                    <!--<input type="number" class="form-control" id="input03" name="manufactureYear" required>-->
+                                                    <select class="chosen-select chosen-transparent form-control" id="input03" name="manufactureYear">
+                                                        <%    
+                                                            for (String s : carYears) {
+                                                                out.println("<option>" + s + "</option>");
+                                                            }
+
+                                                        %>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="input04" class="col-sm-2 control-label">Plate Number</label>
                                                 <div class="col-sm-10">
-                                                    <input type="number" class="form-control" id="input04" name="plateNumber">
+                                                    <input class="form-control" id="input04" name="plateNumber" required>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label for="input05" class="col-sm-2 control-label">Car Color</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input05" name="carColor">
+                                                    <input type="text" class="form-control" id="input05" name="carColor" required>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Transmission Type</label>
                                                 <div class="col-sm-2">
-                                                    <input type="radio"  id="input06" value="Automatic" name="transmission">
+                                                    <input type="radio"  id="input06" value="Automatic" name="transmission" checked>
                                                     <label for="input06" class="control-label">Automatic</label>
                                                 </div>
                                                 <div class="col-sm-2">
@@ -89,7 +143,7 @@
                                                     <label for="input07" class="control-label">Manual</label>
                                                 </div>
                                             </div>
-                                            
+
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -129,16 +183,18 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
         <script src="js/minimal.min.js"></script>
 
         <script>
+
+
             $(function () {
 
-
+                //chosen select input
+                $(".chosen-select").chosen({disable_search_threshold: 10});
 
             })
-
         </script>
     </body>
 </html>

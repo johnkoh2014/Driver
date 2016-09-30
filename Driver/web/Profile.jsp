@@ -1,3 +1,7 @@
+<%@page import="dao.VehicleDAO"%>
+<%@page import="entity.Vehicle"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,6 +31,17 @@
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%
+                        Driver driver = (Driver) session.getAttribute("loggedInUser");
+                        int id = driver.getId();
+                        String token = driver.getToken();
+                        String email = driver.getEmail();
+                        VehicleDAO vDAO = new VehicleDAO();
+                        ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
+                        String handphone = driver.getHandphone();
+//                        ArrayList<Vehicle> vList = driver.getVehicles();
+
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -48,14 +63,14 @@
                                             <div class="form-group">
                                                 <label for="input02" class="col-sm-2 control-label">Email</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="email" readonly>
+                                                    <input type="text" class="form-control" id="input02" name="email" value="<%=email%>" style="color:white" readonly>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input03" class="col-sm-2 control-label">Mobile Number</label>
                                                 <div class="col-sm-10">
-                                                    <input type="tel" class="form-control" id="input03" name="hpNo"readonly>
+                                                    <input type="tel" class="form-control" id="input03" name="hpNo" value="<%=handphone%>" style="color:white" readonly>
                                                 </div>
                                             </div>
 
@@ -67,7 +82,6 @@
                                             </div>
                                             <!--end form footer-->
                                         </form>
-
 
                                     </div>
                                     <!--end tile body-->
@@ -84,30 +98,28 @@
 
                                     <!-- /tile body -->
                                     <div class="tile-body">
+                                        <%
+                                            for (Vehicle vehicle : vList) {
+                                                int vid = vehicle.getId(); 
+                                                String make = vehicle.getMake();
+                                                String model = vehicle.getModel();
+                                                String noPlate = vehicle.getPlateNumber();
+                                        %>
                                         <div class="carItem">
                                             <div class="col-sm-6 car">
-                                                AUDI TT
+                                                <%=make + " " + model%>
                                             </div>
                                             <div class="col-sm-4 car">
-                                                SKJ 1234 Z
+                                                <%=noPlate%>
                                             </div>
                                             <div class="col-sm-2 car">
-                                                <a href="EditVehicle.jsp" class="btn btn-blue">Edit Car</a>
+                                                <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue">Edit Car</a>
                                             </div>
                                         </div>
                                         <!--<div class="line-across-dark"></div>-->
-
-                                        <div class="carItem">
-                                            <div class="col-sm-6 car">
-                                                AUDI TT
-                                            </div>
-                                            <div class="col-sm-4 car">
-                                                SKJ 1234 Z
-                                            </div>
-                                            <div class="col-sm-2 car">
-                                                <a href="EditVehicle.jsp" class="btn btn-blue">Edit Car</a>
-                                            </div>
-                                        </div>
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                     <!--end tile body-->
 

@@ -1,3 +1,6 @@
+<%@page import="entity.Vehicle"%>
+<%@page import="entity.Driver"%>
+<%@page import="dao.VehicleDAO"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,12 +30,30 @@
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%
+                        Driver driver = (Driver) session.getAttribute("loggedInUser");
+                        int id = driver.getId();
+                        String token = driver.getToken();
+                        String vehicleId = request.getParameter("id");
+                        int vid = Integer.parseInt(vehicleId);
+                        
+                        VehicleDAO vDAO = new VehicleDAO();
+                        Vehicle vehicle = vDAO.getVehicle(id, token, vid);
+                        
+                        String make = vehicle.getMake();
+                        String model = vehicle.getModel();
+                        int year = vehicle.getYear();
+                        String plateNumber = vehicle.getPlateNumber();
+                        String color = vehicle.getColour(); 
+                        String control = vehicle.getControl();
+                        
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
                         <div class="row">
                             <!-- col 12 -->
-                          <div>
+                            <div>
 
                                 <section class="tile color transparent-black">
                                     <div class="tile-header text-center">
@@ -47,14 +68,14 @@
                                             <div class="form-group">
                                                 <label for="input01" class="col-sm-2 control-label">Make</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input01" name="carMake">
+                                                    <input type="text" class="form-control" id="input01" name="carMake" value="make">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input02" class="col-sm-2 control-label">Model</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="carModel">
+                                                    <input type="text" class="form-control" id="input02" name="carModel" value="model">
                                                 </div>
                                             </div>
 
@@ -70,14 +91,14 @@
                                                     <input type="number" class="form-control" id="input04" name="plateNumber">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label for="input05" class="col-sm-2 control-label">Car Color</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" id="input05" name="carColor">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Transmission Type</label>
                                                 <div class="col-sm-2">
@@ -89,7 +110,7 @@
                                                     <label for="input07" class="control-label">Manual</label>
                                                 </div>
                                             </div>
-                                            
+
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
