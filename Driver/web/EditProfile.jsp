@@ -1,3 +1,7 @@
+<%@page import="entity.Vehicle"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,6 +31,11 @@
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%
+                        Driver driver = (Driver) session.getAttribute("loggedInUser");
+                        String email = driver.getEmail();
+                        ArrayList<Vehicle> vList = driver.getVehicles();
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->

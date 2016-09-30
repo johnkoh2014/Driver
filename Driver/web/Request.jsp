@@ -1,3 +1,7 @@
+<%@page import="dao.VehicleDAO"%>
+<%@page import="entity.Vehicle"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,6 +31,16 @@
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%
+                        String success = (String) session.getAttribute("success");
+
+                        if (success != null && !(success.equals("null")) && success.length() > 0) {
+                    %>
+                    <div class="alert alert-success"><%=success%></div>
+                    <%
+                            session.setAttribute("success", "");
+                        }
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -36,39 +50,45 @@
                                 <div class="margin-top-15 text-center">
                                     <a href="AddVehicle.jsp" class="btn btn-primary" role="button">Add Car</a>
                                 </div>
+                                <%
+                                    Driver driver = (Driver) session.getAttribute("loggedInUser");
+                                    int id = driver.getId();
+                                    String token = driver.getToken();
+                                    VehicleDAO vDAO = new VehicleDAO();
+                                    ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
+//                                    ArrayList<Vehicle> vList = driver.getVehicles();
+                                %>
                                 <div class="text-center margin-15 full-width">
                                     <div class="btn-group margin-bottom-20" style="width:100%">
                                         <button type="button" class="btn btn-default dropdown-toggle" style="width:100%" data-toggle="dropdown">
                                             Choose a vehicle to service <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu" style="width:100%">
+                                            <%
+                                                for (int i = 0; i < vList.size(); i++) {
+                                                    Vehicle vehicle = vList.get(i);
+                                            %>
                                             <li>
-                                                <a href="Service.jsp">
+                                                <a href="Service.jsp?vehicle=<%=vehicle.getId()%>">
                                                     <div class="carItem">
                                                         <div class="col-sm-6 car">
-                                                            AUDI TT
+                                                            <%=vehicle.getMake()%> <%=vehicle.getModel()%> 
                                                         </div>
                                                         <div class="col-sm-5 car">
-                                                            SKJ 1234 Z
+                                                            <%=vehicle.getPlateNumber()%>
                                                         </div>
                                                         <div class="caret-right"></div>
                                                     </div>
                                                 </a>
                                             </li>
+                                            <%
+                                                if (i < vList.size() - 1) {
+                                            %>
                                             <li class="line-across-dark"></li>
-                                            <li>
-                                                <a href="Service.jsp">
-                                                    <div class="carItem">
-                                                        <div class="col-sm-6 car">
-                                                            AUDI TT
-                                                        </div>
-                                                        <div class="col-sm-5 car">
-                                                            SKJ 1234 Z
-                                                        </div>
-                                                        <div class="caret-right-dark"></div>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
                                         </ul>
                                     </div>
                                 </div>
