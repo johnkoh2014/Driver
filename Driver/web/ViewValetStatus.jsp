@@ -19,7 +19,7 @@
                 <%@include file="include/topbar.jsp"%>
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
-                    
+
                     <!-- page header -->
                     <div class="pageheader">
 
@@ -50,8 +50,8 @@
                                                 <div class="col-sm-12 col-xs-12 text-right">
                                                     <div class="btn-group btn-group-justified table-options desktopOnly">
                                                         <ul class="nav nav-pills tabpager text-center">
-                                                            <li class="w50 active arrange-center"><a href="#Requests" data-toggle="pill">OFFER DETAILS</a></li>
-                                                            <li class="w50 arrange-center"><a href="#Offers" data-toggle="pill">WORKSHOP PROFILE</a></li>
+                                                            <li class="w50 active arrange-center"><a href="#offerDetails" data-toggle="pill">OFFER DETAILS</a></li>
+                                                            <li class="w50 arrange-center"><a href="#workshopProfile" data-toggle="pill">WORKSHOP PROFILE</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -66,21 +66,115 @@
                                     <div class="tile-body">
                                         <div class="tab-content">
 
-                                            <div class="tab-pane fade active in" id="Requests" >
-                                                <ul class="list-group">
-                                                    <li class="list-group-item"><b>General Diagnostic</b><br/><i>No offer at the moment</i></li>
-                                                    <li class="list-group-item"><b>General Diagnostic</b><br/><i>There are offers for your request</i></li>
-                                                </ul>
+                                            <div class="tab-pane fade active in" id="offerDetails" >
+                                                <div class="notification">
+                                                    <div class="row">
+                                                        <strong><center>VALET DETAILS</center></strong>
+                                                    </div>
+                                                    <div class="row">
+                                                        <center><img src="images/joshua.jpg" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
+                                                    </div>
+                                                    <p> </p>
+                                                    <div class="row">
+                                                        <strong><center>Name</center></strong>
+                                                    </div>
+                                                    <div class="row">
+                                                        <center>
+                                                            Ah Siao
+                                                        </center>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <strong><center>Age</center></strong>
+                                                    </div>
+                                                    <div class="row">
+                                                        <center>
+                                                            24
+                                                        </center>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <strong><center>Contact</center></strong>
+                                                    </div>
+                                                    <div class="row">
+                                                        <center>
+                                                            91112222
+                                                        </center>
+                                                    </div>
+
+                                                </div>
+
                                             </div><!--Requests-->
 
 
 
-                                            <div class="tab-pane fade " id="Offers" >
-                                                <div class="list-group">
-                                                    <a href="OfferDetails.jsp?id=" class="list-group-item"><b>AH HUAT WORKSHOP PTE LTD</b><br/><span style="color:blue">$60 - $80</span><br/><i>Click to view profile and quote</i></a>
-                                                    <a href="OfferDetails.jsp?id=" class="list-group-item"><b>DYNAMICS MECHANICS</b><br/><span style="color:blue">$70 - $120</span><br/><i>Click to view profile and quote</i></a>
-                                                </div>
-                                            </div><!--Offers-->
+                                            <div class="tab-pane fade " id="workshopProfile" >
+                                                <!--                                                <div class="list-group">
+                                                                                                    <a href="OfferDetails.jsp?id=" class="list-group-item"><b>AH HUAT WORKSHOP PTE LTD</b><br/><span style="color:blue">$60 - $80</span><br/><i>Click to view profile and quote</i></a>
+                                                                                                    <a href="OfferDetails.jsp?id=" class="list-group-item"><b>DYNAMICS MECHANICS</b><br/><span style="color:blue">$70 - $120</span><br/><i>Click to view profile and quote</i></a>
+                                                                                                </div>-->
+
+                                                <section class="tile color transparent-black">
+                                                    <div class="tile-header text-center">
+                                                        <h3>AH HUAT WORKSHOP PTE LTD</h3>
+                                                        <a href="Booking.jsp" class="btn btn-warning" role="button">Book</a>
+                                                    </div>
+                                                    <!--end tile header-->
+                                                    <div class="line-across"></div>
+                                                    <!-- /tile body -->
+                                                    <div class="tile-body">
+
+                                                        <div class="row">
+                                                            <strong><center>Opening Hours</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                10am - 7pm (Mon - Sat), By Appt only (Sun). Closed on PHs.
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Address</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                328 Circuit Road S(379489)
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Providing Services</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                Maintenence, Repair and servicing
+                                                            </center>
+                                                        </div>
+                                                        
+                                                        <div class="row">
+                                                            <strong><center>Other Brands</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                GlassMechanix
+                                                            </center>
+                                                        </div>
+                                                        
+                                                        <div class="row">
+                                                            <strong><center>Website</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                www.ahhuatworkshop.com.sg
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                    <!--end tile body-->
+
+                                                </section>
+
+
+                                            </div><!--workshopProfile-->
 
 
 
