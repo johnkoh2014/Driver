@@ -5,10 +5,10 @@
  */
 package servlet;
 
-import dao.DriverDAO;
 import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -18,13 +18,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.Validation;
 
 /**
  *
- * @author Joanne
+ * @author User
  */
-@WebServlet(name = "ChangePasswordServlet", urlPatterns = {"/ChangePassword"})
-public class ChangePasswordServlet extends HttpServlet {
+@WebServlet(name = "EditProfileServlet", urlPatterns = {"/EditProfile"})
+public class EditProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,34 +39,23 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
+        
+        String currentEmail = request.getParameter("currentEmail").trim();
+        String newEmail = request.getParameter("newEmail").trim();
+        String hpNo = request.getParameter("hpNo").trim();
+
+        Validation validation = new Validation();
+        String errMsg = validation.isValidMobileContact(hpNo);
+
         HttpSession session = request.getSession(true);
         
-        String oldPassword = request.getParameter("oldPassword");
-        String newPassword = request.getParameter("newPassword");
-        String confirmPassword = request.getParameter("confirmPassword");
-        Driver driver = (Driver)session.getAttribute("loggedInUser");
-        String email = driver.getEmail();
-        DriverDAO uDAO = new DriverDAO();
-        if (!newPassword.equals(confirmPassword)) {
-            request.setAttribute("errMsg", "Incorrect password / New passwords do not match.");
-            RequestDispatcher view = request.getRequestDispatcher("ChangePassword.jsp");
-            view.forward(request, response);
-        }
-        boolean isSuccess = uDAO.updateUserPassword(driver.getId(), driver.getToken(), oldPassword, newPassword);
-        
-        if (isSuccess) {
-            try {
-                session.setAttribute("success", "Your password has been changed!");
-                RequestDispatcher view = request.getRequestDispatcher("Profile.jsp");
-                view.forward(request, response);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        } else {
-            request.setAttribute("errMsg", "Incorrect password / New passwords do not match.");
-            request.setAttribute("email", email);
-            RequestDispatcher view = request.getRequestDispatcher("ChangePassword.jsp");
-            view.forward(request, response);
+        if (errMsg == null || errMsg.length() == 0) {
+
+            Driver user = (Driver) session.getAttribute("loggedInUser");
+
+            int id = user.getId();
+            String token = user.getToken();
+            
         }
     }
 
@@ -84,11 +74,11 @@ public class ChangePasswordServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -102,7 +92,7 @@ public class ChangePasswordServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

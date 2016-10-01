@@ -42,6 +42,15 @@
 //                        ArrayList<Vehicle> vList = driver.getVehicles();
 
                     %>
+                    <%                        String success = (String) session.getAttribute("success");
+
+                        if (success != null && !(success.equals("null")) && success.length() > 0) {
+                    %>
+                    <div class="alert alert-success"><%=success%></div>
+                    <%
+                            session.setAttribute("success", "");
+                        }
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -100,7 +109,7 @@
                                     <div class="tile-body">
                                         <%
                                             for (Vehicle vehicle : vList) {
-                                                int vid = vehicle.getId(); 
+                                                int vid = vehicle.getId();
                                                 String make = vehicle.getMake();
                                                 String model = vehicle.getModel();
                                                 String noPlate = vehicle.getPlateNumber();
@@ -113,6 +122,10 @@
                                                 <%=noPlate%>
                                             </div>
                                             <div class="col-sm-2 car">
+                                                <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue">Edit Car</a>
+                                                <form>
+                                                    
+                                                </form>
                                                 <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue">Edit Car</a>
                                             </div>
                                         </div>

@@ -1,3 +1,4 @@
+<%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,35 +40,58 @@
                                         <h3>Change Password</h3>
                                     </div>
                                     <!--end tile header-->
-
+                                    <%
+                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
+                                        String currentEmail = driver.getEmail();
+                                        String oldPassword = (String) request.getAttribute("oldPassword");
+                                        if (oldPassword == null) {
+                                            oldPassword = "";
+                                        }
+                                        String newPassword = (String) request.getAttribute("newPassword");
+                                        if (newPassword == null) {
+                                            newPassword = "";
+                                        }
+                                        String confirmPassword = (String) request.getAttribute("confirmPassword");
+                                        if (confirmPassword == null) {
+                                            confirmPassword = "";
+                                        }
+                                    %>
+                                    <%
+                                        String errMsg = (String) request.getAttribute("errMsg"); 
+                                        if (errMsg != null && errMsg.length() > 0) {
+                                    %>
+                                    <div class="alert alert-danger"><%=errMsg%></div>
+                                    <%
+                                        }
+                                    %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
-                                        <form class="form-horizontal" role="form" action="" method="POST">
+                                        <form class="form-horizontal" role="form" action="ChangePassword" method="POST">
 
                                             <div class="form-group">
                                                 <label for="input01" class="col-sm-3 control-label">Email</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="input01" name="email" readonly>
+                                                    <input type="text" class="form-control" id="input01" name="email" value="<%=currentEmail%>" style="color:white" readonly>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input02" class="col-sm-3 control-label">Old Password</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="input02" name="oldPassword">
+                                                    <input type="password" class="form-control" id="input02" name="oldPassword" value="<%=oldPassword%>">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="input03" class="col-sm-3 control-label">New Password</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="input03" name="newPassword">
+                                                    <input type="password" class="form-control" id="input03" name="newPassword" value="<%=newPassword%>">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="input04" class="col-sm-3 control-label">Confirm New Password</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="input04" name="confirmPassword">
+                                                    <input type="password" class="form-control" id="input04" name="confirmPassword" value="<%=confirmPassword%>">
                                                 </div>
                                             </div>
 

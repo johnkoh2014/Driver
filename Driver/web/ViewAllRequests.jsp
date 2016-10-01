@@ -1,3 +1,7 @@
+<%@page import="entity.QuotationRequest"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.QuotationRequestDAO"%>
+<%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -50,15 +54,33 @@
                                         </div>
                                     </div>
                                     <!--end tile header-->
+                                    <%
+                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
+                                        int id = driver.getId();
+                                        String token = driver.getToken();
+                                        QuotationRequestDAO qDAO = new QuotationRequestDAO();
+                                        ArrayList<QuotationRequest> qList = qDAO.getAllRequests(id, token);
 
+                                    %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <div class="tab-content">
 
                                             <div class="tab-pane fade active in" id="Requests" >
                                                 <ul class="list-group">
+                                                    <%                                                        for (int i = 0; i < qList.size(); i++) {
+                                                            QuotationRequest req = qList.get(i);
+                                                            int noOffers = req.getNo_of_offers();
+
+                                                            if (noOffers == 0) {%>
                                                     <li class="list-group-item"><b>General Diagnostic</b><br/><i>No offer at the moment</i></li>
-                                                    <li class="list-group-item"><b>General Diagnostic</b><br/><i>There are offers for your request</i></li>
+
+                                                    <%} else {%>
+                                                    <li class="list-group-item"><b>General Diagnostic</b><br/><i>There are <%=noOffers%> offers for your request</i></li>
+
+                                                    <%}
+                                                        }
+                                                    %>
                                                 </ul>
                                             </div><!--Requests-->
 

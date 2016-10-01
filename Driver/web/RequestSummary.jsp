@@ -57,7 +57,7 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
-                                        <form class="form-horizontal" role="form" action="" method="POST">
+                                        <form class="form-horizontal" role="form" action="SubmitOffer" method="POST">
 
                                             <div class="form-group">
                                                 <label for="input02" class="col-sm-2 control-label">Additional Description</label>

@@ -206,15 +206,14 @@ public class DriverDAO {
         }
         return driver;
     }
-    
+
     public static void main(String[] args) throws IOException {
         //authenticateUser("james@james.com", "12345678");
     }
 
-
-    public ArrayList<String> addVehicle(String make, String model, int year, int user_id, String plate_number, 
+    public ArrayList<String> addVehicle(String make, String model, int year, int user_id, String plate_number,
             String token, String car_color, String type_of_control_of_car) throws UnsupportedEncodingException, IOException {
-        
+
         String url = "http://119.81.43.85/car/add_car";
 
         HttpClient client = new DefaultHttpClient();
@@ -267,4 +266,41 @@ public class DriverDAO {
         return errors;
     }
 
+    public boolean updateUserPassword(int user_id, String token, String currentPassword, String newPassword) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/user/change_password";
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("currentPassword", currentPassword));
+        urlParameters.add(new BasicNameValuePair("nPassword", newPassword));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement isSuccess = jobj.get("is_success");
+        if (isSuccess.getAsString().equals("false")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

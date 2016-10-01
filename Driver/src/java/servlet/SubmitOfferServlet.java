@@ -9,8 +9,7 @@ import dao.DriverDAO;
 import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +20,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Joanne
+ * @author User
  */
-@WebServlet(name = "ChangePasswordServlet", urlPatterns = {"/ChangePassword"})
-public class ChangePasswordServlet extends HttpServlet {
+@WebServlet(name = "SubmitOfferServlet", urlPatterns = {"/SubmitOffer"})
+public class SubmitOfferServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,37 +35,34 @@ public class ChangePasswordServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String service = request.getParameter("service");
+        String type = request.getParameter("type");
+        String description = request.getParameter("description");
+        String mileage = request.getParameter("mileage");
+
+        //Logged in user details
         HttpSession session = request.getSession(true);
+        Driver user = (Driver) session.getAttribute("loggedInUser");
+        DriverDAO dDAO = new DriverDAO();
+        int user_id = user.getId();
+        String token = user.getToken(); 
+        ArrayList<String> errorMsg = new ArrayList<String>(); 
+//        ArrayList<String> errorMsg = dDAO.addVehicle(carMake, carModel, manufactureYear, user_id, plateNumber, token, carColor, transmission);
         
-        String oldPassword = request.getParameter("oldPassword");
-        String newPassword = request.getParameter("newPassword");
-        String confirmPassword = request.getParameter("confirmPassword");
-        Driver driver = (Driver)session.getAttribute("loggedInUser");
-        String email = driver.getEmail();
-        DriverDAO uDAO = new DriverDAO();
-        if (!newPassword.equals(confirmPassword)) {
-            request.setAttribute("errMsg", "Incorrect password / New passwords do not match.");
-            RequestDispatcher view = request.getRequestDispatcher("ChangePassword.jsp");
-            view.forward(request, response);
-        }
-        boolean isSuccess = uDAO.updateUserPassword(driver.getId(), driver.getToken(), oldPassword, newPassword);
-        
-        if (isSuccess) {
-            try {
-                session.setAttribute("success", "Your password has been changed!");
-                RequestDispatcher view = request.getRequestDispatcher("Profile.jsp");
-                view.forward(request, response);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+        if (errorMsg == null || errorMsg.isEmpty()) {
+//            Vehicle vehicle = new Vehicle(user_id, token, token, user_id, plateNumber, user_id, carColor, token);
+//            (int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control)
+            
+//            session.setAttribute("success", carMake + " " + carModel + " added");
+            response.sendRedirect("Request.jsp");
         } else {
-            request.setAttribute("errMsg", "Incorrect password / New passwords do not match.");
-            request.setAttribute("email", email);
-            RequestDispatcher view = request.getRequestDispatcher("ChangePassword.jsp");
+            request.setAttribute("errMsg", errorMsg);
+            RequestDispatcher view = request.getRequestDispatcher("Request.jsp");
             view.forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,11 +77,7 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(ChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -99,11 +91,7 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(ChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

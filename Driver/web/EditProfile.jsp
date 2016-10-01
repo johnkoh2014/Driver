@@ -33,8 +33,12 @@
                     <!-- /page header -->
                     <%
                         Driver driver = (Driver) session.getAttribute("loggedInUser");
-                        String email = driver.getEmail();
-                        ArrayList<Vehicle> vList = driver.getVehicles();
+                        String currentEmail = driver.getEmail();
+                        String newEmail = (String) request.getAttribute("newEmail");
+                        if (newEmail == null) {
+                            newEmail = "";
+                        }
+                        String hpNo = driver.getHandphone();
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -52,26 +56,26 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
-                                        <form class="form-horizontal" role="form" action="" method="POST">
+                                        <form class="form-horizontal" role="form" action="EditProfile" method="POST">
 
                                             <div class="form-group">
                                                 <label for="input01" class="col-sm-2 control-label">Current Email</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input01" name="currentEmail">
+                                                    <input type="text" class="form-control" id="input01" name="currentEmail" value="<%=currentEmail%>">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input02" class="col-sm-2 control-label">New Email</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="newEmail">
+                                                    <input type="text" class="form-control" id="input02" name="newEmail" value="<%=newEmail%>">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input03" class="col-sm-2 control-label">Mobile Number</label>
                                                 <div class="col-sm-10">
-                                                    <input type="tel" class="form-control" id="input03" name="hpNo">
+                                                    <input type="tel" class="form-control" id="input03" name="hpNo" value="<%=hpNo%>">
                                                 </div>
                                             </div>
 

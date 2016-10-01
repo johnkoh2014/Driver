@@ -18,7 +18,7 @@
             </li>
 
             <li>
-                <a href="Offers.jsp">
+                <a href="ViewAllRequests.jsp">
                     <i class="fa fa-file-o"></i> Offers
                 </a>
             </li>
