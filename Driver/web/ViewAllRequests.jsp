@@ -54,9 +54,7 @@
                                     </div>
                                     <!--end tile header-->
                                     <%
-                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
-                                        int id = driver.getId();
-                                        String token = driver.getToken();
+                                        
                                         QuotationRequestDAO qDAO = new QuotationRequestDAO();
                                         ArrayList<QuotationRequest> qList = qDAO.getAllRequests(id, token);
 

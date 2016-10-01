@@ -51,9 +51,7 @@
                                     <a href="AddVehicle.jsp" class="btn btn-primary" role="button">Add Car</a>
                                 </div>
                                 <%
-                                    Driver driver = (Driver) session.getAttribute("loggedInUser");
-                                    int id = driver.getId();
-                                    String token = driver.getToken();
+                                    
                                     VehicleDAO vDAO = new VehicleDAO();
                                     ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
 //                                    ArrayList<Vehicle> vList = driver.getVehicles();

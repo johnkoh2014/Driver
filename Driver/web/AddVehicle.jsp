@@ -65,9 +65,7 @@
                                     </div>
                                     <!--end tile header-->
                                     <%
-                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
-                                        int id = driver.getId();
-                                        String token = driver.getToken();
+                                        
                                         VehicleDAO vDAO = new VehicleDAO();
                                         HashMap<Integer, ArrayList<String>> list = vDAO.retrieveAllCarBrands(id, token);
                                         ArrayList<String> carBrands = new ArrayList<String>();

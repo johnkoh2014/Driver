@@ -32,10 +32,7 @@
                     </div>
                     <!-- /page header -->
                     <%
-                        Driver driver = (Driver) session.getAttribute("loggedInUser");
-                        int id = driver.getId();
-                        String token = driver.getToken();
-                        String email = driver.getEmail();
+                        
                         VehicleDAO vDAO = new VehicleDAO();
                         ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
                         String handphone = driver.getHandphone();

@@ -34,9 +34,7 @@
                     </div>
                     <!-- /page header -->
                     <%
-                        Driver driver = (Driver) session.getAttribute("loggedInUser");
-                        int id = driver.getId();
-                        String token = driver.getToken();
+                        
                         String vehicleId = request.getParameter("id");
                         int vid = Integer.parseInt(vehicleId);
 

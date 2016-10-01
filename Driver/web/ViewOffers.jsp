@@ -46,9 +46,7 @@
                                     </div>
                                     <!--end tile header-->
                                     <%
-                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
-                                        int id = driver.getId();
-                                        String token = driver.getToken();
+                                        
                                         String qr_Id = request.getParameter("id");
                                         int qrId = 0;
                                         if (qr_Id.length() > 0) {

@@ -1,4 +1,10 @@
-
+<%
+    Driver driver = (Driver) session.getAttribute("loggedInUser");
+    int id = driver.getId();
+    String token = driver.getToken();
+    String email = driver.getEmail();
+    String name = driver.getName();
+%>
 <div class="navbar navbar-default navbar-fixed-top navbar-transparent-black mm-fixed-top" role="navigation" id="navbar">
 
 
@@ -34,16 +40,16 @@
                     <!--<img src="./images/joshua.jpg" alt />-->
                 </div>
                 <a class="dropdown-toggle options" data-toggle="dropdown" href="#">
-                    Driver<i class="fa fa-caret-down"></i>
+                    <%=name%><i class="fa fa-caret-down"></i>
                     <!--<i class="fa fa-caret-down"></i>-->
                 </a>
 
                 <ul class="dropdown-menu arrow settings dropdown-menu-right" style="z-index: 9999;">
 
                     <li>
-                    <a href="Profile.jsp"><i class="fa fa-user"></i> Profile</a>
+                        <a href="Profile.jsp"><i class="fa fa-user"></i> Profile</a>
                     </li>
-                    
+
                     <li>
                         <a href="ChangePassword.jsp"><i class="fa fa-key"></i> Change Password</a>
                     </li>

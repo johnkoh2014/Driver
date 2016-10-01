@@ -1,3 +1,4 @@
+<%@page import="entity.Driver"%>
 <%@page import="dao.OfferDAO"%>
 <!DOCTYPE html>
 <html>

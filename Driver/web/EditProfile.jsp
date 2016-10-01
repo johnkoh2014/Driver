@@ -32,7 +32,7 @@
                     </div>
                     <!-- /page header -->
                     <%
-                        Driver driver = (Driver) session.getAttribute("loggedInUser");
+                        
                         String currentEmail = driver.getEmail();
                         String newEmail = (String) request.getAttribute("newEmail");
                         if (newEmail == null) {
