@@ -31,6 +31,7 @@
                     <%
                         String service = request.getParameter("service");
                         String type = request.getParameter("type");
+                        String vid = request.getParameter("vehicle");
                         if (type == null) {
                             type = "";
                         }
@@ -77,6 +78,7 @@
                                             <div class="form-group form-footer text-center">
                                                 <input type="hidden" name="service"value="<%=service%>">
                                                 <input type="hidden" name="type" value="<%=type%>">
+                                                <input type="hidden" name="id" value="<%=vid%>">
                                                 <button type="submit" class="btn btn-primary">Get Offers</button>
                                                 <button type="reset" class="btn btn-default">Reset</button>
                                             </div>

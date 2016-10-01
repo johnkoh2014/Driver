@@ -43,7 +43,7 @@ public class SubmitOfferServlet extends HttpServlet {
         String type = request.getParameter("type");
         String description = request.getParameter("description");
         String mileage = request.getParameter("mileage");
-        String v_id = request.getParameter("vehicle");
+        String v_id = request.getParameter("id");
         int vid = 0;
         if (v_id.length() > 0){
             vid = Integer.parseInt(v_id);
@@ -64,11 +64,11 @@ public class SubmitOfferServlet extends HttpServlet {
 //            Vehicle vehicle = new Vehicle(user_id, token, token, user_id, plateNumber, user_id, carColor, token);
 //            (int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control)
             
-            session.setAttribute("success", "Requested for quotations");
+            session.setAttribute("success", "Requested quotations for " + service + " - " + description);
             response.sendRedirect("ViewAllRequests.jsp");
         } else {
             request.setAttribute("errMsg", errorMsg); 
-            RequestDispatcher view = request.getRequestDispatcher("RequestSummary.jsp?service="+<%=service%>+"&type="+<%=type%>+"&vehicle="+<%=vid%>);
+            RequestDispatcher view = request.getRequestDispatcher("RequestSummary.jsp?service="+service+"&type="+type+"&vehicle="+vid);
             view.forward(request, response);
         }
 

@@ -275,6 +275,7 @@ public class QuotationRequestDAO {
         urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("services[0][name]", service + " - " + type));
+        urlParameters.add(new BasicNameValuePair("services[0][details]", ""));
         urlParameters.add(new BasicNameValuePair("services[0][description]", description));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));

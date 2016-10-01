@@ -31,6 +31,16 @@
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%
+                        String success = (String) session.getAttribute("success");
+
+                        if (success != null && !(success.equals("null")) && success.length() > 0) {
+                    %>
+                    <div class="alert alert-success"><%=success%></div>
+                    <%
+                            session.setAttribute("success", "");
+                        }
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -40,7 +50,7 @@
 
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">
-                                        
+
                                     </div>
                                     <!--end tile header-->
                                     <%
