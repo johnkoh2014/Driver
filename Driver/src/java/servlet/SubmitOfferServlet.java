@@ -6,7 +6,9 @@
 package servlet;
 
 import dao.DriverDAO;
+import dao.QuotationRequestDAO;
 import entity.Driver;
+import entity.QuotationRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -41,25 +43,32 @@ public class SubmitOfferServlet extends HttpServlet {
         String type = request.getParameter("type");
         String description = request.getParameter("description");
         String mileage = request.getParameter("mileage");
+        String v_id = request.getParameter("vehicle");
+        int vid = 0;
+        if (v_id.length() > 0){
+            vid = Integer.parseInt(v_id);
+        }
 
         //Logged in user details
         HttpSession session = request.getSession(true);
         Driver user = (Driver) session.getAttribute("loggedInUser");
         DriverDAO dDAO = new DriverDAO();
+        
         int user_id = user.getId();
         String token = user.getToken(); 
+        QuotationRequestDAO qrDAO = new QuotationRequestDAO();
         ArrayList<String> errorMsg = new ArrayList<String>(); 
 //        ArrayList<String> errorMsg = dDAO.addVehicle(carMake, carModel, manufactureYear, user_id, plateNumber, token, carColor, transmission);
-        
+        errorMsg = qrDAO.addRequest(user_id, token, vid, service, type, description, mileage);
         if (errorMsg == null || errorMsg.isEmpty()) {
 //            Vehicle vehicle = new Vehicle(user_id, token, token, user_id, plateNumber, user_id, carColor, token);
 //            (int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control)
             
-//            session.setAttribute("success", carMake + " " + carModel + " added");
-            response.sendRedirect("Request.jsp");
+            session.setAttribute("success", "Requested for quotations");
+            response.sendRedirect("ViewAllRequests.jsp");
         } else {
-            request.setAttribute("errMsg", errorMsg);
-            RequestDispatcher view = request.getRequestDispatcher("Request.jsp");
+            request.setAttribute("errMsg", errorMsg); 
+            RequestDispatcher view = request.getRequestDispatcher("RequestSummary.jsp?service="+<%=service%>+"&type="+<%=type%>+"&vehicle="+<%=vid%>);
             view.forward(request, response);
         }
 

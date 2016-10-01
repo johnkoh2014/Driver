@@ -1,3 +1,4 @@
+<%@page import="dao.OfferDAO"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -50,7 +51,10 @@
                                         </div>
                                     </div>
                                     <!--end tile header-->
-
+                                    <%
+                                        String oId = request.getParameter("id");
+                                        OfferDAO oDAO = new OfferDAO();
+                                    %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <div class="tab-content">
@@ -95,27 +99,27 @@
                                                             <h5><b>OPENING HOURS</b></h5>
                                                             10am - 7pm (Mon - Sat), By Appt only (Sun). Closed on PHs.
                                                         </div>
-                                                            <br/>
+                                                        <br/>
                                                         <div>
                                                             <h5><b>ADDRESS</b></h5>
                                                             338 Circuit Road S(379489)
                                                         </div>
-                                                            <br/>
+                                                        <br/>
                                                         <div>
                                                             <h5><b>PROVIDING SERVICES</b></h5>
                                                             Maintenance, Repair & Servicing
                                                         </div>
-                                                            <br/>
+                                                        <br/>
                                                         <div>
                                                             <h5><b>OTHER BRANDS</b></h5>
                                                             GlassMechanix
                                                         </div>
-                                                            <br/>
+                                                        <br/>
                                                         <div>
                                                             <h5><b>WEBSITE</b></h5>
                                                             <a href="http://www.ahhuatworkshop.com.sg" target="_blank">www.ahhuatworkshop.com.sg</a>
                                                         </div>
-                                                            <br/>
+                                                        <br/>
 
                                                     </div>
                                                     <!--end tile body-->

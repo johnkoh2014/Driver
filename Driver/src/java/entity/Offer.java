@@ -19,6 +19,7 @@ public class Offer {
     private double finalPrice;
     private int workshopId;
     private String shopName;
+    private String contact;
     private String contact1;
     private String contact2;
     private int status;
@@ -38,6 +39,20 @@ public class Offer {
         this.initialMinPrice = initialMinPrice;
         this.initialMaxPrice = initialMaxPrice;
         this.diagnosticPrice = diagnosticPrice;
+    }
+
+    public Offer(int id, String shopName, String contact, int workshopId, double finalPrice, double initialMinPrice, double initialMaxPrice, double diagnosticPrice, int status) {
+        this.id = id;
+        this.shopName = shopName;
+        this.contact = contact;
+        this.workshopId = workshopId;
+        this.finalPrice = finalPrice;
+        this.shopName = shopName;
+        this.finalPrice = finalPrice;
+        this.initialMinPrice = initialMinPrice;
+        this.initialMaxPrice = initialMaxPrice;
+        this.diagnosticPrice = diagnosticPrice;
+        this.status = status;
     }
 
     public int getId() {

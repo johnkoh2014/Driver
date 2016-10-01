@@ -1,3 +1,5 @@
+<%@page import="entity.Offer"%>
+<%@page import="dao.OfferDAO"%>
 <%@page import="entity.QuotationRequest"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.QuotationRequestDAO"%>
@@ -40,35 +42,37 @@
 
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">
-                                        
+
                                     </div>
                                     <!--end tile header-->
                                     <%
                                         Driver driver = (Driver) session.getAttribute("loggedInUser");
                                         int id = driver.getId();
                                         String token = driver.getToken();
+                                        String qr_Id = request.getParameter("id");
+                                        int qrId = 0;
+                                        if (qr_Id.length() > 0) {
+                                            qrId = Integer.parseInt(qr_Id); 
+                                        }
                                         QuotationRequestDAO qDAO = new QuotationRequestDAO();
-                                        ArrayList<QuotationRequest> qList = qDAO.getAllRequests(id, token);
+                                        OfferDAO oDAO = new OfferDAO();
+                                        ArrayList<Offer> oList = oDAO.getOffers(id, token, qrId);
 
                                     %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <ul class="list-group">
-                                            <%                                                        for (int i = 0; i < qList.size(); i++) {
-                                                    QuotationRequest req = qList.get(i);
-                                                    String qrName = req.getName();
-                                                    int qrId = req.getId();
-                                                    int noOffers = req.getNo_of_offers();
+                                            <%                                                        for (int i = 0; i < oList.size(); i++) {
+                                                    Offer offer = oList.get(i);
+                                                    String shopName = offer.getShopName();
+                                                    double min = offer.getInitialMinPrice();
+                                                    double max = offer.getInitialMinPrice();
+                                                    int oId = offer.getId();
 
-                                                    if (noOffers == 0) {%>
-                                            <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>No offer at the moment</i></a>
-
-                                            <%} else {%>
-                                            <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>There are <%=noOffers%> offers for your request</i></a>
-
-                                            <%}
-                                                }
                                             %>
+                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">$<%=min%> - $<%=max%></span><br/><i>Click to view profile and quote</i></a>
+                                                    <% }
+                                                    %>
                                         </ul>
 
                                     </div>

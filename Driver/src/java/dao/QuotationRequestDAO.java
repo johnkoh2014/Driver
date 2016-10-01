@@ -183,8 +183,8 @@ public class QuotationRequestDAO {
 
                 JsonArray offerArr = (JsonArray) qrObj.get("offers");
                 for (int j = 0; j < offerArr.size(); j++) {
-                    JsonObject offerObj = (JsonObject) offerArr.get(i);
-//                    JsonObject offerObj = offerElement.getAsJsonObject();
+                    JsonElement offerElement = offerArr.get(j);
+                    JsonObject offerObj = offerElement.getAsJsonObject();
                     attElement = offerObj.get("status");
                     int status = 0;
                     if (!attElement.isJsonNull()) {
@@ -255,6 +255,60 @@ public class QuotationRequestDAO {
             }
             return qList;
         }
+    }
+    
+    public ArrayList<String> addRequest(int user_id, String token,int vehicle_id, String service, String type, String description, String mileage) throws UnsupportedEncodingException, IOException {
+
+        String url = "http://119.81.43.85/service/save_services";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("vehicle_id", vehicle_id + ""));
+        urlParameters.add(new BasicNameValuePair("mileage", mileage));
+        urlParameters.add(new BasicNameValuePair("latitude", "0.0"));
+        urlParameters.add(new BasicNameValuePair("longitude", "0.0"));
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("services[0][name]", service + " - " + type));
+        urlParameters.add(new BasicNameValuePair("services[0][description]", description));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        String errorMessage = null;
+        ArrayList<String> errors = new ArrayList<String>();
+        JsonElement isSuccess = jobj.get("is_success");
+        if (isSuccess.getAsString().equals("false")) {
+            errorMessage = jobj.get("error_message").getAsString();
+            errors.add(errorMessage);
+            JsonElement fields = jobj.get("payload");
+            if (!fields.isJsonNull()) {
+                JsonArray arr = fields.getAsJsonObject().get("error_field").getAsJsonArray();
+                for (int i = 0; i < arr.size(); i++) {
+                    String f = arr.get(i).getAsString();
+                    errors.add(f);
+                }
+            }
+        }
+        return errors;
     }
 
 }

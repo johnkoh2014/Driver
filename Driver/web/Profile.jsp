@@ -115,7 +115,7 @@
                                                 String noPlate = vehicle.getPlateNumber();
                                         %>
                                         <div class="carItem">
-                                            <div class="col-sm-6 car">
+                                            <div class="col-sm-4 car">
                                                 <%=make + " " + model%>
                                             </div>
                                             <div class="col-sm-4 car">
@@ -123,10 +123,11 @@
                                             </div>
                                             <div class="col-sm-2 car">
                                                 <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue">Edit Car</a>
-                                                <form>
-                                                    
+                                            </div>
+                                            <div class="col-sm-2 car">
+                                                <form role="form" action="DeleteVehicle" method="POST">
+                                                    <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger">Delete</button>
                                                 </form>
-                                                <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue">Edit Car</a>
                                             </div>
                                         </div>
                                         <!--<div class="line-across-dark"></div>-->
