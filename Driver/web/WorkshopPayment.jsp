@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Valet Payment</title>
+        <title>Workshop Payment</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
@@ -23,7 +23,7 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
-                            <h1>Valet Payment</h1>
+                            <h1><strong>Workshop</strong> Payment</h1>
 
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">
 
-                                        <center>Payment Details</center>
+                                        <center>PAYMENT DETAILS</center>
 
                                     </div>
                                     <!--end tile header-->
@@ -47,30 +47,17 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
-
                                         <form class="form-horizontal" role="form" action="" method="POST">
-                                            <!--                                            <div class="row">
-                                                                                            <h1><center><strong>$40</strong></center></h1>
-                                                                                        </div>
+
                                             
-                                                                                        <div class="form-group">
-                                                                                            <label for="input01" class="col-sm-4 control-label">Card Number</label>
-                                                                                            <div class="col-sm-8">
-                                                                                                <input type="text" class="form-control" id="input01">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        
-                                                                                        <div class="form-group ">
-                                                                                            <label for="input01" class="col-sm-4 control-label">Expiration Number</label>
-                                                                                            <div class="col-sm-2">
-                                                                                                    <input type="text" class="form-control" data-stripe="number">
-                                                                                            </div>
-                                                                                            /
-                                                                                            <div class="col-sm-2">
-                                                                                                    <input type="text" class="form-control" data-stripe="number">
-                                                                                            </div>
-                                                                                        </div>-->
-                                            <fieldset>
+                                                <div class="row">
+                                                    <h1><center><strong>$120</strong></center></h1>
+
+                                                    
+                                                </div>
+
+                                                <form class="form-horizontal" role="form" action="" method="POST">
+                                                    <fieldset>
 <!--                                                <legend>Payment</legend>-->
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
@@ -135,13 +122,14 @@
                                                     </div>
                                                 </div>-->
                                             </fieldset>
-
+           
+                                            
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
                                                 <input type="hidden" name="service"value="">
                                                 <input type="hidden" name="type" value="">
-                                                <button type="submit" class="btn btn-warning">Book Now!</button>
-                                                <!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
+                                                <button type="submit" class="btn btn-warning">Pay Now!</button>
+<!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
                                             </div>
                                             <!--end form footer-->
                                         </form>
@@ -180,11 +168,11 @@
         <script src="js/minimal.min.js"></script>
 
         <script>
-            $(function () {
+                                                        $(function () {
 
 
 
-            })
+                                                        })
 
         </script>
     </body>
