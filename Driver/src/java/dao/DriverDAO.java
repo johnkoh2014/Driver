@@ -206,17 +206,13 @@ public class DriverDAO {
         }
         return driver;
     }
-    
+
     public static void main(String[] args) throws IOException {
         //authenticateUser("james@james.com", "12345678");
     }
 
-
-    public ArrayList<String> addVehicle(String make, String model, int year, int user_id, String plate_number, 
-            String token, String car_color, String type_of_control_of_car) throws UnsupportedEncodingException, IOException {
-        
-        String url = "http://119.81.43.85/car/add_car";
-
+    public boolean updateUserPassword(int user_id, String token, String currentPassword, String newPassword) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/user/change_password";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
 
@@ -224,14 +220,10 @@ public class DriverDAO {
         post.setHeader("User-Agent", USER_AGENT);
 
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("make", make));
-        urlParameters.add(new BasicNameValuePair("model", model));
-        urlParameters.add(new BasicNameValuePair("year", year + ""));
         urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
-        urlParameters.add(new BasicNameValuePair("plate_number", plate_number));
         urlParameters.add(new BasicNameValuePair("token", token));
-        urlParameters.add(new BasicNameValuePair("car_color", car_color));
-        urlParameters.add(new BasicNameValuePair("type_of_control_of_car", type_of_control_of_car));
+        urlParameters.add(new BasicNameValuePair("currentPassword", currentPassword));
+        urlParameters.add(new BasicNameValuePair("nPassword", newPassword));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -249,22 +241,11 @@ public class DriverDAO {
         JsonParser jsonParser = new JsonParser();
         JsonElement element = jsonParser.parse(str);
         JsonObject jobj = element.getAsJsonObject();
-        String errorMessage = null;
-        ArrayList<String> errors = new ArrayList<String>();
         JsonElement isSuccess = jobj.get("is_success");
         if (isSuccess.getAsString().equals("false")) {
-            errorMessage = jobj.get("error_message").getAsString();
-            errors.add(errorMessage);
-            JsonElement fields = jobj.get("payload");
-            if (!fields.isJsonNull()) {
-                JsonArray arr = fields.getAsJsonObject().get("error_field").getAsJsonArray();
-                for (int i = 0; i < arr.size(); i++) {
-                    String f = arr.get(i).getAsString();
-                    errors.add(f);
-                }
-            }
+            return false;
+        } else {
+            return true;
         }
-        return errors;
     }
-
 }

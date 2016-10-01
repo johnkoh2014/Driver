@@ -5,13 +5,12 @@
  */
 package servlet;
 
-import dao.DriverDAO;
-import dao.VehicleDAO;
 import entity.Driver;
-import entity.Vehicle;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +24,8 @@ import util.Validation;
  *
  * @author User
  */
-@WebServlet(name = "AddVehicleServlet", urlPatterns = {"/AddVehicle"})
-public class AddVehicleServlet extends HttpServlet {
+@WebServlet(name = "EditProfileServlet", urlPatterns = {"/EditProfile"})
+public class EditProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,37 +37,27 @@ public class AddVehicleServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        String carMake = request.getParameter("carMake");
-        String carModel = request.getParameter("carModel");
-        String aManufactureYear = request.getParameter("manufactureYear");
-        int manufactureYear = Integer.parseInt(aManufactureYear);
-        String plateNumber = request.getParameter("plateNumber");
-        String carColor = request.getParameter("carColor");
-        String transmission = request.getParameter("transmission");
+        
+        String currentEmail = request.getParameter("currentEmail").trim();
+        String newEmail = request.getParameter("newEmail").trim();
+        String hpNo = request.getParameter("hpNo").trim();
 
-        //Logged in user details
+        Validation validation = new Validation();
+        String errMsg = validation.isValidMobileContact(hpNo);
+
         HttpSession session = request.getSession(true);
-        Driver user = (Driver) session.getAttribute("loggedInUser");
-        VehicleDAO vDAO = new VehicleDAO();
-        int user_id = user.getId();
-        String token = user.getToken(); 
         
-        ArrayList<String> errorMsg = vDAO.addVehicle(carMake, carModel, manufactureYear, user_id, plateNumber, token, carColor, transmission);
-        
-        if (errorMsg == null || errorMsg.isEmpty()) {
-//            Vehicle vehicle = new Vehicle(user_id, token, token, user_id, plateNumber, user_id, carColor, token);
-//            (int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control)
-            session.setAttribute("success", carMake + " " + carModel + " added");
-            response.sendRedirect("Request.jsp");
-        } else {
-            request.setAttribute("errMsg", errorMsg);
-            RequestDispatcher view = request.getRequestDispatcher("Request.jsp");
-            view.forward(request, response);
-        }
+        if (errMsg == null || errMsg.length() == 0) {
 
-    } 
+            Driver user = (Driver) session.getAttribute("loggedInUser");
+
+            int id = user.getId();
+            String token = user.getToken();
+            
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -82,10 +71,14 @@ public class AddVehicleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -96,7 +89,11 @@ public class AddVehicleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

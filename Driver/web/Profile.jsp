@@ -42,6 +42,15 @@
 //                        ArrayList<Vehicle> vList = driver.getVehicles();
 
                     %>
+                    <%                        String success = (String) session.getAttribute("success");
+
+                        if (success != null && !(success.equals("null")) && success.length() > 0) {
+                    %>
+                    <div class="alert alert-success"><%=success%></div>
+                    <%
+                            session.setAttribute("success", "");
+                        }
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -100,13 +109,13 @@
                                     <div class="tile-body">
                                         <%
                                             for (Vehicle vehicle : vList) {
-                                                int vid = vehicle.getId(); 
+                                                int vid = vehicle.getId();
                                                 String make = vehicle.getMake();
                                                 String model = vehicle.getModel();
                                                 String noPlate = vehicle.getPlateNumber();
                                         %>
                                         <div class="carItem">
-                                            <div class="col-sm-6 car">
+                                            <div class="col-sm-4 car">
                                                 <%=make + " " + model%>
                                             </div>
                                             <div class="col-sm-4 car">
@@ -114,6 +123,11 @@
                                             </div>
                                             <div class="col-sm-2 car">
                                                 <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue">Edit Car</a>
+                                            </div>
+                                            <div class="col-sm-2 car">
+                                                <form role="form" action="DeleteVehicle" method="POST">
+                                                    <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger">Delete</button>
+                                                </form>
                                             </div>
                                         </div>
                                         <!--<div class="line-across-dark"></div>-->

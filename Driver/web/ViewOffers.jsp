@@ -1,12 +1,14 @@
-<%@page import="entity.Vehicle"%>
+<%@page import="entity.Offer"%>
+<%@page import="dao.OfferDAO"%>
+<%@page import="entity.QuotationRequest"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="dao.QuotationRequestDAO"%>
 <%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile</title>
+        <title>All Requests</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
@@ -26,20 +28,11 @@
                     <div class="pageheader">
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
-                        <div class="margin-top-15 text-center">
-                            <h2>My Profile</h2>
+                        <div class="margin-top-15 text-center" style="color:white">
+                            <h1>ALL REQUESTS</h1>
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        Driver driver = (Driver) session.getAttribute("loggedInUser");
-                        String currentEmail = driver.getEmail();
-                        String newEmail = (String) request.getAttribute("newEmail");
-                        if (newEmail == null) {
-                            newEmail = "";
-                        }
-                        String hpNo = driver.getHandphone();
-                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -48,52 +41,45 @@
                             <div>
 
                                 <section class="tile color transparent-black">
-                                    <div class="tile-header text-center">
-                                        <h3>Account Information</h3>
+                                    <div class="tile-header">
+
                                     </div>
                                     <!--end tile header-->
+                                    <%
+                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
+                                        int id = driver.getId();
+                                        String token = driver.getToken();
+                                        String qr_Id = request.getParameter("id");
+                                        int qrId = 0;
+                                        if (qr_Id.length() > 0) {
+                                            qrId = Integer.parseInt(qr_Id); 
+                                        }
+                                        QuotationRequestDAO qDAO = new QuotationRequestDAO();
+                                        OfferDAO oDAO = new OfferDAO();
+                                        ArrayList<Offer> oList = oDAO.getOffers(id, token, qrId);
 
+                                    %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
+                                        <ul class="list-group">
+                                            <%                                                        for (int i = 0; i < oList.size(); i++) {
+                                                    Offer offer = oList.get(i);
+                                                    String shopName = offer.getShopName();
+                                                    double min = offer.getInitialMinPrice();
+                                                    double max = offer.getInitialMinPrice();
+                                                    int oId = offer.getId();
 
-                                        <form class="form-horizontal" role="form" action="EditProfile" method="POST">
-
-                                            <div class="form-group">
-                                                <label for="input01" class="col-sm-2 control-label">Current Email</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input01" name="currentEmail" value="<%=currentEmail%>">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="input02" class="col-sm-2 control-label">New Email</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="newEmail" value="<%=newEmail%>">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="input03" class="col-sm-2 control-label">Mobile Number</label>
-                                                <div class="col-sm-10">
-                                                    <input type="tel" class="form-control" id="input03" name="hpNo" value="<%=hpNo%>">
-                                                </div>
-                                            </div>
-
-                                            <!--form footer for submit-->
-                                            <div class="form-group form-footer text-center">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                <button type="reset" class="btn btn-default">Reset</button>
-                                            </div>
-                                            <!--end form footer-->
-                                        </form>
-
+                                            %>
+                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">$<%=min%> - $<%=max%></span><br/><i>Click to view profile and quote</i></a>
+                                                    <% }
+                                                    %>
+                                        </ul>
 
                                     </div>
                                     <!--end tile body-->
 
 
                                 </section>
-
                             </div>
                             <!-- /col 12 -->
                         </div>

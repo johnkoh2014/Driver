@@ -6,9 +6,9 @@
 package servlet;
 
 import dao.DriverDAO;
-import dao.VehicleDAO;
+import dao.QuotationRequestDAO;
 import entity.Driver;
-import entity.Vehicle;
+import entity.QuotationRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,14 +19,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import util.Validation;
 
 /**
  *
  * @author User
  */
-@WebServlet(name = "AddVehicleServlet", urlPatterns = {"/AddVehicle"})
-public class AddVehicleServlet extends HttpServlet {
+@WebServlet(name = "SubmitOfferServlet", urlPatterns = {"/SubmitOffer"})
+public class SubmitOfferServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,35 +39,40 @@ public class AddVehicleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String carMake = request.getParameter("carMake");
-        String carModel = request.getParameter("carModel");
-        String aManufactureYear = request.getParameter("manufactureYear");
-        int manufactureYear = Integer.parseInt(aManufactureYear);
-        String plateNumber = request.getParameter("plateNumber");
-        String carColor = request.getParameter("carColor");
-        String transmission = request.getParameter("transmission");
+        String service = request.getParameter("service");
+        String type = request.getParameter("type");
+        String description = request.getParameter("description");
+        String mileage = request.getParameter("mileage");
+        String v_id = request.getParameter("vehicle");
+        int vid = 0;
+        if (v_id.length() > 0){
+            vid = Integer.parseInt(v_id);
+        }
 
         //Logged in user details
         HttpSession session = request.getSession(true);
         Driver user = (Driver) session.getAttribute("loggedInUser");
-        VehicleDAO vDAO = new VehicleDAO();
+        DriverDAO dDAO = new DriverDAO();
+        
         int user_id = user.getId();
         String token = user.getToken(); 
-        
-        ArrayList<String> errorMsg = vDAO.addVehicle(carMake, carModel, manufactureYear, user_id, plateNumber, token, carColor, transmission);
-        
+        QuotationRequestDAO qrDAO = new QuotationRequestDAO();
+        ArrayList<String> errorMsg = new ArrayList<String>(); 
+//        ArrayList<String> errorMsg = dDAO.addVehicle(carMake, carModel, manufactureYear, user_id, plateNumber, token, carColor, transmission);
+        errorMsg = qrDAO.addRequest(user_id, token, vid, service, type, description, mileage);
         if (errorMsg == null || errorMsg.isEmpty()) {
 //            Vehicle vehicle = new Vehicle(user_id, token, token, user_id, plateNumber, user_id, carColor, token);
 //            (int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control)
-            session.setAttribute("success", carMake + " " + carModel + " added");
-            response.sendRedirect("Request.jsp");
+            
+            session.setAttribute("success", "Requested for quotations");
+            response.sendRedirect("ViewAllRequests.jsp");
         } else {
-            request.setAttribute("errMsg", errorMsg);
-            RequestDispatcher view = request.getRequestDispatcher("Request.jsp");
+            request.setAttribute("errMsg", errorMsg); 
+            RequestDispatcher view = request.getRequestDispatcher("RequestSummary.jsp?service="+<%=service%>+"&type="+<%=type%>+"&vehicle="+<%=vid%>);
             view.forward(request, response);
         }
 
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

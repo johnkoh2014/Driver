@@ -8,10 +8,8 @@ package servlet;
 import dao.DriverDAO;
 import dao.VehicleDAO;
 import entity.Driver;
-import entity.Vehicle;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,14 +17,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import util.Validation;
 
 /**
  *
  * @author User
  */
-@WebServlet(name = "AddVehicleServlet", urlPatterns = {"/AddVehicle"})
-public class AddVehicleServlet extends HttpServlet {
+@WebServlet(name = "DeleteVehicleServlet", urlPatterns = {"/DeleteVehicle"})
+public class DeleteVehicleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,35 +37,26 @@ public class AddVehicleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String carMake = request.getParameter("carMake");
-        String carModel = request.getParameter("carModel");
-        String aManufactureYear = request.getParameter("manufactureYear");
-        int manufactureYear = Integer.parseInt(aManufactureYear);
-        String plateNumber = request.getParameter("plateNumber");
-        String carColor = request.getParameter("carColor");
-        String transmission = request.getParameter("transmission");
-
-        //Logged in user details
-        HttpSession session = request.getSession(true);
-        Driver user = (Driver) session.getAttribute("loggedInUser");
+       
+        int idToDelete = Integer.parseInt(request.getParameter("vid"));
         VehicleDAO vDAO = new VehicleDAO();
-        int user_id = user.getId();
-        String token = user.getToken(); 
+                
+        HttpSession session = request.getSession(true);
+        Driver loggedInUser = (Driver) session.getAttribute("loggedInUser");
+        int id = loggedInUser.getId();
+        String token = loggedInUser.getToken();
+        String errMsg = vDAO.deleteVehicle(id, token, idToDelete); 
         
-        ArrayList<String> errorMsg = vDAO.addVehicle(carMake, carModel, manufactureYear, user_id, plateNumber, token, carColor, transmission);
         
-        if (errorMsg == null || errorMsg.isEmpty()) {
-//            Vehicle vehicle = new Vehicle(user_id, token, token, user_id, plateNumber, user_id, carColor, token);
-//            (int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control)
-            session.setAttribute("success", carMake + " " + carModel + " added");
-            response.sendRedirect("Request.jsp");
-        } else {
-            request.setAttribute("errMsg", errorMsg);
-            RequestDispatcher view = request.getRequestDispatcher("Request.jsp");
-            view.forward(request, response);
+        if (errMsg.equals("")) {
+                session.setAttribute("success", "Vehicle successfully deleted!");
+                response.sendRedirect("Profile.jsp");
+            } else {
+                request.setAttribute("fail", errMsg);
+                RequestDispatcher view = request.getRequestDispatcher("Profile.jsp?id=" + idToDelete);
+                view.forward(request, response);
+            }
         }
-
-    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -259,6 +259,99 @@ public class VehicleDAO {
         }
     }
 
+    public String deleteVehicle(int user_id, String token, int id) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/car/delete_car";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("id", id + ""));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
+    }
+
+    public ArrayList<String> addVehicle(String make, String model, int year, int user_id, String plate_number,
+            String token, String car_color, String type_of_control_of_car) throws UnsupportedEncodingException, IOException {
+
+        String url = "http://119.81.43.85/car/add_car";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("make", make));
+        urlParameters.add(new BasicNameValuePair("model", model));
+        urlParameters.add(new BasicNameValuePair("year", year + ""));
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("plate_number", plate_number));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("car_color", car_color));
+        urlParameters.add(new BasicNameValuePair("type_of_control_of_car", type_of_control_of_car));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        String errorMessage = null;
+        ArrayList<String> errors = new ArrayList<String>();
+        JsonElement isSuccess = jobj.get("is_success");
+        if (isSuccess.getAsString().equals("false")) {
+            errorMessage = jobj.get("error_message").getAsString();
+            errors.add(errorMessage);
+            JsonElement fields = jobj.get("payload");
+            if (!fields.isJsonNull()) {
+                JsonArray arr = fields.getAsJsonObject().get("error_field").getAsJsonArray();
+                for (int i = 0; i < arr.size(); i++) {
+                    String f = arr.get(i).getAsString();
+                    errors.add(f);
+                }
+            }
+        }
+        return errors;
+    }
+
     public static void main(String[] args) throws IOException {
         //getVehicle(18, "cb2341be42e49a320f0dbba633e242254956ca9bb800485c757a6e37284fc9693c28a333b39df2791c5a8f88fe136c4060fb65814c807c7cc7acc897a529fc6d22ca19d35ee58820a3571eda94eae9c7c8ca3d76e7501e7df79840f3ede675f0b042cf09ca4e0dfe3ef7a21a4ea49bb0ae14225354831375b78acc64b0bdb6088b9693747d3e145715caa1f3e0dac23bf5190c37ef119f300a3ca1ac0ab18dd9a39c244e1fe7aeab8ad409e365d35a95a01ed3f2467b94fc97aadc2e4cb75482c517edb9e542387fa205b5549d89cae8463bf446cbb4c92b725cd99da45109badf09f2abd13c0d54143f3071186640a7fb1f100b849e5f6c6e1fbcbfa91a1ccec982b106d80b3d21a011f75e82ca16cb7f5d820374e1fd074b5373a367d1cf4c49668b790c3b761df624862302c78acd282c1f3d36eedb98e3d33bcf0b2ed2285490f953e0c588f65a893f07dbd49fbbe4211f898c23b3713358bbe00c0d0574a95256a5bfec7ae42a12f4df75a359fd7dd44d2c72430bb0426e1429fc5e9dad491e8cdb520d0f61b271efde9fe74a24baf208c542bdd49d9eab9a6d3eb836468b7c295d3d9792398b1287c86dd5fb59427cf8e038f1b2643e1dda27b9f4ac99fddf0af3b942d34b2f3b8d36c07b2552fdba09c535162e7eabfb80291f5b6e0087dfe5fcabf9a1384ca93d81923773ce6fd28e1efec778c656e7f379af9b994f", 1);
     }

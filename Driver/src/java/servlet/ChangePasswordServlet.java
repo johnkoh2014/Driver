@@ -42,23 +42,21 @@ public class ChangePasswordServlet extends HttpServlet {
         
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
-        String confirmPassword = request.getParameter("confirmNewPassword");
+        String confirmPassword = request.getParameter("confirmPassword");
         Driver driver = (Driver)session.getAttribute("loggedInUser");
         String email = driver.getEmail();
         DriverDAO uDAO = new DriverDAO();
         if (!newPassword.equals(confirmPassword)) {
             request.setAttribute("errMsg", "Incorrect password / New passwords do not match.");
-            request.setAttribute("email", email);
             RequestDispatcher view = request.getRequestDispatcher("ChangePassword.jsp");
             view.forward(request, response);
         }
-        //boolean isSuccess = uDAO.updateUserPassword(driver.getId(), driver.getToken(), oldPassword, newPassword);
-        boolean isSuccess = false;
+        boolean isSuccess = uDAO.updateUserPassword(driver.getId(), driver.getToken(), oldPassword, newPassword);
+        
         if (isSuccess) {
             try {
-                request.setAttribute("successChangePasswordMsg", "Your password has been changed!");
-                String redirectTo = session.getAttribute("loggedInUserType") + ".jsp";
-                RequestDispatcher view = request.getRequestDispatcher(redirectTo);
+                session.setAttribute("success", "Your password has been changed!");
+                RequestDispatcher view = request.getRequestDispatcher("Profile.jsp");
                 view.forward(request, response);
             } catch (Exception ex) {
                 ex.printStackTrace();

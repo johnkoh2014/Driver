@@ -1,3 +1,7 @@
+<%@page import="entity.QuotationRequest"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.QuotationRequestDAO"%>
+<%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,44 +40,36 @@
 
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">
-                                        <div class="tile-widget">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-xs-12 text-right">
-                                                    <div class="btn-group btn-group-justified table-options desktopOnly">
-                                                        <ul class="nav nav-pills tabpager text-center">
-                                                            <li class="w50 active arrange-center"><a href="#Requests" data-toggle="pill">REQUESTS</a></li>
-                                                            <li class="w50 arrange-center"><a href="#Offers" data-toggle="pill">OFFERS</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <!--end tile header-->
+                                    <%
+                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
+                                        int id = driver.getId();
+                                        String token = driver.getToken();
+                                        QuotationRequestDAO qDAO = new QuotationRequestDAO();
+                                        ArrayList<QuotationRequest> qList = qDAO.getAllRequests(id, token);
 
+                                    %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
-                                        <div class="tab-content">
+                                        <ul class="list-group">
+                                            <%                                                        for (int i = 0; i < qList.size(); i++) {
+                                                    QuotationRequest req = qList.get(i);
+                                                    String qrName = req.getName();
+                                                    int qrId = req.getId();
+                                                    int noOffers = req.getNo_of_offers();
 
-                                            <div class="tab-pane fade active in" id="Requests" >
-                                                <ul class="list-group">
-                                                    <li class="list-group-item"><b>General Diagnostic</b><br/><i>No offer at the moment</i></li>
-                                                    <li class="list-group-item"><b>General Diagnostic</b><br/><i>There are offers for your request</i></li>
-                                                </ul>
-                                            </div><!--Requests-->
+                                                    if (noOffers == 0) {%>
+                                            <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>No offer at the moment</i></a>
 
+                                            <%} else {%>
+                                            <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>There are <%=noOffers%> offers for your request</i></a>
 
-
-                                            <div class="tab-pane fade " id="Offers" >
-                                                <div class="list-group">
-                                                    <a href="OfferDetails.jsp?id=" class="list-group-item"><b>AH HUAT WORKSHOP PTE LTD</b><br/><span style="color:blue">$60 - $80</span><br/><i>Click to view profile and quote</i></a>
-                                                    <a href="OfferDetails.jsp?id=" class="list-group-item"><b>DYNAMICS MECHANICS</b><br/><span style="color:blue">$70 - $120</span><br/><i>Click to view profile and quote</i></a>
-                                                </div>
-                                            </div><!--Offers-->
-
-
-
-                                        </div>
+                                            <%}
+                                                }
+                                            %>
+                                        </ul>
 
                                     </div>
                                     <!--end tile body-->
