@@ -1,3 +1,6 @@
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="entity.Vehicle"%>
 <%@page import="entity.Driver"%>
 <%@page import="dao.VehicleDAO"%>
@@ -36,17 +39,24 @@
                         String token = driver.getToken();
                         String vehicleId = request.getParameter("id");
                         int vid = Integer.parseInt(vehicleId);
-                        
+
                         VehicleDAO vDAO = new VehicleDAO();
                         Vehicle vehicle = vDAO.getVehicle(id, token, vid);
-                        
+
                         String make = vehicle.getMake();
                         String model = vehicle.getModel();
                         int year = vehicle.getYear();
                         String plateNumber = vehicle.getPlateNumber();
-                        String color = vehicle.getColour(); 
+                        String color = vehicle.getColour();
                         String control = vehicle.getControl();
-                        
+
+                        HashMap<Integer, ArrayList<String>> list = vDAO.retrieveAllCarBrands(id, token);
+                        ArrayList<String> carBrands = new ArrayList<String>();
+                        ArrayList<String> carModels = new ArrayList<String>();
+                        ArrayList<String> carYears = new ArrayList<String>();
+                        carBrands = list.get(1);
+                        carModels = list.get(2);
+                        carYears = list.get(3);
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -63,56 +73,88 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
-                                        <form class="form-horizontal" role="form" action="" method="POST">
+                                        <form class="form-horizontal" role="form" action="EditVehicle" method="POST">
 
                                             <div class="form-group">
                                                 <label for="input01" class="col-sm-2 control-label">Make</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input01" name="carMake" value="make">
+                                                    <!--<input type="text" class="form-control" id="input01" name="carMake" value="<%//=make%>">-->
+                                                    <select class="chosen-select chosen-transparent form-control" id="input01" name="carMake">
+                                                        <%
+                                                            for (String s : carBrands) {
+                                                                if (s.equals(make)) {
+                                                                    out.println("<option selected>" + s + "</option>");
+                                                                } else {
+                                                                    out.println("<option>" + s + "</option>");
+                                                                }
+                                                            }
+
+                                                        %>
+                                                    </select>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input02" class="col-sm-2 control-label">Model</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="carModel" value="model">
+                                                    <input type="text" class="form-control" id="input02" name="carModel" value="<%=model%>">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input03" class="col-sm-2 control-label">Year of Manufacture</label>
                                                 <div class="col-sm-10">
-                                                    <input type="number" class="form-control" id="input03" name="manufactureYear">
+                                                    <input type="number" class="form-control" id="input03" name="manufactureYear" value="<%=year%>">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="input04" class="col-sm-2 control-label">Plate Number</label>
                                                 <div class="col-sm-10">
-                                                    <input type="number" class="form-control" id="input04" name="plateNumber">
+                                                    <input type="text" class="form-control" id="input04" name="plateNumber" value="<%=plateNumber%>">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input05" class="col-sm-2 control-label">Car Color</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input05" name="carColor">
+                                                    <input type="text" class="form-control" id="input05" name="carColor" value="<%=color%>">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Transmission Type</label>
                                                 <div class="col-sm-2">
+                                                    <%
+                                                        if (control.equals("Automatic")) {
+                                                    %>
+                                                    <input type="radio"  id="input06" value="Automatic" name="transmission" checked>
+                                                    <%
+                                                    } else {%>
                                                     <input type="radio"  id="input06" value="Automatic" name="transmission">
+                                                    <%
+                                                        }
+                                                    %>
                                                     <label for="input06" class="control-label">Automatic</label>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <input type="radio" id="input07" value="Manual" name="transmission">
+                                                    <!--<input type="radio" id="input07" value="Manual" name="transmission">-->
+                                                    <%
+                                                        if (control.equals("Manual")) {
+                                                    %>
+                                                    <input type="radio"  id="input06" value="Manual" name="transmission" checked>
+                                                    <%
+                                                    } else {%>
+                                                    <input type="radio"  id="input06" value="Manual" name="transmission">
+                                                    <%
+                                                        }
+                                                    %>
                                                     <label for="input07" class="control-label">Manual</label>
                                                 </div>
                                             </div>
 
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
+                                                <input type="hidden" value="<%=vid%>" name="vid"/>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                                 <button type="reset" class="btn btn-default">Reset</button>
                                             </div>

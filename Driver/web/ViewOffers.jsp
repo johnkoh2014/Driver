@@ -66,11 +66,13 @@
                                                     Offer offer = oList.get(i);
                                                     String shopName = offer.getShopName();
                                                     double min = offer.getInitialMinPrice();
+                                                    String minPrice = min + "0";
                                                     double max = offer.getInitialMinPrice();
+                                                    String maxPrice = max + "0";
                                                     int oId = offer.getId();
 
                                             %>
-                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">$<%=min%> - $<%=max%></span><br/><i>Click to view profile and quote</i></a>
+                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">$<%=minPrice%> - $<%=maxPrice%></span><br/><i>Click to view profile and quote</i></a>
                                                     <% }
                                                     %>
                                         </ul>
