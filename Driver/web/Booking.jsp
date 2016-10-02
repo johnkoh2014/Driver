@@ -28,20 +28,27 @@
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%                        
+                    String v_id = request.getParameter("id");
+                        int vid = 0;
+                        if (v_id.length() > 0) {
+                            vid = Integer.parseInt(v_id);
+                        }
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
                         <div class="row">
                             <!-- col 12 -->
 
-                            <form class="form-horizontal" role="form" action="" method="POST">
+                            <form class="form-horizontal" role="form" action="SelectValet" method="POST">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div style="color:white"><b>Service Date & Time</b></div>
                                         <div class="form-group col-sm-12">
                                             <div class='input-group date' id='enddatetimepicker'>
                                                 <!--<form id='' action="" role="form">-->
-                                                <input type='text' name="endTime" class="form-control dt" readonly/>
+                                                <input type='text' name="dateTime" class="form-control dt" readonly/>
                                                 <!--</form>-->
 
                                                 <span class="input-group-addon">
@@ -75,6 +82,7 @@
 
                                         <!--form footer for submit-->
                                         <div class="form-group form-footer text-center">
+                                            <input type="hidden" value="<%=vid%>" name="<%=vid%>">
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                             <button type="reset" class="btn btn-default">Reset</button>
 
