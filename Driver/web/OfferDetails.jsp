@@ -1,3 +1,4 @@
+<%@page import="entity.Offer"%>
 <%@page import="entity.Driver"%>
 <%@page import="dao.OfferDAO"%>
 <!DOCTYPE html>
@@ -52,9 +53,24 @@
                                         </div>
                                     </div>
                                     <!--end tile header-->
-                                    <%
-                                        String oId = request.getParameter("id");
+                                    <%                                        String offerId = request.getParameter("id");
+                                        int oId = 0;
+                                        if (offerId.length() > 0) {
+                                            oId = Integer.parseInt(offerId);
+                                        }
                                         OfferDAO oDAO = new OfferDAO();
+                                        Offer offer = oDAO.retrieveOfferById(id, token, oId);
+                                        String shopName = offer.getShopName();
+                                        double min = offer.getInitialMinPrice();
+                                        String minPrice = min + "0";
+                                        double max = offer.getInitialMinPrice();
+                                        String maxPrice = max + "0";
+                                        String serviceName = offer.getServiceName();
+                                        String openingHour = offer.getOpeningHour();
+                                        String shopAddress = offer.getShopAddress();
+                                        String shopCategory = offer.getShopCategory();
+                                        String brandsCarried = offer.getBrandsCarried();
+                                        String website = offer.getWebsite();
                                     %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
@@ -62,19 +78,19 @@
                                             <div class="tab-pane fade active in" id="offerDetails" >
                                                 <section class="tile color transparent-black">
                                                     <div class="tile-header text-center">
-                                                        <h3>AH HUAT WORKSHOP PTE LTD</h3>
+                                                        <h3><%=shopName%></h3>
                                                     </div>
                                                     <!--end tile header-->
                                                     <div class="line-across"></div>
                                                     <!-- /tile body -->
                                                     <div class="tile-body">
                                                         <div class="text-center">
-                                                            <h1>$60 - $100</h1>
+                                                            <h1>$<%=minPrice%> - $<%=maxPrice%></h1>
                                                             <br/>
-                                                            <h5>General Diagnostic</h5>
+                                                            <h5><%=serviceName%></h5>
                                                         </div>
                                                         <div class="margin-top-15 text-center">
-                                                            <a href="Booking.jsp" class="btn btn-blue">BOOK AN APPOINTMENT</a>
+                                                            <a href="Booking.jsp?id=<%=offerId%>" class="btn btn-blue">BOOK AN APPOINTMENT</a>
                                                         </div>
 
                                                     </div>
@@ -88,7 +104,7 @@
                                             <div class="tab-pane fade " id="workshopProfile" >
                                                 <section class="tile color transparent-black">
                                                     <div class="tile-header">
-                                                        <h3>AH HUAT WORKSHOP PTE LTD</h3>
+                                                        <h3><%=shopName%></h3>
                                                         <a href="Booking.jsp" class="btn btn-blue pull-right">BOOK AN APPOINTMENT</a>
 
                                                     </div>
@@ -98,27 +114,28 @@
                                                     <div class="tile-body">
                                                         <div>
                                                             <h5><b>OPENING HOURS</b></h5>
-                                                            10am - 7pm (Mon - Sat), By Appt only (Sun). Closed on PHs.
+                                                            <%=openingHour%>
+                                                            <!--10am - 7pm (Mon - Sat), By Appt only (Sun). Closed on PHs.-->
                                                         </div>
                                                         <br/>
                                                         <div>
                                                             <h5><b>ADDRESS</b></h5>
-                                                            338 Circuit Road S(379489)
+                                                            <%=shopAddress%>
                                                         </div>
                                                         <br/>
                                                         <div>
                                                             <h5><b>PROVIDING SERVICES</b></h5>
-                                                            Maintenance, Repair & Servicing
+                                                            <%=shopCategory%>
                                                         </div>
                                                         <br/>
                                                         <div>
                                                             <h5><b>OTHER BRANDS</b></h5>
-                                                            GlassMechanix
+                                                            <%=brandsCarried%>
                                                         </div>
                                                         <br/>
                                                         <div>
                                                             <h5><b>WEBSITE</b></h5>
-                                                            <a href="http://www.ahhuatworkshop.com.sg" target="_blank">www.ahhuatworkshop.com.sg</a>
+                                                            <a href="<%=website%>" target="_blank"><%=website%></a>
                                                         </div>
                                                         <br/>
 

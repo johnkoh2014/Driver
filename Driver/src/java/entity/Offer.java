@@ -15,10 +15,13 @@ public class Offer {
 
     private int id;
     private int serviceId;
-//    private Timestamp estCompletionTime;
+    private Timestamp estCompletionTime;
     private double finalPrice;
     private int workshopId;
     private String shopName;
+    private String serviceName;
+    private String shopAddress;
+    private String shopCategory;
     private String contact;
     private String contact1;
     private String contact2;
@@ -26,6 +29,9 @@ public class Offer {
     private double initialMinPrice;
     private double initialMaxPrice;
     private double diagnosticPrice;
+    private String openingHour; 
+    private String brandsCarried; 
+    private String website; 
 
     public Offer(int id, int serviceId, double finalPrice, int workshopId, String shopName, String contact1, String contact2, int status, double initialMinPrice, double initialMaxPrice, double diagnosticPrice) {
         this.id = id;
@@ -53,6 +59,89 @@ public class Offer {
         this.initialMaxPrice = initialMaxPrice;
         this.diagnosticPrice = diagnosticPrice;
         this.status = status;
+    }
+
+    public Offer(int id, int serviceId, String serviceName, String openingHour, int workshopId, String shopName, String shopAddress, String shopCategory, String brandsCarried, String website, int status, double initialMinPrice, double initialMaxPrice, double diagnosticPrice, double finalPrice, Timestamp estCompletionTime) {
+        this.id = id;
+        this.serviceId = serviceId;
+        this.serviceName = serviceName;
+        this.workshopId = workshopId;
+        this.shopName = shopName;
+        this.openingHour = openingHour;
+        this.shopAddress = shopAddress;
+        this.shopCategory = shopCategory;
+        this.status = status;
+        this.brandsCarried = brandsCarried;
+        this.website = website;
+        this.finalPrice = finalPrice;
+        this.initialMinPrice = initialMinPrice;
+        this.initialMaxPrice = initialMaxPrice;
+        this.diagnosticPrice = diagnosticPrice;
+        this.estCompletionTime = estCompletionTime;
+    }
+
+    public String getBrandsCarried() {
+        return brandsCarried;
+    }
+
+    public void setBrandsCarried(String brandsCarried) {
+        this.brandsCarried = brandsCarried;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getShopCategory() {
+        return shopCategory;
+    }
+
+    public void setShopCategory(String shopCategory) {
+        this.shopCategory = shopCategory;
+    }
+
+    public Timestamp getEstCompletionTime() {
+        return estCompletionTime;
+    }
+
+    public void setEstCompletionTime(Timestamp estCompletionTime) {
+        this.estCompletionTime = estCompletionTime;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getOpeningHour() {
+        return openingHour;
+    }
+
+    public void setOpeningHour(String openingHour) {
+        this.openingHour = openingHour;
+    }
+
+    public String getShopAddress() {
+        return shopAddress;
+    }
+
+    public void setShopAddress(String shopAddress) {
+        this.shopAddress = shopAddress;
     }
 
     public int getId() {
