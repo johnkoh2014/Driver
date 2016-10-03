@@ -1,3 +1,5 @@
+<%@page import="entity.Appointment"%>
+<%@page import="dao.AppointmentDAO"%>
 <%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
@@ -29,7 +31,10 @@
                         </div>
                     </div>
                     <!-- /page header -->
-
+                    <%
+                    AppointmentDAO aDAO = new AppointmentDAO();
+                    Appointment appointment = aDAO.getAppointments(id, token);
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->

@@ -46,7 +46,7 @@
                         <!-- row -->
                         <div class="row">
                             <!-- col 12 -->
-                            <div>
+                            <div class="col-md-12">
                                 <div class="margin-top-15 text-center">
                                     <a href="AddVehicle.jsp" class="btn btn-primary" role="button">Add Car</a>
                                 </div>
@@ -69,13 +69,13 @@
                                             <li>
                                                 <a href="Service.jsp?vehicle=<%=vehicle.getId()%>">
                                                     <div class="carItem">
-                                                        <div class="col-sm-6 car">
+                                                        <div class="col-xs-12 car">
                                                             <%=vehicle.getMake()%> <%=vehicle.getModel()%> 
-                                                        </div>
-                                                        <div class="col-sm-5 car">
+                                                            <br/>
                                                             <%=vehicle.getPlateNumber()%>
                                                         </div>
-                                                        <div class="caret-right"></div>
+                                                        <!--<div class="col-xs-12 car">
+                                                        </div>-->
                                                     </div>
                                                 </a>
                                             </li>

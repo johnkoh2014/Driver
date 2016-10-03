@@ -28,8 +28,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%                        
-                    String v_id = request.getParameter("id");
+                    <%                        String v_id = request.getParameter("id");
                         int vid = 0;
                         if (v_id.length() > 0) {
                             vid = Integer.parseInt(v_id);
@@ -70,11 +69,11 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <input type="radio"  id="input06" value="Yes" name="valet">
-                                                <label for="input06" class="control-label">YES</label>
+                                                <input type="radio"  id="valetYes" value="Yes" name="valet" disabled>
+                                                <label for="input06" class="control-label">YES (Feature coming soon!)</label>
                                             </div>
                                             <div class="col-sm-12">
-                                                <input type="radio" id="input07" value="No" name="valet">
+                                                <input type="radio" id="valetNo" value="No" name="valet" selected>
                                                 <label for="input07" class="control-label">NO</label>
                                             </div>
                                         </div>
@@ -126,9 +125,7 @@
 
         <script>
             $(function () {
-
-
-
+//                document.getElementById("valetYes").disabled = true;
             })
 
         </script>

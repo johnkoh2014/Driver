@@ -44,8 +44,8 @@
                                                 <div class="col-sm-12 col-xs-12 text-right">
                                                     <div class="btn-group btn-group-justified table-options desktopOnly">
                                                         <ul class="nav nav-pills tabpager text-center">
-                                                            <li class="w50 active arrange-center"><a href="#offerDetails" data-toggle="pill">OFFER DETAILS</a></li>
-                                                            <li class="w50 arrange-center"><a href="#workshopProfile" data-toggle="pill">WORKSHOP PROFILE</a></li>
+                                                            <li class="w45 active arrange-center"><a href="#offerDetails" data-toggle="pill">OFFER DETAILS</a></li>
+                                                            <li class="w45 arrange-center"><a href="#workshopProfile" data-toggle="pill">WORKSHOP PROFILE</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -85,7 +85,7 @@
                                                     <!-- /tile body -->
                                                     <div class="tile-body">
                                                         <div class="text-center">
-                                                            <h1>$<%=minPrice%> - $<%=maxPrice%></h1>
+                                                            <h3>$<%=minPrice%> - $<%=maxPrice%></h3>
                                                             <br/>
                                                             <h5><%=serviceName%></h5>
                                                         </div>
@@ -104,11 +104,14 @@
                                             <div class="tab-pane fade " id="workshopProfile" >
                                                 <section class="tile color transparent-black">
                                                     <div class="tile-header">
-                                                        <h3><%=shopName%></h3>
-                                                        <a href="Booking.jsp" class="btn btn-blue pull-right">BOOK AN APPOINTMENT</a>
-
+                                                        <div>
+                                                            <h3><%=shopName%></h3>
+                                                        </div>
+                                                        <div>
+                                                            <a href="Booking.jsp?id=<%=offerId%>" class="btn btn-blue">BOOK AN APPOINTMENT</a>
+                                                        </div>
+                                                        <!--end tile header-->
                                                     </div>
-                                                    <!--end tile header-->
                                                     <div class="line-across"></div>
                                                     <!-- /tile body -->
                                                     <div class="tile-body">

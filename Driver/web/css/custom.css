@@ -383,7 +383,7 @@ textarea.form-control{
 }
 .car {
     height: 100%;
-    line-height: 50px;
+    line-height: 25px;
 }
 .line-across-dark {
     border-bottom-color: black;
@@ -392,8 +392,8 @@ textarea.form-control{
     width: 100% !important;
 }
 
-.w50 {
-    width: 49.5%;    
+.w45 {
+    width: 45%;    
 }
 
 .arrange-center {

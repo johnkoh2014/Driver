@@ -23,7 +23,7 @@
                 </a>
             </li>
             <li>
-                <a href="Schedule.jsp">
+                <a href="MyAppointments.jsp">
                     <i class="fa fa-gear"></i> Schedule
                 </a>
             </li>
