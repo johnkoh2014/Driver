@@ -112,20 +112,20 @@
                                                 String noPlate = vehicle.getPlateNumber();
                                         %>
                                         <div class="carItem">
-                                            <div class="col-sm-4 car">
-                                                <%=make + " " + model%>
-                                            </div>
-                                            <div class="col-sm-4 car">
+                                            <div class="col-xs-7 car">
+                                                <%=make + " " + model%><br/>
                                                 <%=noPlate%>
                                             </div>
-                                            <div class="col-sm-2 car">
-                                                <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue">Edit Car</a>
+                                            
+                                            <div class="col-xs-2 car">
+                                                <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue btn-xs">Edit</a>
                                             </div>
-                                            <div class="col-sm-2 car">
+                                            <div class="col-xs-3 car">
                                                 <form role="form" action="DeleteVehicle" method="POST">
-                                                    <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger btn-xs">Delete</button>
                                                 </form>
                                             </div>
+                                                <div class="margin-bottom-20"></div>
                                         </div>
                                         <!--<div class="line-across-dark"></div>-->
                                         <%

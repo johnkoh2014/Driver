@@ -1,3 +1,5 @@
+<%@page import="entity.Offer"%>
+<%@page import="dao.OfferDAO"%>
 <%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
@@ -22,17 +24,19 @@
                     <!-- page header -->
                     <div class="pageheader">
 
-                        <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>MY BOOKING</h1>
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%                        String v_id = request.getParameter("id");
-                        int vid = 0;
-                        if (v_id.length() > 0) {
-                            vid = Integer.parseInt(v_id);
+                    <%                        String o_id = request.getParameter("id");
+                        int offerId = 0;
+                        if (o_id.length() > 0) {
+                            offerId = Integer.parseInt(o_id);
                         }
+                        OfferDAO oDAO = new OfferDAO();
+                        Offer offer = oDAO.retrieveOfferById(id, token, offerId);
+                        int wId = offer.getWorkshopId();
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -70,18 +74,19 @@
                                         <div class="form-group">
                                             <div class="col-sm-12">
                                                 <input type="radio"  id="valetYes" value="Yes" name="valet" disabled>
-                                                <label for="input06" class="control-label">YES (Feature coming soon!)</label>
+                                                <label for="valetYes" class="control-label">YES (Feature coming soon!)</label>
                                             </div>
                                             <div class="col-sm-12">
                                                 <input type="radio" id="valetNo" value="No" name="valet" selected>
-                                                <label for="input07" class="control-label">NO</label>
+                                                <label for="valetNo" class="control-label">NO</label>
                                             </div>
                                         </div>
 
 
                                         <!--form footer for submit-->
                                         <div class="form-group form-footer text-center">
-                                            <input type="hidden" value="<%=vid%>" name="<%=vid%>">
+                                            <input type="hidden" value="<%=offerId%>" name="offerId">
+                                            <input type="hidden" value="<%=wId%>" name="wId">
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                             <button type="reset" class="btn btn-default">Reset</button>
 
@@ -133,9 +138,8 @@
         <script type="text/javascript">
             $(".date").each(function () {
                 $(this).datetimepicker({
-                    format: 'YYYY-MM-DD HH:mm',
+                    format: 'YYYY-MM-DD HH',
                     minDate: new Date(),
-                    sideBySide: true,
                     ignoreReadonly: true
                 });
             });</script>

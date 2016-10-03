@@ -5,8 +5,16 @@
  */
 package servlet;
 
+import dao.AppointmentDAO;
+import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,10 +41,25 @@ public class SelectValetServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String dateTime = request.getParameter("dateTime");
+        String dateTime = request.getParameter("dateTime") + ":00:00";
         String valet = request.getParameter("valet");
-        String vid = request.getParameter("vid");
+        String oId = request.getParameter("offerId");
+        int offerId = 0;
+        if (oId.length() > 0) {
+            offerId = Integer.parseInt(oId);
+        }
+        String wId = request.getParameter("wId");
+        int workshopId = 0;
+        if (wId.length() > 0) {
+            workshopId = Integer.parseInt(wId);
+        }
         HttpSession session = request.getSession(true);
+        Driver user = (Driver) session.getAttribute("loggedInUser");
+        String token = user.getToken();
+        String name = user.getName();
+        int user_id = user.getId();
+        Timestamp ts = Timestamp.valueOf(dateTime);
+
         if (valet.equals("Yes")) {
             session.setAttribute("valet", valet);
             session.setAttribute("dateTime", dateTime);
@@ -44,8 +67,16 @@ public class SelectValetServlet extends HttpServlet {
         } else {
             session.setAttribute("valet", valet);
             session.setAttribute("dateTime", dateTime);
-            
-            response.sendRedirect("MyAppointments.jsp");
+            AppointmentDAO aDAO = new AppointmentDAO();
+            String err = aDAO.addAppointment(user_id, token, workshopId, name, dateTime, dateTime, offerId);
+            if (err.length() > 0) {
+                session.setAttribute("fail", err);
+                RequestDispatcher view = request.getRequestDispatcher("Booking.jsp?id=" + offerId);
+                view.forward(request, response);
+            } else {
+                session.setAttribute("success", "Appointment booked at " + dateTime);
+                response.sendRedirect("MyAppointments.jsp");
+            }
         }
     }
 

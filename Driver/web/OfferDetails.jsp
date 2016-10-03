@@ -71,6 +71,7 @@
                                         String shopCategory = offer.getShopCategory();
                                         String brandsCarried = offer.getBrandsCarried();
                                         String website = offer.getWebsite();
+                                      
                                     %>
                                     <!-- /tile body -->
                                     <div class="tile-body">

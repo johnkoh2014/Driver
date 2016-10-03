@@ -1,3 +1,6 @@
+<%@page import="entity.ValetRequest"%>
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entity.Appointment"%>
 <%@page import="dao.AppointmentDAO"%>
 <%@page import="entity.Driver"%>
@@ -26,14 +29,13 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
-                            <h1>MY APPOINTMENTS</h1>
+                            <h1>MY BOOKINGS</h1>
 
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                    AppointmentDAO aDAO = new AppointmentDAO();
-                    Appointment appointment = aDAO.getAppointments(id, token);
+                    <%                        AppointmentDAO aDAO = new AppointmentDAO();
+                        ArrayList<Appointment> aList = aDAO.getAppointments(id, token);
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -44,29 +46,50 @@
 
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">
-
-                                        <center>BOOKING & VALET DETAILS</center>
-
+                                        <center><h5>BOOKING & VALET DETAILS</h5></center>
                                     </div>
                                     <!--end tile header-->
-                                    <div class="line-across"></div>
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
                                         <div class="list-group">
+                                            <% for (Appointment appointment : aList) {
+                                                    String start = appointment.getAppointmentStart() + "";
+                                                    String startDate = start.substring(0, start.indexOf(" "));
+                                                    String sTime = start.substring(start.indexOf(" "));
+                                                    String startTime = sTime.substring(0, sTime.lastIndexOf("."));
+
+                                                    ValetRequest vr = appointment.getToValet();
+                                                    String pickup = "";
+                                                    String pickupDate = "";
+                                                    String pickupTime = "";
+                                                    if (vr != null) {
+                                                        pickup = vr.getScheduledPickUpTime() + "";
+                                                        pickupDate = pickup.substring(0, pickup.indexOf(" "));
+                                                        String pTime = pickup.substring(pickup.indexOf(" "));
+                                                        pickupTime = pTime.substring(0, pTime.lastIndexOf("."));
+                                                    }
+
+                                            %>
+
                                             <a href="#" class="list-group-item"><b>AH HUAT WORKSHOP PTE LTD</b>
-                                                <p>Tuesday, 12 July 2016</p>
-                                                <p>1:00pm</p>
+                                                <p><%=startDate%></p>
+                                                <p><%=startTime%></p>
                                                 <p></p>
+                                                <%if (vr != null) {%>
                                                 <b>VALET</b>
-                                                <p>12 July 2016,12:15pm</p>
-                                                <i>Click to view more info</i>
+                                                <p><%=pickupDate%></p> 
+                                                <p><%=pickupTime%></p> 
+                                                <%}%>
                                             </a>
-                                            <a href="#" class="list-group-item"><b>KGC WORKSHOP PTE LTD</b>
+                                            <%
+                                                }
+                                            %>
+                                            <!--<a href="#" class="list-group-item"><b>KGC WORKSHOP PTE LTD</b>
                                                 <p>Tuesday, 13 July 2016</p>
                                                 <p>4:00pm</p>
                                                 <i>Click to view more info</i>
-                                            </a>
+                                            </a>-->
                                         </div>
 
                                     </div>
