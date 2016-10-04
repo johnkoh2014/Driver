@@ -31,9 +31,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        
-                        String currentEmail = driver.getEmail();
+                    <%                        String currentEmail = driver.getEmail();
                         String newEmail = (String) request.getAttribute("newEmail");
                         if (newEmail == null) {
                             newEmail = "";
@@ -52,30 +50,37 @@
                                         <h3>Account Information</h3>
                                     </div>
                                     <!--end tile header-->
-
+                                    <%
+                                        String msg = (String) request.getAttribute("fail");
+                                        if (msg != null && msg.length() > 0) {
+                                    %>
+                                    <div class="alert alert-danger"></div>
+                                    <%
+                                        }
+                                    %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
                                         <form class="form-horizontal" role="form" action="EditProfile" method="POST">
 
                                             <div class="form-group">
-                                                <label for="input01" class="col-sm-2 control-label">Current Email</label>
+                                                <label for="input01" class="col-sm-2 control-label">Email</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input01" name="currentEmail" value="<%=currentEmail%>">
+                                                    <input type="text" class="form-control" style="color:white;" id="input01" name="email" value="<%=email%>" readonly>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="input02" class="col-sm-2 control-label">New Email</label>
+                                                <label for="input02" class="col-sm-2 control-label">Name *</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="newEmail" value="<%=newEmail%>">
+                                                    <input type="text" class="form-control" id="input02" name="name" value="<%=name%>" required>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="input03" class="col-sm-2 control-label">Mobile Number</label>
+                                                <label for="input03" class="col-sm-2 control-label">Mobile Number *</label>
                                                 <div class="col-sm-10">
-                                                    <input type="tel" class="form-control" id="input03" name="hpNo" value="<%=hpNo%>">
+                                                    <input type="tel" class="form-control" id="input03" name="hpNo" value="<%=hpNo%>" required>
                                                 </div>
                                             </div>
 

@@ -67,9 +67,16 @@
                                         <form class="form-horizontal" role="form" action="" method="POST">
 
                                             <div class="form-group">
-                                                <label for="input02" class="col-sm-2 control-label">Email</label>
+                                                <label for="input01" class="col-sm-2 control-label">Email</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="email" value="<%=email%>" style="color:white" readonly>
+                                                    <input type="text" class="form-control" id="input01" name="email" value="<%=email%>" style="color:white" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="input02" class="col-sm-2 control-label">Name</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="input02" name="name" value="<%=name%>" style="color:white" readonly>
                                                 </div>
                                             </div>
 

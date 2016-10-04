@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import dao.DriverDAO;
 import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,23 +40,38 @@ public class EditProfileServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String currentEmail = request.getParameter("currentEmail").trim();
-        String newEmail = request.getParameter("newEmail").trim();
+
+        String email = request.getParameter("email").trim();
+        String name = request.getParameter("name").trim();
         String hpNo = request.getParameter("hpNo").trim();
 
         Validation validation = new Validation();
         String errMsg = validation.isValidMobileContact(hpNo);
 
         HttpSession session = request.getSession(true);
-        
+
         if (errMsg == null || errMsg.length() == 0) {
-
+            DriverDAO dDAO = new DriverDAO();
             Driver user = (Driver) session.getAttribute("loggedInUser");
-
             int id = user.getId();
+
             String token = user.getToken();
-            
+            String error = dDAO.updateDriver(id, token, name, hpNo);
+            if (error == null || error.length() == 0) {
+                session.setAttribute("success", "Successfully edited profile");
+                user.setName(name);
+                user.setHandphone(hpNo);
+                session.setAttribute("loggedInUser", user);
+                response.sendRedirect("Profile.jsp");
+            } else {
+                request.setAttribute("fail", error);
+                RequestDispatcher view = request.getRequestDispatcher("EditProfile.jsp");
+                view.forward(request, response);
+            }
+        } else {
+            request.setAttribute("fail", errMsg);
+            RequestDispatcher view = request.getRequestDispatcher("EditProfile.jsp");
+            view.forward(request, response);
         }
     }
 
@@ -78,7 +94,7 @@ public class EditProfileServlet extends HttpServlet {
         }
     }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request

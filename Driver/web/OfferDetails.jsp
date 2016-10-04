@@ -63,7 +63,7 @@
                                         String shopName = offer.getShopName();
                                         double min = offer.getInitialMinPrice();
                                         String minPrice = min + "0";
-                                        double max = offer.getInitialMinPrice();
+                                        double max = offer.getInitialMaxPrice();
                                         String maxPrice = max + "0";
                                         String serviceName = offer.getServiceName();
                                         String openingHour = offer.getOpeningHour();
