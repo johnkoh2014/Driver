@@ -110,14 +110,14 @@ body {
 }
 
 ul.inbox {
-     -webkit-border-radius: 0; 
+    -webkit-border-radius: 0; 
     -moz-border-radius: 0;
     -ms-border-radius: 0;
     -o-border-radius: 0;
-     border-radius: 0; 
-     -webkit-box-shadow: 0; 
-     box-shadow: 0; 
-     border: none; 
+    border-radius: 0; 
+    -webkit-box-shadow: 0; 
+    box-shadow: 0; 
+    border: none; 
 }
 
 .navbar-nav.side-nav > li.navigation .menu > li > a {
@@ -400,4 +400,12 @@ textarea.form-control{
     float: none !important; 
     display: inline-block !important;
     margin: 0 auto !important;
+}
+
+.navbar-nav.side-nav > li.collapsed-content > ul > li.user > .settings{
+    left: auto;
+    top: auto;
+}
+body .navbar.navbar-default .navbar-collapse .nav .open .dropdown-menu.arrow:before{
+    right: auto;
 }

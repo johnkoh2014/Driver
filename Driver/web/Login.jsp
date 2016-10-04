@@ -52,10 +52,12 @@
                                 <a href = "ForgotPassword.jsp">Forgot Password</a>
                             </section>
                             <section class="log-in">
-                                <div class="col-md-5">
+                                <div class="col-xs-6">
                                     <button class="btn btn-greensea">Log In</button>
                                 </div>
-                                <a href="Signup.jsp" class="btn btn-blue">Sign Up</a>
+                                <div class="col-xs-6">
+                                    <a href="Signup.jsp" class="btn btn-blue">Sign Up</a>
+                                </div>
                             </section>
                         </form>
                         <%
