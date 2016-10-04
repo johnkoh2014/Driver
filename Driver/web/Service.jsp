@@ -41,7 +41,7 @@
                                 %>
                                 <div class="list-group">
                                     <a href="ServiceType.jsp?service=Maintenance&vehicle=<%=vid%>" class="list-group-item">Maintenance</a>
-                                    <a href="ServiceType.jsp?service=Tyre / Wheel Service&vehicle=<%=vid%>" class="list-group-item">Tyre / Wheel Service</a>
+                                    <a href="ServiceType.jsp?service=Tyre/Wheel Service&vehicle=<%=vid%>" class="list-group-item">Tyre/Wheel Service</a>
                                     <a href="RequestSummary.jsp?service=Car Grooming&vehicle=<%=vid%>" class="list-group-item">Car Grooming</a>
                                     <a href="RequestSummary.jsp?service=Air Conditioning&vehicle=<%=vid%>" class="list-group-item">Air Conditioning</a>
                                     <a href="RequestSummary.jsp?service=Battery&vehicle=<%=vid%>" class="list-group-item">Battery</a>

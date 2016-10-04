@@ -67,6 +67,7 @@
                                                     String qrName = req.getName();
                                                     int qrId = req.getId();
                                                     int noOffers = req.getNo_of_offers();
+                                                    
 
                                                     if (noOffers == 0) {%>
                                             <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>No offer at the moment</i></a>
