@@ -5,19 +5,16 @@
  */
 package servlet;
 
-import dao.AppointmentDAO;
 import dao.OfferDAO;
 import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -32,8 +29,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author User
  */
-@WebServlet(name = "SelectValetServlet", urlPatterns = {"/SelectValet"})
-public class SelectValetServlet extends HttpServlet {
+@WebServlet(name = "BookValetServlet", urlPatterns = {"/BookValet"})
+public class BookValetServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,13 +42,14 @@ public class SelectValetServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ParseException {
+            throws ServletException, IOException, SQLException, ParseException, Exception {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession(true);
         Driver user = (Driver) session.getAttribute("loggedInUser");
+        OfferDAO oDAO = new OfferDAO();
 
-        String isValet = request.getParameter("valet");
+        ArrayList<String> errMsg = new ArrayList<String>();
 
         String oId = request.getParameter("offerId");
         int offerId = 0;
@@ -63,53 +61,72 @@ public class SelectValetServlet extends HttpServlet {
 
         String token = user.getToken();
 
-        String wId = request.getParameter("wId");
+        String wId = request.getParameter("workshopId");
         int workshopId = 0;
         if (wId.length() > 0) {
             workshopId = Integer.parseInt(wId);
         }
 
-        String dateTimeString = request.getParameter("dateTime") + ":00:00";
-        Timestamp startTime = null;
-        Timestamp later = null;
+        String serviceStartTime = request.getParameter("serviceStartTime");
 
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            Date parsedDate = dateFormat.parse(dateTimeString);
-            startTime = new java.sql.Timestamp(parsedDate.getTime());
+        String serviceEndTime = request.getParameter("serviceEndTime");
 
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(startTime.getTime());
-
-            //Subtract the time taken to reach the drop off point from the appointment time
-            cal.add(Calendar.HOUR, 2);
-
-            //Round down the time to the nearest 15 minute
-            later = new Timestamp(cal.getTime().getTime());
-        } catch (Exception e) {
-        }
-        String serviceStartTime = dateTimeString;
-        String serviceEndTime = later + "";
-        serviceEndTime = serviceEndTime.substring(0, serviceEndTime.lastIndexOf("."));
+        String pickupTime = request.getParameter("pickupTime");
         
         String title = user.getName();
 
-        if (isValet.equals("true")) {
-            session.setAttribute("isValet", isValet);
-            session.setAttribute("offerId", offerId);
-            session.setAttribute("workshopId", workshopId);
-            session.setAttribute("serviceStartTime", serviceStartTime);
-            session.setAttribute("serviceEndTime", serviceEndTime);
+        String appointmentTime = request.getParameter("appointmentTime");
+        String scheduledPickupTime = appointmentTime.substring(0, appointmentTime.lastIndexOf("."));
 
-            response.sendRedirect("ValetForm.jsp");
+        String wsAddress = request.getParameter("wsAddress");
+
+        String wsPostal = request.getParameter("wsPostal");
+
+        double dropoffLatitude = 0.0;
+        double dropoffLongitude = 0.0;
+        String[] latLong = oDAO.retrieveLatLong("Singapore("+wsPostal+")");
+        if (latLong == null) {
+            latLong = oDAO.retrieveLatLong("Singapore " + wsPostal);
+            if (latLong == null) {
+                errMsg.add("Please enter a valid address.");
+            }
         } else {
+            dropoffLatitude = Double.parseDouble(latLong[0]);
+            dropoffLongitude = Double.parseDouble(latLong[1]);
+        }
 
-            OfferDAO oDAO = new OfferDAO();
-            String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title);
+        String address = request.getParameter("address");
+        String postal = request.getParameter("postal");
+
+        double pickupLat = 0.0;
+        double pickupLong = 0.0;
+        String[] puLatLong = oDAO.retrieveLatLong("Singapore("+postal+")");
+        if (puLatLong == null) {
+            puLatLong = oDAO.retrieveLatLong("Singapore " + postal);
+            if (puLatLong == null) {
+                errMsg.add("Please enter a valid address.");
+            }
+        } else {
+            pickupLat = Double.parseDouble(puLatLong[0]);
+            pickupLong = Double.parseDouble(puLatLong[1]);
+        }
+
+        String priceString = request.getParameter("price");
+        double price = Double.parseDouble(priceString);
+
+        if (errMsg.size() > 0) {
+            session.setAttribute("fail", errMsg);
+            RequestDispatcher view = request.getRequestDispatcher("BookValet.jsp");
+            view.forward(request, response);
+        } else {
+            
+            String err = oDAO.acceptOfferWithValet(true, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title, address + " " + postal, pickupLat, 
+                    pickupLong, wsAddress + " " + wsPostal, dropoffLatitude, dropoffLongitude, pickupTime, price);
+//            String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title);
 
             if (err.length() > 0) {
                 session.setAttribute("fail", err);
-                RequestDispatcher view = request.getRequestDispatcher("Booking.jsp?id=" + offerId);
+                RequestDispatcher view = request.getRequestDispatcher("BookValet.jsp");
                 view.forward(request, response);
             } else {
                 session.setAttribute("success", "Appointment booked at " + serviceStartTime);
@@ -132,10 +149,10 @@ public class SelectValetServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SelectValetServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(SelectValetServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookValetServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(BookValetServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -152,10 +169,10 @@ public class SelectValetServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SelectValetServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(SelectValetServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookValetServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(BookValetServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

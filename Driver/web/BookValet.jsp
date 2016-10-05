@@ -1,3 +1,4 @@
+<%@page import="java.sql.Timestamp"%>
 <%@page import="entity.Vehicle"%>
 <%@page import="entity.Offer"%>
 <%@page import="dao.OfferDAO"%>
@@ -33,17 +34,22 @@
                     </div>
                     <!-- /page header -->
                     <%                        String isValet = (String) session.getAttribute("isValet");
-                        int offerId = (int) session.getAttribute("offerId");
+                        int offerId = (Integer) session.getAttribute("offerId");
                         int workshopId = (int) session.getAttribute("workshopId");
                         String serviceStartTime = (String) session.getAttribute("serviceStartTime");
                         String serviceEndTime = (String) session.getAttribute("serviceEndTime");
+                        String puTime = (Timestamp) session.getAttribute("pickupTime") + "";
+                        String pickupTime = puTime.substring(0,puTime.lastIndexOf("."));
+                        String appointmentTime = (Timestamp) session.getAttribute("appointmentTime") + "";
+                        String postal = (String) session.getAttribute("postal");
+                        String address = (String) session.getAttribute("address");
 
                         OfferDAO oDAO = new OfferDAO();
                         Offer offer = oDAO.retrieveOfferById(id, token, offerId);
 
-                        String addressPostal = offer.getShopAddress();
-                        String address = addressPostal.substring(0, addressPostal.lastIndexOf(" "));
-                        String postal = addressPostal.substring(addressPostal.lastIndexOf(" ") + 1);
+                        String wsAddressPostal = offer.getShopAddress();
+                        String wsAddress = wsAddressPostal.substring(0, wsAddressPostal.lastIndexOf(" "));
+                        String wsPostal = wsAddressPostal.substring(wsAddressPostal.lastIndexOf(" ") + 1);
                         Vehicle vehicle = offer.getVehicle();
                         String make = vehicle.getMake();
                         String model = vehicle.getModel();
@@ -61,7 +67,7 @@
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">
 
-                                        <center>DETAILS</center>
+                                        <center><h5>DETAILS</h5></center>
 
                                     </div>
                                     <!--end tile header-->
@@ -74,68 +80,42 @@
                                                 return false;
                                             }">
 
-                                        <form class="form-horizontal" role="form" action="" method="POST">
+                                        <form class="form-horizontal" role="form" action="BookValet" method="POST">
 
-                                            <div class="notification">
+                                            <div>
                                                 <div class="row">
                                                     <h1><center><strong>$40</strong></center></h1>
 
-                                                    <h4><center><Strong>Time and Date of Pickup</Strong></center></h4>
+                                                    <h4><center><Strong>Date and Time of Pickup</Strong></center></h4>
 
                                                     <center>
-                                                        <h4>2nd June 2016 12:30pm</h4>
-                                                        <h4><strong>Confirmed car</strong></h4>
+                                                        <h4><%=pickupTime%></h4>
+                                                        <h4><strong>Confirmed Car</strong></h4>
                                                         <h4><%=year%> <%=make%> <%=model%> <%=noPlate%></h4>
                                                     </center>
                                                 </div>
 
                                                 <div class="row">
-                                                    <section class="tile color transparent-white">
-                                                        <div class="tile-header text-center">
-                                                            <h3>Account Information</h3>
+                                                    <div>
+                                                        <h3>Account Information</h3>
+                                                    </div>
+                                                    <!--end tile header-->
+                                                    <div class="form-group">
+                                                        <label for="input01" class="col-sm-2 control-label" style="color:white">Address</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" style="color:white;" id="input01" name="address" value="<%=address%>" readonly>
                                                         </div>
-                                                        <!--end tile header-->
-                                                        <%
-                                                            String msg = (String) request.getAttribute("fail");
-                                                            if (msg != null && msg.length() > 0) {
-                                                        %>
-                                                        <div class="alert alert-danger"></div>
-                                                        <%
-                                                            }
-                                                        %>
-                                                        <!-- /tile body -->
-                                                        <div class="tile-body">
+                                                    </div>
 
-                                                            <form class="form-horizontal" role="form" action="EditProfile" method="POST">
-
-                                                                <div class="form-group">
-                                                                    <label for="input01" class="col-sm-2 control-label" style="color:grey">Address *</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" style="color:white;" id="input01" name="address" required>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label for="input02" class="col-sm-2 control-label" style="color:grey">Postal *</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" id="input02" name="postal" required>
-                                                                    </div>
-                                                                </div>
-
-                                                                <!--form footer for submit-->
-                                                                <div class="form-group form-footer text-center">
-                                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                                    <button type="reset" class="btn btn-default">Reset</button>
-                                                                </div>
-                                                                <!--end form footer-->
-                                                            </form>
-
-
+                                                    <div class="form-group">
+                                                        <label for="input02" class="col-sm-2 control-label" style="color:white">Postal</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="input02" style="color:white;" name="postal" value="<%=postal%>" readonly>
                                                         </div>
-                                                        <!--end tile body-->
+                                                    </div>
 
+                                                    <!--end tile body-->
 
-                                                    </section>
 
                                                 </div>
 
@@ -146,8 +126,15 @@
                                             </div>
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
-                                                <input type="hidden" name="service"value="">
-                                                <input type="hidden" name="type" value="">
+                                                <input type="hidden" name="offerId" value="<%=offerId%>"/>
+                                                <input type="hidden" name="workshopId" value="<%=workshopId%>"/>
+                                                <input type="hidden" name="serviceStartTime" value="<%=serviceStartTime%>"/>
+                                                <input type="hidden" name="serviceEndTime" value="<%=serviceEndTime%>"/>
+                                                <input type="hidden" name="appointmentTime" value="<%=appointmentTime%>"/>
+                                                <input type="hidden" name="wsAddress" value="<%=wsAddress%>"/>
+                                                <input type="hidden" name="wsPostal" value="<%=wsPostal%>"/>
+                                                <input type="hidden" name="pickupTime" value="<%=pickupTime%>"/>
+                                                <input type="hidden" name="price" value="40"/>
                                                 <button type="submit" class="btn btn-primary">Book Now!</button>
                                                 <!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
                                             </div>

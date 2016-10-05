@@ -41,7 +41,8 @@ public class QuotationRequestDAO {
 
         ArrayList<QuotationRequest> qList = new ArrayList<QuotationRequest>();
         ArrayList<Offer> offerList = new ArrayList<Offer>();
-        String url = "http://119.81.43.85/service/get_services";
+        String url = "http://119.81.43.85/service/get_services_without_accepted_offer";
+//        String url = "http://119.81.43.85/service/get_services";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);

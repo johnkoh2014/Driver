@@ -21,12 +21,14 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -444,6 +446,65 @@ public class AppointmentDAO {
             errMsg = errMsgEle.getAsString();
         }
         return errMsg;
+    }
+
+    public Timestamp calculatePickUpTime(String pickUpAddress, String dropOffAddress, Timestamp appointmentTime) throws UnsupportedEncodingException, IOException {
+
+//        String dropOffPostal = dropOffAddress.substring(dropOffAddress.lastIndexOf(" "));
+        String wsAddress = dropOffAddress.substring(0, dropOffAddress.lastIndexOf(" "));
+        String wsPostal = "Singapore(" + dropOffAddress.substring(dropOffAddress.lastIndexOf(" ") + 1) + ")";
+        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
+                + pickUpAddress.replace(" ", "+")
+                + "&destinations="
+                + wsPostal.replace(" ", "+")
+                + "&key=AIzaSyCpdZ3c3twyc93Rv1PL_E6eOvsnUlP3lqg";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpGet get = new HttpGet(url);
+
+        // add header
+        //get.setHeader("User-Agent", USER_AGENT);
+        HttpResponse response = client.execute(get);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement oElement = jobj.get("rows");
+        if (oElement.isJsonNull()) {
+            return null;
+        }
+        JsonArray arr = oElement.getAsJsonArray();
+        JsonObject obj = arr.get(0).getAsJsonObject();
+        JsonObject e2 = obj.get("elements").getAsJsonArray().get(0).getAsJsonObject().get("duration").getAsJsonObject();
+        JsonElement attElement = e2.get("value");
+        //In seconds
+        int timeTaken = 0;
+        if (!attElement.isJsonNull()) {
+            timeTaken = attElement.getAsInt();
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(appointmentTime.getTime());
+
+        //Subtract the time taken to reach the drop off point from the appointment time
+        cal.add(Calendar.MINUTE, -timeTaken / 60 - 30);
+
+        //Round down the time to the nearest 15 minute
+        int unroundedMinutes = cal.get(Calendar.MINUTE);
+        int mod = unroundedMinutes % 10;
+        cal.set(Calendar.MINUTE, unroundedMinutes - mod);
+
+        Timestamp later = new Timestamp(cal.getTime().getTime());
+        return later;
     }
 
     public static void main(String[] args) throws ParseException, IOException {

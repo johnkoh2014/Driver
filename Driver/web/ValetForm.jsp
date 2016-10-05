@@ -25,20 +25,19 @@
                     <div class="pageheader">
 
                         <div class="margin-top-15 text-center" style="color:white">
-                            <h1>MY BOOKING</h1>
+                            <h1>MY VALET BOOKING</h1>
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%                        
-                        String o_id = request.getParameter("id");
-                        int offerId = 0;
-                        if (o_id.length() > 0) {
-                            offerId = Integer.parseInt(o_id);
-                        }
+                    <%                        String isValet = (String) session.getAttribute("isValet");
+                        int offerId = (Integer) session.getAttribute("offerId");
+                        int workshopId = (Integer) session.getAttribute("workshopId");
+                        String serviceStartTime = (String) session.getAttribute("serviceStartTime");
+                        String serviceEndTime = (String) session.getAttribute("serviceEndTime");
+
                         OfferDAO oDAO = new OfferDAO();
                         Offer offer = oDAO.retrieveOfferById(id, token, offerId);
-                        int wId = offer.getWorkshopId();
-                        
+                        String wsAddress = offer.getShopAddress();
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -46,26 +45,9 @@
                         <div class="row">
                             <!-- col 12 -->
 
-                            <form class="form-horizontal" role="form" action="SelectValet" method="POST">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div style="color:white"><b>Service Date & Time</b></div>
-                                        <div class="form-group col-sm-12">
-                                            <div class='input-group date' id='enddatetimepicker'>
-                                                <!--<form id='' action="" role="form">-->
-                                                <input type='text' name="dateTime" class="form-control dt" readonly/>
-                                                <!--</form>-->
-
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <form class="form-horizontal" role="form" action="SubmitValet" method="POST">
                                 <section class="tile color transparent-white">
                                     <div class="tile-header">
-                                        Would you like to have Valet?
                                     </div>
                                     <!--end tile header-->
 
@@ -74,22 +56,24 @@
 
 
                                         <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <input type="radio"  id="valetYes" value="true" name="valet">
-                                                <label for="valetYes" class="control-label">YES (Feature coming soon!)</label>
+                                            <label for="input01" class="col-sm-2 control-label">Address</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" style="color:white;" id="input01" name="address" required>
                                             </div>
-                                            <div class="col-sm-12">
-                                                <input type="radio" id="valetNo" value="false" name="valet" checked="checked">
-                                                <label for="valetNo" class="control-label">NO</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="input01" class="col-sm-2 control-label">Postal</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" style="color:white;" id="input01" name="postal" required>
                                             </div>
                                         </div>
 
 
                                         <!--form footer for submit-->
                                         <div class="form-group form-footer text-center">
-                                            <input type="hidden" value="<%=offerId%>" name="offerId">
-                                            <input type="hidden" value="<%=wId%>" name="wId">
-                                            <input type="hidden" value="<%=id%>" name="userId">
+                                            <input type="hidden" value="<%=serviceStartTime%>" name="serviceStartTime">
+                                            <input type="hidden" value="<%=wsAddress%>" name="wsAddress">
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                             <button type="reset" class="btn btn-default">Reset</button>
 
