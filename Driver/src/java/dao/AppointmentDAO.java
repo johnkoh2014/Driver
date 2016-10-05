@@ -451,10 +451,13 @@ public class AppointmentDAO {
     public Timestamp calculatePickUpTime(String pickUpAddress, String dropOffAddress, Timestamp appointmentTime) throws UnsupportedEncodingException, IOException {
 
 //        String dropOffPostal = dropOffAddress.substring(dropOffAddress.lastIndexOf(" "));
+        String address = pickUpAddress.substring(0, pickUpAddress.lastIndexOf(" "));
+        String postal = "Singapore(" + pickUpAddress.substring(pickUpAddress.lastIndexOf(" ") + 1) + ")";
+        
         String wsAddress = dropOffAddress.substring(0, dropOffAddress.lastIndexOf(" "));
         String wsPostal = "Singapore(" + dropOffAddress.substring(dropOffAddress.lastIndexOf(" ") + 1) + ")";
         String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
-                + pickUpAddress.replace(" ", "+")
+                + postal.replace(" ", "+")
                 + "&destinations="
                 + wsPostal.replace(" ", "+")
                 + "&key=AIzaSyCpdZ3c3twyc93Rv1PL_E6eOvsnUlP3lqg";

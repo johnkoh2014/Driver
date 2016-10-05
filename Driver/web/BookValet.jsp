@@ -97,7 +97,6 @@
 
                                                 <div class="row">
                                                     <div>
-                                                        <h3>Account Information</h3>
                                                     </div>
                                                     <!--end tile header-->
                                                     <div class="form-group">

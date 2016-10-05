@@ -47,7 +47,7 @@ public class SubmitValetServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         String pickUpAddress = request.getParameter("address");
         String postal = request.getParameter("postal");
-        String address = request.getParameter("address");
+        String wsAddress = request.getParameter("wsAddress");
         String appointmentTime = request.getParameter("serviceStartTime");
 
         Validation validation = new Validation();
@@ -64,7 +64,7 @@ public class SubmitValetServlet extends HttpServlet {
         appointmentStart = new java.sql.Timestamp(parsedDate.getTime());
 
         AppointmentDAO aDAO = new AppointmentDAO();
-        Timestamp pickupTime = aDAO.calculatePickUpTime(pickUpAddress, address, appointmentStart);
+        Timestamp pickupTime = aDAO.calculatePickUpTime(pickUpAddress + " " + postal, wsAddress, appointmentStart);
         if (pickupTime == null) {
             request.setAttribute("errMsg", "Invalid Address/Postal");
             RequestDispatcher view = request.getRequestDispatcher("ValetForm.jsp");
@@ -72,7 +72,7 @@ public class SubmitValetServlet extends HttpServlet {
         } else {
             session.setAttribute("appointmentTime", appointmentStart);
             session.setAttribute("pickupTime", pickupTime);
-            session.setAttribute("address", address);
+            session.setAttribute("address", pickUpAddress);
             session.setAttribute("postal", postal);
             response.sendRedirect("BookValet.jsp");
         }
