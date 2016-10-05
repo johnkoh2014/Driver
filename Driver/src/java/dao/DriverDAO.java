@@ -245,11 +245,6 @@ public class DriverDAO {
         return errMsg;
     }
 
-
-    public static void main(String[] args) throws IOException {
-        //authenticateUser("james@james.com", "12345678");
-    }
-
     public boolean updateUserPassword(int user_id, String token, String currentPassword, String newPassword) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/user/change_password";
         HttpClient client = new DefaultHttpClient();
@@ -286,5 +281,9 @@ public class DriverDAO {
         } else {
             return true;
         }
+    }
+    
+    public static void main(String[] args) throws IOException {
+        //authenticateUser("james@james.com", "12345678");
     }
 }

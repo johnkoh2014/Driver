@@ -4,6 +4,7 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,17 +33,40 @@
                     <div class="inside-block">
                         <h2><strong>Sign Up</strong></h2>
                         <%
-                        
+                            String email = (String) request.getAttribute("email");
+                            if (email == null || email.equals("null")) {
+                                email = "";
+                            }
+                            String name = (String) request.getAttribute("fullname");
+                            if (name == null || name.equals("null")) {
+                                name = "";
+                            }
+                            ArrayList<String> errMsg = (ArrayList<String>) request.getAttribute("err");
+                            if (errMsg != null && errMsg.size() > 0) {
+                        %>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <%
+                                    for (String error : errMsg) {
+                                %>
+                                <li><%=error%></li>
+                                    <%
+                                        }
+                                    %>
+                            </ul>
+                        </div>
+                        <%
+                            }
                         %>
 
                         <form id="form-signin" class="form-signin" action = "SignupServlet" method= "post">
                             <section>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="fullname" placeholder="Fullname">
+                                    <input type="text" class="form-control" name="fullname" value="<%=name%>" placeholder="Fullname">
                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="email" class="form-control" name="email" placeholder="Email">
+                                    <input type="email" class="form-control" name="email" value="<%=email%>" placeholder="Email">
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                 </div>
                                 <div class="input-group">
@@ -60,17 +84,6 @@
                                 <button class="btn btn-greensea">Submit</button>
                             </section>
                         </form>
-                        <%
-                            String errMsg = (String) request.getAttribute("errMsg");
-                            if (errMsg != null) {
-                                out.println(errMsg + "<br/><br/>");
-                            }
-
-                            String successResetPasswordMsg = (String) request.getAttribute("successResetPasswordMsg");
-                            if (successResetPasswordMsg != null) {
-                                out.println(successResetPasswordMsg + "<br/><br/>");
-                            }
-                        %>
                     </div>
                 </div>
                 <!-- /Page content -->  

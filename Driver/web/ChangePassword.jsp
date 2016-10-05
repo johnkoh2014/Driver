@@ -41,7 +41,6 @@
                                     </div>
                                     <!--end tile header-->
                                     <%
-                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
                                         String currentEmail = driver.getEmail();
                                         String oldPassword = (String) request.getAttribute("oldPassword");
                                         if (oldPassword == null) {
