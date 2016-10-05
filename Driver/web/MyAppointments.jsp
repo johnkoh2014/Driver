@@ -36,6 +36,13 @@
                     <!-- /page header -->
                     <%                        AppointmentDAO aDAO = new AppointmentDAO();
                         ArrayList<Appointment> aList = aDAO.getAppointments(id, token);
+                        String success = (String) session.getAttribute("success");
+                        if (success != null && success.length() > 0) {
+                    %>
+                    <div class="alert alert-success"><%=success%></div>
+                    <%
+                    session.setAttribute("success", "");
+                        }
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -58,7 +65,8 @@
                                                     String startDate = start.substring(0, start.indexOf(" "));
                                                     String sTime = start.substring(start.indexOf(" "));
                                                     String startTime = sTime.substring(0, sTime.lastIndexOf("."));
-
+                                                    String shopName = appointment.getShopName();
+                                                    
                                                     ValetRequest vr = appointment.getToValet();
                                                     String pickup = "";
                                                     String pickupDate = "";
@@ -72,14 +80,14 @@
 
                                             %>
 
-                                            <a href="#" class="list-group-item"><b>AH HUAT WORKSHOP PTE LTD</b>
-                                                <p><%=startDate%></p>
-                                                <p><%=startTime%></p>
+                                            <a href="#" class="list-group-item"><p><b><%=shopName%></b></p>
+                                                <%=startDate%><br/>
+                                                <%=startTime%><br/>
                                                 <p></p>
                                                 <%if (vr != null) {%>
-                                                <b>VALET</b>
-                                                <p><%=pickupDate%></p> 
-                                                <p><%=pickupTime%></p> 
+                                                <p><b>VALET</b></p>
+                                                <%=pickupDate%><br/> 
+                                                <%=pickupTime%><br/> 
                                                 <%}%>
                                             </a>
                                             <%

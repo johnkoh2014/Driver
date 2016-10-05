@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,7 +52,7 @@ public class SelectValetServlet extends HttpServlet {
         Driver user = (Driver) session.getAttribute("loggedInUser");
 
         String isValet = request.getParameter("valet");
- 
+
         String oId = request.getParameter("offerId");
         int offerId = 0;
         if (oId.length() > 0) {
@@ -68,27 +69,37 @@ public class SelectValetServlet extends HttpServlet {
             workshopId = Integer.parseInt(wId);
         }
 
-        String dateTime = request.getParameter("dateTime") + ":00:00";
-        Timestamp ts = Timestamp.valueOf(dateTime);
+        String serviceStartTime = request.getParameter("dateTime") + ":00:00";
 
-        String serviceStartTime = dateTime;
 
-        String serviceEndTime = dateTime;
+        DateFormat df2 = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
+        String[] dt = serviceStartTime.split(" ");
+        String[] d = dt[0].split("-");
+        int year = Integer.parseInt(d[0]);
+        int month = Integer.parseInt(d[1]);
+        int day = Integer.parseInt(d[2]);
+        String[] t = dt[1].split(":");
+        int hour = Integer.parseInt(t[0]);
+        int min = Integer.parseInt(t[1]);
+        int sec = Integer.parseInt(t[2]);
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, day, hour, min, sec);
+
+        cal.add(Calendar.HOUR_OF_DAY, 2);
+        String serviceEndTime = cal.get(cal.YEAR) + "-" + cal.get(cal.MONTH) + "-" + cal.get(cal.DATE) + " " + cal.get(cal.HOUR_OF_DAY) + ":00:00";
 
         String title = user.getName();
 
         if (isValet.equals("true")) {
             session.setAttribute("valet", isValet);
-            session.setAttribute("dateTime", dateTime);
+//            session.setAttribute("dateTime", dateTime);
             response.sendRedirect("BookValet.jsp");
         } else {
-            session.setAttribute("valet", isValet);
-            session.setAttribute("dateTime", dateTime);
+//            session.setAttribute("valet", isValet);
+//            session.setAttribute("dateTime", dateTime);
 
             OfferDAO oDAO = new OfferDAO();
             String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title);
-                    
-                    
 
 //            AppointmentDAO aDAO = new AppointmentDAO();
 //            String err = aDAO.addAppointment(user_id, token, workshopId, name, dateTime, dateTime, offerId);
@@ -97,7 +108,7 @@ public class SelectValetServlet extends HttpServlet {
                 RequestDispatcher view = request.getRequestDispatcher("Booking.jsp?id=" + offerId);
                 view.forward(request, response);
             } else {
-                session.setAttribute("success", "Appointment booked at " + dateTime);
+                session.setAttribute("success", "Appointment booked at " + serviceStartTime);
                 response.sendRedirect("MyAppointments.jsp");
             }
         }

@@ -47,6 +47,7 @@ public class ValetRequest {
         this.offerId = offerId;
         this.status = status;  
     }
+
     
     public int getId() {
         return id; 

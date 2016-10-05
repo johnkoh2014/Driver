@@ -370,6 +370,12 @@ public class AppointmentDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 carControl = attElement.getAsString();
             }
+            
+            attElement = obj.get("shop_name");
+            String shopName = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                shopName = attElement.getAsString();
+            }
 
             
             Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, carColor, carControl);
@@ -381,11 +387,11 @@ public class AppointmentDAO {
             if (valetTwoId != 0) {
                 ValetRequest returnValet = new ValetRequest(valetTwoId, vehicle, valetTwoPickUpAddress, valetTwoPickUpLat, valetTwoPickUpLong, valetTwoDropOffAddress, 
                 valetTwoDropOffLat, valetTwoDropOffLong, valetTwoScheduledPickUpTime, valetTwoActualPickUpTime, valetTwoCompletedTime, valetTwoPrice, valetTwoOfferId, valetTwoStatus);
-                appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, returnValet);
+                appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, returnValet, shopName);
             } else {
-                appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet);
+                appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, shopName);
             }
-            if (appointment.getReturnValet() != null) {
+            if (appointment.getReturnValet() != null) { 
             }
             appointments.add(appointment);
         }
