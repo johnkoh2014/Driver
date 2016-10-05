@@ -6,14 +6,19 @@
 package servlet;
 
 import dao.AppointmentDAO;
+import dao.OfferDAO;
 import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,36 +44,54 @@ public class SelectValetServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        String dateTime = request.getParameter("dateTime") + ":00:00";
-        String valet = request.getParameter("valet");
+
+        HttpSession session = request.getSession(true);
+        Driver user = (Driver) session.getAttribute("loggedInUser");
+
+        String isValet = request.getParameter("valet");
+ 
         String oId = request.getParameter("offerId");
         int offerId = 0;
         if (oId.length() > 0) {
             offerId = Integer.parseInt(oId);
         }
+
+        int user_id = user.getId();
+
+        String token = user.getToken();
+
         String wId = request.getParameter("wId");
         int workshopId = 0;
         if (wId.length() > 0) {
             workshopId = Integer.parseInt(wId);
         }
-        HttpSession session = request.getSession(true);
-        Driver user = (Driver) session.getAttribute("loggedInUser");
-        String token = user.getToken();
-        String name = user.getName();
-        int user_id = user.getId();
+
+        String dateTime = request.getParameter("dateTime") + ":00:00";
         Timestamp ts = Timestamp.valueOf(dateTime);
 
-        if (valet.equals("Yes")) {
-            session.setAttribute("valet", valet);
+        String serviceStartTime = dateTime;
+
+        String serviceEndTime = dateTime;
+
+        String title = user.getName();
+
+        if (isValet.equals("true")) {
+            session.setAttribute("valet", isValet);
             session.setAttribute("dateTime", dateTime);
             response.sendRedirect("BookValet.jsp");
         } else {
-            session.setAttribute("valet", valet);
+            session.setAttribute("valet", isValet);
             session.setAttribute("dateTime", dateTime);
-            AppointmentDAO aDAO = new AppointmentDAO();
-            String err = aDAO.addAppointment(user_id, token, workshopId, name, dateTime, dateTime, offerId);
+
+            OfferDAO oDAO = new OfferDAO();
+            String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title);
+                    
+                    
+
+//            AppointmentDAO aDAO = new AppointmentDAO();
+//            String err = aDAO.addAppointment(user_id, token, workshopId, name, dateTime, dateTime, offerId);
             if (err.length() > 0) {
                 session.setAttribute("fail", err);
                 RequestDispatcher view = request.getRequestDispatcher("Booking.jsp?id=" + offerId);
@@ -92,7 +115,13 @@ public class SelectValetServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SelectValetServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(SelectValetServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -106,7 +135,13 @@ public class SelectValetServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SelectValetServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(SelectValetServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

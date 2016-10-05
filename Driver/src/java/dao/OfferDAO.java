@@ -275,4 +275,103 @@ public class OfferDAO {
 
     }
 
+    public String acceptOfferWithValet(boolean is_use_valet, int offer_id, int user_id, String token, int shop_id, String start_time,
+            String end_time, String title, String pick_up_address, double pick_up_latitude, double pick_up_longitude, String drop_off_address,
+            double drop_off_latitude, double drop_off_longitude, String scheduled_pick_up_time, double price) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/quotation_request/initial_quotation_accepted";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("is_use_valet", is_use_valet + ""));
+        urlParameters.add(new BasicNameValuePair("offer_id", offer_id + ""));
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("shop_id", shop_id + ""));
+        urlParameters.add(new BasicNameValuePair("start_time", start_time));
+        urlParameters.add(new BasicNameValuePair("end_time", end_time));
+        urlParameters.add(new BasicNameValuePair("title", title));
+        urlParameters.add(new BasicNameValuePair("bg_color", "#731F1F"));
+        urlParameters.add(new BasicNameValuePair("font_color", "#FFF"));
+        urlParameters.add(new BasicNameValuePair("pick_up_address", pick_up_address));
+        urlParameters.add(new BasicNameValuePair("pick_up_latitude", pick_up_latitude + ""));
+        urlParameters.add(new BasicNameValuePair("pick_up_longitude", pick_up_longitude + ""));
+        urlParameters.add(new BasicNameValuePair("drop_off_address", drop_off_address));
+        urlParameters.add(new BasicNameValuePair("drop_off_latitude", drop_off_latitude + ""));
+        urlParameters.add(new BasicNameValuePair("drop_off_longitude", drop_off_longitude + ""));
+        urlParameters.add(new BasicNameValuePair("scheduled_pick_up_time", scheduled_pick_up_time));
+        urlParameters.add(new BasicNameValuePair("price", price + ""));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
+    }
+
+    public String acceptOfferWithoutValet(boolean is_use_valet, int offer_id, int user_id, String token, int shop_id, String start_time,
+            String end_time, String title) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/quotation_request/initial_quotation_accepted";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("is_use_valet", is_use_valet + ""));
+        urlParameters.add(new BasicNameValuePair("offer_id", offer_id + ""));
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("shop_id", shop_id + ""));
+        urlParameters.add(new BasicNameValuePair("start_time", start_time));
+        urlParameters.add(new BasicNameValuePair("end_time", end_time));
+        urlParameters.add(new BasicNameValuePair("title", title));
+        urlParameters.add(new BasicNameValuePair("bg_color", "#731F1F"));
+        urlParameters.add(new BasicNameValuePair("font_color", "#FFF"));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
+    }
+
 }

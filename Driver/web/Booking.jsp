@@ -29,7 +29,8 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%                        String o_id = request.getParameter("id");
+                    <%                        
+                        String o_id = request.getParameter("id");
                         int offerId = 0;
                         if (o_id.length() > 0) {
                             offerId = Integer.parseInt(o_id);
@@ -37,6 +38,7 @@
                         OfferDAO oDAO = new OfferDAO();
                         Offer offer = oDAO.retrieveOfferById(id, token, offerId);
                         int wId = offer.getWorkshopId();
+                        
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -73,11 +75,11 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <input type="radio"  id="valetYes" value="Yes" name="valet" disabled>
+                                                <input type="radio"  id="valetYes" value="true" name="valet" disabled>
                                                 <label for="valetYes" class="control-label">YES (Feature coming soon!)</label>
                                             </div>
                                             <div class="col-sm-12">
-                                                <input type="radio" id="valetNo" value="No" name="valet" selected>
+                                                <input type="radio" id="valetNo" value="false" name="valet" selected>
                                                 <label for="valetNo" class="control-label">NO</label>
                                             </div>
                                         </div>
@@ -87,6 +89,7 @@
                                         <div class="form-group form-footer text-center">
                                             <input type="hidden" value="<%=offerId%>" name="offerId">
                                             <input type="hidden" value="<%=wId%>" name="wId">
+                                            <input type="hidden" value="<%=id%>" name="userId">
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                             <button type="reset" class="btn btn-default">Reset</button>
 
