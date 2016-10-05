@@ -1,3 +1,6 @@
+<%@page import="entity.Vehicle"%>
+<%@page import="entity.Offer"%>
+<%@page import="dao.OfferDAO"%>
 <%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
@@ -29,7 +32,25 @@
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%                        String isValet = (String) session.getAttribute("isValet");
+                        int offerId = (int) session.getAttribute("offerId");
+                        int workshopId = (int) session.getAttribute("workshopId");
+                        String serviceStartTime = (String) session.getAttribute("serviceStartTime");
+                        String serviceEndTime = (String) session.getAttribute("serviceEndTime");
 
+                        OfferDAO oDAO = new OfferDAO();
+                        Offer offer = oDAO.retrieveOfferById(id, token, offerId);
+
+                        String addressPostal = offer.getShopAddress();
+                        String address = addressPostal.substring(0, addressPostal.lastIndexOf(" "));
+                        String postal = addressPostal.substring(addressPostal.lastIndexOf(" ") + 1);
+                        Vehicle vehicle = offer.getVehicle();
+                        String make = vehicle.getMake();
+                        String model = vehicle.getModel();
+                        int year = vehicle.getYear();
+                        String noPlate = vehicle.getPlateNumber();
+
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -47,11 +68,11 @@
                                     <div class="line-across"></div>
                                     <!-- /tile body -->
                                     <div class="tile-body"action="#" onsubmit="if (document.getElementById('agree').checked) {
-                                                                return true;
-                                                            } else {
-                                                                alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy');
-                                                                return false;
-                                                            }">
+                                                return true;
+                                            } else {
+                                                alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy');
+                                                return false;
+                                            }">
 
                                         <form class="form-horizontal" role="form" action="" method="POST">
 
@@ -64,29 +85,63 @@
                                                     <center>
                                                         <h4>2nd June 2016 12:30pm</h4>
                                                         <h4><strong>Confirmed car</strong></h4>
-                                                        <h4>2007 Suzuki Swift SGW6529Z</h4>
+                                                        <h4><%=year%> <%=make%> <%=model%> <%=noPlate%></h4>
                                                     </center>
                                                 </div>
 
                                                 <div class="row">
+                                                    <section class="tile color transparent-white">
+                                                        <div class="tile-header text-center">
+                                                            <h3>Account Information</h3>
+                                                        </div>
+                                                        <!--end tile header-->
+                                                        <%
+                                                            String msg = (String) request.getAttribute("fail");
+                                                            if (msg != null && msg.length() > 0) {
+                                                        %>
+                                                        <div class="alert alert-danger"></div>
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <!-- /tile body -->
+                                                        <div class="tile-body">
 
+                                                            <form class="form-horizontal" role="form" action="EditProfile" method="POST">
+
+                                                                <div class="form-group">
+                                                                    <label for="input01" class="col-sm-2 control-label" style="color:grey">Address *</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" style="color:white;" id="input01" name="address" required>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="input02" class="col-sm-2 control-label" style="color:grey">Postal *</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" id="input02" name="postal" required>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--form footer for submit-->
+                                                                <div class="form-group form-footer text-center">
+                                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                                    <button type="reset" class="btn btn-default">Reset</button>
+                                                                </div>
+                                                                <!--end form footer-->
+                                                            </form>
+
+
+                                                        </div>
+                                                        <!--end tile body-->
+
+
+                                                    </section>
 
                                                 </div>
 
-                                                <div class="notification notification-info">
-                                                    <h4><center><strong>ADDRESS</strong></center></h4>
-                                                    <center>326 Clementi Avenue 5 #06-185</center>
-                                                </div>
-
-                                                <div class="notification notification-info">
-                                                    <h4><center><strong>POSTAL CODE</strong></center></h4>
-                                                    <center>Singapore 120326</center>
-                                                    
-                                                </div>
-                                                
                                                 <div class="notification notification-info">
                                                     <center><input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the terms and conditions</center>
-<!--                                                        <input type="submit" name="submit" value="submit" />-->
+                                                    <!--                                                        <input type="submit" name="submit" value="submit" />-->
                                                 </div>
                                             </div>
                                             <!--form footer for submit-->
@@ -94,7 +149,7 @@
                                                 <input type="hidden" name="service"value="">
                                                 <input type="hidden" name="type" value="">
                                                 <button type="submit" class="btn btn-primary">Book Now!</button>
-<!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
+                                                <!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
                                             </div>
                                             <!--end form footer-->
                                         </form>
@@ -133,11 +188,11 @@
         <script src="js/minimal.min.js"></script>
 
         <script>
-                                                        $(function () {
+                                        $(function () {
 
 
 
-                                                        })
+                                        })
 
         </script>
     </body>

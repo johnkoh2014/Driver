@@ -71,7 +71,6 @@ public class SelectValetServlet extends HttpServlet {
 
         String serviceStartTime = request.getParameter("dateTime") + ":00:00";
 
-
         DateFormat df2 = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
         String[] dt = serviceStartTime.split(" ");
         String[] d = dt[0].split("-");
@@ -91,18 +90,18 @@ public class SelectValetServlet extends HttpServlet {
         String title = user.getName();
 
         if (isValet.equals("true")) {
-            session.setAttribute("valet", isValet);
-//            session.setAttribute("dateTime", dateTime);
+            session.setAttribute("isValet", isValet);
+            session.setAttribute("offerId", offerId);
+            session.setAttribute("workshopId", workshopId);
+            session.setAttribute("serviceStartTime", serviceStartTime);
+            session.setAttribute("serviceEndTime", serviceEndTime);
+
             response.sendRedirect("BookValet.jsp");
         } else {
-//            session.setAttribute("valet", isValet);
-//            session.setAttribute("dateTime", dateTime);
 
             OfferDAO oDAO = new OfferDAO();
             String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title);
-
-//            AppointmentDAO aDAO = new AppointmentDAO();
-//            String err = aDAO.addAppointment(user_id, token, workshopId, name, dateTime, dateTime, offerId);
+            
             if (err.length() > 0) {
                 session.setAttribute("fail", err);
                 RequestDispatcher view = request.getRequestDispatcher("Booking.jsp?id=" + offerId);

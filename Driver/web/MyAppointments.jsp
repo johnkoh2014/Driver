@@ -81,13 +81,13 @@
                                             %>
 
                                             <a href="#" class="list-group-item"><p><b><%=shopName%></b></p>
-                                                <%=startDate%><br/>
-                                                <%=startTime%><br/>
+                                                Service Date: <%=startDate%><br/>
+                                                Service Time: <%=startTime%><br/>
                                                 <p></p>
                                                 <%if (vr != null) {%>
                                                 <p><b>VALET</b></p>
-                                                <%=pickupDate%><br/> 
-                                                <%=pickupTime%><br/> 
+                                                Pickup Date: <%=pickupDate%><br/> 
+                                                Pickup Time:<%=pickupTime%><br/> 
                                                 <%}%>
                                             </a>
                                             <%

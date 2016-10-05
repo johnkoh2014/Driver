@@ -75,7 +75,7 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <input type="radio"  id="valetYes" value="true" name="valet" disabled>
+                                                <input type="radio"  id="valetYes" value="true" name="valet">
                                                 <label for="valetYes" class="control-label">YES (Feature coming soon!)</label>
                                             </div>
                                             <div class="col-sm-12">

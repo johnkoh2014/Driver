@@ -36,7 +36,7 @@ import org.apache.http.message.BasicNameValuePair;
  * @author User
  */
 public class AppointmentDAO {
-    
+
     private final String USER_AGENT = "Mozilla/5.0";
 
     public ArrayList<Appointment> getAppointments(int user_id, String token) throws UnsupportedEncodingException, IOException, ParseException {
@@ -99,7 +99,7 @@ public class AppointmentDAO {
                 parsedDate = dateFormat.parse(dateTimeString);
                 appointmentStart = new java.sql.Timestamp(parsedDate.getTime());
             }
-            
+
             attElement = obj.get("appointment_end_time");
             Timestamp appointmentEnd = null;
             dateTimeString = "1990-01-01 00:00:00";
@@ -121,37 +121,37 @@ public class AppointmentDAO {
 
             attElement = obj.get("request1_id");
             int valetOneId = 0;
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 valetOneId = attElement.getAsInt();
             }
 
             attElement = obj.get("request1_service_type");
             int valetOneServiceType = 0;
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 valetOneServiceType = attElement.getAsInt();
             }
 
             attElement = obj.get("request1_pick_up_address");
             String valetOnePickUpAddress = "";
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 valetOnePickUpAddress = attElement.getAsString();
             }
 
             attElement = obj.get("request1_pick_up_latitude");
             double valetOnePickUpLat = 0.0;
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 valetOnePickUpLat = attElement.getAsDouble();
             }
 
             attElement = obj.get("request1_pick_up_longitude");
             double valetOnePickUpLong = 0.0;
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 valetOnePickUpLong = attElement.getAsDouble();
             }
 
             attElement = obj.get("request1_drop_off_address");
             String valetOneDropOffAddress = "";
-            if (!attElement.isJsonNull()) {
+            if (attElement != null && !attElement.isJsonNull()) {
                 valetOneDropOffAddress = attElement.getAsString();
             }
 
@@ -179,7 +179,7 @@ public class AppointmentDAO {
                 parsedDate = dateFormat.parse(dateTimeString);
                 valetOneScheduledPickUpTime = new java.sql.Timestamp(parsedDate.getTime());
             }
-            
+
             attElement = obj.get("request1_actual_pick_up_time");
             Timestamp valetOneActualPickUpTime = null;
             dateTimeString = "1990-01-01 00:00:00";
@@ -192,7 +192,7 @@ public class AppointmentDAO {
                 parsedDate = dateFormat.parse(dateTimeString);
                 valetOneActualPickUpTime = new java.sql.Timestamp(parsedDate.getTime());
             }
-            
+
             attElement = obj.get("request1_completed_time");
             Timestamp valetOneCompletedTime = null;
             dateTimeString = "1990-01-01 00:00:00";
@@ -205,7 +205,7 @@ public class AppointmentDAO {
                 parsedDate = dateFormat.parse(dateTimeString);
                 valetOneCompletedTime = new java.sql.Timestamp(parsedDate.getTime());
             }
-            
+
             attElement = obj.get("request1_status");
             int valetOneStatus = 0;
             if (attElement != null && !attElement.isJsonNull()) {
@@ -217,7 +217,7 @@ public class AppointmentDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 valetOneOfferId = attElement.getAsInt();
             }
-            
+
             attElement = obj.get("request1_price");
             int valetOnePrice = 0;
             if (attElement != null && !attElement.isJsonNull()) {
@@ -284,7 +284,7 @@ public class AppointmentDAO {
                 parsedDate = dateFormat.parse(dateTimeString);
                 valetTwoScheduledPickUpTime = new java.sql.Timestamp(parsedDate.getTime());
             }
-            
+
             attElement = obj.get("request2_actual_pick_up_time");
             Timestamp valetTwoActualPickUpTime = null;
             dateTimeString = "1990-01-01 00:00:00";
@@ -297,7 +297,7 @@ public class AppointmentDAO {
                 parsedDate = dateFormat.parse(dateTimeString);
                 valetTwoActualPickUpTime = new java.sql.Timestamp(parsedDate.getTime());
             }
-            
+
             attElement = obj.get("request2_completed_time");
             Timestamp valetTwoCompletedTime = null;
             dateTimeString = "1990-01-01 00:00:00";
@@ -310,7 +310,7 @@ public class AppointmentDAO {
                 parsedDate = dateFormat.parse(dateTimeString);
                 valetTwoCompletedTime = new java.sql.Timestamp(parsedDate.getTime());
             }
-            
+
             attElement = obj.get("request2_status");
             int valetTwoStatus = 0;
             if (attElement != null && !attElement.isJsonNull()) {
@@ -322,7 +322,7 @@ public class AppointmentDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 valetTwoOfferId = attElement.getAsInt();
             }
-            
+
             attElement = obj.get("request2_price");
             int valetTwoPrice = 0;
             if (attElement != null && !attElement.isJsonNull()) {
@@ -370,34 +370,37 @@ public class AppointmentDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 carControl = attElement.getAsString();
             }
-            
+
             attElement = obj.get("shop_name");
             String shopName = "";
             if (attElement != null && !attElement.isJsonNull()) {
                 shopName = attElement.getAsString();
             }
 
-            
             Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, carColor, carControl);
-            
-            ValetRequest toValet = new ValetRequest(valetOneId, vehicle, valetOnePickUpAddress, valetOnePickUpLat, valetOnePickUpLong, valetOneDropOffAddress, 
-            valetOneDropOffLat, valetOneDropOffLong, valetOneScheduledPickUpTime, valetOneActualPickUpTime, valetOneCompletedTime, valetOnePrice, valetOneOfferId, valetOneStatus);
-            
+            ValetRequest toValet = null;
             Appointment appointment = null;
-            if (valetTwoId != 0) {
-                ValetRequest returnValet = new ValetRequest(valetTwoId, vehicle, valetTwoPickUpAddress, valetTwoPickUpLat, valetTwoPickUpLong, valetTwoDropOffAddress, 
-                valetTwoDropOffLat, valetTwoDropOffLong, valetTwoScheduledPickUpTime, valetTwoActualPickUpTime, valetTwoCompletedTime, valetTwoPrice, valetTwoOfferId, valetTwoStatus);
-                appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, returnValet, shopName);
+            if (valetOneId == 0) {
+                appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, shopName);
             } else {
-                appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, shopName);
-            }
-            if (appointment.getReturnValet() != null) { 
+                toValet = new ValetRequest(valetOneId, vehicle, valetOnePickUpAddress, valetOnePickUpLat, valetOnePickUpLong, valetOneDropOffAddress,
+                        valetOneDropOffLat, valetOneDropOffLong, valetOneScheduledPickUpTime, valetOneActualPickUpTime, valetOneCompletedTime, valetOnePrice, valetOneOfferId, valetOneStatus);
+
+                if (valetTwoId != 0) {
+                    ValetRequest returnValet = new ValetRequest(valetTwoId, vehicle, valetTwoPickUpAddress, valetTwoPickUpLat, valetTwoPickUpLong, valetTwoDropOffAddress,
+                            valetTwoDropOffLat, valetTwoDropOffLong, valetTwoScheduledPickUpTime, valetTwoActualPickUpTime, valetTwoCompletedTime, valetTwoPrice, valetTwoOfferId, valetTwoStatus);
+                    appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, returnValet, shopName);
+                } else {
+                    appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, shopName);
+                }
+                if (appointment.getReturnValet() != null) {
+                }
             }
             appointments.add(appointment);
         }
         return appointments;
     }
-    
+
     public String addAppointment(int user_id, String token, int shop_id, String title, String start_time, String end_time, int offer_id) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/erp/schedule/add_schedule";
 
@@ -442,10 +445,8 @@ public class AppointmentDAO {
         }
         return errMsg;
     }
-    
-    
-    
-    public static void main (String[] args) throws ParseException, IOException {
+
+    public static void main(String[] args) throws ParseException, IOException {
         //getAppointments(374, "edd0b70bd3849edf63c21ffb8d5ed78ef4565bbcffacea8b7a0ee03f2da96063f031cc7d9261baf0138dc0936fae17a8d176cbb7504939aef107c92a403ab6eb9c9c5a0184fb63fab863d48e7ea0b67678e4915b2496bfc742b4883f98a1ebde445f05266ee4517f5a29c3a2e473f4b7fc4537cd74a9eabd293a9126c0d36b85bdf6bd9bd3931ae225ca038f249ba44871cc53e885f6819756f07bde58d65af3cd72c1e2f3a666775a9775e805852deb3c49e750eefeea7814fb05a64b9bf82797a615744725bc146dd5ce58f9940d78f3a457cefaf6867ee485132dc077a870e3c672c7efd18fb635e5eed398e5df28f9383032b16e717f04345fc04b42a2840abf67d661096b6977de90dcc8d1f3e03087f1ccee98f21d2c2cb39b21b72482b757e13447d2951d3d519dcf677e531b187da6e907e8682c67981cce5ac56a757cd0354043b4207c986993e3115dfdeeb9d821addceeea8f4dba57dbf56e5a7c04a82836b4880067a82da742d176729cf257a81348a227b4dddc991584dc2b5034a33462fffc0307b43b7730ad76c5a45758544599662db7562ede00fd609602f7cf9ea13bcf2f159346076b20a45cf236b100b0e3ea483fde8b3391026dbc0f87bdd2572feae9b581f05b2641bc37b727382fc50cd76330215e69227d555730bd89a8b467b47e99c8221f0d5d483021b75327a9edc138a265256a13628de2fe");
         //addAppointment(374, "edd0b70bd3849edf63c21ffb8d5ed78ef4565bbcffacea8b7a0ee03f2da96063f031cc7d9261baf0138dc0936fae17a8d176cbb7504939aef107c92a403ab6eb9c9c5a0184fb63fab863d48e7ea0b67678e4915b2496bfc742b4883f98a1ebde445f05266ee4517f5a29c3a2e473f4b7fc4537cd74a9eabd293a9126c0d36b85bdf6bd9bd3931ae225ca038f249ba44871cc53e885f6819756f07bde58d65af3cd72c1e2f3a666775a9775e805852deb3c49e750eefeea7814fb05a64b9bf82797a615744725bc146dd5ce58f9940d78f3a457cefaf6867ee485132dc077a870e3c672c7efd18fb635e5eed398e5df28f9383032b16e717f04345fc04b42a2840abf67d661096b6977de90dcc8d1f3e03087f1ccee98f21d2c2cb39b21b72482b757e13447d2951d3d519dcf677e531b187da6e907e8682c67981cce5ac56a757cd0354043b4207c986993e3115dfdeeb9d821addceeea8f4dba57dbf56e5a7c04a82836b4880067a82da742d176729cf257a81348a227b4dddc991584dc2b5034a33462fffc0307b43b7730ad76c5a45758544599662db7562ede00fd609602f7cf9ea13bcf2f159346076b20a45cf236b100b0e3ea483fde8b3391026dbc0f87bdd2572feae9b581f05b2641bc37b727382fc50cd76330215e69227d555730bd89a8b467b47e99c8221f0d5d483021b75327a9edc138a265256a13628de2fe", 1, "Test", "2016-12-16 15:00:00", "2016-12-16 15:00:00", 2);
     }

@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Offer;
 import entity.QuotationRequest;
+import entity.Vehicle;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -270,7 +271,50 @@ public class OfferDAO {
             diagnosticPrice = attElement.getAsDouble();
         }
 
-        offer = new Offer(offerId, serviceId, serviceName, openingHour, wsId, shopName, shopAddress, shopCategory, brandsCarried, website, status, initialMinPrice, initialMaxPrice, diagnosticPrice, finalPrice, estCompletionDateTime);
+        attElement = oObj.get("vehicle_id");
+        int vehicle_id = 0;
+        if (!attElement.isJsonNull()) {
+            vehicle_id = attElement.getAsInt();
+        }
+
+        attElement = oObj.get("car_make");
+        String car_make = "";
+        if (!attElement.isJsonNull()) {
+            car_make = attElement.getAsString();
+        }
+
+        attElement = oObj.get("car_model");
+        String car_model = "";
+        if (!attElement.isJsonNull()) {
+            car_model = attElement.getAsString();
+        }
+
+        attElement = oObj.get("car_year");
+        int car_year = 0;
+        if (!attElement.isJsonNull()) {
+            car_year = attElement.getAsInt();
+        }
+
+        attElement = oObj.get("car_plate_number");
+        String car_plate_number = "";
+        if (!attElement.isJsonNull()) {
+            car_plate_number = attElement.getAsString();
+        }
+
+        attElement = oObj.get("car_color");
+        String car_color = "";
+        if (!attElement.isJsonNull()) {
+            car_color = attElement.getAsString();
+        }
+
+        attElement = oObj.get("car_control");
+        String car_control = "";
+        if (!attElement.isJsonNull()) {
+            car_control = attElement.getAsString();
+        }
+        Vehicle vehicle = new Vehicle(vehicle_id, car_make, car_model, car_year, car_plate_number, user_id, car_color, car_control);
+        
+        offer = new Offer(offerId, serviceId, serviceName, openingHour, wsId, shopName, shopAddress, shopCategory, brandsCarried, website, status, initialMinPrice, initialMaxPrice, diagnosticPrice, finalPrice, estCompletionDateTime, vehicle);
         return offer;
 
     }

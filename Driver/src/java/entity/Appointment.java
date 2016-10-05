@@ -22,11 +22,12 @@ public class Appointment {
     private ValetRequest returnValet;
     private String shopName;
     
-    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd) {
+    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd,String shopName) {
         this.id = id;
         this.shopId = shopId;
         this.appointmentStart = appointmentStart;
         this.appointmentEnd = appointmentEnd;
+        this.shopName = shopName;
     }
     
     public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, ValetRequest toValet, String shopName) {

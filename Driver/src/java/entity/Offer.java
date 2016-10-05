@@ -32,6 +32,7 @@ public class Offer {
     private String openingHour; 
     private String brandsCarried; 
     private String website; 
+    private Vehicle vehicle;
 
     public Offer(int id, int serviceId, double finalPrice, int workshopId, String shopName, String contact1, String contact2, int status, double initialMinPrice, double initialMaxPrice, double diagnosticPrice) {
         this.id = id;
@@ -78,6 +79,26 @@ public class Offer {
         this.initialMaxPrice = initialMaxPrice;
         this.diagnosticPrice = diagnosticPrice;
         this.estCompletionTime = estCompletionTime;
+    }
+
+    public Offer(int id, int serviceId, String serviceName, String openingHour, int workshopId, String shopName, String shopAddress, String shopCategory, String brandsCarried, String website, int status, double initialMinPrice, double initialMaxPrice, double diagnosticPrice, double finalPrice, Timestamp estCompletionTime, Vehicle vehicle) {
+        this.id = id;
+        this.serviceId = serviceId;
+        this.serviceName = serviceName;
+        this.workshopId = workshopId;
+        this.shopName = shopName;
+        this.openingHour = openingHour;
+        this.shopAddress = shopAddress;
+        this.shopCategory = shopCategory;
+        this.status = status;
+        this.brandsCarried = brandsCarried;
+        this.website = website;
+        this.finalPrice = finalPrice;
+        this.initialMinPrice = initialMinPrice;
+        this.initialMaxPrice = initialMaxPrice;
+        this.diagnosticPrice = diagnosticPrice;
+        this.estCompletionTime = estCompletionTime;
+        this.vehicle = vehicle;
     }
 
     public String getBrandsCarried() {
@@ -230,6 +251,14 @@ public class Offer {
 
     public void setDiagnosticPrice(double diagnosticPrice) {
         this.diagnosticPrice = diagnosticPrice;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
 }
