@@ -73,12 +73,7 @@
                                     <!--end tile header-->
                                     <div class="line-across"></div>
                                     <!-- /tile body -->
-                                    <div class="tile-body"action="#" onsubmit="if (document.getElementById('agree').checked) {
-                                                return true;
-                                            } else {
-                                                alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy');
-                                                return false;
-                                            }">
+                                    <div class="tile-body">
 
                                         <form class="form-horizontal" role="form" action="BookValet" method="POST">
 
@@ -116,11 +111,6 @@
                                                     <!--end tile body-->
 
 
-                                                </div>
-
-                                                <div class="notification notification-info">
-                                                    <center><input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the terms and conditions</center>
-                                                    <!--                                                        <input type="submit" name="submit" value="submit" />-->
                                                 </div>
                                             </div>
                                             <!--form footer for submit-->

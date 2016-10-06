@@ -74,9 +74,9 @@
 
 
                                         <div class="form-group">
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-12 margin-bottom-20">
                                                 <input type="radio"  id="valetYes" value="true" name="valet">
-                                                <label for="valetYes" class="control-label">YES (Feature coming soon!)</label>
+                                                <label for="valetYes" class="control-label">YES</label>
                                             </div>
                                             <div class="col-sm-12">
                                                 <input type="radio" id="valetNo" value="false" name="valet" checked="checked">
