@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Fixir - Page 500</title>
+        <title>Fixir - Page 404</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-1">
@@ -21,9 +21,10 @@
 
                         <img src="images/Logo.png" alt class="logo">
 
-                        <h1 class="error">Error <strong>500</strong></h1>
-                        <p class="lead"><span class="overline">Whoops</span>, a real big error here!</p>
-                        <p>our code is broken :-(</p>
+                        <h1 class="error">Error <strong>404</strong></h1>
+                        <p class="lead"><span class="overline">something's</span> not right here</p>
+                        <p>the page you are looking for cannot be found</p>
+
                         <%
                             Driver user = (Driver) session.getAttribute("loggedInUser");
                             String url = "Login.jsp";
