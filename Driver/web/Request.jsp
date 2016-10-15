@@ -31,8 +31,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        String success = (String) session.getAttribute("success");
+                    <%                        String success = (String) session.getAttribute("success");
 
                         if (success != null && !(success.equals("null")) && success.length() > 0) {
                     %>
@@ -51,7 +50,6 @@
                                     <a href="AddVehicle.jsp" class="btn btn-primary" role="button">Add Car</a>
                                 </div>
                                 <%
-                                    
                                     VehicleDAO vDAO = new VehicleDAO();
                                     ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
 //                                    ArrayList<Vehicle> vList = driver.getVehicles();
@@ -120,16 +118,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
         <script src="js/minimal.min.js"></script>
+        <script type="text/javascript" src="js/custom.js"></script>
 
         <script>
-            $(function () {
-
-
-
-            })
-
+            
         </script>
     </body>
 </html>

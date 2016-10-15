@@ -31,8 +31,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        String success = (String) session.getAttribute("success");
+                    <%                        String success = (String) session.getAttribute("success");
 
                         if (success != null && !(success.equals("null")) && success.length() > 0) {
                     %>
@@ -54,7 +53,6 @@
                                     </div>
                                     <!--end tile header-->
                                     <%
-                                        
                                         QuotationRequestDAO qDAO = new QuotationRequestDAO();
                                         ArrayList<QuotationRequest> qList = qDAO.getAllRequests(id, token);
 
@@ -67,7 +65,6 @@
                                                     String qrName = req.getName();
                                                     int qrId = req.getId();
                                                     int noOffers = req.getNo_of_offers();
-                                                    
 
                                                     if (noOffers == 0) {%>
                                             <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>No offer at the moment</i></a>
@@ -111,7 +108,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

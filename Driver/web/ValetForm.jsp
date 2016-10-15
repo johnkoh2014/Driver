@@ -114,7 +114,7 @@
         <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 //                document.getElementById("valetYes").disabled = true;

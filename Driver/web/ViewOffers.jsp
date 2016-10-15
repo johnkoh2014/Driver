@@ -45,12 +45,10 @@
 
                                     </div>
                                     <!--end tile header-->
-                                    <%
-                                        
-                                        String qr_Id = request.getParameter("id");
+                                    <%                                        String qr_Id = request.getParameter("id");
                                         int qrId = 0;
                                         if (qr_Id.length() > 0) {
-                                            qrId = Integer.parseInt(qr_Id); 
+                                            qrId = Integer.parseInt(qr_Id);
                                         }
                                         QuotationRequestDAO qDAO = new QuotationRequestDAO();
                                         OfferDAO oDAO = new OfferDAO();
@@ -68,11 +66,18 @@
                                                     double max = offer.getInitialMaxPrice();
                                                     String maxPrice = max + "0";
                                                     int oId = offer.getId();
+                                                    double dPrice = offer.getDiagnosticPrice();
+                                                    String diagnosticPrice = dPrice + "0";
 
+                                                    if (dPrice == 0.0) {%>
+                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Quotation Price: $<%=minPrice%> - $<%=maxPrice%></span><br/><i>Click to view profile and quote</i></a>
+                                                    <% } else {%>
+                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Diagnostic Price: $<%=diagnosticPrice%></span><br/><i>Click to view profile and quote</i></a>
+
+                                            <%
+                                                    }
+                                                }
                                             %>
-                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">$<%=minPrice%> - $<%=maxPrice%></span><br/><i>Click to view profile and quote</i></a>
-                                                    <% }
-                                                    %>
                                         </ul>
 
                                     </div>
@@ -106,7 +111,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

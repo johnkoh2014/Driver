@@ -162,6 +162,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
+                <script type="text/javascript" src="js/custom.js"></script>
 
         <script>
                                         $(function () {

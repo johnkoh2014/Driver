@@ -65,13 +65,15 @@
                                         String minPrice = min + "0";
                                         double max = offer.getInitialMaxPrice();
                                         String maxPrice = max + "0";
+                                        double dPrice = offer.getDiagnosticPrice();
+                                        String diagnosticPrice = dPrice + "0";
                                         String serviceName = offer.getServiceName();
                                         String openingHour = offer.getOpeningHour();
                                         String shopAddress = offer.getShopAddress();
                                         String shopCategory = offer.getShopCategory();
                                         String brandsCarried = offer.getBrandsCarried();
                                         String website = offer.getWebsite();
-                                      
+
                                     %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
@@ -86,7 +88,13 @@
                                                     <!-- /tile body -->
                                                     <div class="tile-body">
                                                         <div class="text-center">
-                                                            <h3>$<%=minPrice%> - $<%=maxPrice%></h3>
+
+                                                            <% if (dPrice == 0.0) {%>
+                                                            <h3>Quotation Price: $<%=minPrice%> - $<%=maxPrice%></h3>
+                                                            <% } else {%>
+                                                            <h3>Diagnostic Price: $<%=diagnosticPrice%></h3>
+                                                            <% }%>
+                                                            
                                                             <br/>
                                                             <h5><%=serviceName%></h5>
                                                         </div>
@@ -184,7 +192,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

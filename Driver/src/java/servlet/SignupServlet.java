@@ -50,10 +50,12 @@ public class SignupServlet extends HttpServlet {
         Validation validation = new Validation();
         String err = validation.isValidPassword(passwordEntered, confirmPassword);
         ArrayList<String> errors = new ArrayList<String>();
+        
         if (err != null && err.length() > 0) {
+            errors.add(err);
             request.setAttribute("fullname", fullname);
             request.setAttribute("email", email);
-            request.setAttribute("err", errors.add(err));
+            request.setAttribute("err", errors);
             RequestDispatcher view = request.getRequestDispatcher("Signup.jsp");
             view.forward(request, response);
         } else {

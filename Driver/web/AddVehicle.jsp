@@ -35,8 +35,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        ArrayList<String> fail = (ArrayList<String>) request.getAttribute("errMsg");
+                    <%                        ArrayList<String> fail = (ArrayList<String>) request.getAttribute("errMsg");
                         if (fail != null && fail.size() > 0) {
                     %>
                     <div class="alert alert-danger">
@@ -65,7 +64,6 @@
                                     </div>
                                     <!--end tile header-->
                                     <%
-                                        
                                         VehicleDAO vDAO = new VehicleDAO();
                                         HashMap<Integer, ArrayList<String>> list = vDAO.retrieveAllCarBrands(id, token);
                                         ArrayList<String> carBrands = new ArrayList<String>();
@@ -85,7 +83,7 @@
                                                 <div class="col-sm-10">
                                                     <!--<input type="text" class="form-control" id="input01" name="carMake" required>-->
                                                     <select class="chosen-select chosen-transparent form-control" id="input01" name="carMake">
-                                                        <%    
+                                                        <%
                                                             for (String s : carBrands) {
                                                                 out.println("<option>" + s + "</option>");
                                                             }
@@ -107,8 +105,7 @@
                                                 <div class="col-sm-10">
                                                     <!--<input type="number" class="form-control" id="input03" name="manufactureYear" required>-->
                                                     <select class="chosen-select chosen-transparent form-control" id="input03" name="manufactureYear">
-                                                        <%    
-                                                            for (String s : carYears) {
+                                                        <%                                                            for (String s : carYears) {
                                                                 out.println("<option>" + s + "</option>");
                                                             }
 
@@ -183,7 +180,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
 
 

@@ -366,14 +366,6 @@ textarea.form-control{
 }
 /*Textarea Form control*/
 
-/*@media screen and (max-width: 1190px){
-    .desktopOnly {
-        display: none;
-    }
-    .mobileOnly {
-        display: initial;
-    }
-}*/
 
 .align-center {
     margin: 0 auto;
@@ -408,4 +400,47 @@ textarea.form-control{
 }
 body .navbar.navbar-default .navbar-collapse .nav .open .dropdown-menu.arrow:before{
     right: auto;
+}
+
+
+/*Input iphone no zoom*/
+select, textarea, input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], 
+input[type="month"], 
+input[type="time"], 
+input[type="week"], 
+input[type="number"], 
+input[type="email"], 
+input[type="url"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="color"] { 
+    font-size: 16px; 
+}
+/*Input iphone no zoom*/
+
+body .navbar.navbar-default .navbar-collapse .nav.logout {
+    display:none;
+}
+
+@media screen and (max-width: 1024px){
+    #content{
+        padding-left: 25px !important;
+    }
+    #sidebar {
+        display:none;
+    }
+
+    body .navbar.navbar-default .navbar-collapse .nav.logout {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        margin: 0;
+    }
+    body .navbar.collapsed .navbar-collapse .nav.logout {
+        right: 10px;
+    }
 }

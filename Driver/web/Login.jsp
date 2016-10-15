@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="css/bootstrap-dropdown-multilevel.css">
 
         <link href="css/minimal.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/custom.css">
         <title>Log In</title>
     </head>
     <body class="bg-3">
@@ -53,10 +54,10 @@
                             </section>
                             <section class="log-in">
                                 <div class="col-xs-6">
-                                    <button class="btn btn-greensea">Log In</button>
+                                    <a href="Signup.jsp" class="btn btn-blue">Sign Up</a>
                                 </div>
                                 <div class="col-xs-6">
-                                    <a href="Signup.jsp" class="btn btn-blue">Sign Up</a>
+                                    <button class="btn btn-greensea">Log In</button>
                                 </div>
                             </section>
                         </form>

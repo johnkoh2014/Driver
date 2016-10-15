@@ -77,6 +77,17 @@
                                                         String pTime = pickup.substring(pickup.indexOf(" "));
                                                         pickupTime = pTime.substring(0, pTime.lastIndexOf("."));
                                                     }
+                                                    
+                                                    ValetRequest returnVr = appointment.getReturnValet();
+                                                    String returnPickup = "";
+                                                    String returnPickupDate = "";
+                                                    String returnPickupTime = "";
+                                                    if (returnVr != null) {
+                                                        returnPickup = returnVr.getScheduledPickUpTime() + "";
+                                                        returnPickupDate = returnPickup.substring(0, returnPickup.indexOf(" "));
+                                                        String pTime = returnPickup.substring(returnPickup.indexOf(" "));
+                                                        returnPickupTime = pTime.substring(0, pTime.lastIndexOf("."));
+                                                    }
 
                                             %>
 
@@ -88,6 +99,12 @@
                                                 <p><b>VALET</b></p>
                                                 Pickup Date: <%=pickupDate%><br/> 
                                                 Pickup Time:<%=pickupTime%><br/> 
+                                                <%}%>
+                                                <p></p>
+                                                <%if (returnVr != null) {%>
+                                                <p><b>RETURN VALET</b></p>
+                                                Pickup Date: <%=returnPickupDate%><br/> 
+                                                Pickup Time:<%=returnPickupTime%><br/> 
                                                 <%}%>
                                             </a>
                                             <%
@@ -131,7 +148,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

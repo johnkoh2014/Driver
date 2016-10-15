@@ -351,6 +351,7 @@ public class OfferDAO {
         urlParameters.add(new BasicNameValuePair("title", title));
         urlParameters.add(new BasicNameValuePair("bg_color", "#731F1F"));
         urlParameters.add(new BasicNameValuePair("font_color", "#FFF"));
+        urlParameters.add(new BasicNameValuePair("service_type", "1"));
         urlParameters.add(new BasicNameValuePair("pick_up_address", pick_up_address));
         urlParameters.add(new BasicNameValuePair("pick_up_latitude", pick_up_latitude + ""));
         urlParameters.add(new BasicNameValuePair("pick_up_longitude", pick_up_longitude + ""));

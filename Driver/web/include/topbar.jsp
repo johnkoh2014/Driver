@@ -63,12 +63,24 @@
 
         </ul>
         <!-- /Quick Actions -->
-
-
+        
+        <!--Mobile Logout-->
+        <ul class="nav navbar-nav logout">
+            <li class="">
+                <!--<a href="#" class="page-refresh"><i class="fa fa-refresh"></i></a>-->
+                <a href="Logout.jsp"><i class="fa fa-power-off"></i></a>
+            </li>
+        </ul>
+        <!--/Mobile Logout-->
+        
         <%@include file="leftbar.jsp"%>
         <!--End Leftbar-->
 
 
     </div>
     <!--/.nav-collapse -->
+    
+    
+    
+
 </div>
