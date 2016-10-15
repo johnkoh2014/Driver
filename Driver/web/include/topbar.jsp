@@ -25,11 +25,11 @@
     <div class="navbar-collapse">
 
         <!-- Page refresh -->
-        <ul class="nav navbar-nav refresh">
+<!--        <ul class="nav navbar-nav refresh">
             <li class="divided">
                 <a href="#" class="page-refresh"><i class="fa fa-refresh"></i></a>
             </li>
-        </ul>
+        </ul>-->
         <!-- /Page refresh -->
 
         <!-- Quick Actions -->

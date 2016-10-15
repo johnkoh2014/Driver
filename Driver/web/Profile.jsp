@@ -125,11 +125,11 @@
                                             </div>
                                             
                                             <div class="col-xs-2 car">
-                                                <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue btn-xs">Edit</a>
+                                                <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue btn-sm">Edit</a>
                                             </div>
                                             <div class="col-xs-3 car">
                                                 <form role="form" action="DeleteVehicle" method="POST">
-                                                    <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger btn-xs">Delete</button>
+                                                    <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger btn-sm">Delete</button>
                                                 </form>
                                             </div>
                                                 <div class="margin-bottom-20"></div>

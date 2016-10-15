@@ -377,6 +377,9 @@ textarea.form-control{
     height: 100%;
     line-height: 25px;
 }
+.car .btn {
+    margin-top: 12px;
+}
 .line-across-dark {
     border-bottom-color: black;
     border-bottom-style: solid;
@@ -426,6 +429,9 @@ body .navbar.navbar-default .navbar-collapse .nav.logout {
     display:none;
 }
 
+body .mask { background-color: rgba(0, 0, 0, 0.8); width: 100%; height: 100%; position: fixed; z-index: 100000; top: -45px; padding-top: 45px; padding-bottom: 45px; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; }
+body .mask #loader { background: url(../images/Loading_gif.gif)center center no-repeat; height: 100%; width: 100%; top:0; left:0; margin: 0 auto;}
+
 @media screen and (max-width: 1024px){
     #content{
         padding-left: 25px !important;
@@ -442,5 +448,9 @@ body .navbar.navbar-default .navbar-collapse .nav.logout {
     }
     body .navbar.collapsed .navbar-collapse .nav.logout {
         right: 10px;
+    }
+    body .mask #loader {
+        background-size: 50% 50%;
+        
     }
 }
