@@ -7,7 +7,10 @@ package servlet;
 
 import dao.AppointmentDAO;
 import dao.OfferDAO;
+import dao.WorkshopDAO;
 import entity.Driver;
+import entity.Offer;
+import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -27,6 +30,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.SmsNotification;
 
 /**
  *
@@ -50,7 +54,8 @@ public class SelectValetServlet extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         Driver user = (Driver) session.getAttribute("loggedInUser");
-
+        OfferDAO oDAO = new OfferDAO();
+        
         String isValet = request.getParameter("valet");
 
         String oId = request.getParameter("offerId");
@@ -69,6 +74,14 @@ public class SelectValetServlet extends HttpServlet {
             workshopId = Integer.parseInt(wId);
         }
 
+        //for sms
+        Offer offer = oDAO.retrieveOfferById(user_id, token, offerId);
+        String servName = offer.getServiceName();
+        
+        WorkshopDAO wsDAO = new WorkshopDAO();
+        Workshop ws = wsDAO.retrieveWorkshop(workshopId, user_id, token);
+        String wsMobileNo = ws.getContact2();
+        
         String dateTimeString = request.getParameter("dateTime") + ":00:00";
         Timestamp startTime = null;
         Timestamp later = null;
@@ -104,7 +117,7 @@ public class SelectValetServlet extends HttpServlet {
             response.sendRedirect("ValetForm.jsp");
         } else {
 
-            OfferDAO oDAO = new OfferDAO();
+            oDAO = new OfferDAO();
             String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title);
 
             if (err.length() > 0) {
@@ -113,6 +126,9 @@ public class SelectValetServlet extends HttpServlet {
                 view.forward(request, response);
             } else {
                 session.setAttribute("success", "Appointment booked at " + serviceStartTime);
+                //add sms here
+                SmsNotification smsNotification = new SmsNotification();
+                smsNotification.smsForApptBooking(user.getName(), wsMobileNo, servName, dateTimeString);
                 response.sendRedirect("MyAppointments.jsp");
             }
         }

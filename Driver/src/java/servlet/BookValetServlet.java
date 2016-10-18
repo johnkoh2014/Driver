@@ -6,7 +6,10 @@
 package servlet;
 
 import dao.OfferDAO;
+import dao.WorkshopDAO;
 import entity.Driver;
+import entity.Offer;
+import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -24,6 +27,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.SmsNotification;
 
 /**
  *
@@ -48,7 +52,7 @@ public class BookValetServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         Driver user = (Driver) session.getAttribute("loggedInUser");
         OfferDAO oDAO = new OfferDAO();
-
+        
         ArrayList<String> errMsg = new ArrayList<String>();
 
         String oId = request.getParameter("offerId");
@@ -82,6 +86,15 @@ public class BookValetServlet extends HttpServlet {
 
         String wsPostal = request.getParameter("wsPostal");
 
+        //for sms details
+        Offer offer = oDAO.retrieveOfferById(user_id, token, offerId);
+        String servName = offer.getServiceName();
+        
+        WorkshopDAO wsDAO = new WorkshopDAO();
+        Workshop ws = wsDAO.retrieveWorkshop(workshopId, user_id, token);
+        String wsMobileNo = ws.getContact2();
+        
+        
         double dropoffLatitude = 0.0;
         double dropoffLongitude = 0.0;
         String[] latLong = oDAO.retrieveLatLong("Singapore("+wsPostal+")");
@@ -130,6 +143,9 @@ public class BookValetServlet extends HttpServlet {
                 view.forward(request, response);
             } else {
                 session.setAttribute("success", "Appointment booked at " + serviceStartTime);
+                //add sms here
+                SmsNotification smsNotification = new SmsNotification();
+                smsNotification.smsForApptBooking(user.getName(), wsMobileNo, servName, appointmentTime);
                 response.sendRedirect("MyAppointments.jsp");
             }
         }
