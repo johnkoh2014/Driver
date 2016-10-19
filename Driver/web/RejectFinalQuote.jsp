@@ -1,4 +1,5 @@
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +7,7 @@
         <title>Confirm Reject Final Quote</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>

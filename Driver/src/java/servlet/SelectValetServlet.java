@@ -69,7 +69,24 @@ public class SelectValetServlet extends HttpServlet {
             workshopId = Integer.parseInt(wId);
         }
 
-        String dateTimeString = request.getParameter("dateTime") + ":00:00";
+//        String dateTimeString = request.getParameter("dateTime") + ":00:00";
+        String date = request.getParameter("date");
+        String time = request.getParameter("time");
+        
+        String hours = time.substring(0, time.indexOf(":"));
+        int hoursInt = Integer.parseInt(hours);
+        String mins = time.substring(time.indexOf(":") + 1, time.lastIndexOf(" "));
+        String ampm = time.substring(time.lastIndexOf(" ") + 1);
+        
+        if(ampm.equals("PM")){
+            hoursInt += 12;
+            hours = hoursInt + "";
+        } else {
+            if(hoursInt < 10){
+                hours = "0" + hours;
+            }
+        }
+        String dateTimeString = date + " " + hours + ":" + mins + ":00";
         Timestamp startTime = null;
         Timestamp later = null;
 

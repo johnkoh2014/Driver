@@ -4,6 +4,7 @@
 <%@page import="entity.Appointment"%>
 <%@page import="dao.AppointmentDAO"%>
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +12,7 @@
         <title>My Appointments</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -41,7 +42,7 @@
                     %>
                     <div class="alert alert-success"><%=success%></div>
                     <%
-                    session.setAttribute("success", "");
+                            session.setAttribute("success", "");
                         }
                     %>
                     <!-- content main container -->
@@ -60,13 +61,21 @@
                                     <div class="tile-body">
 
                                         <div class="list-group">
-                                            <% for (Appointment appointment : aList) {
+
+                                            <%
+                                                if (aList == null || aList.size() == 0) {
+                                            %>
+                                            <span style="color: white">You have no bookings at the moment.</span>
+                                            
+                                            <%
+                                            } else {
+                                                for (Appointment appointment : aList) {
                                                     String start = appointment.getAppointmentStart() + "";
                                                     String startDate = start.substring(0, start.indexOf(" "));
                                                     String sTime = start.substring(start.indexOf(" "));
                                                     String startTime = sTime.substring(0, sTime.lastIndexOf("."));
                                                     String shopName = appointment.getShopName();
-                                                    
+
                                                     ValetRequest vr = appointment.getToValet();
                                                     String pickup = "";
                                                     String pickupDate = "";
@@ -77,7 +86,7 @@
                                                         String pTime = pickup.substring(pickup.indexOf(" "));
                                                         pickupTime = pTime.substring(0, pTime.lastIndexOf("."));
                                                     }
-                                                    
+
                                                     ValetRequest returnVr = appointment.getReturnValet();
                                                     String returnPickup = "";
                                                     String returnPickupDate = "";
@@ -108,6 +117,7 @@
                                                 <%}%>
                                             </a>
                                             <%
+                                                    }
                                                 }
                                             %>
                                             <!--<a href="#" class="list-group-item"><b>KGC WORKSHOP PTE LTD</b>

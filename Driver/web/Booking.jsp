@@ -1,6 +1,7 @@
 <%@page import="entity.Offer"%>
 <%@page import="dao.OfferDAO"%>
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,7 +9,7 @@
         <title>Profile</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -29,8 +30,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%                        
-                        String o_id = request.getParameter("id");
+                    <%                        String o_id = request.getParameter("id");
                         int offerId = 0;
                         if (o_id.length() > 0) {
                             offerId = Integer.parseInt(o_id);
@@ -38,7 +38,7 @@
                         OfferDAO oDAO = new OfferDAO();
                         Offer offer = oDAO.retrieveOfferById(id, token, offerId);
                         int wId = offer.getWorkshopId();
-                        
+
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -49,11 +49,22 @@
                             <form class="form-horizontal" role="form" action="SelectValet" method="POST">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div style="color:white"><b>Service Date & Time</b></div>
+
+                                    </div>
+                                </div>
+                                <section class="tile color transparent-white">
+                                    <div class="tile-header">
+
+                                    </div>
+                                    <!--end tile header-->
+
+                                    <!-- /tile body -->
+                                    <div class="tile-body">
+                                        <div style="color:white"><b>Service Date</b></div>
                                         <div class="form-group col-sm-12">
-                                            <div class='input-group date' id='enddatetimepicker'>
+                                            <div class='input-group date' id='date'>
                                                 <!--<form id='' action="" role="form">-->
-                                                <input type='text' name="dateTime" class="form-control dt" readonly/>
+                                                <input type='text' name="date" class="form-control dt" readonly style="color: white"/>
                                                 <!--</form>-->
 
                                                 <span class="input-group-addon">
@@ -61,22 +72,23 @@
                                                 </span>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <section class="tile color transparent-white">
-                                    <div class="tile-header">
-                                        Would you like to have Valet?
-                                    </div>
-                                    <!--end tile header-->
+                                        <div style="color:white"><b>Service Time</b></div>
+                                        <div class="form-group col-sm-12">
+                                            <div class='input-group date' id='time'>
+                                                <!--<form id='' action="" role="form">-->
+                                                <input type='text' name="time" class="form-control dt" id="inputTime" readonly style="color: white"/>
+                                                <!--</form>-->
 
-                                    <!-- /tile body -->
-                                    <div class="tile-body">
-
-
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="margin-top-15"><b>Would you like to have Valet?</b></div>
                                         <div class="form-group">
-                                            <div class="col-sm-12 margin-bottom-20">
-                                                <input type="radio"  id="valetYes" value="true" name="valet">
-                                                <label for="valetYes" class="control-label">YES</label>
+                                            <div class="col-sm-12">
+                                                <input type="radio"  id="valetYes" value="true" name="valet" disabled="">
+                                                <label for="valetYes" class="control-label">YES (Coming Soon)</label>
                                             </div>
                                             <div class="col-sm-12">
                                                 <input type="radio" id="valetNo" value="false" name="valet" checked="checked">
@@ -91,7 +103,6 @@
                                             <input type="hidden" value="<%=wId%>" name="wId">
                                             <input type="hidden" value="<%=id%>" name="userId">
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            <button type="reset" class="btn btn-default">Reset</button>
 
                                         </div>
 
@@ -139,12 +150,34 @@
         </script>
         <!--DATETIME-->
         <script type="text/javascript">
-            $(".date").each(function () {
-                $(this).datetimepicker({
-                    format: 'YYYY-MM-DD HH',
-                    minDate: new Date(),
-                    ignoreReadonly: true
-                });
-            });</script>
+//            $(".date").each(function () {
+//                $(this).datetimepicker({
+//                    format: 'YYYY-MM-DD HH',
+//                    minDate: new Date(),
+//                    ignoreReadonly: true
+//                });
+//            });
+            $("#date").datetimepicker({
+                format: 'YYYY-MM-DD',
+                minDate: new Date(),
+                ignoreReadonly: true
+            });
+            $("#time").datetimepicker({
+                format: 'LT',
+//                focusOnShow, true,
+//                minDate: strTime,
+                stepping: 30,
+                ignoreReadonly: true
+            });
+            var date = new Date();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            $("#inputTime").val(strTime);
+        </script>
     </body>
 </html>
