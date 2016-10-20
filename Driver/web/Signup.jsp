@@ -41,6 +41,10 @@
                             if (name == null || name.equals("null")) {
                                 name = "";
                             }
+                            String handphone = (String) request.getAttribute("handphone");
+                            if (handphone == null || handphone.equals("null")) {
+                                handphone = "";
+                            }
                             ArrayList<String> errMsg = (ArrayList<String>) request.getAttribute("err");
                             if (errMsg != null && errMsg.size() > 0) {
                         %>
@@ -69,6 +73,10 @@
                                     <input type="email" class="form-control" name="email" value="<%=email%>" placeholder="Email">
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                 </div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="handphone" value="<%=handphone%>" placeholder="Handphone Number">
+                                    <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
+                                </div>    
                                 <div class="input-group">
                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>

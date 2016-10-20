@@ -33,7 +33,7 @@ public class DriverDAO {
 
     private final String USER_AGENT = "Mozilla/5.0";
 
-    public ArrayList<String> addDriver(String name, String email, String password) throws UnsupportedEncodingException, IOException {
+    public ArrayList<String> addDriver(String name, String email, String password, String handphone) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/user/signup";
 
         HttpClient client = new DefaultHttpClient();
@@ -46,6 +46,7 @@ public class DriverDAO {
         urlParameters.add(new BasicNameValuePair("name", name));
         urlParameters.add(new BasicNameValuePair("password", password));
         urlParameters.add(new BasicNameValuePair("email", email));
+        urlParameters.add(new BasicNameValuePair("handphone", handphone));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
