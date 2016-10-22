@@ -9,7 +9,7 @@
         <title>Waiting for Valet</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -55,8 +55,9 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <div class="notification text-center">           
-                                            <h3><b>Valet Request Sent!</b></h3>                
-                                            <p>You will be notified shortly via SMS</p>                   
+                                            <h3><b>Valet Request Sent!</b></h3>   
+                                            We are searching for a valet driver for you.
+                                            <p><b>You will be notified shortly via SMS</b></p>                   
                                             <a href="MyAppointments.jsp" class="btn btn-primary" role="button">View All Appointments</a>
                                         </div>
                                                              

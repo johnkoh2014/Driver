@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Valet Payment</title>
+        <title>Confirm Payment</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="solid-bg-3">
@@ -37,56 +37,28 @@
                         <div class="row">
                             <!-- col 12 -->
                             <div>
-                                <div class="alert alert-success" role="alert">
-                                    <h3 class="alert-heading"><center>Success!</center></h3>
-                                    <p><center>Your Valet has been booked!</center></p>
-                                    <p class="m-b-0"><center>You'll be notified via a notification once your valet has reached.</center></p>
+                                <div class="alert alert-success text-center" role="alert">
+                                    <h3 class="alert-heading">Success!</h3>
+                                    <p>Your Valet has been confirmed!!</p>
+                                    
+                                    <p class="m-b-0"><center>You'll be notified via SMS once your valet has reached.</center></p>
                                 </div>
-
+                                
+                                <div class="alert alert-success text-center" role="alert">
+                                    <h3 class="alert-heading">Estimated Pick Up Time</h3>
+                                    <h3 class="alert-heading">3:00PM</h3>
+                                    
+                                   
+                                </div>
+                                
+                               
+                                
                                 <section class="tile color transparent-black">
-                                    <div class="tile-header">
-
-                                        <center><strong>CONFIRMED BOOKING</strong></center>
-
-                                    </div>
-                                    <!--end tile header-->
-                                    <div class="line-across"></div>
-                                    <!-- /tile body -->
-                                    <div class="tile-body">
-
-
-
-
-                                        <div class="notification">
-                                            <div class="row">
-                                                <strong><center>AH HUAT WORKSHOP</center></strong>
-                                            </div>
-                                            <div class="row">
-                                                <center>
-                                                    Tuesday, 12 July 2016
-                                                    1:00pm
-                                                </center>
-                                            </div>
-                                            <p> </p>
-                                            <div class="row">
-                                                <strong><center>VALET DETAILS</center></strong>
-                                            </div>
-                                            <div class="row">
-                                                <center>
-                                                    Tuesday, 12 July 2016
-                                                    12:15pm
-                                                </center>
-                                            </div>
-
-                                        </div>
-                                        
-                                        <div class="notification">
-                                            <a href="#" class="btn btn-block btn-orange margin-bottom-20" role="button"><font color="black">View Valet Details</font></a>
-                                            <a href="#" class="btn btn-block btn-orange margin-bottom-20" role="button"><font color="black">View All Appointments</font></a>
+                                    <div class="notification">
+                                            <a href="ViewValetStatus.jsp" class="btn btn-block btn-orange margin-bottom-20" role="button"><font color="black">View Valet Details</font></a>
+                                            <a href="MyAppointments.jsp" class="btn btn-block btn-orange margin-bottom-20" role="button"><font color="black">View All Appointments</font></a>
                                             
-                                        </div>
                                     </div>
-                                    <!--end tile body-->
 
 
                                 </section>
