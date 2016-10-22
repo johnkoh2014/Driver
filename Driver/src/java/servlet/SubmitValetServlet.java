@@ -5,11 +5,15 @@
  */
 package servlet;
 
+import dao.AppointmentDAO;
 import dao.DriverDAO;
-import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -25,8 +29,8 @@ import util.Validation;
  *
  * @author User
  */
-@WebServlet(name = "EditProfileServlet", urlPatterns = {"/EditProfile"})
-public class EditProfileServlet extends HttpServlet {
+@WebServlet(name = "SubmitValetServlet", urlPatterns = {"/SubmitValet"})
+public class SubmitValetServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,40 +42,39 @@ public class EditProfileServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-
-        String email = request.getParameter("email").trim();
-        String name = request.getParameter("name").trim();
-        String hpNo = request.getParameter("hpNo").trim();
+        HttpSession session = request.getSession(true);
+        String pickUpAddress = request.getParameter("address");
+        String postal = request.getParameter("postal");
+        String wsAddress = request.getParameter("wsAddress");
+        String appointmentTime = request.getParameter("serviceStartTime");
 
         Validation validation = new Validation();
-        String errMsg = validation.isValidMobileContact(hpNo);
-
-        HttpSession session = request.getSession(true);
-
-        if (errMsg == null || errMsg.length() == 0) {
-            DriverDAO dDAO = new DriverDAO();
-            Driver user = (Driver) session.getAttribute("loggedInUser");
-            int id = user.getId();
-
-            String token = user.getToken();
-            String error = dDAO.updateDriver(id, token, name, hpNo);
-            if (error == null || error.length() == 0) {
-                session.setAttribute("success", "Successfully edited profile");
-                user.setName(name);
-                user.setHandphone(hpNo);
-                session.setAttribute("loggedInUser", user);
-                response.sendRedirect("Profile.jsp");
-            } else {
-                request.setAttribute("fail", error);
-                RequestDispatcher view = request.getRequestDispatcher("EditProfile.jsp");
-                view.forward(request, response);
-            }
-        } else {
-            request.setAttribute("fail", errMsg);
-            RequestDispatcher view = request.getRequestDispatcher("EditProfile.jsp");
+        String isValidPostal = validation.isValidPostalCode(postal);
+        if (isValidPostal != null) {
+            request.setAttribute("errMsg", isValidPostal);
+            RequestDispatcher view = request.getRequestDispatcher("ValetForm.jsp");
             view.forward(request, response);
+        }
+
+        Timestamp appointmentStart = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date parsedDate = dateFormat.parse(appointmentTime);
+        appointmentStart = new java.sql.Timestamp(parsedDate.getTime());
+
+        AppointmentDAO aDAO = new AppointmentDAO();
+        Timestamp pickupTime = aDAO.calculatePickUpTime(pickUpAddress + " " + postal, wsAddress, appointmentStart);
+        if (pickupTime == null) {
+            request.setAttribute("errMsg", "Invalid Address/Postal");
+            RequestDispatcher view = request.getRequestDispatcher("ValetForm.jsp");
+            view.forward(request, response);
+        } else {
+            session.setAttribute("appointmentTime", appointmentStart);
+            session.setAttribute("pickupTime", pickupTime);
+            session.setAttribute("address", pickUpAddress);
+            session.setAttribute("postal", postal);
+            response.sendRedirect("BookValet.jsp");
         }
     }
 
@@ -90,7 +93,7 @@ public class EditProfileServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SubmitValetServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -108,7 +111,7 @@ public class EditProfileServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SubmitValetServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

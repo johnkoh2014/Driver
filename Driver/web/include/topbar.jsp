@@ -24,13 +24,14 @@
     <!-- .nav-collapse -->
     <div class="navbar-collapse">
 
-        <!-- Page refresh -->
-        <ul class="nav navbar-nav refresh">
-            <li class="divided">
-                <a href="#" class="page-refresh"><i class="fa fa-refresh"></i></a>
-            </li>
-        </ul>
-        <!-- /Page refresh -->
+        <!--Page refresh--> 
+        <!--        <ul class="nav navbar-nav refresh">
+                    <li class="divided">-->
+        <!--<a href="#" class="page-refresh"><i class="fa fa-refresh"></i></a>-->
+        <!--                <a class="navbar-brand mobile-brand" href="Request.jsp"></a>
+                    </li>
+                </ul>-->
+        <!--/Page refresh--> 
 
         <!-- Quick Actions -->
         <ul class="nav navbar-nav quick-actions">
@@ -64,6 +65,14 @@
         </ul>
         <!-- /Quick Actions -->
 
+        <!--Mobile Logout-->
+        <ul class="nav navbar-nav logout">
+            <li class="">
+                <!--<a href="#" class="page-refresh"><i class="fa fa-refresh"></i></a>-->
+                <a href="Logout.jsp"><i class="fa fa-power-off"></i></a>
+            </li>
+        </ul>
+        <!--/Mobile Logout-->
 
         <%@include file="leftbar.jsp"%>
         <!--End Leftbar-->
@@ -71,4 +80,9 @@
 
     </div>
     <!--/.nav-collapse -->
+
+
+
+
 </div>
+<div class="mobile-brand" onclick="location.href='Request.jsp'"></div>

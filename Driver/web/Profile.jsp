@@ -2,6 +2,7 @@
 <%@page import="entity.Vehicle"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +10,7 @@
         <title>Profile</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -67,9 +68,16 @@
                                         <form class="form-horizontal" role="form" action="" method="POST">
 
                                             <div class="form-group">
-                                                <label for="input02" class="col-sm-2 control-label">Email</label>
+                                                <label for="input01" class="col-sm-2 control-label">Email</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="email" value="<%=email%>" style="color:white" readonly>
+                                                    <input type="text" class="form-control" id="input01" name="email" value="<%=email%>" style="color:white" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="input02" class="col-sm-2 control-label">Name</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="input02" name="name" value="<%=name%>" style="color:white" readonly>
                                                 </div>
                                             </div>
 
@@ -112,20 +120,20 @@
                                                 String noPlate = vehicle.getPlateNumber();
                                         %>
                                         <div class="carItem">
-                                            <div class="col-sm-4 car">
-                                                <%=make + " " + model%>
-                                            </div>
-                                            <div class="col-sm-4 car">
+                                            <div class="col-xs-7 car">
+                                                <%=make + " " + model%><br/>
                                                 <%=noPlate%>
                                             </div>
-                                            <div class="col-sm-2 car">
-                                                <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue">Edit Car</a>
+                                            
+                                            <div class="col-xs-2 car">
+                                                <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue btn-sm">Edit</a>
                                             </div>
-                                            <div class="col-sm-2 car">
+                                            <div class="col-xs-3 car">
                                                 <form role="form" action="DeleteVehicle" method="POST">
-                                                    <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger btn-sm">Delete</button>
                                                 </form>
                                             </div>
+                                                <div class="margin-bottom-20"></div>
                                         </div>
                                         <!--<div class="line-across-dark"></div>-->
                                         <%
@@ -165,7 +173,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

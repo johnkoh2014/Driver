@@ -1,4 +1,5 @@
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +7,7 @@
         <title>Get Offers</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -41,7 +42,7 @@
                                 %>
                                 <div class="list-group">
                                     <a href="ServiceType.jsp?service=Maintenance&vehicle=<%=vid%>" class="list-group-item">Maintenance</a>
-                                    <a href="ServiceType.jsp?service=Tyre / Wheel Service&vehicle=<%=vid%>" class="list-group-item">Tyre / Wheel Service</a>
+                                    <a href="ServiceType.jsp?service=Tyre/Wheel Service&vehicle=<%=vid%>" class="list-group-item">Tyre/Wheel Service</a>
                                     <a href="RequestSummary.jsp?service=Car Grooming&vehicle=<%=vid%>" class="list-group-item">Car Grooming</a>
                                     <a href="RequestSummary.jsp?service=Air Conditioning&vehicle=<%=vid%>" class="list-group-item">Air Conditioning</a>
                                     <a href="RequestSummary.jsp?service=Battery&vehicle=<%=vid%>" class="list-group-item">Battery</a>
@@ -73,7 +74,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

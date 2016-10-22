@@ -33,7 +33,7 @@ public class DriverDAO {
 
     private final String USER_AGENT = "Mozilla/5.0";
 
-    public ArrayList<String> addDriver(String name, String email, String password) throws UnsupportedEncodingException, IOException {
+    public ArrayList<String> addDriver(String name, String email, String password, String handphone) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/user/signup";
 
         HttpClient client = new DefaultHttpClient();
@@ -46,6 +46,7 @@ public class DriverDAO {
         urlParameters.add(new BasicNameValuePair("name", name));
         urlParameters.add(new BasicNameValuePair("password", password));
         urlParameters.add(new BasicNameValuePair("email", email));
+        urlParameters.add(new BasicNameValuePair("handphone", handphone));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -206,9 +207,43 @@ public class DriverDAO {
         }
         return driver;
     }
+    
+    public String updateDriver(int user_id, String token, String nName, String nMobile) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/user/edit_profile";
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
 
-    public static void main(String[] args) throws IOException {
-        //authenticateUser("james@james.com", "12345678");
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("nName", nName));
+        urlParameters.add(new BasicNameValuePair("nMobile", nMobile));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
     }
 
     public boolean updateUserPassword(int user_id, String token, String currentPassword, String newPassword) throws UnsupportedEncodingException, IOException {
@@ -247,5 +282,9 @@ public class DriverDAO {
         } else {
             return true;
         }
+    }
+    
+    public static void main(String[] args) throws IOException {
+        //authenticateUser("james@james.com", "12345678");
     }
 }

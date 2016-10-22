@@ -1,6 +1,7 @@
 <%@page import="entity.Offer"%>
 <%@page import="entity.Driver"%>
 <%@page import="dao.OfferDAO"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,7 +9,7 @@
         <title>Booking</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -63,14 +64,17 @@
                                         String shopName = offer.getShopName();
                                         double min = offer.getInitialMinPrice();
                                         String minPrice = min + "0";
-                                        double max = offer.getInitialMinPrice();
+                                        double max = offer.getInitialMaxPrice();
                                         String maxPrice = max + "0";
+                                        double dPrice = offer.getDiagnosticPrice();
+                                        String diagnosticPrice = dPrice + "0";
                                         String serviceName = offer.getServiceName();
                                         String openingHour = offer.getOpeningHour();
                                         String shopAddress = offer.getShopAddress();
                                         String shopCategory = offer.getShopCategory();
                                         String brandsCarried = offer.getBrandsCarried();
                                         String website = offer.getWebsite();
+
                                     %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
@@ -85,7 +89,13 @@
                                                     <!-- /tile body -->
                                                     <div class="tile-body">
                                                         <div class="text-center">
-                                                            <h3>$<%=minPrice%> - $<%=maxPrice%></h3>
+
+                                                            <% if (dPrice == 0.0) {%>
+                                                            <h3>Quotation Price: $<%=minPrice%> - $<%=maxPrice%></h3>
+                                                            <% } else {%>
+                                                            <h3>Diagnostic Price: $<%=diagnosticPrice%></h3>
+                                                            <% }%>
+                                                            
                                                             <br/>
                                                             <h5><%=serviceName%></h5>
                                                         </div>
@@ -183,7 +193,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

@@ -1,4 +1,5 @@
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,9 +41,7 @@
                                         <h3>Change Password</h3>
                                     </div>
                                     <!--end tile header-->
-                                    <%
-                                        Driver driver = (Driver) session.getAttribute("loggedInUser");
-                                        String currentEmail = driver.getEmail();
+                                    <%                                        String currentEmail = driver.getEmail();
                                         String oldPassword = (String) request.getAttribute("oldPassword");
                                         if (oldPassword == null) {
                                             oldPassword = "";
@@ -57,7 +56,7 @@
                                         }
                                     %>
                                     <%
-                                        String errMsg = (String) request.getAttribute("errMsg"); 
+                                        String errMsg = (String) request.getAttribute("errMsg");
                                         if (errMsg != null && errMsg.length() > 0) {
                                     %>
                                     <div class="alert alert-danger"><%=errMsg%></div>
@@ -138,7 +137,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

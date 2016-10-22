@@ -46,23 +46,32 @@ public class SignupServlet extends HttpServlet {
         String email = request.getParameter("email");
         String passwordEntered = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
+        String handphone = request.getParameter("handphone");        
 
         Validation validation = new Validation();
         String err = validation.isValidPassword(passwordEntered, confirmPassword);
+        ArrayList<String> errors = new ArrayList<String>();
+        
         if (err != null && err.length() > 0) {
+            errors.add(err);
             request.setAttribute("fullname", fullname);
             request.setAttribute("email", email);
-            request.setAttribute("err", err);
+            request.setAttribute("err", errors);
             RequestDispatcher view = request.getRequestDispatcher("Signup.jsp");
             view.forward(request, response);
         } else {
             DriverDAO driverDAO = new DriverDAO();
-            ArrayList<String> errors = driverDAO.addDriver(fullname, email, passwordEntered);
+            errors = driverDAO.addDriver(fullname, email, passwordEntered, handphone);
             if (errors == null || errors.size() == 0) {
+                Driver user = driverDAO.authenticateUser(email, passwordEntered);
+                session.setAttribute("loggedInUser", user);
                 response.sendRedirect("Request.jsp");
             } else {
-                RequestDispatcher view = request.getRequestDispatcher("Login.jsp");
-                request.setAttribute("errors", errors);
+                RequestDispatcher view = request.getRequestDispatcher("Signup.jsp");
+                request.setAttribute("fullname", fullname);
+                request.setAttribute("email", email);
+                request.setAttribute("handphone", handphone);
+                request.setAttribute("err", errors);
                 view.forward(request, response);
             }
         }

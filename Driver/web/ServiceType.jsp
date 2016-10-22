@@ -1,4 +1,5 @@
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +7,7 @@
         <title>Get Offers - Maintenance</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -48,14 +49,14 @@
                                     <%if (service.equals("Maintenance")) {%>
                                     <a href="RequestSummary.jsp?service=Maintenance&type=General Maintenance&vehicle=<%=vid%>" class="list-group-item">General Maintenance</a>
                                     <a href="RequestSummary.jsp?service=Maintenance&type=Oil and Filter Service&vehicle=<%=vid%>" class="list-group-item">Oil and Filter Service</a>
-                                    <a href="RequestSummary.jsp?service=Maintenance&type=Break Services&vehicle=<%=vid%>" class="list-group-item">Break Services</a>
+                                    <a href="RequestSummary.jsp?service=Maintenance&type=Brake Services&vehicle=<%=vid%>" class="list-group-item">Brake Services</a>
                                     <a href="RequestSummary.jsp?service=Maintenance&type=Fluids and Flushes&vehicle=<%=vid%>" class="list-group-item">Fluids and Flushes</a>
-                                    <%} else if (service.equals("Tyre / Wheel Service")) {%>
-                                    <a href="RequestSummary.jsp?service=Tyre / Wheel Service&type=Change Tyre&vehicle=<%=vid%>" class="list-group-item">Change Tyre</a>
-                                    <a href="RequestSummary.jsp?service=Tyre / Wheel Service&type=Change Rims&vehicle=<%=vid%>" class="list-group-item">Change Rims</a>
-                                    <a href="RequestSummary.jsp?service=Tyre / Wheel Service&type=Tyre Rotation&vehicle=<%=vid%>" class="list-group-item">Tyre Rotation</a>
-                                    <a href="RequestSummary.jsp?service=Tyre / Wheel Service&type=Tyre Installation&vehicle=<%=vid%>" class="list-group-item">Tyre Installation</a>
-                                    <a href="RequestSummary.jsp?service=Tyre / Wheel Service&type=Others&vehicle=<%=vid%>" class="list-group-item">Others</a>
+                                    <%} else if (service.equals("Tyre/Wheel Service")) {%>
+                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Change Tyre&vehicle=<%=vid%>" class="list-group-item">Change Tyre</a>
+                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Change Rims&vehicle=<%=vid%>" class="list-group-item">Change Rims</a>
+                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Tyre Rotation&vehicle=<%=vid%>" class="list-group-item">Tyre Rotation</a>
+                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Tyre Installation&vehicle=<%=vid%>" class="list-group-item">Tyre Installation</a>
+                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Others&vehicle=<%=vid%>" class="list-group-item">Others</a>
                                     <%}%>
                                 </div>
                             </div>
@@ -84,7 +85,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

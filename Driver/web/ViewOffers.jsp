@@ -4,6 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.QuotationRequestDAO"%>
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +12,7 @@
         <title>All Requests</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -45,12 +46,10 @@
 
                                     </div>
                                     <!--end tile header-->
-                                    <%
-                                        
-                                        String qr_Id = request.getParameter("id");
+                                    <%                                        String qr_Id = request.getParameter("id");
                                         int qrId = 0;
                                         if (qr_Id.length() > 0) {
-                                            qrId = Integer.parseInt(qr_Id); 
+                                            qrId = Integer.parseInt(qr_Id);
                                         }
                                         QuotationRequestDAO qDAO = new QuotationRequestDAO();
                                         OfferDAO oDAO = new OfferDAO();
@@ -60,19 +59,33 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <ul class="list-group">
-                                            <%                                                        for (int i = 0; i < oList.size(); i++) {
+                                            <%                                                if (oList == null || oList.size() == 0) {
+                                            %>
+                                            <span style="color: white">You have no offer for this request at the moment.</span>
+                                            <%
+                                            } else {
+                                                for (int i = 0; i < oList.size(); i++) {
                                                     Offer offer = oList.get(i);
                                                     String shopName = offer.getShopName();
                                                     double min = offer.getInitialMinPrice();
                                                     String minPrice = min + "0";
-                                                    double max = offer.getInitialMinPrice();
+                                                    double max = offer.getInitialMaxPrice();
                                                     String maxPrice = max + "0";
                                                     int oId = offer.getId();
+                                                    double dPrice = offer.getDiagnosticPrice();
+                                                            String diagnosticPrice = dPrice + "0";
 
+                                                            if (dPrice == 0.0) {%>
+                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Quotation Price: $<%=minPrice%> - $<%=maxPrice%></span><br/><i>Click to view profile and quote</i></a>
+                                                    <% } else {%>
+                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Diagnostic Price: $<%=diagnosticPrice%></span><br/><i>Click to view profile and quote</i></a>
+
+                                            <%
+                                                        }
+                                                    }
+
+                                                }
                                             %>
-                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">$<%=minPrice%> - $<%=maxPrice%></span><br/><i>Click to view profile and quote</i></a>
-                                                    <% }
-                                                    %>
                                         </ul>
 
                                     </div>
@@ -106,7 +119,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

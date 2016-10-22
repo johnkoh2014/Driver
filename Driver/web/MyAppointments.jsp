@@ -1,6 +1,10 @@
+<%@page import="entity.ValetRequest"%>
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entity.Appointment"%>
 <%@page import="dao.AppointmentDAO"%>
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,7 +12,7 @@
         <title>My Appointments</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -26,14 +30,20 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
-                            <h1>MY APPOINTMENTS</h1>
+                            <h1>MY BOOKINGS</h1>
 
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%                        AppointmentDAO aDAO = new AppointmentDAO();
+                        ArrayList<Appointment> aList = aDAO.getAppointments(id, token);
+                        String success = (String) session.getAttribute("success");
+                        if (success != null && success.length() > 0) {
+                    %>
+                    <div class="alert alert-success"><%=success%></div>
                     <%
-                    AppointmentDAO aDAO = new AppointmentDAO();
-                    Appointment appointment = aDAO.getAppointments(id, token);
+                            session.setAttribute("success", "");
+                        }
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -44,29 +54,77 @@
 
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">
-
-                                        <center>BOOKING & VALET DETAILS</center>
-
+                                        <center><h5>BOOKING & VALET DETAILS</h5></center>
                                     </div>
                                     <!--end tile header-->
-                                    <div class="line-across"></div>
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
                                         <div class="list-group">
-                                            <a href="#" class="list-group-item"><b>AH HUAT WORKSHOP PTE LTD</b>
-                                                <p>Tuesday, 12 July 2016</p>
-                                                <p>1:00pm</p>
+
+                                            <%
+                                                if (aList == null || aList.size() == 0) {
+                                            %>
+                                            <span style="color: white">You have no bookings at the moment.</span>
+                                            
+                                            <%
+                                            } else {
+                                                for (Appointment appointment : aList) {
+                                                    String start = appointment.getAppointmentStart() + "";
+                                                    String startDate = start.substring(0, start.indexOf(" "));
+                                                    String sTime = start.substring(start.indexOf(" "));
+                                                    String startTime = sTime.substring(0, sTime.lastIndexOf("."));
+                                                    String shopName = appointment.getShopName();
+
+                                                    ValetRequest vr = appointment.getToValet();
+                                                    String pickup = "";
+                                                    String pickupDate = "";
+                                                    String pickupTime = "";
+                                                    if (vr != null) {
+                                                        pickup = vr.getScheduledPickUpTime() + "";
+                                                        pickupDate = pickup.substring(0, pickup.indexOf(" "));
+                                                        String pTime = pickup.substring(pickup.indexOf(" "));
+                                                        pickupTime = pTime.substring(0, pTime.lastIndexOf("."));
+                                                    }
+
+                                                    ValetRequest returnVr = appointment.getReturnValet();
+                                                    String returnPickup = "";
+                                                    String returnPickupDate = "";
+                                                    String returnPickupTime = "";
+                                                    if (returnVr != null) {
+                                                        returnPickup = returnVr.getScheduledPickUpTime() + "";
+                                                        returnPickupDate = returnPickup.substring(0, returnPickup.indexOf(" "));
+                                                        String pTime = returnPickup.substring(returnPickup.indexOf(" "));
+                                                        returnPickupTime = pTime.substring(0, pTime.lastIndexOf("."));
+                                                    }
+
+                                            %>
+
+                                            <a href="#" class="list-group-item"><p><b><%=shopName%></b></p>
+                                                Service Date: <%=startDate%><br/>
+                                                Service Time: <%=startTime%><br/>
                                                 <p></p>
-                                                <b>VALET</b>
-                                                <p>12 July 2016,12:15pm</p>
-                                                <i>Click to view more info</i>
+                                                <%if (vr != null) {%>
+                                                <p><b>VALET</b></p>
+                                                Pickup Date: <%=pickupDate%><br/> 
+                                                Pickup Time:<%=pickupTime%><br/> 
+                                                <%}%>
+                                                <p></p>
+                                                <%if (returnVr != null) {%>
+                                                <p><b>RETURN VALET</b></p>
+                                                Pickup Date: <%=returnPickupDate%><br/> 
+                                                Pickup Time:<%=returnPickupTime%><br/> 
+                                                <%}%>
                                             </a>
-                                            <a href="#" class="list-group-item"><b>KGC WORKSHOP PTE LTD</b>
+                                            <%
+                                                    }
+                                                }
+                                            %>
+                                            <!--<a href="#" class="list-group-item"><b>KGC WORKSHOP PTE LTD</b>
                                                 <p>Tuesday, 13 July 2016</p>
                                                 <p>4:00pm</p>
                                                 <i>Click to view more info</i>
-                                            </a>
+                                            </a>-->
                                         </div>
 
                                     </div>
@@ -100,7 +158,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

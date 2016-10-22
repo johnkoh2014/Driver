@@ -2,6 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.QuotationRequestDAO"%>
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +10,7 @@
         <title>All Requests</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -31,8 +32,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        String success = (String) session.getAttribute("success");
+                    <%                        String success = (String) session.getAttribute("success");
 
                         if (success != null && !(success.equals("null")) && success.length() > 0) {
                     %>
@@ -54,7 +54,6 @@
                                     </div>
                                     <!--end tile header-->
                                     <%
-                                        
                                         QuotationRequestDAO qDAO = new QuotationRequestDAO();
                                         ArrayList<QuotationRequest> qList = qDAO.getAllRequests(id, token);
 
@@ -62,19 +61,26 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <ul class="list-group">
-                                            <%                                                        for (int i = 0; i < qList.size(); i++) {
-                                                    QuotationRequest req = qList.get(i);
-                                                    String qrName = req.getName();
-                                                    int qrId = req.getId();
-                                                    int noOffers = req.getNo_of_offers();
+                                            <%                                                
+                                        if (qList == null || qList.size() == 0) {
+                                            %>
+                                            <span style="color: white">You have no requests at the moment.</span>
+                                            <%
+                                                } else {
+                                                    for (int i = 0; i < qList.size(); i++) {
+                                                        QuotationRequest req = qList.get(i);
+                                                        String qrName = req.getName();
+                                                        int qrId = req.getId();
+                                                        int noOffers = req.getNo_of_offers();
 
-                                                    if (noOffers == 0) {%>
+                                                        if (noOffers == 0) {%>
                                             <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>No offer at the moment</i></a>
 
                                             <%} else {%>
                                             <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>There are <%=noOffers%> offers for your request</i></a>
 
                                             <%}
+                                                    }
                                                 }
                                             %>
                                         </ul>
@@ -110,7 +116,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/minimal.min.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script>
             $(function () {
 

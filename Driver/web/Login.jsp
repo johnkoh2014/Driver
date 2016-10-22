@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="css/bootstrap-dropdown-multilevel.css">
 
         <link href="css/minimal.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/custom.css">
         <title>Log In</title>
     </head>
     <body class="bg-3">
@@ -32,7 +33,17 @@
                     <div class="inside-block">
                         <img src="images/Logo.png" alt class="logo">
                         <h4><strong>VALUE QUOTES FROM TRUSTED WORKSHOPS</strong></h4>
+                        <%
+                            String errMsg = (String) request.getAttribute("errMsg");
+                            if (errMsg != null) {%>
+                        <div class="alert alert-danger"><%=errMsg%></div>
+                        <%}
 
+                            String successResetPasswordMsg = (String) request.getAttribute("successResetPasswordMsg");
+                                if (successResetPasswordMsg != null) {%>
+                        <div class="alert alert-success"><%=successResetPasswordMsg%></div>
+                        <%}
+                        %>
                         <form id="form-signin" class="form-signin" action = "Authenticate" method= "post">
                             <section>
                                 <div class="input-group">
@@ -52,23 +63,14 @@
                                 <a href = "ForgotPassword.jsp">Forgot Password</a>
                             </section>
                             <section class="log-in">
-                                <div class="col-md-5">
+                                <div class="col-xs-6">
+                                    <a href="Signup.jsp" class="btn btn-blue">Sign Up</a>
+                                </div>
+                                <div class="col-xs-6">
                                     <button class="btn btn-greensea">Log In</button>
                                 </div>
-                                <a href="Signup.jsp" class="btn btn-blue">Sign Up</a>
                             </section>
                         </form>
-                        <%
-                            String errMsg = (String) request.getAttribute("errMsg");
-                            if (errMsg != null) {
-                                out.println(errMsg + "<br/><br/>");
-                            }
-
-                            String successResetPasswordMsg = (String) request.getAttribute("successResetPasswordMsg");
-                            if (successResetPasswordMsg != null) {
-                                out.println(successResetPasswordMsg + "<br/><br/>");
-                            }
-                        %>
                     </div>
                 </div>
                 <!-- /Page content -->  

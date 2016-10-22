@@ -11,10 +11,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Offer;
 import entity.QuotationRequest;
+import entity.Vehicle;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -22,6 +26,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 import static org.apache.http.HttpHeaders.USER_AGENT;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -30,6 +40,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -270,9 +281,178 @@ public class OfferDAO {
             diagnosticPrice = attElement.getAsDouble();
         }
 
-        offer = new Offer(offerId, serviceId, serviceName, openingHour, wsId, shopName, shopAddress, shopCategory, brandsCarried, website, status, initialMinPrice, initialMaxPrice, diagnosticPrice, finalPrice, estCompletionDateTime);
+        attElement = oObj.get("vehicle_id");
+        int vehicle_id = 0;
+        if (!attElement.isJsonNull()) {
+            vehicle_id = attElement.getAsInt();
+        }
+
+        attElement = oObj.get("car_make");
+        String car_make = "";
+        if (!attElement.isJsonNull()) {
+            car_make = attElement.getAsString();
+        }
+
+        attElement = oObj.get("car_model");
+        String car_model = "";
+        if (!attElement.isJsonNull()) {
+            car_model = attElement.getAsString();
+        }
+
+        attElement = oObj.get("car_year");
+        int car_year = 0;
+        if (!attElement.isJsonNull()) {
+            car_year = attElement.getAsInt();
+        }
+
+        attElement = oObj.get("car_plate_number");
+        String car_plate_number = "";
+        if (!attElement.isJsonNull()) {
+            car_plate_number = attElement.getAsString();
+        }
+
+        attElement = oObj.get("car_color");
+        String car_color = "";
+        if (!attElement.isJsonNull()) {
+            car_color = attElement.getAsString();
+        }
+
+        attElement = oObj.get("car_control");
+        String car_control = "";
+        if (!attElement.isJsonNull()) {
+            car_control = attElement.getAsString();
+        }
+        Vehicle vehicle = new Vehicle(vehicle_id, car_make, car_model, car_year, car_plate_number, user_id, car_color, car_control);
+        
+        offer = new Offer(offerId, serviceId, serviceName, openingHour, wsId, shopName, shopAddress, shopCategory, brandsCarried, website, status, initialMinPrice, initialMaxPrice, diagnosticPrice, finalPrice, estCompletionDateTime, vehicle);
         return offer;
 
     }
 
+    public String acceptOfferWithValet(boolean is_use_valet, int offer_id, int user_id, String token, int shop_id, String start_time,
+            String end_time, String title, String pick_up_address, double pick_up_latitude, double pick_up_longitude, String drop_off_address,
+            double drop_off_latitude, double drop_off_longitude, String scheduled_pick_up_time, double price) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/quotation_request/initial_quotation_accepted";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("is_use_valet", is_use_valet + ""));
+        urlParameters.add(new BasicNameValuePair("offer_id", offer_id + ""));
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("shop_id", shop_id + ""));
+        urlParameters.add(new BasicNameValuePair("start_time", start_time));
+        urlParameters.add(new BasicNameValuePair("end_time", end_time));
+        urlParameters.add(new BasicNameValuePair("title", title));
+        urlParameters.add(new BasicNameValuePair("bg_color", "#731F1F"));
+        urlParameters.add(new BasicNameValuePair("font_color", "#FFF"));
+        urlParameters.add(new BasicNameValuePair("service_type", "1"));
+        urlParameters.add(new BasicNameValuePair("pick_up_address", pick_up_address));
+        urlParameters.add(new BasicNameValuePair("pick_up_latitude", pick_up_latitude + ""));
+        urlParameters.add(new BasicNameValuePair("pick_up_longitude", pick_up_longitude + ""));
+        urlParameters.add(new BasicNameValuePair("drop_off_address", drop_off_address));
+        urlParameters.add(new BasicNameValuePair("drop_off_latitude", drop_off_latitude + ""));
+        urlParameters.add(new BasicNameValuePair("drop_off_longitude", drop_off_longitude + ""));
+        urlParameters.add(new BasicNameValuePair("scheduled_pick_up_time", scheduled_pick_up_time));
+        urlParameters.add(new BasicNameValuePair("price", price + ""));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
+    }
+
+    public String acceptOfferWithoutValet(boolean is_use_valet, int offer_id, int user_id, String token, int shop_id, String start_time,
+            String end_time, String title) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/quotation_request/initial_quotation_accepted";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("is_use_valet", is_use_valet + ""));
+        urlParameters.add(new BasicNameValuePair("offer_id", offer_id + ""));
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("shop_id", shop_id + ""));
+        urlParameters.add(new BasicNameValuePair("start_time", start_time));
+        urlParameters.add(new BasicNameValuePair("end_time", end_time));
+        urlParameters.add(new BasicNameValuePair("title", title));
+        urlParameters.add(new BasicNameValuePair("bg_color", "#731F1F"));
+        urlParameters.add(new BasicNameValuePair("font_color", "#FFF"));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
+    }
+
+    public String[] retrieveLatLong(String address) throws Exception {
+        int responseCode = 0;
+        String api = "http://maps.googleapis.com/maps/api/geocode/xml?address=" + URLEncoder.encode(address, "UTF-8") + "&sensor=true";
+        URL url = new URL(api);
+        HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+        httpConnection.connect();
+        responseCode = httpConnection.getResponseCode();
+        if (responseCode == 200) {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();;
+            Document document = builder.parse(httpConnection.getInputStream());
+            XPathFactory xPathfactory = XPathFactory.newInstance();
+            XPath xpath = xPathfactory.newXPath();
+            XPathExpression expr = xpath.compile("/GeocodeResponse/status");
+            String status = (String) expr.evaluate(document, XPathConstants.STRING);
+            if (status.equals("OK")) {
+                expr = xpath.compile("//geometry/location/lat");
+                String latitude = (String) expr.evaluate(document, XPathConstants.STRING);
+                expr = xpath.compile("//geometry/location/lng");
+                String longitude = (String) expr.evaluate(document, XPathConstants.STRING);
+                return new String[]{latitude, longitude};
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
 }

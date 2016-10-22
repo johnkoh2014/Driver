@@ -2,6 +2,7 @@
 <%@page import="entity.Vehicle"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +10,7 @@
         <title>Get Quotes</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>
@@ -31,8 +32,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        String success = (String) session.getAttribute("success");
+                    <%                        String success = (String) session.getAttribute("success");
 
                         if (success != null && !(success.equals("null")) && success.length() > 0) {
                     %>
@@ -51,7 +51,6 @@
                                     <a href="AddVehicle.jsp" class="btn btn-primary" role="button">Add Car</a>
                                 </div>
                                 <%
-                                    
                                     VehicleDAO vDAO = new VehicleDAO();
                                     ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
 //                                    ArrayList<Vehicle> vList = driver.getVehicles();
@@ -120,16 +119,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
         <script src="js/minimal.min.js"></script>
+        <script type="text/javascript" src="js/custom.js"></script>
 
         <script>
-            $(function () {
-
-
-
-            })
-
+            
         </script>
     </body>
 </html>

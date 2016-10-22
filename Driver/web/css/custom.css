@@ -1,3 +1,16 @@
+/*Fonts*/
+body{
+    font-family: "Ebrima REGULAR", "Roboto", "Arial", sans-serif;
+}
+h1{
+    font-family: "Ebrima BOLD", "Roboto", "Arial", sans-serif;
+}
+h2,h3,h4,h5,h6{
+    font-family: "Ebrima REGULAR", "Roboto", "Arial", sans-serif;
+}
+/*Fonts*/
+
+
 /*Dashboard Card(Ave rating)*/
 .card-container { position: relative; min-height: 80px; margin-bottom: 20px; }
 .card-container .card1 { height: 100%; position: relative; -webkit-perspective: 600px; -moz-perspective: 600px; perspective: 600px; width: 100%; -cursor: pointer; z-index: 9; }
@@ -110,14 +123,14 @@ body {
 }
 
 ul.inbox {
-     -webkit-border-radius: 0; 
+    -webkit-border-radius: 0; 
     -moz-border-radius: 0;
     -ms-border-radius: 0;
     -o-border-radius: 0;
-     border-radius: 0; 
-     -webkit-box-shadow: 0; 
-     box-shadow: 0; 
-     border: none; 
+    border-radius: 0; 
+    -webkit-box-shadow: 0; 
+    box-shadow: 0; 
+    border: none; 
 }
 
 .navbar-nav.side-nav > li.navigation .menu > li > a {
@@ -366,14 +379,6 @@ textarea.form-control{
 }
 /*Textarea Form control*/
 
-/*@media screen and (max-width: 1190px){
-    .desktopOnly {
-        display: none;
-    }
-    .mobileOnly {
-        display: initial;
-    }
-}*/
 
 .align-center {
     margin: 0 auto;
@@ -384,6 +389,9 @@ textarea.form-control{
 .car {
     height: 100%;
     line-height: 25px;
+}
+.car .btn {
+    margin-top: 12px;
 }
 .line-across-dark {
     border-bottom-color: black;
@@ -400,4 +408,72 @@ textarea.form-control{
     float: none !important; 
     display: inline-block !important;
     margin: 0 auto !important;
+}
+
+.navbar-nav.side-nav > li.collapsed-content > ul > li.user > .settings{
+    left: auto;
+    top: auto;
+}
+body .navbar.navbar-default .navbar-collapse .nav .open .dropdown-menu.arrow:before{
+    right: auto;
+}
+
+
+/*Input iphone no zoom*/
+select, textarea, input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], 
+input[type="month"], 
+input[type="time"], 
+input[type="week"], 
+input[type="number"], 
+input[type="email"], 
+input[type="url"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="color"] { 
+    font-size: 16px; 
+}
+/*Input iphone no zoom*/
+
+body .navbar.navbar-default .navbar-collapse .nav.logout {
+    display:none;
+}
+
+body .mask { background-color: white; width: 100%; height: 100%; position: fixed; z-index: 100000; top: -45px; padding-top: 45px; padding-bottom: 45px; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; }
+body .mask #loader { background: url(../images/Loading_gif.gif)center center no-repeat; height: 100%; width: 100%; top:0; left:0; margin: 0 auto;}
+
+@media screen and (max-width: 1024px){
+    #content{
+        padding-left: 25px !important;
+    }
+    #sidebar {
+        display:none;
+    }
+
+    body .navbar.navbar-default .navbar-collapse .nav.logout {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        margin: 0;
+    }
+    body .navbar.collapsed .navbar-collapse .nav.logout {
+        right: 10px;
+    }
+    body .mask #loader {
+        background-size: 50% 50%;
+    }
+    .mobile-brand{
+        width: 20%;
+        height: 45px;
+        background: url(../images/Logo.png) no-repeat 50% 50%;
+        background-size: 80%;
+        display: inline-block;
+        z-index: 9999;
+        position: absolute;
+        top: 0;
+        left:40%;
+    }
 }

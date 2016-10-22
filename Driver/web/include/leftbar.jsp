@@ -24,7 +24,7 @@
             </li>
             <li>
                 <a href="MyAppointments.jsp">
-                    <i class="fa fa-gear"></i> Schedule
+                    <i class="fa fa-calendar"></i> Schedule
                 </a>
             </li>
             <li>
