@@ -61,19 +61,26 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <ul class="list-group">
-                                            <%                                                        for (int i = 0; i < qList.size(); i++) {
-                                                    QuotationRequest req = qList.get(i);
-                                                    String qrName = req.getName();
-                                                    int qrId = req.getId();
-                                                    int noOffers = req.getNo_of_offers();
+                                            <%                                                
+                                        if (qList == null || qList.size() == 0) {
+                                            %>
+                                            <span style="color: white">You have no requests at the moment.</span>
+                                            <%
+                                                } else {
+                                                    for (int i = 0; i < qList.size(); i++) {
+                                                        QuotationRequest req = qList.get(i);
+                                                        String qrName = req.getName();
+                                                        int qrId = req.getId();
+                                                        int noOffers = req.getNo_of_offers();
 
-                                                    if (noOffers == 0) {%>
+                                                        if (noOffers == 0) {%>
                                             <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>No offer at the moment</i></a>
 
                                             <%} else {%>
                                             <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>There are <%=noOffers%> offers for your request</i></a>
 
                                             <%}
+                                                    }
                                                 }
                                             %>
                                         </ul>

@@ -59,7 +59,12 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <ul class="list-group">
-                                            <%                                                        for (int i = 0; i < oList.size(); i++) {
+                                            <%                                                if (oList == null || oList.size() == 0) {
+                                            %>
+                                            <span style="color: white">You have no offer for this request at the moment.</span>
+                                            <%
+                                            } else {
+                                                for (int i = 0; i < oList.size(); i++) {
                                                     Offer offer = oList.get(i);
                                                     String shopName = offer.getShopName();
                                                     double min = offer.getInitialMinPrice();
@@ -68,15 +73,17 @@
                                                     String maxPrice = max + "0";
                                                     int oId = offer.getId();
                                                     double dPrice = offer.getDiagnosticPrice();
-                                                    String diagnosticPrice = dPrice + "0";
+                                                            String diagnosticPrice = dPrice + "0";
 
-                                                    if (dPrice == 0.0) {%>
+                                                            if (dPrice == 0.0) {%>
                                             <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Quotation Price: $<%=minPrice%> - $<%=maxPrice%></span><br/><i>Click to view profile and quote</i></a>
                                                     <% } else {%>
                                             <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Diagnostic Price: $<%=diagnosticPrice%></span><br/><i>Click to view profile and quote</i></a>
 
                                             <%
+                                                        }
                                                     }
+
                                                 }
                                             %>
                                         </ul>

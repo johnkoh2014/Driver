@@ -39,6 +39,12 @@
                         Offer offer = oDAO.retrieveOfferById(id, token, offerId);
                         int wId = offer.getWorkshopId();
 
+                        String err = (String) request.getAttribute("fail");
+                        if (err != null || err.length() > 0) {
+                    %>
+                    <div class="alert alert-danger"><%=err%></div>
+                    <%
+                        }
                     %>
                     <!-- content main container -->
                     <div class="main">

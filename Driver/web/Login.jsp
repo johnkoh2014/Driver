@@ -33,7 +33,17 @@
                     <div class="inside-block">
                         <img src="images/Logo.png" alt class="logo">
                         <h4><strong>VALUE QUOTES FROM TRUSTED WORKSHOPS</strong></h4>
+                        <%
+                            String errMsg = (String) request.getAttribute("errMsg");
+                            if (errMsg != null) {%>
+                        <div class="alert alert-danger"><%=errMsg%></div>
+                        <%}
 
+                            String successResetPasswordMsg = (String) request.getAttribute("successResetPasswordMsg");
+                                if (successResetPasswordMsg != null) {%>
+                        <div class="alert alert-success"><%=successResetPasswordMsg%></div>
+                        <%}
+                        %>
                         <form id="form-signin" class="form-signin" action = "Authenticate" method= "post">
                             <section>
                                 <div class="input-group">
@@ -61,17 +71,6 @@
                                 </div>
                             </section>
                         </form>
-                        <%
-                            String errMsg = (String) request.getAttribute("errMsg");
-                            if (errMsg != null) {
-                                out.println(errMsg + "<br/><br/>");
-                            }
-
-                            String successResetPasswordMsg = (String) request.getAttribute("successResetPasswordMsg");
-                            if (successResetPasswordMsg != null) {
-                                out.println(successResetPasswordMsg + "<br/><br/>");
-                            }
-                        %>
                     </div>
                 </div>
                 <!-- /Page content -->  
