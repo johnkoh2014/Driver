@@ -1,9 +1,12 @@
+<%@page import="entity.Vehicle"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entity.Driver"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Book a Valet</title>
+        <title>Book Valet</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
@@ -23,12 +26,23 @@
                     <div class="pageheader">
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
-                        <div class="margin-top-15 text-center" style="color:white">
-                            <h1>BOOK VALET</h1>
-
+                        <div class="margin-top-15 text-center">
+                            <h2>Book Valet</h2>
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%--
+                    <%
+                        
+                        String currentEmail = driver.getEmail();
+                        String newEmail = (String) request.getAttribute("newEmail");
+                        if (newEmail == null) {
+                            newEmail = "";
+                        }
+                        String hpNo = driver.getHandphone();
+                    %>
+                    --%>
+
 
                     <!-- content main container -->
                     <div class="main">
@@ -38,63 +52,60 @@
                             <div>
 
                                 <section class="tile color transparent-black">
-                                    <div class="tile-header">
-
-                                        <center>DETAILS</center>
-
+                                    <div class="tile-header text-center">
+                                        <h3>Details</h3>
                                     </div>
-                                    <!--end tile header-->
+
                                     <div class="line-across"></div>
+                                    <!--end tile header-->
+
                                     <!-- /tile body -->
-                                    <div class="tile-body"action="#" onsubmit="if (document.getElementById('agree').checked) {
-                                                                return true;
-                                                            } else {
-                                                                alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy');
-                                                                return false;
-                                                            }">
-
-                                        <form class="form-horizontal" role="form" action="" method="POST">
-
-                                            <div class="notification">
-                                                <div class="row">
-                                                    <h1><center><strong>$40</strong></center></h1>
-
-                                                    <h4><center><Strong>Time and Date of Pickup</Strong></center></h4>
-
-                                                    <center>
-                                                        <h4>2nd June 2016 12:30pm</h4>
-                                                        <h4><strong>Confirmed car</strong></h4>
-                                                        <h4>2007 Suzuki Swift SGW6529Z</h4>
-                                                    </center>
-                                                </div>
-
-                                                <div class="row">
+                                    <div class="tile-body text-center"action="#" onsubmit="if (document.getElementById('agree').checked) {
+                                                return true;
+                                            } else {
+                                                alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy');
+                                                return false;
+                                            }">
 
 
-                                                </div>
 
-                                                <div class="notification notification-info">
-                                                    <h4><center><strong>ADDRESS</strong></center></h4>
-                                                    <center>326 Clementi Avenue 5 #06-185</center>
-                                                </div>
 
-                                                <div class="notification notification-info">
-                                                    <h4><center><strong>POSTAL CODE</strong></center></h4>
-                                                    <center>Singapore 120326</center>
-                                                    
-                                                </div>
-                                                
-                                                <div class="notification notification-info">
-                                                    <center><input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the terms and conditions</center>
-<!--                                                        <input type="submit" name="submit" value="submit" />-->
+                                        <h2><center><strong>$40</strong></center></h2>
+                                        <p></p>
+                                        <center><b>VALET CHARGE</b></center>
+                                        <p></p>
+                                        <center><b>Workshop Appointment</b></center>
+                                        <p></p>
+                                        <center><b>2:30PM</b></center>
+                                        <p></p>
+                                        <center>Thursday, 13th October 2016</center>
+                                        <p></p>
+                                        <div class="line-across"></div>
+                                        <form class="form-horizontal" role="form" action="EditProfile" method="POST">
+
+                                            <div class="form-group">
+                                                <center><label for="input01" class="col-sm-2 control-label">Address</label></center>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="input01" name="address" value="">
                                                 </div>
                                             </div>
+
+                                            <div class="form-group">
+                                                <center><label for="input02" class="col-sm-2 control-label">Postal Code</label></center>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="input02" name="postalCode" value="">
+                                                </div>
+                                            </div>
+
+                                            <div class="notification">
+                                                <center><input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the terms and conditions</center>
+                                                <!--                                                        <input type="submit" name="submit" value="submit" />-->
+                                            </div>
+
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
-                                                <input type="hidden" name="service"value="">
-                                                <input type="hidden" name="type" value="">
-                                                <button type="submit" class="btn btn-primary">Book Now!</button>
-<!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
+                                                <button type="submit" class="btn btn-primary">FIND VALET!</button>
+                                                <!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
                                             </div>
                                             <!--end form footer-->
                                         </form>
@@ -105,6 +116,7 @@
 
 
                                 </section>
+
                             </div>
                             <!-- /col 12 -->
                         </div>
@@ -133,11 +145,11 @@
         <script src="js/minimal.min.js"></script>
 
         <script>
-                                                        $(function () {
+                                        $(function () {
 
 
 
-                                                        })
+                                        })
 
         </script>
     </body>
