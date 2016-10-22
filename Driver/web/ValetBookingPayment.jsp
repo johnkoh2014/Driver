@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Valet Payment</title>
         <jsp:include page="include/head.jsp"/>
+
     </head>
     <body class="bg-3">
 
@@ -48,41 +49,30 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
+                                        <%                                            
+                                            String errorMsg = (String) session.getAttribute("errorMsg");
+                                            String successMsg = (String)session.getAttribute("successMsg");
+                                            if (errorMsg != null) {
+                                                out.print(errorMsg);
+                                                out.print((String) session.getAttribute("token"));
+                                            } else {
+                                                out.print(successMsg);
+                                            }
+                                        %>
+                                        <form class="form-horizontal" id="payment-form" role="form" action="PaymentServlet" method="POST">
 
-                                        <form class="form-horizontal" role="form" action="" method="POST">
-                                            <!--                                            <div class="row">
-                                                                                            <h1><center><strong>$40</strong></center></h1>
-                                                                                        </div>
-                                            
-                                                                                        <div class="form-group">
-                                                                                            <label for="input01" class="col-sm-4 control-label">Card Number</label>
-                                                                                            <div class="col-sm-8">
-                                                                                                <input type="text" class="form-control" id="input01">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        
-                                                                                        <div class="form-group ">
-                                                                                            <label for="input01" class="col-sm-4 control-label">Expiration Number</label>
-                                                                                            <div class="col-sm-2">
-                                                                                                    <input type="text" class="form-control" data-stripe="number">
-                                                                                            </div>
-                                                                                            /
-                                                                                            <div class="col-sm-2">
-                                                                                                    <input type="text" class="form-control" data-stripe="number">
-                                                                                            </div>
-                                                                                        </div>-->
                                             <fieldset>
-<!--                                                <legend>Payment</legend>-->
+                                                <!--                                         <legend>Payment</legend>-->
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
+                                                        <input type="text" class="form-control" id="card-holder-name" placeholder="Card Holder's Name">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label" for="card-number">Card Number</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
+                                                        <input type="text" class="form-control" name="card-number" data-stripe="number"id="card-number" placeholder="Debit/Credit Card Number">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -90,58 +80,29 @@
                                                     <div class="col-sm-9">
                                                         <div class="row">
                                                             <div class="col-xs-3">
-                                                                <select class="form-control col-sm-2" name="expiry-month" id="expiry-month">
-                                                                    <option>Month</option>
-                                                                    <option value="01">Jan (01)</option>
-                                                                    <option value="02">Feb (02)</option>
-                                                                    <option value="03">Mar (03)</option>
-                                                                    <option value="04">Apr (04)</option>
-                                                                    <option value="05">May (05)</option>
-                                                                    <option value="06">June (06)</option>
-                                                                    <option value="07">July (07)</option>
-                                                                    <option value="08">Aug (08)</option>
-                                                                    <option value="09">Sep (09)</option>
-                                                                    <option value="10">Oct (10)</option>
-                                                                    <option value="11">Nov (11)</option>
-                                                                    <option value="12">Dec (12)</option>
-                                                                </select>
+                                                                <input type="text" class="form-control" data-stripe="exp-month" id="expiry-month" placeholder="Month">
+
                                                             </div>
                                                             <div class="col-xs-3">
-                                                                <select class="form-control" name="expiry-year">
-                                                                    <option value="13">2013</option>
-                                                                    <option value="14">2014</option>
-                                                                    <option value="15">2015</option>
-                                                                    <option value="16">2016</option>
-                                                                    <option value="17">2017</option>
-                                                                    <option value="18">2018</option>
-                                                                    <option value="19">2019</option>
-                                                                    <option value="20">2020</option>
-                                                                    <option value="21">2021</option>
-                                                                    <option value="22">2022</option>
-                                                                    <option value="23">2023</option>
-                                                                </select>
+                                                                <input type="text" class="form-control" data-stripe="exp-year" id="expiry-year" placeholder="Year">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
+                                                    <label class="col-sm-3 control-label" for="cvc">Card CVC</label>
                                                     <div class="col-sm-3">
-                                                        <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code">
+                                                        <input type="text" class="form-control" data-stripe="cvc" id="cvc" placeholder="Security Code">
                                                     </div>
                                                 </div>
-<!--                                                <div class="form-group">
-                                                    <div class="col-sm-offset-3 col-sm-9">
-                                                        <button type="button" class="btn btn-success">Pay Now</button>
-                                                    </div>
-                                                </div>-->
+
                                             </fieldset>
 
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
                                                 <input type="hidden" name="service"value="">
                                                 <input type="hidden" name="type" value="">
-                                                <button type="submit" class="btn btn-warning">Book Now!</button>
+                                                <button type="submit" id="submitBtn" class="btn btn-warning">Book Now!</button>
                                                 <!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
                                             </div>
                                             <!--end form footer-->
@@ -178,14 +139,114 @@
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
+
         <script src="js/minimal.min.js"></script>
 
+        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+        <script type="text/javascript">
+            Stripe.setPublishableKey('pk_test_U9y8GuuFBVq9pOt4ss9tcGAx');
+        </script>
         <script>
+
             $(function () {
+                var $form = $('#payment-form');
+                $form.submit(function (event) {
+                    // Disable the submit button to prevent repeated clicks:
+                    $form.find('.submit').prop('disabled', true);
 
+                    // Request a token from Stripe:
+                    Stripe.card.createToken($form, stripeResponseHandler);
 
+                    // Prevent the form from being submitted:
+                    return false;
+                });
+            });
 
-            })
+            function stripeResponseHandler(status, response) {
+                // Grab the form:
+                var $form = $('#payment-form');
+
+                if (response.error) { // Problem!
+
+                    // Show the errors on the form:
+                    $form.find('.payment-errors').text(response.error.message);
+                    $form.find('.submit').prop('disabled', false); // Re-enable submission
+
+                } else { // Token was created!
+
+                    // Get the token ID:
+                    var token = response.id;
+
+                    // Insert the token ID into the form so it gets submitted to the server:
+                    $form.append($('<input type="hidden" name="stripeToken">').val(token));
+
+                    // Submit the form:
+                    $form.get(0).submit();
+                }
+            }
+            ;
+
+            /**
+             $(document).ready(function () {
+             $("#payment-form").submit(function (e) {
+             var form = $(this);
+             //alert("Hello! I am an alert box!!");
+             // No pressing the buy now button more than once
+             $('#submitBtn').hide();
+             //                    $('#submitBtn').prop('disabled', true);
+             // Create the token, based on the form object
+             Stripe.create(form, stripeResponseHandler);
+             
+             // Prevent the form from submitting
+             e.preventDefault();
+             });
+             });
+             
+             
+             var stripeResponseHandler = function (status, response) {
+             var form = $('#payment-form');
+             // Any validation errors?
+             if (response.error) {
+             // Show the user what they did wrong
+             form.find('.payment-errors').text(response.error.message);
+             
+             // Make the submit clickable again
+             form.find('button').prop('disabled', false);
+             } else {
+             // Otherwise, we're good to go! Submit the form.
+             
+             // Insert the unique token into the form
+             $('<input>', {
+             'type': 'hidden',
+             'name': 'stripeToken',
+             'value': response.id
+             }).appendTo(form);
+             
+             // Call the native submit method on the form
+             // to keep the submission from being canceled
+             form.get(0).submit();
+             
+             }
+             };
+             
+             /*
+             // Event Listeners
+             $('#payment-form').on('submit', generateToken);
+             
+             var generateToken = function (e) {
+             var form = $(this);
+             alert("Hello! I am an alert box!!");
+             // No pressing the buy now button more than once
+             form.find('submitBtn').prop('disabled', true);
+             
+             // Create the token, based on the form object
+             Stripe.create(form, stripeResponseHandler);
+             
+             // Prevent the form from submitting
+             e.preventDefault();
+             };
+             */
+
 
         </script>
     </body>
