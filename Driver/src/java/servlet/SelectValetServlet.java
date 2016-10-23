@@ -141,7 +141,7 @@ public class SelectValetServlet extends HttpServlet {
             String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title);
 
             if (err.length() > 0) {
-                session.setAttribute("fail", err);
+                request.setAttribute("fail", err);
                 RequestDispatcher view = request.getRequestDispatcher("Booking.jsp?id=" + offerId);
                 view.forward(request, response);
             } else {

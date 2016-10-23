@@ -30,8 +30,10 @@
                             <h1>MY APPOINTMENTS</h1>
                         </div>
                         <div class="row">
-                            <div class="alert alert-success">
+                            <div class="alert alert-blue">
                                 <h5><center><strong>Status: </strong>On the way to pick up point.</center></h5>
+                                <h5><center><strong>Status: </strong>Reached up point.</center></h5>
+                                <h5><center><strong>Status: </strong>On the way to drop off point.</center></h5>
                             </div>
                         </div>
                     </div>
@@ -52,8 +54,8 @@
                                                 <div class="col-sm-12 col-xs-12 text-right">
                                                     <div class="btn-group btn-group-justified table-options desktopOnly">
                                                         <ul class="nav nav-pills tabpager text-center">
-                                                            <li class="w50 active arrange-center"><a href="#offerDetails" data-toggle="pill">OFFER DETAILS</a></li>
-                                                            <li class="w50 arrange-center"><a href="#workshopProfile" data-toggle="pill">WORKSHOP PROFILE</a></li>
+                                                            <li class="w45 active arrange-center"><a href="#offerDetails" data-toggle="pill">OFFER DETAILS</a></li>
+                                                            <li class="w45 arrange-center"><a href="#workshopProfile" data-toggle="pill">WORKSHOP PROFILE</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -119,7 +121,7 @@
                                                 <section class="tile color transparent-black">
                                                     <div class="tile-header text-center">
                                                         <h3>AH HUAT WORKSHOP PTE LTD</h3>
-                                                        <a href="Booking.jsp" class="btn btn-warning" role="button">Book</a>
+                                                        <!--<a href="Booking.jsp" class="btn btn-warning" role="button">Book</a>-->
                                                     </div>
                                                     <!--end tile header-->
                                                     <div class="line-across"></div>

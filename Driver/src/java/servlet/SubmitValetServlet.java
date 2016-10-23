@@ -46,12 +46,15 @@ public class SubmitValetServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
         String pickUpAddress = request.getParameter("address");
-        String postal = request.getParameter("postal");
+        String pickUpPostal = request.getParameter("postal");
         String wsAddress = request.getParameter("wsAddress");
         String appointmentTime = request.getParameter("serviceStartTime");
+        String serviceEndTime = request.getParameter("serviceEndTime");
+        String workshopId = request.getParameter("workshopId");
+        String offerId = request.getParameter("offerId");
 
         Validation validation = new Validation();
-        String isValidPostal = validation.isValidPostalCode(postal);
+        String isValidPostal = validation.isValidPostalCode(pickUpPostal);
         if (isValidPostal != null) {
             request.setAttribute("errMsg", isValidPostal);
             RequestDispatcher view = request.getRequestDispatcher("ValetForm.jsp");
@@ -64,16 +67,20 @@ public class SubmitValetServlet extends HttpServlet {
         appointmentStart = new java.sql.Timestamp(parsedDate.getTime());
 
         AppointmentDAO aDAO = new AppointmentDAO();
-        Timestamp pickupTime = aDAO.calculatePickUpTime(pickUpAddress + " " + postal, wsAddress, appointmentStart);
+        Timestamp pickupTime = aDAO.calculatePickUpTime(pickUpAddress + " " + pickUpPostal, wsAddress, appointmentStart);
         if (pickupTime == null) {
             request.setAttribute("errMsg", "Invalid Address/Postal");
             RequestDispatcher view = request.getRequestDispatcher("ValetForm.jsp");
             view.forward(request, response);
         } else {
             session.setAttribute("appointmentTime", appointmentStart);
+            session.setAttribute("serviceEndTime", serviceEndTime);
             session.setAttribute("pickupTime", pickupTime);
-            session.setAttribute("address", pickUpAddress);
-            session.setAttribute("postal", postal);
+            session.setAttribute("workshopId", workshopId);
+            session.setAttribute("offerId", offerId);
+            session.setAttribute("wsAddress", wsAddress);
+            session.setAttribute("pickUpAddress", pickUpAddress);
+            session.setAttribute("pickUpPostal", pickUpPostal);
             response.sendRedirect("BookValet.jsp");
         }
     }

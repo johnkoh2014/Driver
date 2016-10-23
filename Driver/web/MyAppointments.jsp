@@ -80,11 +80,13 @@
                                                     String pickup = "";
                                                     String pickupDate = "";
                                                     String pickupTime = "";
+                                                    String url = "#";
                                                     if (vr != null) {
                                                         pickup = vr.getScheduledPickUpTime() + "";
                                                         pickupDate = pickup.substring(0, pickup.indexOf(" "));
                                                         String pTime = pickup.substring(pickup.indexOf(" "));
                                                         pickupTime = pTime.substring(0, pTime.lastIndexOf("."));
+                                                        
                                                     }
 
                                                     ValetRequest returnVr = appointment.getReturnValet();
@@ -100,7 +102,7 @@
 
                                             %>
 
-                                            <a href="#" class="list-group-item"><p><b><%=shopName%></b></p>
+                                            <a href="<%=url%>" class="list-group-item"><p><b><%=shopName%></b></p>
                                                 Service Date: <%=startDate%><br/>
                                                 Service Time: <%=startTime%><br/>
                                                 <p></p>

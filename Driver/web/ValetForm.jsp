@@ -57,14 +57,14 @@
 
 
                                         <div class="form-group">
-                                            <label for="input01" class="col-sm-2 control-label">Address</label>
+                                            <label for="input01" class="col-sm-2 control-label">Pickup Address</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" style="color:white;" id="input01" name="address" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="input01" class="col-sm-2 control-label">Postal</label>
+                                            <label for="input01" class="col-sm-2 control-label">Pickup Postal</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" style="color:white;" id="input01" name="postal" required>
                                             </div>
@@ -74,9 +74,11 @@
                                         <!--form footer for submit-->
                                         <div class="form-group form-footer text-center">
                                             <input type="hidden" value="<%=serviceStartTime%>" name="serviceStartTime">
+                                            <input type="hidden" value="<%=serviceEndTime%>" name="serviceEndTime">
                                             <input type="hidden" value="<%=wsAddress%>" name="wsAddress">
+                                            <input type="hidden" value="<%=workshopId%>" name="workshopId">
+                                            <input type="hidden" value="<%=offerId%>" name="offerId">
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            <button type="reset" class="btn btn-default">Reset</button>
 
                                         </div>
 

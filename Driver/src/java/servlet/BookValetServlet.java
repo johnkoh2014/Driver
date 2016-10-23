@@ -79,11 +79,8 @@ public class BookValetServlet extends HttpServlet {
         
         String title = user.getName();
 
-        String appointmentTime = request.getParameter("appointmentTime");
-        String scheduledPickupTime = appointmentTime.substring(0, appointmentTime.lastIndexOf("."));
-
         String wsAddress = request.getParameter("wsAddress");
-
+        
         String wsPostal = request.getParameter("wsPostal");
 
         //for sms details
@@ -145,7 +142,7 @@ public class BookValetServlet extends HttpServlet {
                 session.setAttribute("success", "Appointment booked at " + serviceStartTime);
                 //add sms here
                 SmsNotification smsNotification = new SmsNotification();
-                smsNotification.smsForApptBooking(user.getName(), wsMobileNo, servName, appointmentTime);
+                smsNotification.smsForApptBooking(user.getName(), wsMobileNo, servName, serviceStartTime);
                 response.sendRedirect("MyAppointments.jsp");
             }
         }

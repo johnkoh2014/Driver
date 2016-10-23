@@ -35,118 +35,217 @@
                             <!-- col 12 -->
                             <div>
                                 <div class="alert alert-success" role="alert">
-                                    <h5 class="alert-heading"><center><strong>STATUS:</strong> AT WORKSHOP(DIAGNOSTIC)</center></h5>
+                                    <h5 class="alert-heading"><center><strong>STATUS:</strong> AT WORKSHOP<br/>(DIAGNOSTIC)</center></h5>
 
                                 </div>
-
-
-                                <section class="tile color transparent-black">
-
-
-
-                                    <!-- tile header -->
-                                    <div class="tile-header">
-                                        <center><h1><strong>VALET</strong> DETAILS</h1></center>
-                                        <div class="controls">
-                                            <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
-                                            <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
-
-                                        </div>
-                                    </div>
-                                    <!-- /tile header -->
-
-                                    <!-- tile body -->
-                                    <div class="tile-body ">
-
-                                        <div class="notification">
-                                            
-                                            <div class="row">
-                                                <center><img src="images/joshua.jpg" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
-                                            </div>
-                                            <p> </p>
-                                            <div class="row">
-                                                <strong><center>Name</center></strong>
-                                            </div>
-                                            <div class="row">
-                                                <center>
-                                                    Ah Siao
-                                                </center>
-                                            </div>
-
-                                            <div class="row">
-                                                <strong><center>Age</center></strong>
-                                            </div>
-                                            <div class="row">
-                                                <center>
-                                                    24
-                                                </center>
-                                            </div>
-
-                                            <div class="row">
-                                                <strong><center>Contact</center></strong>
-                                            </div>
-                                            <div class="row">
-                                                <center>
-                                                    91112222
-                                                </center>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- /tile body -->
-
-
-
-
-                                </section>
-
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">
-
-                                        <center><h1><strong>FINAL</strong> QUOTATION</h1></center>
-
+                                        <div class="tile-widget">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-xs-12 text-right">
+                                                    <div class="btn-group btn-group-justified table-options desktopOnly">
+                                                        <ul class="nav nav-pills tabpager text-center">
+                                                            <li class="w45 active arrange-center"><a href="#offerDetails" data-toggle="pill">OFFER DETAILS</a></li>
+                                                            <li class="w45 arrange-center"><a href="#workshopProfile" data-toggle="pill">WORKSHOP PROFILE</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <!--end tile header-->
-                                    <div class="line-across"></div>
+
                                     <!-- /tile body -->
+
                                     <div class="tile-body">
+                                        <div class="tab-content">
+
+                                            <div class="tab-pane fade active in" id="offerDetails" >
+
+                                                <section class="tile color transparent-black minimized">
+
+
+
+                                                    <!-- tile header -->
+                                                    <div class="tile-header">
+                                                        <center><h1><strong>VALET</strong> DETAILS</h1></center>
+                                                        <div class="controls">
+                                                            <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /tile header -->
+
+                                                    <!-- tile body -->
+                                                    <div class="tile-body ">
+
+                                                        <div class="notification">
+
+                                                            <div class="row">
+                                                                <center><img src="images/joshua.jpg" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
+                                                            </div>
+                                                            <p> </p>
+                                                            <div class="row">
+                                                                <strong><center>Name</center></strong>
+                                                            </div>
+                                                            <div class="row">
+                                                                <center>
+                                                                    Ah Siao
+                                                                </center>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <strong><center>Age</center></strong>
+                                                            </div>
+                                                            <div class="row">
+                                                                <center>
+                                                                    24
+                                                                </center>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <strong><center>Contact</center></strong>
+                                                            </div>
+                                                            <div class="row">
+                                                                <center>
+                                                                    91112222
+                                                                </center>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- /tile body -->
 
 
 
 
-                                        <div class="notification">
-                                            <div class="row">
-                                                <center><h1><strong>$120</strong></h1></center>
-                                            </div>
-                                            <div class="row">
-                                                <center>
-                                                    <strong>ESTIMATED TIME AND DATE OF COMPLETION</strong>
+                                                </section>
 
-                                                </center>
-                                            </div>
-                                            <p> </p>
-                                            
-                                            <div class="row">
-                                                <center>
-                                                    11 JULY 2016, 1400HRS
-                                                </center>
-                                            </div>
-                                            <p></p>
-                                            <div class="row">                                               
-                                                <center>
-                                                <a href="#" class="btn btn-lg btn-greensea margin-bottom-20" role="button">Accept</a>                                               
-                                                <a href="#" class="btn btn-lg btn-red margin-bottom-20" role="button">Decline</a>                                           
-                                                </center>                                               
-                                            </div>
+                                                <section class="tile color transparent-black">
+                                                    <div class="tile-header">
+
+                                                        <center><h1><strong>FINAL</strong> QUOTATION</h1></center>
+                                                        <div class="controls">
+                                                            <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /tile body -->
+                                                    <div class="tile-body">
+
+
+                                                        <span style="color: white">No final offer at the moment.</span>
+
+                                                        <div class="notification">
+                                                            <div class="row">
+                                                                <center><h1><strong>$120</strong></h1></center>
+                                                            </div>
+                                                            <div class="row">
+                                                                <center>
+                                                                    <strong>ESTIMATED TIME AND DATE OF COMPLETION</strong>
+
+                                                                </center>
+                                                            </div>
+                                                            <p> </p>
+
+                                                            <div class="row">
+                                                                <center>
+                                                                    11 JULY 2016, 1400HRS
+                                                                </center>
+                                                            </div>
+                                                            <p></p>
+                                                            <div class="row">                                               
+                                                                <center>
+                                                                    <a href="#" class="btn btn-lg btn-greensea margin-bottom-20" role="button">Accept</a>                                               
+                                                                    <a href="#" class="btn btn-lg btn-red margin-bottom-20" role="button">Decline</a>                                           
+                                                                </center>                                               
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                    <!--end tile body-->
+
+
+                                                </section>
+
+                                            </div><!--Requests-->
+
+
+
+                                            <div class="tab-pane fade " id="workshopProfile" >
+                                                <section class="tile color transparent-black">
+                                                    <div class="tile-header text-center">
+                                                        <h3>AH HUAT WORKSHOP PTE LTD</h3>
+                                                        <!--<a href="Booking.jsp" class="btn btn-warning" role="button">Book</a>-->
+                                                    </div>
+                                                    <!--end tile header-->
+                                                    <div class="line-across"></div>
+                                                    <!-- /tile body -->
+                                                    <div class="tile-body">
+
+                                                        <div class="row">
+                                                            <strong><center>Opening Hours</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                10am - 7pm (Mon - Sat), By Appt only (Sun). Closed on PHs.
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Address</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                328 Circuit Road S(379489)
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Providing Services</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                Maintenence, Repair and servicing
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Other Brands</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                GlassMechanix
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Website</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                www.ahhuatworkshop.com.sg
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                    <!--end tile body-->
+
+                                                </section>
+
+
+                                            </div><!--workshopProfile-->
+
+
 
                                         </div>
 
-                                        
                                     </div>
                                     <!--end tile body-->
 
 
                                 </section>
+
                             </div>
                             <!-- /col 12 -->
                         </div>

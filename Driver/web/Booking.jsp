@@ -38,11 +38,11 @@
                         OfferDAO oDAO = new OfferDAO();
                         Offer offer = oDAO.retrieveOfferById(id, token, offerId);
                         int wId = offer.getWorkshopId();
-
-                        String err = (String) request.getAttribute("fail");
-                        if (err != null || err.length() > 0) {
+                    
+                        String error = (String) request.getAttribute("fail");
+                        if (error != null && error.length() > 0) {
                     %>
-                    <div class="alert alert-danger"><%=err%></div>
+                    <div class="alert alert-danger"><%=error%></div> 
                     <%
                         }
                     %>
@@ -93,7 +93,7 @@
                                         <div class="margin-top-15"><b>Would you like to have Valet?</b></div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <input type="radio"  id="valetYes" value="true" name="valet" disabled="">
+                                                <input type="radio"  id="valetYes" value="true" name="valet" >
                                                 <label for="valetYes" class="control-label">YES (Coming Soon)</label>
                                             </div>
                                             <div class="col-sm-12">

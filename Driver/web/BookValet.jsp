@@ -1,3 +1,4 @@
+<%@page import="java.sql.Timestamp"%>
 <%@page import="entity.Vehicle"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
@@ -43,7 +44,19 @@
                     %>
                     --%>
 
-
+                    <%                        String puTime = (Timestamp) session.getAttribute("pickupTime") + "";
+                        String pickupTime = puTime.substring(0, puTime.lastIndexOf("."));
+                        String serviceEndTime = (String) session.getAttribute("serviceEndTime");
+                        String appTime = (Timestamp) session.getAttribute("appointmentTime") + "";
+                        String appointmentTime = appTime.substring(0, puTime.lastIndexOf("."));
+                        String wsAddress = (String) session.getAttribute("wsAddress");
+                        String wsPostal = wsAddress.substring(wsAddress.lastIndexOf(" ")).trim();
+                        wsAddress = wsAddress.substring(0, wsAddress.lastIndexOf(" "));
+                        String address = (String) session.getAttribute("pickUpAddress");
+                        String postal = (String) session.getAttribute("pickUpPostal");
+                        String offerId = (String) session.getAttribute("offerId");
+                        String workshopId = (String) session.getAttribute("workshopId");
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -70,40 +83,51 @@
 
 
 
+                                        <center><b>VALET CHARGE</b></center>
+                                        <p></p>
                                         <h2><center><strong>$40</strong></center></h2>
                                         <p></p>
-                                        <center><b>VALET CHARGE</b></center>
+                                        <center><b>Valet Appointment</b></center>
+                                        <p></p>
+                                        <center><b><%=pickupTime%></b></center>
                                         <p></p>
                                         <center><b>Workshop Appointment</b></center>
                                         <p></p>
-                                        <center><b>2:30PM</b></center>
-                                        <p></p>
-                                        <center>Thursday, 13th October 2016</center>
+                                        <center><b><%=appointmentTime%></b></center>
                                         <p></p>
                                         <div class="line-across"></div>
-                                        <form class="form-horizontal" role="form" action="EditProfile" method="POST">
+                                        <form class="form-horizontal" role="form" action="BookValet" method="POST">
 
                                             <div class="form-group">
                                                 <center><label for="input01" class="col-sm-2 control-label">Address</label></center>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input01" name="address" value="">
+                                                    <input type="text" class="form-control" id="input01" name="address" value="<%=address%>" readonly style="color:white">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <center><label for="input02" class="col-sm-2 control-label">Postal Code</label></center>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="postalCode" value="">
+                                                    <input type="text" class="form-control" id="input02" name="postalCode" value="<%=postal%>" readonly style="color:white">
                                                 </div>
                                             </div>
 
                                             <div class="notification">
-                                                <center><input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the terms and conditions</center>
+                                                <center><input type="checkbox" name="checkbox" id="agree" value="check" id="agree" /> <label for="agree">I have read and agree to the terms and conditions</label></center>
                                                 <!--                                                        <input type="submit" name="submit" value="submit" />-->
                                             </div>
 
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
+                                                <input type="hidden" name="offerId" value="<%=offerId%>">
+                                                <input type="hidden" name="workshopId" value="<%=workshopId%>">
+                                                <input type="hidden" name="serviceStartTime" value="<%=appointmentTime%>">
+                                                <input type="hidden" name="serviceEndTime" value="<%=serviceEndTime%>">
+                                                <input type="hidden" name="pickupTime" value="<%=pickupTime%>">
+                                                <input type="hidden" name="appointmentTime" value="<%=appointmentTime%>">
+                                                <input type="hidden" name="wsAddress" value="<%=wsAddress%>">
+                                                <input type="hidden" name="wsPostal" value="<%=wsPostal%>">
+                                                <input type="hidden" name="price" value="40">
                                                 <button type="submit" class="btn btn-primary">FIND VALET!</button>
                                                 <!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
                                             </div>

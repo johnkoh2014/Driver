@@ -35,57 +35,145 @@
                             <!-- col 12 -->
                             <div>
                                 <div class="alert alert-success" role="alert">
-                                    <h5 class="alert-heading"><center><strong>STATUS:</strong> AT WORKSHOP(Servicing Done)</center></h5>
-
+                                    <h5 class="alert-heading"><center><strong>STATUS:</strong> AT WORKSHOP<br/>(SERVICING COMPLETED)</center></h5>
                                 </div>
-
-
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">
-
-                                        <center><h1><strong>Your car is ready for collection!</strong></h1></center>
-
+                                        <div class="tile-widget">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-xs-12 text-right">
+                                                    <div class="btn-group btn-group-justified table-options desktopOnly">
+                                                        <ul class="nav nav-pills tabpager text-center">
+                                                            <li class="w45 active arrange-center"><a href="#offerDetails" data-toggle="pill">OFFER DETAILS</a></li>
+                                                            <li class="w45 arrange-center"><a href="#workshopProfile" data-toggle="pill">WORKSHOP PROFILE</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <!--end tile header-->
-                                    <div class="line-across"></div>
+
                                     <!-- /tile body -->
+
                                     <div class="tile-body">
+                                        <div class="tab-content">
+
+                                            <div class="tab-pane fade active in" id="offerDetails" >
+
+
+                                                <section class="tile color transparent-black">
+                                                    <div class="tile-header">
+
+                                                        <center><h1><strong>Your car is ready for collection!</strong></h1></center>
+
+                                                    </div>
+                                                    <!--end tile header-->
+                                                    <div class="line-across"></div>
+                                                    <!-- /tile body -->
+                                                    <div class="tile-body">
 
 
 
 
-                                        <div class="notification">
-                                            <div class="row">
-                                                <center><h1><strong></strong></h1></center>
-                                            </div>
-                                            <div class="row">
-                                                <center>
-                                                    <strong>Please proceed to collect your car at the workshop.</strong>
+                                                        <div class="notification">
+                                                            <div class="row">
+                                                                <center><h1><strong></strong></h1></center>
+                                                            </div>
+                                                            <div class="row">
+                                                                <center>
+                                                                    <strong>Please proceed to collect your car at the workshop.</strong>
 
-                                                </center>
-                                            </div>
-                                            <p> </p>
-                                            
-                                            <div class="row">
-                                                <center>
-                                                    11 JULY 2016, 1400HRS
-                                                </center>
-                                            </div>
-                                            <p></p>
-                                            <div class="row">                                               
-                                                <center>
-                                                    <b>Ah Huat Workshop Pte Ltd</b>                                     
-                                                </center>                                               
-                                            </div>
+                                                                </center>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <!--end tile body-->
+
+
+                                                </section>
+
+                                            </div><!--Requests-->
+
+
+
+                                            <div class="tab-pane fade " id="workshopProfile" >
+
+                                                <section class="tile color transparent-black">
+                                                    <div class="tile-header text-center">
+                                                        <h3>AH HUAT WORKSHOP PTE LTD</h3>
+                                                        <!--<a href="Booking.jsp" class="btn btn-warning" role="button">Book</a>-->
+                                                    </div>
+                                                    <!--end tile header-->
+                                                    <div class="line-across"></div>
+                                                    <!-- /tile body -->
+                                                    <div class="tile-body">
+
+                                                        <div class="row">
+                                                            <strong><center>Opening Hours</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                10am - 7pm (Mon - Sat), By Appt only (Sun). Closed on PHs.
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Address</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                328 Circuit Road S(379489)
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Providing Services</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                Maintenence, Repair and servicing
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Other Brands</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                GlassMechanix
+                                                            </center>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <strong><center>Website</center></strong>
+                                                        </div>
+                                                        <div class="row">
+                                                            <center>
+                                                                www.ahhuatworkshop.com.sg
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                    <!--end tile body-->
+
+                                                </section>
+
+
+                                            </div><!--workshopProfile-->
+
+
 
                                         </div>
 
-                                        
                                     </div>
                                     <!--end tile body-->
 
 
                                 </section>
+
                             </div>
                             <!-- /col 12 -->
                         </div>

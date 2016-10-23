@@ -82,7 +82,7 @@
                                                 <input type="hidden" name="type" value="<%=type%>">
                                                 <input type="hidden" name="id" value="<%=vid%>">
                                                 <button type="submit" class="btn btn-primary">Get Offers</button>
-                                                <button type="reset" class="btn btn-default">Reset</button>
+                                               
                                             </div>
                                             <!--end form footer-->
                                         </form>
