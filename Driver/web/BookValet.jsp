@@ -10,7 +10,7 @@
         <title>Book Valet</title>
         <jsp:include page="include/head.jsp"/>
     </head>
-    <body class="bg-3">
+    <body class="solid-bg-3">
 
         <!-- Preloader -->
         <div class="mask"><div id="loader"></div></div>

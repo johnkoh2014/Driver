@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%                        String o_id = request.getParameter("id");
+                    <%                        String o_id = (String)session.getAttribute("oId");
                         int offerId = 0;
                         if (o_id.length() > 0) {
                             offerId = Integer.parseInt(o_id);

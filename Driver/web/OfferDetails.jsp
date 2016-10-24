@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                     <!--end tile header-->
-                                    <%                                        String offerId = request.getParameter("id");
+                                    <%                                        String offerId = (String) session.getAttribute("oId");
                                         int oId = 0;
                                         if (offerId.length() > 0) {
                                             oId = Integer.parseInt(offerId);
@@ -100,7 +100,7 @@
                                                             <h5><%=serviceName%></h5>
                                                         </div>
                                                         <div class="margin-top-15 text-center">
-                                                            <a href="Booking.jsp?id=<%=offerId%>" class="btn btn-blue">BOOK AN APPOINTMENT</a>
+                                                            <a href="Booking.jsp" class="btn btn-blue">BOOK AN APPOINTMENT</a>
                                                         </div>
 
                                                     </div>
@@ -118,7 +118,7 @@
                                                             <h3><%=shopName%></h3>
                                                         </div>
                                                         <div>
-                                                            <a href="Booking.jsp?id=<%=offerId%>" class="btn btn-blue">BOOK AN APPOINTMENT</a>
+                                                            <a href="Booking.jsp" class="btn btn-blue">BOOK AN APPOINTMENT</a>
                                                         </div>
                                                         <!--end tile header-->
                                                     </div>

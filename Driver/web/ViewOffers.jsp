@@ -46,7 +46,7 @@
 
                                     </div>
                                     <!--end tile header-->
-                                    <%                                        String qr_Id = request.getParameter("id");
+                                    <%                                        String qr_Id = (String) session.getAttribute("qrId");
                                         int qrId = 0;
                                         if (qr_Id.length() > 0) {
                                             qrId = Integer.parseInt(qr_Id);
@@ -73,12 +73,12 @@
                                                     String maxPrice = max + "0";
                                                     int oId = offer.getId();
                                                     double dPrice = offer.getDiagnosticPrice();
-                                                            String diagnosticPrice = dPrice + "0";
+                                                    String diagnosticPrice = dPrice + "0";
 
-                                                            if (dPrice == 0.0) {%>
-                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Quotation Price: $<%=minPrice%> - $<%=maxPrice%></span><br/><i>Click to view profile and quote</i></a>
+                                                    if (dPrice == 0.0) {%>
+                                            <a href="ProcessViewOffers?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Quotation Price: $<%=minPrice%> - $<%=maxPrice%></span><br/><i>Click to view profile and quote</i></a>
                                                     <% } else {%>
-                                            <a href="OfferDetails.jsp?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Diagnostic Price: $<%=diagnosticPrice%></span><br/><i>Click to view profile and quote</i></a>
+                                            <a href="ProcessViewOffers?id=<%=oId%>" class="list-group-item"><b><%=shopName%></b><br/><span style="color:blue">Diagnostic Price: $<%=diagnosticPrice%></span><br/><i>Click to view profile and quote</i></a>
 
                                             <%
                                                         }

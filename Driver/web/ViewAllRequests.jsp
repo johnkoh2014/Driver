@@ -74,10 +74,10 @@
                                                         int noOffers = req.getNo_of_offers();
 
                                                         if (noOffers == 0) {%>
-                                            <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>No offer at the moment</i></a>
+                                            <a href="ProcessViewAllRequests?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>No offer at the moment</i></a>
 
                                             <%} else {%>
-                                            <a href="ViewOffers.jsp?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>There are <%=noOffers%> offers for your request</i></a>
+                                            <a href="ProcessViewAllRequests?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>There are <%=noOffers%> offers for your request</i></a>
 
                                             <%}
                                                     }

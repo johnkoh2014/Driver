@@ -143,7 +143,7 @@ public class BookValetServlet extends HttpServlet {
                 //add sms here
                 SmsNotification smsNotification = new SmsNotification();
                 smsNotification.smsForApptBooking(user.getName(), wsMobileNo, servName, serviceStartTime);
-                response.sendRedirect("MyAppointments.jsp");
+                response.sendRedirect("WaitingForValet.jsp");
             }
         }
     }
