@@ -37,17 +37,18 @@
                             <!-- col 12 -->
                             <div>
                                 <%
-                                    String vid = request.getParameter("vehicle");
-                                    session.setAttribute("vid", vid);
+                                    //String vid = request.getParameter("vehicle");
+//                                    String vid = (String)session.getAttribute("vid"); 
+//                                    session.setAttribute("vid", vid);
                                 %>
                                 <div class="list-group">
-                                    <a href="ServiceType.jsp?service=Maintenance&vehicle=<%=vid%>" class="list-group-item">Maintenance</a>
-                                    <a href="ServiceType.jsp?service=Tyre/Wheel Service&vehicle=<%=vid%>" class="list-group-item">Tyre/Wheel Service</a>
-                                    <a href="RequestSummary.jsp?service=Car Grooming&vehicle=<%=vid%>" class="list-group-item">Car Grooming</a>
-                                    <a href="RequestSummary.jsp?service=Air Conditioning&vehicle=<%=vid%>" class="list-group-item">Air Conditioning</a>
-                                    <a href="RequestSummary.jsp?service=Battery&vehicle=<%=vid%>" class="list-group-item">Battery</a>
-                                    <a href="RequestSummary.jsp?service=Others&vehicle=<%=vid%>" class="list-group-item">Others</a>
-                                </div>
+                                    <a href="ProcessService?service=Maintenance" class="list-group-item">Maintenance</a>
+                                    <a href="ProcessService?service=Tyre/Wheel Service" class="list-group-item">Tyre/Wheel Service</a>
+                                    <a href="ProcessService?service=Car Grooming" class="list-group-item">Car Grooming</a>
+                                    <a href="ProcessService?service=Air Conditioning" class="list-group-item">Air Conditioning</a>
+                                    <a href="ProcessService?service=Battery" class="list-group-item">Battery</a>
+                                    <a href="ProcessService?service=Others" class="list-group-item">Others</a>
+<!--                                   </div>
                             </div>
                             <!-- /col 12 -->
                         </div>

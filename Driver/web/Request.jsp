@@ -66,7 +66,8 @@
                                                     Vehicle vehicle = vList.get(i);
                                             %>
                                             <li>
-                                                <a href="Service.jsp?vehicle=<%=vehicle.getId()%>">
+                                                <!--<a href="Service.jsp?vehicle=<%=vehicle.getId()%>" id="<%=vehicle.getId()%>">-->
+                                                <a href="ProcessRequest?vehicle=<%=vehicle.getId()%>"/>
                                                     <div class="carItem">
                                                         <div class="col-xs-12 car">
                                                             <%=vehicle.getMake()%> <%=vehicle.getModel()%> 
@@ -123,7 +124,7 @@
         <script type="text/javascript" src="js/custom.js"></script>
 
         <script>
-            
+       
         </script>
     </body>
 </html>

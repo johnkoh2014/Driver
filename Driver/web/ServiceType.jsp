@@ -19,8 +19,8 @@
             <div class="row">
                 <%@include file="include/topbar.jsp"%>
                 <%
-                    String service = request.getParameter("service");
-                    String vid = request.getParameter("vehicle");
+                    String service = (String)session.getAttribute("service");
+                    String vid = (String)session.getAttribute("vid");
                 %>
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
@@ -32,8 +32,8 @@
                             <h1>GET OFFERS</h1>
                             <%if (service.equals("Maintenance")) {%>
                             <h5>What maintenance can we do for you?</h5>
-                            <%} else if (service.equals("Tyre / Wheel Service")) {%>
-                            <h5>Tyre / Wheel Service</h5>
+                            <%} else if (service.equals("Tyre/Wheel Service")) {%>
+                            <h5>Tyre/Wheel Service</h5>
                             <%}%>
 
                         </div>
@@ -47,16 +47,16 @@
                             <div>
                                 <div class="list-group">
                                     <%if (service.equals("Maintenance")) {%>
-                                    <a href="RequestSummary.jsp?service=Maintenance&type=General Maintenance&vehicle=<%=vid%>" class="list-group-item">General Maintenance</a>
-                                    <a href="RequestSummary.jsp?service=Maintenance&type=Oil and Filter Service&vehicle=<%=vid%>" class="list-group-item">Oil and Filter Service</a>
-                                    <a href="RequestSummary.jsp?service=Maintenance&type=Brake Services&vehicle=<%=vid%>" class="list-group-item">Brake Services</a>
-                                    <a href="RequestSummary.jsp?service=Maintenance&type=Fluids and Flushes&vehicle=<%=vid%>" class="list-group-item">Fluids and Flushes</a>
+                                    <a href="ProcessServiceType?type=General Maintenance" class="list-group-item">General Maintenance</a>
+                                    <a href="ProcessServiceType?type=Oil and Filter Service" class="list-group-item">Oil and Filter Service</a>
+                                    <a href="ProcessServiceType?type=Brake Services" class="list-group-item">Brake Services</a>
+                                    <a href="ProcessServiceType?type=Fluids and Flushes" class="list-group-item">Fluids and Flushes</a>
                                     <%} else if (service.equals("Tyre/Wheel Service")) {%>
-                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Change Tyre&vehicle=<%=vid%>" class="list-group-item">Change Tyre</a>
-                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Change Rims&vehicle=<%=vid%>" class="list-group-item">Change Rims</a>
-                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Tyre Rotation&vehicle=<%=vid%>" class="list-group-item">Tyre Rotation</a>
-                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Tyre Installation&vehicle=<%=vid%>" class="list-group-item">Tyre Installation</a>
-                                    <a href="RequestSummary.jsp?service=Tyre/Wheel Service&type=Others&vehicle=<%=vid%>" class="list-group-item">Others</a>
+                                    <a href="ProcessServiceType?type=Change Tyre" class="list-group-item">Change Tyre</a>
+                                    <a href="ProcessServiceType?type=Change Rims" class="list-group-item">Change Rims</a>
+                                    <a href="ProcessServiceType?type=Tyre Rotation" class="list-group-item">Tyre Rotation</a>
+                                    <a href="ProcessServiceType?type=Tyre Installation" class="list-group-item">Tyre Installation</a>
+                                    <a href="ProcessServiceType?type=Others" class="list-group-item">Others</a>
                                     <%}%>
                                 </div>
                             </div>

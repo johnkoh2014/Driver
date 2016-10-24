@@ -31,9 +31,12 @@
                     </div>
                     <!-- /page header -->
                     <%
-                        String service = request.getParameter("service");
-                        String type = request.getParameter("type");
-                        String vid = request.getParameter("vehicle");
+                        //String service = request.getParameter("service");
+                        //String type = request.getParameter("type");
+                        //String vid = request.getParameter("vehicle");
+                        String service = (String )session.getAttribute("service");
+                        String type = (String )session.getAttribute("type");
+                        String vid = (String )session.getAttribute("vid");
                         if (type == null) {
                             type = "";
                         }
