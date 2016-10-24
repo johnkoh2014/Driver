@@ -10,6 +10,15 @@ h2,h3,h4,h5,h6{
 }
 /*Fonts*/
 
+/*Breadcrumbs*/
+.pageheader .breadcrumbs ol.breadcrumb > li{
+    color: white;
+}
+.pageheader .breadcrumbs ol.breadcrumb > li.active {
+    color: rgba(255, 255, 255, 0.5); 
+}
+/*Breadcrumbs*/
+
 
 /*Dashboard Card(Ave rating)*/
 .card-container { position: relative; min-height: 80px; margin-bottom: 20px; }
@@ -475,5 +484,8 @@ body .mask #loader { background: url(../images/Loading_gif.gif)center center no-
         position: absolute;
         top: 0;
         left:40%;
+    }
+    .pageheader .breadcrumbs ol.breadcrumb > li{
+        font-size: 11px;
     }
 }

@@ -24,13 +24,20 @@
                 <div id="content" class="col-md-12">
                     <!-- page header -->
                     <div class="pageheader">
-
+                        <div class="breadcrumbs">
+                            <ol class="breadcrumb">
+                                <li><a href="ViewAllRequests.jsp">All Requests</a></li>
+                                <li><a href="ViewOffers.jsp">Offers</a></li>
+                                <li><a href="OfferDetails.jsp">Offer Details</a></li>
+                                <li>Booking</li>
+                            </ol>
+                        </div>
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>MY BOOKING</h1>
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%                        String o_id = (String)session.getAttribute("oId");
+                    <%                        String o_id = (String) session.getAttribute("oId");
                         int offerId = 0;
                         if (o_id.length() > 0) {
                             offerId = Integer.parseInt(o_id);
@@ -38,7 +45,7 @@
                         OfferDAO oDAO = new OfferDAO();
                         Offer offer = oDAO.retrieveOfferById(id, token, offerId);
                         int wId = offer.getWorkshopId();
-                    
+
                         String error = (String) request.getAttribute("fail");
                         if (error != null && error.length() > 0) {
                     %>

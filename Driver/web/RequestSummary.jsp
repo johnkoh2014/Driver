@@ -19,10 +19,29 @@
             <div class="row">
                 <%@include file="include/topbar.jsp"%>
                 <!-- Page content -->
+                <%                        //String service = request.getParameter("service");
+                    //String type = request.getParameter("type");
+                    //String vid = request.getParameter("vehicle");
+                    String service = (String) session.getAttribute("service");
+                    String type = (String) session.getAttribute("type");
+                    String vid = (String) session.getAttribute("vid");
+                    if (type == null) {
+                        type = "";
+                    }
+                %>
                 <div id="content" class="col-md-12">
                     <!-- page header -->
                     <div class="pageheader">
-
+                        <div class="breadcrumbs">
+                            <ol class="breadcrumb">
+                                <li><a href="Request.jsp">Select Vehicle</a></li>
+                                <li><a href="Service.jsp">Service</a></li>
+                                    <%if (service.equals("Maintenance") || service.equals("Tyre/Wheel Service")) {%>
+                                <li><a href="ServiceType.jsp.jsp">Service Type</a></li>
+                                    <%}%>
+                                <li>Request Summary</li>
+                            </ol>
+                        </div>
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>REQUEST SUMMARY</h1>
@@ -30,17 +49,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        //String service = request.getParameter("service");
-                        //String type = request.getParameter("type");
-                        //String vid = request.getParameter("vehicle");
-                        String service = (String )session.getAttribute("service");
-                        String type = (String )session.getAttribute("type");
-                        String vid = (String )session.getAttribute("vid");
-                        if (type == null) {
-                            type = "";
-                        }
-                    %>
+
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -85,7 +94,7 @@
                                                 <input type="hidden" name="type" value="<%=type%>">
                                                 <input type="hidden" name="id" value="<%=vid%>">
                                                 <button type="submit" class="btn btn-primary">Get Offers</button>
-                                               
+
                                             </div>
                                             <!--end form footer-->
                                         </form>

@@ -25,7 +25,14 @@
                 <div id="content" class="col-md-12">
                     <!-- page header -->
                     <div class="pageheader">
-
+                        <div class="breadcrumbs">
+                            <ol class="breadcrumb">
+                                <li>All Requests</li>
+                                <li class="active">Offers</li>
+                                <li class="active">Offer Details</li>
+                                <li class="active">Booking</li>
+                            </ol>
+                        </div>
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>ALL REQUESTS</h1>
@@ -61,19 +68,18 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <ul class="list-group">
-                                            <%                                                
-                                        if (qList == null || qList.size() == 0) {
+                                            <%                                                if (qList == null || qList.size() == 0) {
                                             %>
                                             <span style="color: white">You have no requests at the moment.</span>
                                             <%
-                                                } else {
-                                                    for (int i = 0; i < qList.size(); i++) {
-                                                        QuotationRequest req = qList.get(i);
-                                                        String qrName = req.getName();
-                                                        int qrId = req.getId();
-                                                        int noOffers = req.getNo_of_offers();
+                                            } else {
+                                                for (int i = 0; i < qList.size(); i++) {
+                                                    QuotationRequest req = qList.get(i);
+                                                    String qrName = req.getName();
+                                                    int qrId = req.getId();
+                                                    int noOffers = req.getNo_of_offers();
 
-                                                        if (noOffers == 0) {%>
+                                                    if (noOffers == 0) {%>
                                             <a href="ProcessViewAllRequests?id=<%=qrId%>" class="list-group-item"><b><%=qrName%></b><br/><i>No offer at the moment</i></a>
 
                                             <%} else {%>
