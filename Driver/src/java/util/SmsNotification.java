@@ -17,7 +17,8 @@ public class SmsNotification { //for workshops to receive
     String username = "Fixir"; //bulksms username
     String password = "fixir2016"; //bulksms password
     String senderId = "FIXIR"; //sender's name appearing on customer's mobile phone
-    String mobileTest = "";  //REMEMBER TO CHANGE ALL MOBILETEST TO MOBILE NO IN THE CODES BELOW 
+    String mobileTest = "90054906";  //this is desmond's number to be used for testing. 
+                            // REMEMBER TO CHANGE ALL MOBILETEST TO MOBILE NO IN THE CODES BELOW 
     
     //mobile number must all add "65" in front!!!
     //user:Fixir  
@@ -38,7 +39,7 @@ public class SmsNotification { //for workshops to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65" + mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("A customer has just booked an appointment on: " + apptDateTime + "%0aCustomer Name: "+ custName + "%0aService Description: " + servDesc,"ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -82,7 +83,7 @@ public class SmsNotification { //for workshops to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65" + mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Your customer, " + custName + " of vehicle number " + vNum + ", has just accepted your final quotation.","ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -126,7 +127,7 @@ public class SmsNotification { //for workshops to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65" + mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Your customer, " + custName + " of vehicle number " + vNum + ", has just rejected your final quotation.","ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
