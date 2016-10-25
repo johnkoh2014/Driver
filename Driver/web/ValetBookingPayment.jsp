@@ -55,7 +55,8 @@
                                             if (errorMsg != null) {
                                                 out.print(errorMsg);
                                                 out.print((String) session.getAttribute("token"));
-                                            } else {
+                                            } 
+                                            if(successMsg != null) {
                                                 out.print(successMsg);
                                             }
                                         %>

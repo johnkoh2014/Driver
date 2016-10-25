@@ -24,7 +24,9 @@
                     <div class="pageheader">
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
-
+                        <div class="margin-top-15 text-center" style="color:white">
+                            <h1>MY APPOINTMENTS</h1>
+                        </div>
                     </div>
                     <!-- /page header -->
 
@@ -35,7 +37,7 @@
                             <!-- col 12 -->
                             <div>
                                 <div class="alert alert-success" role="alert">
-                                    <h5 class="alert-heading"><center><strong>STATUS:</strong> AT WORKSHOP<br/>(SERVICING COMPLETED)</center></h5>
+                                    <h5 class="alert-heading"><center><strong>STATUS: </strong>AT WORKSHOP<br/>(SERVICING COMPLETED)</center></h5>
                                 </div>
                                 <section class="tile color transparent-black">
                                     <div class="tile-header">

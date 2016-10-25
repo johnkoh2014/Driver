@@ -21,14 +21,14 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <!-- page header -->
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li><a href="Request.jsp">Select Vehicle</a></li>
+                            <li>Service</li>
+                            <li class="active">Request Summary</li>
+                        </ol>
+                    </div>
                     <div class="pageheader">
-                        <div class="breadcrumbs">
-                            <ol class="breadcrumb">
-                                <li><a href="Request.jsp">Select Vehicle</a></li>
-                                <li>Service</li>
-                                <li class="active">Request Summary</li>
-                            </ol>
-                        </div>
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>GET OFFERS</h1>
@@ -45,7 +45,7 @@
                                 <%                                    //String vid = request.getParameter("vehicle");
 //                                    String vid = (String)session.getAttribute("vid"); 
 //                                    session.setAttribute("vid", vid);
-%>
+                                %>
                                 <div class="list-group">
                                     <a href="ProcessService?service=Maintenance" class="list-group-item">Maintenance</a>
                                     <a href="ProcessService?service=Tyre/Wheel Service" class="list-group-item">Tyre/Wheel Service</a>

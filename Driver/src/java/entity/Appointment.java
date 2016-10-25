@@ -21,25 +21,28 @@ public class Appointment {
     private ValetRequest toValet;
     private ValetRequest returnValet;
     private String shopName;
+    private int offerStatus;
     
-    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd,String shopName) {
+    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd,String shopName,int offerStatus) {
         this.id = id;
         this.shopId = shopId;
         this.appointmentStart = appointmentStart;
         this.appointmentEnd = appointmentEnd;
         this.shopName = shopName;
+        this.offerStatus = offerStatus;
     }
     
-    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, ValetRequest toValet, String shopName) {
+    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, ValetRequest toValet, String shopName,int offerStatus) {
         this.id = id;
         this.shopId = shopId;
         this.appointmentStart = appointmentStart;
         this.appointmentEnd = appointmentEnd;
         this.toValet = toValet;
         this.shopName = shopName;
+        this.offerStatus = offerStatus;
     }
     
-    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, ValetRequest toValet, ValetRequest returnValet,String shopName) {
+    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, ValetRequest toValet, ValetRequest returnValet,String shopName,int offerStatus) {
         this.id = id;
         this.shopId = shopId;
         this.appointmentStart = appointmentStart;
@@ -47,6 +50,7 @@ public class Appointment {
         this.toValet = toValet;
         this.returnValet = returnValet;
         this.shopName = shopName;
+        this.offerStatus = offerStatus;
     }
     
     public int getId() {
@@ -79,6 +83,14 @@ public class Appointment {
 
     public void setShopName(String shopName) {
         this.shopName = shopName;
+    }
+
+    public int getOfferStatus() {
+        return offerStatus;
+    }
+
+    public void setOfferStatus(int offerStatus) {
+        this.offerStatus = offerStatus;
     }
     
 }

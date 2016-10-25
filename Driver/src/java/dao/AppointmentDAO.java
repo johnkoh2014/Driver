@@ -378,12 +378,18 @@ public class AppointmentDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 shopName = attElement.getAsString();
             }
+            
+            attElement = obj.get("offer_status");
+            int offerStatus = 0;
+            if (attElement != null && !attElement.isJsonNull()) {
+                offerStatus = attElement.getAsInt();
+            }
 
             Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, carColor, carControl);
             ValetRequest toValet = null;
             Appointment appointment = null;
             if (valetOneId == 0) {
-                appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, shopName);
+                appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, shopName, offerStatus);
             } else {
                 toValet = new ValetRequest(valetOneId, vehicle, valetOnePickUpAddress, valetOnePickUpLat, valetOnePickUpLong, valetOneDropOffAddress,
                         valetOneDropOffLat, valetOneDropOffLong, valetOneScheduledPickUpTime, valetOneActualPickUpTime, valetOneCompletedTime, valetOnePrice, valetOneOfferId, valetOneStatus);
@@ -391,9 +397,9 @@ public class AppointmentDAO {
                 if (valetTwoId != 0) {
                     ValetRequest returnValet = new ValetRequest(valetTwoId, vehicle, valetTwoPickUpAddress, valetTwoPickUpLat, valetTwoPickUpLong, valetTwoDropOffAddress,
                             valetTwoDropOffLat, valetTwoDropOffLong, valetTwoScheduledPickUpTime, valetTwoActualPickUpTime, valetTwoCompletedTime, valetTwoPrice, valetTwoOfferId, valetTwoStatus);
-                    appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, returnValet, shopName);
+                    appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, returnValet, shopName,offerStatus);
                 } else {
-                    appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, shopName);
+                    appointment = new Appointment(id, shopId, appointmentStart, appointmentEnd, toValet, shopName, offerStatus);
                 }
                 if (appointment.getReturnValet() != null) {
                 }

@@ -11,6 +11,15 @@ h2,h3,h4,h5,h6{
 /*Fonts*/
 
 /*Breadcrumbs*/
+.breadcrumb{
+    background-color: transparent;
+}
+ol.breadcrumb > li{
+    color: white;
+}
+.breadcrumb>.active{
+    color: rgba(255, 255, 255, 0.5);
+}
 .pageheader .breadcrumbs ol.breadcrumb > li{
     color: white;
 }
@@ -445,6 +454,9 @@ input[type="tel"],
 input[type="color"] { 
     font-size: 16px; 
 }
+[class^="tile"][class*="transparent-"] .form-control {
+    font-size: 16px;
+}
 /*Input iphone no zoom*/
 
 body .navbar.navbar-default .navbar-collapse .nav.logout {
@@ -454,38 +466,82 @@ body .navbar.navbar-default .navbar-collapse .nav.logout {
 body .mask { background-color: white; width: 100%; height: 100%; position: fixed; z-index: 100000; top: -45px; padding-top: 45px; padding-bottom: 45px; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; }
 body .mask #loader { background: url(../images/Loading_gif.gif)center center no-repeat; height: 100%; width: 100%; top:0; left:0; margin: 0 auto;}
 
-@media screen and (max-width: 1024px){
-    #content{
-        padding-left: 25px !important;
-    }
-    #sidebar {
-        display:none;
-    }
+/*Mobile*/
+.mobile-device .navbar:not(.collapsed) .navbar-header{
+    width: 250px;
+}
+/*Mobile*/
 
-    body .navbar.navbar-default .navbar-collapse .nav.logout {
-        display: inline-block;
-        position: absolute;
-        top: 0;
-        margin: 0;
+
+@media screen and (max-width: 1024px){
+    /*    #content{
+            padding-left: 25px !important;
+        }*/
+    .navbar-nav.side-nav{
+        width: 250px;
     }
-    body .navbar.collapsed .navbar-collapse .nav.logout {
-        right: 10px;
+    .mobile-device .navbar:not(.collapsed) .navbar-header{
+        width: 250px;
     }
     body .mask #loader {
         background-size: 50% 50%;
+    }
+    body .navbar .navbar-nav.quick-actions{
+        right: 0px;
+    }
+
+    .pageheader .breadcrumbs ol.breadcrumb > li{
+        font-size: 11px;
+    }
+    body .navbar.navbar-default .navbar-collapse .nav .open .dropdown-menu.arrow:before{
+        right: 73px;
+        left: 134px;
+    }
+}
+
+@media screen and (max-width: 768px){
+
+
+}
+@media screen and (max-width: 667px){
+    .navbar-nav.side-nav{
+        width: 100%;
+    }
+    .mobile-device .navbar:not(.collapsed) .navbar-header{
+        width: 100%;
     }
     .mobile-brand{
         width: 20%;
         height: 45px;
         background: url(../images/Logo.png) no-repeat 50% 50%;
-        background-size: 80%;
+        background-size: 40%;
         display: inline-block;
         z-index: 9999;
         position: absolute;
         top: 0;
         left:40%;
     }
-    .pageheader .breadcrumbs ol.breadcrumb > li{
-        font-size: 11px;
+    body .navbar.navbar-default .navbar-collapse .nav.logout {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        margin: 0;
     }
+    #sidebar {
+        display:none;
+    }
+    body .navbar.collapsed .navbar-collapse .nav.logout {
+        right: 10px;
+    }
+}
+
+@media screen and (max-width: 479px){
+    .mobile-brand{
+        background-size: 80%;
+    }   
+    body .navbar.navbar-default .navbar-collapse .nav .open .dropdown-menu.arrow:before{
+        right: auto;
+        left: auto;
+    }
+    
 }

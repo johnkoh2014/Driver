@@ -66,7 +66,7 @@
                                                 if (aList == null || aList.size() == 0) {
                                             %>
                                             <span style="color: white">You have no bookings at the moment.</span>
-                                            
+
                                             <%
                                             } else {
                                                 for (Appointment appointment : aList) {
@@ -75,18 +75,20 @@
                                                     String sTime = start.substring(start.indexOf(" "));
                                                     String startTime = sTime.substring(0, sTime.lastIndexOf("."));
                                                     String shopName = appointment.getShopName();
+                                                    int offerStatus = appointment.getOfferStatus();
 
                                                     ValetRequest vr = appointment.getToValet();
                                                     String pickup = "";
                                                     String pickupDate = "";
                                                     String pickupTime = "";
                                                     String url = "#";
+                                                    int valetRequestStatus = 0;
                                                     if (vr != null) {
                                                         pickup = vr.getScheduledPickUpTime() + "";
                                                         pickupDate = pickup.substring(0, pickup.indexOf(" "));
                                                         String pTime = pickup.substring(pickup.indexOf(" "));
                                                         pickupTime = pTime.substring(0, pTime.lastIndexOf("."));
-                                                        
+                                                        valetRequestStatus = vr.getStatus();
                                                     }
 
                                                     ValetRequest returnVr = appointment.getReturnValet();
@@ -99,10 +101,24 @@
                                                         String pTime = returnPickup.substring(returnPickup.indexOf(" "));
                                                         returnPickupTime = pTime.substring(0, pTime.lastIndexOf("."));
                                                     }
+//                                                    if (valetRequestStatus == 1) {
+//                                                        url = "WaitingForValet.jsp";
+//                                                    } else if (valetRequestStatus == 2 || valetRequestStatus == 3 || valetRequestStatus == 4 || valetRequestStatus == 5) {
+//                                                        url = "ViewValetStatus.jsp";
+//                                                    } else if (valetRequestStatus == 6) {
+//                                                        if (offerStatus == 3 || offerStatus == 4) {
+//                                                            url = "WorkshopDiagnosis.jsp";
+//                                                        } else if (offerStatus == 5 || offerStatus == 6) {
+//                                                            url = "WorkshopStartServicing.jsp";
+//                                                        } else if (offerStatus == 7) {
+//                                                            url = "WorkshopCompleteServicing.jsp";
+//                                                        }
+//                                                    }
+
 
                                             %>
 
-                                            <a href="<%=url%>" class="list-group-item"><p><b><%=shopName%></b></p>
+                                            <a href="ProcessAppointments?valetRequestStatus=<%=valetRequestStatus%>&offerStatus=<%=offerStatus%>" class="list-group-item"><p><b><%=shopName%></b></p>
                                                 Service Date: <%=startDate%><br/>
                                                 Service Time: <%=startTime%><br/>
                                                 <p></p>

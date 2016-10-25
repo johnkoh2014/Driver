@@ -23,17 +23,17 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <!-- page header -->
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li><a href="ViewAllRequests.jsp">All Requests</a></li>
+                            <li><a href="ViewOffers.jsp">Offers</a></li>
+                            <li><a href="OfferDetails.jsp">Offer Details</a></li>
+                            <li><a href="Booking.jsp">Booking</a></li>
+                            <li>Valet</li>
+                            <li class="active">Confirm Valet</li>
+                        </ol>
+                    </div>
                     <div class="pageheader">
-                        <div class="breadcrumbs">
-                            <ol class="breadcrumb">
-                                <li><a href="ViewAllRequests.jsp">All Requests</a></li>
-                                <li><a href="ViewOffers.jsp">Offers</a></li>
-                                <li><a href="OfferDetails.jsp">Offer Details</a></li>
-                                <li><a href="Booking.jsp">Booking</a></li>
-                                <li>Valet</li>
-                                <li class="active">Confirm Valet</li>
-                            </ol>
-                        </div>
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>MY VALET BOOKING</h1>
                         </div>

@@ -24,17 +24,17 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <!-- page header -->
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li><a href="ViewAllRequests.jsp">All Requests</a></li>
+                            <li><a href="ViewOffers.jsp">Offers</a></li>
+                            <li><a href="OfferDetails.jsp">Offer Details</a></li>
+                            <li><a href="Booking.jsp">Booking</a></li>
+                            <li><a href="ValetForm.jsp">Valet</a></li>
+                            <li>Confirm Valet</li>
+                        </ol>
+                    </div>
                     <div class="pageheader">
-                        <div class="breadcrumbs">
-                            <ol class="breadcrumb">
-                                <li><a href="ViewAllRequests.jsp">All Requests</a></li>
-                                <li><a href="ViewOffers.jsp">Offers</a></li>
-                                <li><a href="OfferDetails.jsp">Offer Details</a></li>
-                                <li><a href="Booking.jsp">Booking</a></li>
-                                <li><a href="ValetForm.jsp">Valet</a></li>
-                                <li>Confirm Valet</li>
-                            </ol>
-                        </div>
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center">
                             <h2>Book Valet</h2>
@@ -117,7 +117,7 @@
                                             <div class="form-group">
                                                 <center><label for="input02" class="col-sm-2 control-label">Postal Code</label></center>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input02" name="postalCode" value="<%=postal%>" readonly style="color:white">
+                                                    <input type="text" class="form-control" id="input02" name="postal" value="<%=postal%>" readonly style="color:white">
                                                 </div>
                                             </div>
 

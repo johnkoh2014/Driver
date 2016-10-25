@@ -24,16 +24,17 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <!-- page header -->
+                    <div class="breadcrumbs margin-top-15">
+                        <ol class="breadcrumb transparent">
+                            <li>Select Vehicle</li>
+                            <li class="active">Service</li>
+                            <li class="active">Request Summary</li>
+                        </ol>
+                    </div>
                     <div class="pageheader">
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
-                        <div class="breadcrumbs">
-                            <ol class="breadcrumb">
-                                <li>Select Vehicle</li>
-                                <li class="active">Service</li>
-                                <li class="active">Request Summary</li>
-                            </ol>
-                        </div>
+
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>GET QUOTES</h1>
                         </div>

@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.HashMap"%>
@@ -73,6 +75,7 @@
                                         carBrands = list.get(1);
                                         carModels = list.get(2);
                                         carYears = list.get(3);
+                                        int maxYear = Calendar.getInstance().get(Calendar.YEAR);
                                     %>
                                     <!-- /tile body -->
                                     <div class="tile-body">
@@ -104,14 +107,7 @@
                                             <div class="form-group">
                                                 <label for="input03" class="col-sm-2 control-label">Year of Manufacture</label>
                                                 <div class="col-sm-10">
-                                                    <!--<input type="number" class="form-control" id="input03" name="manufactureYear" required>-->
-                                                    <select class="chosen-select chosen-transparent form-control" id="input03" name="manufactureYear">
-                                                        <%                                                            for (String s : carYears) {
-                                                                out.println("<option>" + s + "</option>");
-                                                            }
-
-                                                        %>
-                                                    </select>
+                                                    <input type="number" class="form-control" id="input03" name="manufactureYear" min="1996" max="<%=maxYear%>" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">

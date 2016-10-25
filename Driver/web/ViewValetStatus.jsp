@@ -30,10 +30,21 @@
                             <h1>MY APPOINTMENTS</h1>
                         </div>
                         <div class="row">
-                            <div class="alert alert-blue">
-                                <h5><center><strong>Status: </strong>On the way to pick up point.</center></h5>
-                                <h5><center><strong>Status: </strong>Reached up point.</center></h5>
-                                <h5><center><strong>Status: </strong>On the way to drop off point.</center></h5>
+                            <%                                    int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
+                                int offerStatus = (int) session.getAttribute("offerStatus");
+                                String status = "VALET JOB NOT STARTED";
+                                if (valetRequestStatus == 2) {
+                                    status = "VALET JOB NOT STARTED";
+                                } else if (valetRequestStatus == 3) {
+                                    status = "ON THE WAY TO PICK UP POINT";
+                                } else if (valetRequestStatus == 4) {
+                                    status = "REACHED PICK UP POINT";
+                                } else if (valetRequestStatus == 5) {
+                                    status = "ON THE WAY TO DROP OFF POINT";
+                                }
+                            %>
+                            <div class="alert alert-success">
+                                <h5><center><strong>STATUS: </strong><%=status%></center></h5>
                             </div>
                         </div>
                     </div>
@@ -154,7 +165,7 @@
                                                                 Maintenence, Repair and servicing
                                                             </center>
                                                         </div>
-                                                        
+
                                                         <div class="row">
                                                             <strong><center>Other Brands</center></strong>
                                                         </div>
@@ -163,7 +174,7 @@
                                                                 GlassMechanix
                                                             </center>
                                                         </div>
-                                                        
+
                                                         <div class="row">
                                                             <strong><center>Website</center></strong>
                                                         </div>

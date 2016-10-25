@@ -23,15 +23,15 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <!-- page header -->
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li><a href="ViewAllRequests.jsp">All Requests</a></li>
+                            <li><a href="ViewOffers.jsp">Offers</a></li>
+                            <li><a href="OfferDetails.jsp">Offer Details</a></li>
+                            <li>Booking</li>
+                        </ol>
+                    </div>
                     <div class="pageheader">
-                        <div class="breadcrumbs">
-                            <ol class="breadcrumb">
-                                <li><a href="ViewAllRequests.jsp">All Requests</a></li>
-                                <li><a href="ViewOffers.jsp">Offers</a></li>
-                                <li><a href="OfferDetails.jsp">Offer Details</a></li>
-                                <li>Booking</li>
-                            </ol>
-                        </div>
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>MY BOOKING</h1>
                         </div>

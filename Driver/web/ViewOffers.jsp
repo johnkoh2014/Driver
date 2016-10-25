@@ -26,15 +26,15 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <!-- page header -->
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li><a href="ViewAllRequests.jsp">All Requests</a></li>
+                            <li>Offers</li>
+                            <li class="active">Offer Details</li>
+                            <li class="active">Booking</li>
+                        </ol>
+                    </div>
                     <div class="pageheader">
-                        <div class="breadcrumbs">
-                            <ol class="breadcrumb">
-                                <li><a href="ViewAllRequests.jsp">All Requests</a></li>
-                                <li>Offers</li>
-                                <li class="active">Offer Details</li>
-                                <li class="active">Booking</li>
-                            </ol>
-                        </div>
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>ALL REQUESTS</h1>
