@@ -466,6 +466,43 @@ public class OfferDAO {
         return errMsg;
     }
 
+    public String confirmValetPayment(int user_id, String token, int request_id) throws UnsupportedEncodingException, IOException, ParseException {
+        String url = "http://119.81.43.85/erp/valet_request/confirm_valet_payment";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("request_id", request_id + ""));
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        System.out.println(errMsg);
+        return errMsg;
+    }
     public String[] retrieveLatLong(String address) throws Exception {
         int responseCode = 0;
         String api = "http://maps.googleapis.com/maps/api/geocode/xml?address=" + URLEncoder.encode(address, "UTF-8") + "&sensor=true";
@@ -491,5 +528,9 @@ public class OfferDAO {
             }
         }
         return null;
+    }
+    
+    public static void main(String[] args) throws IOException, UnsupportedEncodingException, ParseException {
+        //confirmValetPayment(409, "5deab3cea69ada808710eec3daf59cff593b3cb10d1d4a57eeef0001554130f76a977c9208b7a60f479c70340dd2569d93701630bb3e08969e8b0a5f324b71f0a78b429f54bbff351fda56a94eb589398cd742f298dd22d203ae2259fecde496bab5a2c12e9e19b086a52d997996b63bd7e49a63bf96214a9c0fc18d758b25f86666e7f44c56644bac5f13c4f8406a52208f7e89f624a2deaa61e8abec136ea47e1e7a7e828a766e4efd8d3ade0dc0854edcfa8023253d121c1845b882bde7ac3d3b1573a77e35d3c447f4ce26198b261a27425b8525ac54cb5d6ce9376e1ca367eafcda81f04b9ba0dc56333c2c187049aa887147a47161a8ed3d531eaca9591d157354bc6566b580f29b08850f2a5c0f7b7da30f28bacdb34c1127289f7f79cda92ad84882b5d070a47d5039502bb22e65ef63fa29a532094a931ec1d2decc3b4ed490a7669ea231c372f1f16a2a8d3d022711275c261ff2571850382000d5f24e1fabc24a2f15522523e40c749f74e4f52700735a79c6851d3dee4a9e20255a5f02493e92f7fba977aef673202f55cc6ef27dcac30a3a74bde3d3e23431ec119e74c3ceb05b91021811a3c485a67ba9f487955f20d95e102ebd557e817aecd9e7aebf1c600f0d6e2d86ef0996867217dc23371c6fc42032f612a3098094397b16cb6064bb18a1e645d91603bfd8be344b5aeaf6ae1cc58c293861588dac99", 3);
     }
 }
