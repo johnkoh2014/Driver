@@ -27,23 +27,11 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center">
-                            <h2>Valet Payment</h2>
+                            <h2>VALET PAYMENT</h2>
                         </div>
                     </div>
-                    <!-- /page header -->
-                    <%--
-                    <%
-                        
-                        String currentEmail = driver.getEmail();
-                        String newEmail = (String) request.getAttribute("newEmail");
-                        if (newEmail == null) {
-                            newEmail = "";
-                        }
-                        String hpNo = driver.getHandphone();
-                    %>
-                    --%>
-                    
-                    
+                    <!-- /page header -->                    
+
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -60,7 +48,7 @@
                                             <p><b>You will be notified shortly via SMS</b></p>                   
                                             <a href="MyAppointments.jsp" class="btn btn-primary" role="button">View All Appointments</a>
                                         </div>
-                                                             
+
                                     </div>
                                     <!--end tile body-->
 
@@ -91,7 +79,7 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
         <script src="js/minimal.min.js"></script>
 
         <script>

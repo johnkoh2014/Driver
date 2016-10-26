@@ -10,7 +10,7 @@ h1{
 }
 h2,h3,h4,h5,h6{
     font-family: "Ebrima REGULAR", "Roboto", "Arial", sans-serif;
-    color: rgba(255, 255, 255, 0.9);
+    -color: rgba(255, 255, 255, 0.9);
 }
 /*Fonts*/
 
@@ -450,6 +450,8 @@ input[type="color"] {
     font-size: 16px;
 }
 /*Input iphone no zoom*/
+
+
 .tile.color [class^="tile-"]{
     color: rgba(255, 255, 255, 0.9);
 }
@@ -515,6 +517,9 @@ body .mask #loader { background: url(../images/Loading_gif.gif)center center no-
     }
     body .navbar.collapsed .navbar-collapse .nav.logout {
         right: 10px;
+    }
+    #content{
+        padding-left: 25px !important;
     }
 
 }
