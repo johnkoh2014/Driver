@@ -1,24 +1,47 @@
 /*Fonts*/
 body{
     font-family: "Ebrima REGULAR", "Roboto", "Arial", sans-serif;
+    color: rgba(255, 255, 255, 0.9);
+    background-image: none;
 }
 h1{
     font-family: "Ebrima BOLD", "Roboto", "Arial", sans-serif;
+    color: rgba(255, 255, 255, 0.9);
 }
 h2,h3,h4,h5,h6{
     font-family: "Ebrima REGULAR", "Roboto", "Arial", sans-serif;
+    color: rgba(255, 255, 255, 0.9);
 }
 /*Fonts*/
+
+/*Navbar color*/
+.navbar-nav.side-nav > li.navigation .menu > li > a{
+    color: white;
+    font-size: 1.2rem;
+}
+.navbar-nav.side-nav > li.navigation .menu > li > a:hover{
+    background-color: #F27324;
+}
+.navbar-nav.side-nav.collapsed > li.navigation > ul > li > a:hover{
+    background-color: #F27324;
+}
+.navbar-nav.side-nav.collapsed > li.navigation > ul > li.hovered > a:after {  
+    background: #F27324; 
+}
+.navbar-nav.side-nav.collapsed > li.navigation > ul > li.hovered{
+    background-color: #F27324;
+}
+/*Navbar color*/
 
 /*Breadcrumbs*/
 .breadcrumb{
     background-color: transparent;
 }
 ol.breadcrumb > li{
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
 }
 .breadcrumb>.active{
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255,255,255,0.5);
 }
 .pageheader .breadcrumbs ol.breadcrumb > li{
     color: white;
@@ -28,29 +51,6 @@ ol.breadcrumb > li{
 }
 /*Breadcrumbs*/
 
-
-/*Dashboard Card(Ave rating)*/
-.card-container { position: relative; min-height: 80px; margin-bottom: 20px; }
-.card-container .card1 { height: 100%; position: relative; -webkit-perspective: 600px; -moz-perspective: 600px; perspective: 600px; width: 100%; -cursor: pointer; z-index: 9; }
-.card-container .card1 .front { height: 100%; position: relative; width: 100%; background-color: #f2f2f2; padding: 15px; min-height: 115px; top: 0; left: 0; z-index: 900; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05); -webkit-transform: rotateX(0deg) rotateY(0deg); -moz-transform: rotateX(0deg) rotateY(0deg); -ms-transform: rotateX(0deg) rotateY(0deg); -o-transform: rotateX(0deg) rotateY(0deg); transform: rotateX(0deg) rotateY(0deg); -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d; -ms-transform-style: preserve-3d; -o-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-backface-visibility: hidden; backface-visibility: hidden; /* -- transition is the magic sauce for animation -- */ -webkit-transition: all 0.4s ease-in-out; -moz-transition: all 0.4s ease-in-out; transition: all 0.4s ease-in-out; }
-.card-container .card1 .front .media { margin-bottom: 10px; }
-.card-container .card1 .front .media .media-object { font-size: 48px; margin-top: 5px; }
-.card-container .card1 .front .media .media-body small { font-size: 12px; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; font-weight: 300; }
-.card-container .card1 .front .media .media-body h2 { font-family: "Roboto", "Arial", sans-serif; font-weight: 400; }
-.card-container .card1 .front .progress-list .details .title { font-weight: 400; font-size: 11px; line-height: normal; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
-.card-container .card1 .front .progress-list .status { font-size: 9px; padding: 3px 6px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; }
-.card-container .card1 .front .progress-list .clearfix { height: 20px; }
-.card-container .card1 .front .progress-list .progress { margin-bottom: 0; }
-.card-container .card1.flip .front { z-index: 900; -webkit-transform: rotateY(180deg); -moz-transform: rotateY(180deg); -ms-transform: rotateY(180deg); -o-transform: rotateY(180deg); transform: rotateY(180deg); }
-.card-container .card1.card-slategray .front { color: white; background-color: #3f4e62; }
-.card-container .card1.card-slategray .back p { color: #3f4e62; }
-/*Dashboard Card(Ave rating)*/
-
-/*Dashboard Card Height*/
-.card-container .card .card-custom{
-    height: 125px;
-}
-/*Dashboard Card Height*/
 
 [class^="tile"].color table.table-custom1 > thead > tr > th, [class^="tile"].color table.table-custom1 > thead > tr > td { color: rgba(255, 255, 255, 0.6); }
 [class^="tile"].color table.table-custom1 > thead > tr > th:after, [class^="tile"].color table.table-custom1 > thead > tr > td:after { background-color: rgba(255, 255, 255, 0.3); }
@@ -101,11 +101,6 @@ ol.breadcrumb > li{
 .table.table-custom1 > tbody > tr:first-child > th, .table.table-custom1 > tbody > tr:first-child > td { border-top: 0; }
 
 
-body {
-    background: #fff;
-    background-image: none;
-}
-
 /*DateTimeForm*/
 .date{
     color: black;
@@ -151,10 +146,7 @@ ul.inbox {
     border: none; 
 }
 
-.navbar-nav.side-nav > li.navigation .menu > li > a {
-    color: white;
-    font-size: 1.2rem;
-}
+
 
 .modal-dialog-img{
     width: 80%;
@@ -458,6 +450,9 @@ input[type="color"] {
     font-size: 16px;
 }
 /*Input iphone no zoom*/
+.tile.color [class^="tile-"]{
+    color: rgba(255, 255, 255, 0.9);
+}
 
 body .navbar.navbar-default .navbar-collapse .nav.logout {
     display:none;
@@ -466,11 +461,6 @@ body .navbar.navbar-default .navbar-collapse .nav.logout {
 body .mask { background-color: white; width: 100%; height: 100%; position: fixed; z-index: 100000; top: -45px; padding-top: 45px; padding-bottom: 45px; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; }
 body .mask #loader { background: url(../images/Loading_gif.gif)center center no-repeat; height: 100%; width: 100%; top:0; left:0; margin: 0 auto;}
 
-/*Mobile*/
-.mobile-device .navbar:not(.collapsed) .navbar-header{
-    width: 250px;
-}
-/*Mobile*/
 
 
 @media screen and (max-width: 1024px){
@@ -499,12 +489,8 @@ body .mask #loader { background: url(../images/Loading_gif.gif)center center no-
     }
 }
 
-@media screen and (max-width: 768px){
-
-
-}
-@media screen and (max-width: 667px){
-    .navbar-nav.side-nav{
+@media screen and (max-width: 736px){
+    .mobile-device .navbar:not(.collapsed) .navbar-nav.side-nav{
         width: 100%;
     }
     .mobile-device .navbar:not(.collapsed) .navbar-header{
@@ -527,11 +513,17 @@ body .mask #loader { background: url(../images/Loading_gif.gif)center center no-
         top: 0;
         margin: 0;
     }
-    #sidebar {
-        display:none;
-    }
     body .navbar.collapsed .navbar-collapse .nav.logout {
         right: 10px;
+    }
+
+}
+@media screen and (max-width: 667px){
+    .navbar-nav.side-nav{
+        width: 100%;
+    }
+    #sidebar {
+        display:none;
     }
 }
 
@@ -543,5 +535,5 @@ body .mask #loader { background: url(../images/Loading_gif.gif)center center no-
         right: auto;
         left: auto;
     }
-    
+
 }

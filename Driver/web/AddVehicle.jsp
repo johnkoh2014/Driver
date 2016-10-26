@@ -34,7 +34,7 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center">
-                            <h2>Add New Car</h2>
+                            <h1>Add New Car</h1>
                         </div>
                     </div>
                     <!-- /page header -->
@@ -62,7 +62,7 @@
                             <!-- col 12 -->
                             <div>
 
-                                <section class="tile color transparent-black">
+                                <section class="tile color transparent-white">
                                     <div class="tile-header text-center">
                                     </div>
                                     <!--end tile header-->

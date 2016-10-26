@@ -35,7 +35,7 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
 
-                        <div class="margin-top-15 text-center" style="color:white">
+                        <div class="margin-top-15 text-center">
                             <h1>GET QUOTES</h1>
                         </div>
 

@@ -53,9 +53,9 @@ public class ProcessAppointmentsServlet extends HttpServlet {
             url = "WaitingForValet.jsp";
         } else if (valetRequestStatus == 2){
             url = "ValetAssigned.jsp";
-        }else if(valetRequestStatus == 3 || valetRequestStatus == 4 || valetRequestStatus == 5) {
+        }else if(valetRequestStatus == 3 || valetRequestStatus == 4 || valetRequestStatus == 5 || valetRequestStatus == 6) {
             url = "ViewValetStatus.jsp";
-        } else if (valetRequestStatus == 6) {
+        } else if (valetRequestStatus == 7) {
             if (offerStatus == 3 || offerStatus == 4) {
                 url = "WorkshopDiagnosis.jsp";
             } else if (offerStatus == 5 || offerStatus == 6) {
