@@ -1,3 +1,7 @@
+<%@page import="entity.ValetDriver"%>
+<%@page import="entity.ValetRequest"%>
+<%@page import="entity.Appointment"%>
+<%@page import="dao.AppointmentDAO"%>
 <%@page import="entity.Vehicle"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
@@ -42,7 +46,14 @@
                         String hpNo = driver.getHandphone();
                     %>
                     --%>
-
+                    <%
+                    int scheduleId = (int) session.getAttribute("scheduleId");
+                    AppointmentDAO aDAO = new AppointmentDAO();
+                    Appointment appointment = aDAO.getAppointmentById(id, token, scheduleId);
+                    ValetDriver vDriver = appointment.getValetDriver();
+                    String valetHp = vDriver.getHandphone();
+                    String valetName = vDriver.getName();
+                    %>
 
                     <!-- content main container -->
                     <div class="main">
@@ -54,7 +65,7 @@
                                 <section class="tile color transparent-black">
                                     <!-- /tile body -->
                                     <div class="tile-body">
-                                        <div class="notification text-center">           
+                                        <div class="text-center">           
                                             <h3><b>You have been assigned a Valet!</b></h3>   
                                             <p></p>
                                             Please proceed to make payment.
@@ -78,16 +89,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <center>
-                                                            Joshua
-                                                        </center>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <strong><center>Age</center></strong>
-                                                    </div>
-                                                    <div class="row">
-                                                        <center>
-                                                            24
+                                                            <%=valetName%>
                                                         </center>
                                                     </div>
 
@@ -96,7 +98,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <center>
-                                                            91112222
+                                                            <%=valetHp%>
                                                         </center>
                                                     </div>
 

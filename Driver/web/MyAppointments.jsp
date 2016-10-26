@@ -76,6 +76,7 @@
                                                     String startTime = sTime.substring(0, sTime.lastIndexOf("."));
                                                     String shopName = appointment.getShopName();
                                                     int offerStatus = appointment.getOfferStatus();
+                                                    int scheduleId = appointment.getId();
 
                                                     ValetRequest vr = appointment.getToValet();
                                                     String pickup = "";
@@ -89,6 +90,7 @@
                                                         String pTime = pickup.substring(pickup.indexOf(" "));
                                                         pickupTime = pTime.substring(0, pTime.lastIndexOf("."));
                                                         valetRequestStatus = vr.getStatus();
+                                                        url="ProcessAppointments?valetRequestStatus=" + valetRequestStatus + "&offerStatus=" + offerStatus + "&scheduleId=" + scheduleId;
                                                     }
 
                                                     ValetRequest returnVr = appointment.getReturnValet();
@@ -118,7 +120,7 @@
 
                                             %>
 
-                                            <a href="ProcessAppointments?valetRequestStatus=<%=valetRequestStatus%>&offerStatus=<%=offerStatus%>" class="list-group-item"><p><b><%=shopName%></b></p>
+                                            <a href="<%=url%>" class="list-group-item"><p><b><%=shopName%></b></p>
                                                 Service Date: <%=startDate%><br/>
                                                 Service Time: <%=startTime%><br/>
                                                 <p></p>

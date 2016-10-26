@@ -519,9 +519,9 @@ public class AppointmentDAO {
         return later;
     }
 
-    public Appointment getAppointmentByOfferId(int user_id, String token, int offer_id) throws UnsupportedEncodingException, IOException, ParseException {
+    public Appointment getAppointmentById(int user_id, String token, int schedule_id) throws UnsupportedEncodingException, IOException, ParseException {
         Appointment appointment = null;
-        String url = "http://119.81.43.85/erp/schedule/get_appointment_by_offer_id";
+        String url = "http://119.81.43.85/erp/schedule/get_appointment_by_id";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -532,7 +532,7 @@ public class AppointmentDAO {
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
         urlParameters.add(new BasicNameValuePair("token", token));
-        urlParameters.add(new BasicNameValuePair("offer_id", offer_id + ""));
+        urlParameters.add(new BasicNameValuePair("schedule_id", schedule_id + ""));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 

@@ -54,7 +54,7 @@
                                 <section class="tile color transparent-black">
                                     <!-- /tile body -->
                                     <div class="tile-body">
-                                        <div class="notification text-center">           
+                                        <div class="text-center">           
                                             <h3><b>Valet Request Sent!</b></h3>   
                                             We are searching for a valet driver for you.
                                             <p><b>You will be notified shortly via SMS</b></p>                   

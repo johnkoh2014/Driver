@@ -44,9 +44,15 @@ public class ProcessAppointmentsServlet extends HttpServlet {
         if (oStatus != null && oStatus.length() > 0) {
             offerStatus = Integer.parseInt(oStatus);
         }
+        String sId = request.getParameter("scheduleId");
+        int scheduleId = 0;
+        if (sId != null && sId.length() > 0) {
+            scheduleId = Integer.parseInt(sId);
+        }
 
         session.setAttribute("valetRequestStatus", valetRequestStatus);
         session.setAttribute("offerStatus", offerStatus);
+        session.setAttribute("scheduleId", scheduleId);
         
         String url = "MyAppointments.jsp";
         if (valetRequestStatus == 1) {
