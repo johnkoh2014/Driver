@@ -21,7 +21,7 @@ $(document).ready(function () {
                 if (screen.width <= 1024) {
                     $("#content").css("padding-left", "55px");
                 }
-                if (screen.width <= 667) {
+                if (screen.width <= 736) {
                     $(".mobile-brand").show();
                     $("#sidebar").hide();
                     $("body .navbar.navbar-default .navbar-collapse .nav.logout").show();
@@ -31,7 +31,7 @@ $(document).ready(function () {
                     $("#content").show();
                     $("#content").css("padding-left", "265px");
                 }
-                if (screen.width <= 667) {
+                if (screen.width <= 736) {
                     $("#content").hide();
                     $(".mobile-brand").hide();
                     $("#sidebar").show();

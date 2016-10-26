@@ -33,13 +33,13 @@
                             <%                                    int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
                                 int offerStatus = (int) session.getAttribute("offerStatus");
                                 String status = "VALET JOB NOT STARTED";
-                                if (valetRequestStatus == 2) {
+                                if (valetRequestStatus == 3) {
                                     status = "VALET JOB NOT STARTED";
-                                } else if (valetRequestStatus == 3) {
-                                    status = "ON THE WAY TO PICK UP POINT";
                                 } else if (valetRequestStatus == 4) {
-                                    status = "REACHED PICK UP POINT";
+                                    status = "ON THE WAY TO PICK UP POINT";
                                 } else if (valetRequestStatus == 5) {
+                                    status = "REACHED PICK UP POINT";
+                                } else if (valetRequestStatus == 6) {
                                     status = "ON THE WAY TO DROP OFF POINT";
                                 }
                             %>

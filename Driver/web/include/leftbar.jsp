@@ -1,5 +1,5 @@
 
-<ul class="nav navbar-nav side-nav" id="sidebar">
+<ul class="nav navbar-nav side-nav navbar-custom" id="sidebar">
 
     <li class="collapsed-content"> 
         <ul>
@@ -8,8 +8,8 @@
     </li>
 
     <li class="navigation" id="navigation">
-        <a href="#" class="sidebar-toggle" data-toggle="#navigation">Navigation <i class="fa fa-angle-up"></i></a>
-
+        <!--<a href="#" class="sidebar-toggle" data-toggle="#navigation">Navigation <i class="fa fa-angle-up"></i></a>-->
+        
         <ul class="menu"> 
             <li>
                 <a href="Request.jsp">
