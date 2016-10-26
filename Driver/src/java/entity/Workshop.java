@@ -31,7 +31,16 @@ public class Workshop {
     private String brandsCarried;
     private String remark;
     private int status;
-
+    
+    public Workshop(int id, String name, String openingHour, String address, String category, String brandsCarried, String website) {
+        this.name = name;
+        this.address = address;
+        this.id = id;
+        this.brandsCarried = brandsCarried;
+        this.website = website;
+        this.openingHour = openingHour;
+        this.category = category;
+    }
     public Workshop(int id, String email, String name, String description, String website, String address, String openingHour,
             String openingHourFormat, double latitude, double longitude, String contact, String contact2, String location,
             String specialize, String category, String brandsCarried, String remark, int status) {

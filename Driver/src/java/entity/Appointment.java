@@ -18,10 +18,15 @@ public class Appointment {
     private int shopId;
     private Timestamp appointmentStart;
     private Timestamp appointmentEnd;
+    private String appointmentTitle;
     private ValetRequest toValet;
     private ValetRequest returnValet;
     private String shopName;
     private int offerStatus;
+    private ValetDriver valetDriver;
+    private Workshop workshop;
+    private double serviceFinalPrice;
+    private Timestamp serviceEstCompleteTime;
     
     public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd,String shopName,int offerStatus) {
         this.id = id;
@@ -53,6 +58,18 @@ public class Appointment {
         this.offerStatus = offerStatus;
     }
     
+    public Appointment(int id, Timestamp appointmentStart, Timestamp appointmentEnd, String appointmentTitle, ValetRequest toValet, ValetDriver valetDriver, Workshop workshop, double serviceFinalPrice, Timestamp serviceEstCompleteTime) {
+        this.id = id;
+        this.appointmentStart = appointmentStart;
+        this.appointmentEnd = appointmentEnd;
+        this.appointmentTitle = appointmentTitle;
+        this.toValet = toValet;
+        this.valetDriver = valetDriver;
+        this.workshop = workshop;
+        this.serviceFinalPrice = serviceFinalPrice;
+        this.serviceEstCompleteTime = serviceEstCompleteTime;
+    }
+        
     public int getId() {
         return id;
     }

@@ -47,6 +47,24 @@ public class ValetRequest {
         this.offerId = offerId;
         this.status = status;  
     }
+    
+    public ValetRequest(int id, String pickUpAddress, double pickUpLatitude, double pickUpLongitude, String dropOffAddress, 
+            double dropOffLatitude, double dropOffLongitude, Timestamp scheduledPickUpTime, Timestamp actualPickUpTime, Timestamp completedTime, double price, int offerId, int status) {
+        this.id = id;
+        //this.serviceType = serviceType;
+        this.pickUpAddress = pickUpAddress;
+        this.pickUpLatitude = pickUpLatitude;
+        this.pickUpLongitude = pickUpLongitude;
+        this.dropOffAddress = dropOffAddress;
+        this.dropOffLatitude = dropOffLatitude;
+        this.dropOffLongitude = dropOffLongitude;
+        this.scheduledPickUpTime = scheduledPickUpTime;
+        this.actualPickUpTime = actualPickUpTime;
+        this.completedTime = completedTime;
+        this.price = price;
+        this.offerId = offerId;
+        this.status = status;  
+    }
 
     
     public int getId() {
