@@ -466,6 +466,43 @@ public class OfferDAO {
         return errMsg;
     }
 
+    public String rejectFinalQuotation(int user_id, String token, int offer_id) throws UnsupportedEncodingException, IOException, ParseException {
+        String url = "http://119.81.43.85/quotation_request/offer_declined";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("offer_id", offer_id + ""));
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
+    }
+
     public String confirmValetPayment(int user_id, String token, int request_id) throws UnsupportedEncodingException, IOException, ParseException {
         String url = "http://119.81.43.85/erp/valet_request/confirm_valet_payment";
 

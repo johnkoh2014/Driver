@@ -6,10 +6,14 @@
 package servlet;
 
 import dao.OfferDAO;
+import dao.WorkshopDAO;
 import entity.Driver;
+import entity.Offer;
+import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.SmsNotification;
 
 /**
  *
@@ -38,7 +43,7 @@ public class ProcessFinalQuoteServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, UnsupportedEncodingException, ParseException {
+            throws ServletException, IOException, UnsupportedEncodingException, ParseException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
         String status = request.getParameter("accept");
@@ -48,15 +53,44 @@ public class ProcessFinalQuoteServlet extends HttpServlet {
         Driver user = (Driver) session.getAttribute("loggedInUser");
         int userId = user.getId();
         String token = user.getToken();
-        String error = oDAO.acceptFinalQuotation(userId, token, offerId);
-        if (error.length() > 0) {
-                request.setAttribute("fail", error);
+        
+        //to retrieve details for sms
+        Offer offer = oDAO.retrieveOfferById(userId, token, offerId);
+        int workshopId = offer.getWorkshopId();
+        WorkshopDAO wsDAO = new WorkshopDAO();
+        Workshop ws = wsDAO.retrieveWorkshop(workshopId, userId, token);
+        String mobileNo = ws.getContact2();
+       
+        String custName = user.getName();
+        
+        String vNum = offer.getVehicle().getPlateNumber();
+        
+        
+        if(status.equals("accept")){
+            String error = oDAO.acceptFinalQuotation(userId, token, offerId);
+            if (error.length() > 0) {
+                    request.setAttribute("fail", error);   
+                    RequestDispatcher view = request.getRequestDispatcher("WorkshopDiagnosis.jsp");
+                    view.forward(request, response);
+                } else {
+                    session.setAttribute("success", "Final Quotation Accepted");
+                    SmsNotification smsNotification = new SmsNotification();
+                    smsNotification.smsForAcceptFinal(custName, mobileNo, vNum);
+                    response.sendRedirect("WorkshopStartServicing.jsp");
+                }
+        } else {
+            String error = oDAO.rejectFinalQuotation(userId, token, offerId);
+            if (error.length() > 0) {
+                request.setAttribute("fail", error);   
                 RequestDispatcher view = request.getRequestDispatcher("WorkshopDiagnosis.jsp");
                 view.forward(request, response);
             } else {
-                session.setAttribute("success", "Final Quotation Accepted");
-                response.sendRedirect("WorkshopStartServicing.jsp");
+                session.setAttribute("success", "Final Quotation Rejected");
+                SmsNotification smsNotification = new SmsNotification();
+                smsNotification.smsForRejectFinal(custName, mobileNo, vNum);
+                response.sendRedirect("Request.jsp");
             }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,6 +109,8 @@ public class ProcessFinalQuoteServlet extends HttpServlet {
             processRequest(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(ProcessFinalQuoteServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProcessFinalQuoteServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -92,6 +128,8 @@ public class ProcessFinalQuoteServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
+            Logger.getLogger(ProcessFinalQuoteServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(ProcessFinalQuoteServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
