@@ -35,7 +35,7 @@ import org.apache.http.message.BasicNameValuePair;
  */
 public class VehicleDAO {
 
-    private final String USER_AGENT = "Mozilla/5.0";
+    private static final String USER_AGENT = "Mozilla/5.0";
 
     public Vehicle getVehicle(int user_id, String token, int givenId) throws UnsupportedEncodingException, IOException {
 
@@ -348,12 +348,22 @@ public class VehicleDAO {
                     errors.add(f);
                 }
             }
+        } else {
+            JsonElement ele = jobj.get("payload");
+            JsonObject obj = ele.getAsJsonObject();
+            JsonElement attElement = obj.get("id");
+            String id = "";
+            if (!attElement.isJsonNull()) {
+                id = attElement.getAsString();
+                errors.add(id);
+            }
         }
         return errors;
     }
 
     public static void main(String[] args) throws IOException {
         //getVehicle(18, "cb2341be42e49a320f0dbba633e242254956ca9bb800485c757a6e37284fc9693c28a333b39df2791c5a8f88fe136c4060fb65814c807c7cc7acc897a529fc6d22ca19d35ee58820a3571eda94eae9c7c8ca3d76e7501e7df79840f3ede675f0b042cf09ca4e0dfe3ef7a21a4ea49bb0ae14225354831375b78acc64b0bdb6088b9693747d3e145715caa1f3e0dac23bf5190c37ef119f300a3ca1ac0ab18dd9a39c244e1fe7aeab8ad409e365d35a95a01ed3f2467b94fc97aadc2e4cb75482c517edb9e542387fa205b5549d89cae8463bf446cbb4c92b725cd99da45109badf09f2abd13c0d54143f3071186640a7fb1f100b849e5f6c6e1fbcbfa91a1ccec982b106d80b3d21a011f75e82ca16cb7f5d820374e1fd074b5373a367d1cf4c49668b790c3b761df624862302c78acd282c1f3d36eedb98e3d33bcf0b2ed2285490f953e0c588f65a893f07dbd49fbbe4211f898c23b3713358bbe00c0d0574a95256a5bfec7ae42a12f4df75a359fd7dd44d2c72430bb0426e1429fc5e9dad491e8cdb520d0f61b271efde9fe74a24baf208c542bdd49d9eab9a6d3eb836468b7c295d3d9792398b1287c86dd5fb59427cf8e038f1b2643e1dda27b9f4ac99fddf0af3b942d34b2f3b8d36c07b2552fdba09c535162e7eabfb80291f5b6e0087dfe5fcabf9a1384ca93d81923773ce6fd28e1efec778c656e7f379af9b994f", 1);
+        //addVehicle("temp2", "temp2", 1233, 337, "1234", "1c21fa2b0e16cc95e4f3c837b36c812d9588e465a2d770c77b73c9e4744cb60fff61accec3ad0b37e649adf08fe551f4d4c70eff4e9233922ac4c256428589e696f055593e3393fbd2f335358985f815d7f984055b8ff2d977482dfc0bf4c915057b819fb6079edef02a88bde1d3241b7dfaaaf7bac9d4a74a3deb4ef838ac0529026ec97f88ab379a2e0c15340a857a775b0ac7f59b7a74586131084e1cbf66764f37a479e8621bd788d95c4d1f6d82a7ea2fa760a482cdf8b6f593f3d742a073b71a219197f49122fc1784fa4f4b7ed84371d33b4bf2e25a3dfa23a2b1501cf35b5434cb0a1678a7053efa43b0a533bcd288b3134cf0f81cae2f43e8ff14d72579f90a6ca86014ceab4992b5d352bb24bdc570ab8eabcfcd35b46a6c023df46bce56d51ea582d30da14bc84928d346346f1c93312fbd3ee784024f05da80a59ba8f9b733962b30165780af8697f3399a9994eac0c170029308efa00be5d0343e80c5390f3d91d82380003beea5d51b770e0a03c706c4f9ffec142c15f2a6de6cd392f3aa11b4cab14814205471e4abe371e3843aae412321fb8cde228eb66dfe812585f3324e192289a405e59297d7e1d9301bf49328f174a0e4b90df82064075b43d3c2539b3c09ff2f24d9dbbe00f913170696c912a84fef61563cc5f2b5e0a6b858441db2bb26b23ebeb1947ab235d9149e5eb46d09d154024d0c8a217a", "blue", "auto");
     }
 
     public ArrayList<String> editVehicle(int id, String make, String model, int year, int user_id, String plate_number,

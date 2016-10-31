@@ -33,7 +33,7 @@ public class DriverDAO {
 
     private final String USER_AGENT = "Mozilla/5.0";
 
-    public ArrayList<String> addDriver(String name, String email, String password, String handphone) throws UnsupportedEncodingException, IOException {
+    public ArrayList<String> addDriver(String name, String email, String password, String handphone, String nric) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/user/signup";
 
         HttpClient client = new DefaultHttpClient();
@@ -47,6 +47,7 @@ public class DriverDAO {
         urlParameters.add(new BasicNameValuePair("password", password));
         urlParameters.add(new BasicNameValuePair("email", email));
         urlParameters.add(new BasicNameValuePair("handphone", handphone));
+        urlParameters.add(new BasicNameValuePair("nric", nric));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -145,6 +146,12 @@ public class DriverDAO {
                 handphone = attElement.getAsString();
             }
 
+            String nric = "";
+            attElement = user.get("nric");
+            if (attElement != null && !attElement.isJsonNull()) {
+                nric = attElement.getAsString();
+            }
+
             String token = "";
             attElement = user.get("token");
             if (attElement != null && !attElement.isJsonNull()) {
@@ -203,12 +210,12 @@ public class DriverDAO {
                 vList.add(vehicle);
             }
 
-            driver = new Driver(id, name, email, password, handphone, token, vList);
+            driver = new Driver(id, name, email, password, handphone, nric, token, vList);
         }
         return driver;
     }
-    
-    public String updateDriver(int user_id, String token, String nName, String nMobile) throws UnsupportedEncodingException, IOException {
+
+    public ArrayList<String> updateDriver(int user_id, String token, String nName, String nMobile, String nric) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/user/edit_profile";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -221,6 +228,7 @@ public class DriverDAO {
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("nName", nName));
         urlParameters.add(new BasicNameValuePair("nMobile", nMobile));
+        urlParameters.add(new BasicNameValuePair("nric", nric));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -238,12 +246,30 @@ public class DriverDAO {
         JsonParser jsonParser = new JsonParser();
         JsonElement element = jsonParser.parse(str);
         JsonObject jobj = element.getAsJsonObject();
-        JsonElement errMsgEle = jobj.get("error_message");
-        String errMsg = "";
-        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
-            errMsg = errMsgEle.getAsString();
+        ArrayList<String> errors = new ArrayList<String>();
+        JsonElement isSuccess = jobj.get("is_success");
+//        JsonElement errMsgEle = jobj.get("error_message");
+        String errorMessage = "";
+//        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+//            errMsg = errMsgEle.getAsString();
+//        }
+        if (isSuccess.getAsString().equals("false")) {
+            errorMessage = jobj.get("error_message").getAsString();
+            errors.add(errorMessage);
+            JsonElement fields = jobj.get("payload");
+            JsonArray arr;
+            if (!fields.isJsonNull()) {
+                arr = fields.getAsJsonObject().get("error_field").getAsJsonArray();
+
+                for (int i = 0; i < arr.size(); i++) {
+                    String f = arr.get(i).getAsString();
+                    errors.add(f);
+                }
+            }
         }
-        return errMsg;
+
+        return errors;
+        //return errMsg;
     }
 
     public boolean updateUserPassword(int user_id, String token, String currentPassword, String newPassword) throws UnsupportedEncodingException, IOException {
@@ -283,7 +309,7 @@ public class DriverDAO {
             return true;
         }
     }
-    
+
     public static void main(String[] args) throws IOException {
         //authenticateUser("james@james.com", "12345678");
     }

@@ -17,15 +17,17 @@ public class Driver {
     private String email;
     private String password;
     private String handphone;
+    private String nric; 
     private ArrayList<Vehicle> vehicles;
     private String token;
 
-    public Driver(int id, String name, String email, String password, String handphone, String token, ArrayList<Vehicle> vehicles) {
+    public Driver(int id, String name, String email, String password, String handphone, String nric, String token, ArrayList<Vehicle> vehicles) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.handphone = handphone;
+        this.nric = nric;
         this.token = token;
         this.vehicles = vehicles;
     }
@@ -85,6 +87,14 @@ public class Driver {
 
     public void setToken(String token) {
         this.token = token;
+    }
+    
+    public String getNric() {
+        return nric;
+    }
+
+    public void setNric(String nric) {
+        this.nric = nric;
     }
     
 }

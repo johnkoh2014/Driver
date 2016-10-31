@@ -44,7 +44,9 @@ public class EditProfileServlet extends HttpServlet {
         String email = request.getParameter("email").trim();
         String name = request.getParameter("name").trim();
         String hpNo = request.getParameter("hpNo").trim();
-
+        String nric = request.getParameter("nric").trim();
+        ArrayList<String> errors = new ArrayList<String>();
+        
         Validation validation = new Validation();
         String errMsg = validation.isValidMobileContact(hpNo);
 
@@ -56,20 +58,22 @@ public class EditProfileServlet extends HttpServlet {
             int id = user.getId();
 
             String token = user.getToken();
-            String error = dDAO.updateDriver(id, token, name, hpNo);
-            if (error == null || error.length() == 0) {
+            errors = dDAO.updateDriver(id, token, name, hpNo, nric);
+            if (errors == null || errors.size() == 0) {
                 session.setAttribute("success", "Successfully edited profile");
                 user.setName(name);
                 user.setHandphone(hpNo);
+                user.setNric(nric);
                 session.setAttribute("loggedInUser", user);
                 response.sendRedirect("Profile.jsp");
             } else {
-                request.setAttribute("fail", error);
+                request.setAttribute("fail", errors);
                 RequestDispatcher view = request.getRequestDispatcher("EditProfile.jsp");
                 view.forward(request, response);
             }
         } else {
-            request.setAttribute("fail", errMsg);
+            errors.add(errMsg);
+            request.setAttribute("fail", errors);
             RequestDispatcher view = request.getRequestDispatcher("EditProfile.jsp");
             view.forward(request, response);
         }

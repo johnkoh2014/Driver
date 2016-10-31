@@ -56,18 +56,22 @@ public class AddVehicleServlet extends HttpServlet {
         String token = user.getToken(); 
         
         ArrayList<String> errorMsg = vDAO.addVehicle(carMake, carModel, manufactureYear, user_id, plateNumber, token, carColor, transmission);
-        
-        if (errorMsg == null || errorMsg.isEmpty()) {
-//            Vehicle vehicle = new Vehicle(user_id, token, token, user_id, plateNumber, user_id, carColor, token);
-//            (int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control)
-            session.setAttribute("success", carMake + " " + carModel + " added");
-            response.sendRedirect("Request.jsp");
+        int vid = 0;
+        if (errorMsg.size() == 1) {
+            try {
+                vid = Integer.parseInt(errorMsg.get(0));
+                session.setAttribute("vid", vid);
+                response.sendRedirect("Service.jsp");
+            } catch (NumberFormatException e) {
+                request.setAttribute("errMsg", errorMsg);
+                RequestDispatcher view = request.getRequestDispatcher("AddVehicle.jsp");
+                view.forward(request, response);
+            }
         } else {
             request.setAttribute("errMsg", errorMsg);
-            RequestDispatcher view = request.getRequestDispatcher("Request.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("AddVehicle.jsp");
             view.forward(request, response);
         }
-
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

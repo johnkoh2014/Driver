@@ -45,6 +45,11 @@
                             if (handphone == null || handphone.equals("null")) {
                                 handphone = "";
                             }
+                            
+                            String nric = (String) request.getAttribute("nric");
+                            if (nric == null || nric.equals("null")) {
+                                nric = "";
+                            }
                             ArrayList<String> errMsg = (ArrayList<String>) request.getAttribute("err");
                             if (errMsg != null && errMsg.size() > 0) {
                         %>
@@ -76,7 +81,11 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="handphone" value="<%=handphone%>" placeholder="Handphone Number">
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-                                </div>    
+                                </div> 
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="nric" placeholder="NRIC">
+                                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                                </div>
                                 <div class="input-group">
                                     <input type="password" class="form-control" name="password" placeholder="Password">
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>

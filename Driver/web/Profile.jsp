@@ -37,6 +37,7 @@
                         VehicleDAO vDAO = new VehicleDAO();
                         ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
                         String handphone = driver.getHandphone();
+                        String nric = driver.getNric();
 //                        ArrayList<Vehicle> vList = driver.getVehicles();
 
                     %>
@@ -85,6 +86,13 @@
                                                 <label for="input03" class="col-sm-2 control-label">Mobile Number</label>
                                                 <div class="col-sm-10">
                                                     <input type="tel" class="form-control" id="input03" name="hpNo" value="<%=handphone%>" style="color:white" readonly>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="form-group">
+                                                <label for="input04" class="col-sm-2 control-label">NRIC</label>
+                                                <div class="col-sm-10">
+                                                    <input type="tel" class="form-control" id="input04" name="nric" value="<%=nric%>" style="color:white" readonly>
                                                 </div>
                                             </div>
 

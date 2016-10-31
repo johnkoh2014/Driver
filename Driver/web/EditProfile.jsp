@@ -38,6 +38,7 @@
                             newEmail = "";
                         }
                         String hpNo = driver.getHandphone();
+                        String nric = driver.getNric();
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -52,10 +53,18 @@
                                     </div>
                                     <!--end tile header-->
                                     <%
-                                        String msg = (String) request.getAttribute("fail");
-                                        if (msg != null && msg.length() > 0) {
+                                        ArrayList<String> msg = (ArrayList<String>) request.getAttribute("fail");
+                                        if (msg != null && msg.size() > 0) {
                                     %>
-                                    <div class="alert alert-danger"></div>
+                                    <div class="alert alert-danger">
+                                        <%
+                                            for (String e : msg) {
+                                        %>
+                                        <li><%=e%></li>
+                                        <%
+                                            }
+                                        %>
+                                    </div>
                                     <%
                                         }
                                     %>
@@ -85,6 +94,12 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group">
+                                                <label for="input04" class="col-sm-2 control-label">NRIC *</label>
+                                                <div class="col-sm-10">
+                                                    <input type="tel" class="form-control" id="input04" name="nric" value="<%=nric%>" required>
+                                                </div>
+                                            </div>
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
