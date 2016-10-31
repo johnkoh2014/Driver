@@ -89,7 +89,7 @@
                                                         String pTime = pickup.substring(pickup.indexOf(" "));
                                                         pickupTime = pTime.substring(0, pTime.lastIndexOf("."));
                                                         valetRequestStatus = vr.getStatus();
-                                                        url="ProcessAppointments?valetRequestStatus=" + valetRequestStatus + "&offerStatus=" + offerStatus + "&scheduleId=" + scheduleId;
+                                                        url = "ProcessAppointments?valetRequestStatus=" + valetRequestStatus + "&offerStatus=" + offerStatus + "&scheduleId=" + scheduleId;
                                                     }
 
                                                     ValetRequest returnVr = appointment.getReturnValet();
@@ -175,16 +175,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

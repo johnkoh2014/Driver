@@ -49,17 +49,16 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
 
-                                        <%                                            
-                                            String errorMsg = (String) session.getAttribute("errorMsg");
-                                            String successMsg = (String)session.getAttribute("successMsg");
+                                        <%                                            String errorMsg = (String) session.getAttribute("errorMsg");
+                                            String successMsg = (String) session.getAttribute("successMsg");
                                             if (errorMsg != null) {
                                                 out.print(errorMsg);
                                                 out.print((String) session.getAttribute("token"));
-                                            } 
-                                            if(successMsg != null) {
+                                            }
+                                            if (successMsg != null) {
                                                 out.print(successMsg);
                                             }
-                                            int requestId = (int)session.getAttribute("requestId");
+                                            int requestId = (int) session.getAttribute("requestId");
                                         %>
                                         <!--<form class="form-horizontal" id="payment-form" role="form" action="PaymentServlet" method="POST">-->
                                         <form class="form-horizontal" id="payment-form" role="form" action="ProxyPaymentServlet" method="POST">
@@ -142,8 +141,8 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-<script type="text/javascript" src="js/custom.js"></script>
-
+        <script type="text/javascript" src="js/custom.js"></script>
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
 
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
@@ -252,6 +251,9 @@
              */
 
 
+        </script>
+        <script>
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

@@ -1,17 +1,14 @@
-function intercom(user_name, user_email, staffID, phone_number, workshop_name, categories, brands_carried) {
+function intercom(user_name, user_email, userID, phone_number) {
 
     window.intercomSettings = {
-           app_id: "zaimqowd",
-           name: user_name, // Full name
-           email: user_email, // Email address
-           staff_id: staffID, // Staff ID
-           phone_number: phone_number, // Staff Number
-           workshop: workshop_name, // Workshop Name
-           categories: categories, // Categories
-           brand_carried: brands_carried, // Brands carried
-           // created_at: 1312182000 // Signup date as a Unix timestamp
+        app_id: "zaimqowd",
+        name: user_name, // Full name
+        email: user_email, // Email address
+        user_id: userID, // Staff ID
+        phone_number: phone_number // Staff Numberried
+        //created_at: 1312182000 // Signup date as a Unix timestamp
         //   hide_default_launcher: false
-     };
+    };
     (function () {
         var w = window;
         var ic = w.Intercom;

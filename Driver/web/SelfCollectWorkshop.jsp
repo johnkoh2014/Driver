@@ -68,9 +68,9 @@
                                                         <div class="text-center">
                                                             <h3>Please proceed to the workshop to collect your car.</h3>
                                                             <br/>
-                                                            
+
                                                         </div>
-                                                        
+
 
                                                     </div>
                                                     <!--end tile body-->
@@ -95,27 +95,27 @@
                                                             <h5><b>OPENING HOURS</b></h5>
                                                             10am - 7pm (Mon - Sat), By Appt only (Sun). Closed on PHs.
                                                         </div>
-                                                            <br/>
+                                                        <br/>
                                                         <div>
                                                             <h5><b>ADDRESS</b></h5>
                                                             338 Circuit Road S(379489)
                                                         </div>
-                                                            <br/>
+                                                        <br/>
                                                         <div>
                                                             <h5><b>PROVIDING SERVICES</b></h5>
                                                             Maintenance, Repair & Servicing
                                                         </div>
-                                                            <br/>
+                                                        <br/>
                                                         <div>
                                                             <h5><b>OTHER BRANDS</b></h5>
                                                             GlassMechanix
                                                         </div>
-                                                            <br/>
+                                                        <br/>
                                                         <div>
                                                             <h5><b>WEBSITE</b></h5>
                                                             <a href="http://www.ahhuatworkshop.com.sg" target="_blank">www.ahhuatworkshop.com.sg</a>
                                                         </div>
-                                                            <br/>
+                                                        <br/>
 
                                                     </div>
                                                     <!--end tile body-->
@@ -156,16 +156,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

@@ -40,24 +40,24 @@
                                 <div class="alert alert-success text-center" role="alert">
                                     <h3 class="alert-heading">Success!</h3>
                                     <p>Your Valet has been confirmed!!</p>
-                                    
+
                                     <p class="m-b-0"><center>You'll be notified via SMS once your valet has reached.</center></p>
                                 </div>
-                                
+
                                 <div class="alert alert-success text-center" role="alert">
                                     <h3 class="alert-heading">Estimated Pick Up Time</h3>
                                     <h3 class="alert-heading">3:00PM</h3>
-                                    
-                                   
+
+
                                 </div>
-                                
-                               
-                                
+
+
+
                                 <section class="tile color transparent-black">
                                     <div class="notification">
-                                            <a href="ViewValetStatus.jsp" class="btn btn-block btn-orange margin-bottom-20" role="button"><font color="black">View Valet Details</font></a>
-                                            <a href="MyAppointments.jsp" class="btn btn-block btn-orange margin-bottom-20" role="button"><font color="black">View All Appointments</font></a>
-                                            
+                                        <a href="ViewValetStatus.jsp" class="btn btn-block btn-orange margin-bottom-20" role="button"><font color="black">View Valet Details</font></a>
+                                        <a href="MyAppointments.jsp" class="btn btn-block btn-orange margin-bottom-20" role="button"><font color="black">View All Appointments</font></a>
+
                                     </div>
 
 
@@ -86,16 +86,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

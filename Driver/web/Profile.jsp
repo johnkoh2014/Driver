@@ -32,9 +32,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        
-                        VehicleDAO vDAO = new VehicleDAO();
+                    <%                        VehicleDAO vDAO = new VehicleDAO();
                         ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
                         String handphone = driver.getHandphone();
 //                        ArrayList<Vehicle> vList = driver.getVehicles();
@@ -124,7 +122,7 @@
                                                 <%=make + " " + model%><br/>
                                                 <%=noPlate%>
                                             </div>
-                                            
+
                                             <div class="col-xs-2 car">
                                                 <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue btn-sm">Edit</a>
                                             </div>
@@ -133,7 +131,7 @@
                                                     <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger btn-sm">Delete</button>
                                                 </form>
                                             </div>
-                                                <div class="margin-bottom-20"></div>
+                                            <div class="margin-bottom-20"></div>
                                         </div>
                                         <!--<div class="line-across-dark"></div>-->
                                         <%
@@ -171,16 +169,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

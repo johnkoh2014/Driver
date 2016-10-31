@@ -130,10 +130,10 @@ public class BookValetServlet extends HttpServlet {
             session.setAttribute("fail", errMsg);
             RequestDispatcher view = request.getRequestDispatcher("BookValet.jsp");
             view.forward(request, response);
-        } else {
+        } else { 
             
             String err = oDAO.acceptOfferWithValet(true, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title, address + " " + postal, pickupLat, 
-                    pickupLong, wsAddress + " " + wsPostal, dropoffLatitude, dropoffLongitude, pickupTime, price);
+                    pickupLong, wsAddress + " " + wsPostal, dropoffLatitude, dropoffLongitude, pickupTime, price, driverInitialComment);
 //            String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title);
 
             if (err.length() > 0) {

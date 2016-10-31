@@ -126,7 +126,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="js/moment.js"></script> 
         <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
@@ -144,5 +144,8 @@
                     ignoreReadonly: true
                 });
             });</script>
+        <script>
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
+        </script>
     </body>
 </html>

@@ -65,29 +65,26 @@
                     </div>
                     <!-- Make page fluid-->
                 </div>
-                <!-- Wrap all page content end -->
-                <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-                <script src="https://code.jquery.com/jquery.js"></script>
-                <!-- Include all compiled plugins (below), or include individual files as needed -->
-                <script src="js/bootstrap.min.js"></script>
-                <script src="js/bootstrap-dropdown-multilevel.js"></script>
-                <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
-                <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
-                <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
-                <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
-                <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-                <script type="text/javascript" src="s/jquery.videobackground.js"></script>
-                <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
-                <script src="js/minimal.min.js"></script>
-                <script type="text/javascript" src="js/custom.js"></script>
-                <script>
-                    $(function () {
-
-
-
-                    })
-
-                </script>
-                </body>
-                </html>
+            </div>
+        </div>
+        <!-- Wrap all page content end -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-dropdown-multilevel.js"></script>
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
+        <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
+        <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
+        <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+        <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
+        <script type="text/javascript" src="s/jquery.videobackground.js"></script>
+        <script type="text/javascript" src="js/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="js/intercom.js"></script>
+        <script src="js/minimal.min.js"></script>
+        <script type="text/javascript" src="js/custom.js"></script>
+        <script>
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
+        </script>
+    </body>
+</html>

@@ -4,6 +4,7 @@
     String token = driver.getToken();
     String email = driver.getEmail();
     String name = driver.getName();
+    String handphone = driver.getHandphone();
 %>
 <div class="navbar navbar-default navbar-fixed-top navbar-transparent-black mm-fixed-top" role="navigation" id="navbar">
 
