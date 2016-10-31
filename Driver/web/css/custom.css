@@ -10,7 +10,7 @@ h1{
 }
 h2,h3,h4,h5,h6{
     font-family: "Ebrima REGULAR", "Roboto", "Arial", sans-serif;
-    color: rgba(255, 255, 255, 0.9);
+    -color: rgba(255, 255, 255, 0.9);
 }
 /*Fonts*/
 
@@ -133,6 +133,7 @@ ol.breadcrumb > li{
 
 #wrap #content .main {
     margin: 0px 0;
+    margin-bottom: 60px;
 }
 
 ul.inbox {
@@ -398,6 +399,10 @@ textarea.form-control{
 }
 .car {
     height: 100%;
+    line-height: 50px;
+}
+.car1 {
+    height: 100%;
     line-height: 25px;
 }
 .car .btn {
@@ -450,6 +455,8 @@ input[type="color"] {
     font-size: 16px;
 }
 /*Input iphone no zoom*/
+
+
 .tile.color [class^="tile-"]{
     color: rgba(255, 255, 255, 0.9);
 }
@@ -461,7 +468,11 @@ body .navbar.navbar-default .navbar-collapse .nav.logout {
 body .mask { background-color: white; width: 100%; height: 100%; position: fixed; z-index: 100000; top: -45px; padding-top: 45px; padding-bottom: 45px; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; }
 body .mask #loader { background: url(../images/Loading_gif.gif)center center no-repeat; height: 100%; width: 100%; top:0; left:0; margin: 0 auto;}
 
-
+/*Intercom*/
+.intercom-mobile-messenger-active{
+    overflow: visible !important;
+}
+/*Intercom*/
 
 @media screen and (max-width: 1024px){
     /*    #content{
@@ -503,7 +514,7 @@ body .mask #loader { background: url(../images/Loading_gif.gif)center center no-
         background-size: 40%;
         display: inline-block;
         z-index: 9999;
-        position: absolute;
+        position: fixed;
         top: 0;
         left:40%;
     }
@@ -515,6 +526,9 @@ body .mask #loader { background: url(../images/Loading_gif.gif)center center no-
     }
     body .navbar.collapsed .navbar-collapse .nav.logout {
         right: 10px;
+    }
+    #content{
+        padding-left: 25px !important;
     }
 
 }

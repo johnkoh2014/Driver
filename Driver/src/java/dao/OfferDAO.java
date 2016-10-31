@@ -232,6 +232,24 @@ public class OfferDAO {
             website = attElement.getAsString();
         }
 
+        attElement = oObj.get("ws_initial_comment");
+        String wsInitialComment = "";
+        if (!attElement.isJsonNull()) {
+            wsInitialComment = attElement.getAsString();
+        }
+
+        attElement = oObj.get("ws_final_comment");
+        String wsFinalComment = "";
+        if (!attElement.isJsonNull()) {
+            wsFinalComment = attElement.getAsString();
+        }
+
+        attElement = oObj.get("driver_initial_comment");
+        String driverInitialComment = "";
+        if (!attElement.isJsonNull()) {
+            driverInitialComment = attElement.getAsString();
+        }
+
         attElement = oObj.get("est_complete_time");
         Timestamp estCompletionDateTime = null;
         String dateTimeString = "1990-01-01 00:00:00";
@@ -324,14 +342,14 @@ public class OfferDAO {
         }
         Vehicle vehicle = new Vehicle(vehicle_id, car_make, car_model, car_year, car_plate_number, user_id, car_color, car_control);
 
-        offer = new Offer(offerId, serviceId, serviceName, openingHour, wsId, shopName, shopAddress, shopCategory, brandsCarried, website, status, initialMinPrice, initialMaxPrice, diagnosticPrice, finalPrice, estCompletionDateTime, vehicle);
-        return offer;
+        offer = new Offer(offerId, serviceId, serviceName, openingHour, wsId, shopName, shopAddress, shopCategory, brandsCarried, website, status, initialMinPrice, initialMaxPrice, diagnosticPrice, finalPrice, estCompletionDateTime, vehicle, wsInitialComment, wsFinalComment, driverInitialComment);
+        return offer; 
 
     }
 
     public String acceptOfferWithValet(boolean is_use_valet, int offer_id, int user_id, String token, int shop_id, String start_time,
             String end_time, String title, String pick_up_address, double pick_up_latitude, double pick_up_longitude, String drop_off_address,
-            double drop_off_latitude, double drop_off_longitude, String scheduled_pick_up_time, double price) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
+            double drop_off_latitude, double drop_off_longitude, String scheduled_pick_up_time, double price, String driver_comment) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/quotation_request/initial_quotation_accepted";
 
         HttpClient client = new DefaultHttpClient();
@@ -360,6 +378,7 @@ public class OfferDAO {
         urlParameters.add(new BasicNameValuePair("drop_off_longitude", drop_off_longitude + ""));
         urlParameters.add(new BasicNameValuePair("scheduled_pick_up_time", scheduled_pick_up_time));
         urlParameters.add(new BasicNameValuePair("price", price + ""));
+        urlParameters.add(new BasicNameValuePair("driver_comment", driver_comment));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -385,7 +404,7 @@ public class OfferDAO {
     }
 
     public String acceptOfferWithoutValet(boolean is_use_valet, int offer_id, int user_id, String token, int shop_id, String start_time,
-            String end_time, String title) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
+            String end_time, String title, String driver_comment) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/quotation_request/initial_quotation_accepted";
 
         HttpClient client = new DefaultHttpClient();
@@ -405,6 +424,7 @@ public class OfferDAO {
         urlParameters.add(new BasicNameValuePair("title", title));
         urlParameters.add(new BasicNameValuePair("bg_color", "#731F1F"));
         urlParameters.add(new BasicNameValuePair("font_color", "#FFF"));
+        urlParameters.add(new BasicNameValuePair("driver_comment", driver_comment));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -431,6 +451,43 @@ public class OfferDAO {
 
     public String acceptFinalQuotation(int user_id, String token, int offer_id) throws UnsupportedEncodingException, IOException, ParseException {
         String url = "http://119.81.43.85/quotation_request/final_quotation_accepted";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("offer_id", offer_id + ""));
+        urlParameters.add(new BasicNameValuePair("user_id", user_id + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
+    }
+
+    public String rejectFinalQuotation(int user_id, String token, int offer_id) throws UnsupportedEncodingException, IOException, ParseException {
+        String url = "http://119.81.43.85/quotation_request/offer_declined";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);

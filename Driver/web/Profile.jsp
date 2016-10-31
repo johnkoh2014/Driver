@@ -32,12 +32,8 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        
-                        VehicleDAO vDAO = new VehicleDAO();
+                    <%                        VehicleDAO vDAO = new VehicleDAO();
                         ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
-                        String handphone = driver.getHandphone();
-                        String nric = driver.getNric();
 //                        ArrayList<Vehicle> vList = driver.getVehicles();
 
                     %>
@@ -88,13 +84,6 @@
                                                     <input type="tel" class="form-control" id="input03" name="hpNo" value="<%=handphone%>" style="color:white" readonly>
                                                 </div>
                                             </div>
-                                                
-                                            <div class="form-group">
-                                                <label for="input04" class="col-sm-2 control-label">NRIC</label>
-                                                <div class="col-sm-10">
-                                                    <input type="tel" class="form-control" id="input04" name="nric" value="<%=nric%>" style="color:white" readonly>
-                                                </div>
-                                            </div>
 
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
@@ -128,11 +117,11 @@
                                                 String noPlate = vehicle.getPlateNumber();
                                         %>
                                         <div class="carItem">
-                                            <div class="col-xs-7 car">
+                                            <div class="col-xs-7 car1">
                                                 <%=make + " " + model%><br/>
                                                 <%=noPlate%>
                                             </div>
-                                            
+
                                             <div class="col-xs-2 car">
                                                 <a href="EditVehicle.jsp?id=<%=vid%>" class="btn btn-blue btn-sm">Edit</a>
                                             </div>
@@ -141,7 +130,7 @@
                                                     <button type="submit" name="vid" value="<%=vid%>" class="btn btn-danger btn-sm">Delete</button>
                                                 </form>
                                             </div>
-                                                <div class="margin-bottom-20"></div>
+                                            <div class="margin-bottom-20"></div>
                                         </div>
                                         <!--<div class="line-across-dark"></div>-->
                                         <%
@@ -179,16 +168,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

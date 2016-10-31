@@ -31,7 +31,6 @@
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>MY BOOKINGS</h1>
-
                         </div>
                     </div>
                     <!-- /page header -->
@@ -76,6 +75,7 @@
                                                     String startTime = sTime.substring(0, sTime.lastIndexOf("."));
                                                     String shopName = appointment.getShopName();
                                                     int offerStatus = appointment.getOfferStatus();
+                                                    int scheduleId = appointment.getId();
 
                                                     ValetRequest vr = appointment.getToValet();
                                                     String pickup = "";
@@ -89,6 +89,7 @@
                                                         String pTime = pickup.substring(pickup.indexOf(" "));
                                                         pickupTime = pTime.substring(0, pTime.lastIndexOf("."));
                                                         valetRequestStatus = vr.getStatus();
+                                                        url = "ProcessAppointments?valetRequestStatus=" + valetRequestStatus + "&offerStatus=" + offerStatus + "&scheduleId=" + scheduleId;
                                                     }
 
                                                     ValetRequest returnVr = appointment.getReturnValet();
@@ -118,7 +119,7 @@
 
                                             %>
 
-                                            <a href="ProcessAppointments?valetRequestStatus=<%=valetRequestStatus%>&offerStatus=<%=offerStatus%>" class="list-group-item"><p><b><%=shopName%></b></p>
+                                            <a href="<%=url%>" class="list-group-item"><p><b><%=shopName%></b></p>
                                                 Service Date: <%=startDate%><br/>
                                                 Service Time: <%=startTime%><br/>
                                                 <p></p>
@@ -174,16 +175,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

@@ -23,14 +23,14 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <!-- page header -->
-                        <div class="breadcrumbs">
-                            <ol class="breadcrumb">
-                                <li><a href="ViewAllRequests.jsp">All Requests</a></li>
-                                <li><a href="ViewOffers.jsp">Offers</a></li>
-                                <li>Offer Details</li>
-                                <li class="active">Booking</li>
-                            </ol>
-                        </div>
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li><a href="ViewAllRequests.jsp">All Requests</a></li>
+                            <li><a href="ViewOffers.jsp">Offers</a></li>
+                            <li>Offer Details</li>
+                            <li class="active">Booking</li>
+                        </ol>
+                    </div>
                     <div class="pageheader">
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
@@ -81,6 +81,7 @@
                                         String shopCategory = offer.getShopCategory();
                                         String brandsCarried = offer.getBrandsCarried();
                                         String website = offer.getWebsite();
+                                        String wsInitialComment = offer.getWsInitialComment();
 
                                     %>
                                     <!-- /tile body -->
@@ -103,6 +104,8 @@
                                                             <h3>Diagnostic Price: $<%=diagnosticPrice%></h3>
                                                             <% }%>
 
+                                                            <br/>
+                                                            <h5><b>Remark:</b><br/><%=wsInitialComment%></h5>
                                                             <br/>
                                                             <h5><%=serviceName%></h5>
                                                         </div>
@@ -198,16 +201,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

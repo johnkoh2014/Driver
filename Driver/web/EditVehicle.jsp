@@ -34,9 +34,7 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%
-                        
-                        String vehicleId = request.getParameter("id");
+                    <%                        String vehicleId = request.getParameter("id");
                         int vid = Integer.parseInt(vehicleId);
 
                         VehicleDAO vDAO = new VehicleDAO();
@@ -191,16 +189,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

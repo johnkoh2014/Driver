@@ -109,5 +109,45 @@ public class Appointment {
     public void setOfferStatus(int offerStatus) {
         this.offerStatus = offerStatus;
     }
+
+    public String getAppointmentTitle() {
+        return appointmentTitle;
+    }
+
+    public void setAppointmentTitle(String appointmentTitle) {
+        this.appointmentTitle = appointmentTitle;
+    }
+
+    public ValetDriver getValetDriver() {
+        return valetDriver;
+    }
+
+    public void setValetDriver(ValetDriver valetDriver) {
+        this.valetDriver = valetDriver;
+    }
+
+    public Workshop getWorkshop() {
+        return workshop;
+    }
+
+    public void setWorkshop(Workshop workshop) {
+        this.workshop = workshop;
+    }
+
+    public double getServiceFinalPrice() {
+        return serviceFinalPrice;
+    }
+
+    public void setServiceFinalPrice(double serviceFinalPrice) {
+        this.serviceFinalPrice = serviceFinalPrice;
+    }
+
+    public Timestamp getServiceEstCompleteTime() {
+        return serviceEstCompleteTime;
+    }
+
+    public void setServiceEstCompleteTime(Timestamp serviceEstCompleteTime) {
+        this.serviceEstCompleteTime = serviceEstCompleteTime;
+    }
     
 }

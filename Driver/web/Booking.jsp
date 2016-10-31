@@ -100,12 +100,15 @@
                                         <div class="margin-top-15"><b>Would you like to have Valet?</b></div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <input type="radio"  id="valetYes" value="true" name="valet" >
+                                                <input type="radio"  id="valetYes" value="true" name="valet" disabled="">
                                                 <label for="valetYes" class="control-label">YES (Coming Soon)</label>
                                             </div>
                                             <div class="col-sm-12">
                                                 <input type="radio" id="valetNo" value="false" name="valet" checked="checked">
                                                 <label for="valetNo" class="control-label">NO</label>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <b>Remarks: </b><textarea class="form-control" id="comment" rows="5" name="comment"></textarea>
                                             </div>
                                         </div>
 
@@ -152,7 +155,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="js/moment.js"></script> 
         <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
@@ -191,6 +194,9 @@
             minutes = minutes < 10 ? '0' + minutes : minutes;
             var strTime = hours + ':' + minutes + ' ' + ampm;
             $("#inputTime").val(strTime);
+        </script>
+        <script>
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

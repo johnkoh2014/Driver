@@ -13,10 +13,16 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.RateLimitException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
+import dao.OfferDAO;
+import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +47,7 @@ public class PaymentServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, UnsupportedEncodingException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String errorMsg = null;
@@ -61,16 +67,14 @@ public class PaymentServlet extends HttpServlet {
                 chargeParams.put("description", "Example charge");
 
                 Charge charge = Charge.create(chargeParams);
-                
+
                 //Saving customer details for future payments--> insert code below here
                 // YOUR CODE: Save the customer ID and other info in a database for later!
-                
                 // YOUR CODE: When it's time to charge the customer again, retrieve the customer ID!
-
             } catch (CardException e) {
                 // Since it's a decline, CardException will be caught
                 errorMsg = "Status is: " + e.getMessage();
-                
+
             } catch (RateLimitException e) {
                 // Too many requests made to the API too quickly
                 errorMsg = "Status is: " + e.getMessage();
@@ -87,13 +91,29 @@ public class PaymentServlet extends HttpServlet {
                 // Display a very generic error to the user, and maybe send
                 // yourself an email
                 errorMsg = "Status is: " + e.getMessage();
-            } 
+            }
 
             if (errorMsg == null) {
                 String successMsg = "Success!";
-                session.setAttribute("successMsg", successMsg);
-                session.setAttribute("token", token);
-                response.sendRedirect("ValetBookingPayment.jsp");
+                OfferDAO oDAO = new OfferDAO();
+                Driver user = (Driver) session.getAttribute("loggedInUser");
+                int userId = user.getId();
+                String userToken = user.getToken();
+                String oId = request.getParameter("requestId");
+                int requestId = 0;
+                if (oId != null && oId.length() > 0) {
+                    requestId = Integer.parseInt(oId);
+                }
+                String error = oDAO.confirmValetPayment(userId, userToken, requestId);
+                if (error.length() == 0) {
+                    session.setAttribute("successMsg", successMsg);
+                    session.setAttribute("token", token);
+                    response.sendRedirect("ValetBookingPayment.jsp");
+                } else {
+                    session.setAttribute("errorMsg", error);
+                    session.setAttribute("token", token);
+                    response.sendRedirect("ValetBookingPayment.jsp");
+                }
             } else {
                 session.setAttribute("errorMsg", errorMsg);
                 session.setAttribute("token", token);
@@ -113,8 +133,12 @@ public class PaymentServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException, UnsupportedEncodingException {
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -127,8 +151,12 @@ public class PaymentServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException, UnsupportedEncodingException {
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

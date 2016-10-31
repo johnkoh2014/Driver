@@ -5,8 +5,14 @@
  */
 package servlet;
 
+import dao.OfferDAO;
+import entity.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author User
  */
-@WebServlet(name = "ProcessAppointmentsServlet", urlPatterns = {"/ProcessAppointments"})
-public class ProcessAppointmentsServlet extends HttpServlet {
+@WebServlet(name = "ProxyPaymentServlet", urlPatterns = {"/ProxyPayment"})
+public class ProxyPaymentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,46 +37,30 @@ public class ProcessAppointmentsServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, UnsupportedEncodingException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(true);
-        String vrStatus = request.getParameter("valetRequestStatus");
-        int valetRequestStatus = 0;
-        if (vrStatus != null && vrStatus.length() > 0) {
-            valetRequestStatus = Integer.parseInt(vrStatus);
-        }
-        String oStatus = request.getParameter("offerStatus");
-        int offerStatus = 0;
-        if (oStatus != null && oStatus.length() > 0) {
-            offerStatus = Integer.parseInt(oStatus);
-        }
-        String sId = request.getParameter("scheduleId");
-        int scheduleId = 0;
-        if (sId != null && sId.length() > 0) {
-            scheduleId = Integer.parseInt(sId);
-        }
 
-        session.setAttribute("valetRequestStatus", valetRequestStatus);
-        session.setAttribute("offerStatus", offerStatus);
-        session.setAttribute("scheduleId", scheduleId);
-        
-        String url = "MyAppointments.jsp";
-        if (valetRequestStatus == 1) {
-            url = "WaitingForValet.jsp";
-        } else if (valetRequestStatus == 2){
-            url = "ValetAssigned.jsp";
-        }else if(valetRequestStatus == 3 || valetRequestStatus == 4 || valetRequestStatus == 5 || valetRequestStatus == 6) {
-            url = "ViewValetStatus.jsp";
-        } else if (valetRequestStatus == 7) {
-            if (offerStatus == 3 || offerStatus == 4) {
-                url = "WorkshopDiagnosis.jsp";
-            } else if (offerStatus == 5 || offerStatus == 6) {
-                url = "WorkshopStartServicing.jsp";
-            } else if (offerStatus == 7) {
-                url = "WorkshopCompleteServicing.jsp";
-            }
+//        String errorMsg = null;
+        HttpSession session = request.getSession(true);
+        OfferDAO oDAO = new OfferDAO();
+        Driver user = (Driver) session.getAttribute("loggedInUser");
+        int userId = user.getId();
+        String userToken = user.getToken();
+        String rId = request.getParameter("requestId");
+        int requestId = 0;
+        if (rId != null && rId.length() > 0) {
+            requestId = Integer.parseInt(rId);
         }
-        response.sendRedirect(url);
+        String error = null;
+        
+        error = oDAO.confirmValetPayment(userId, userToken, requestId);
+        if (error.length() == 0) {
+            session.setAttribute("successMsg", "Paid");
+            response.sendRedirect("ViewValetStatus.jsp");
+        } else {
+            session.setAttribute("errorMsg", error);
+            response.sendRedirect("ValetBookingPayment.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -84,8 +74,12 @@ public class ProcessAppointmentsServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException, UnsupportedEncodingException {
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ProxyPaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -98,8 +92,12 @@ public class ProcessAppointmentsServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException, UnsupportedEncodingException {
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ProxyPaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

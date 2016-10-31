@@ -1,3 +1,9 @@
+<%@page import="java.sql.Timestamp"%>
+<%@page import="dao.AppointmentDAO"%>
+<%@page import="entity.Appointment"%>
+<%@page import="entity.ValetDriver"%>
+<%@page import="entity.ValetRequest"%>
+<%@page import="entity.Workshop"%>
 <%@page import="entity.Driver"%>
 <%@include file="Protect.jsp" %>
 <!DOCTYPE html>
@@ -25,11 +31,30 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
-                            <h1>MY APPOINTMENTS</h1>
+                            <h1>MY<br/>APPOINTMENT</h1>
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%                        int scheduleId = (int) session.getAttribute("scheduleId");
+                        AppointmentDAO aDAO = new AppointmentDAO();
+                        Appointment appointment = aDAO.getAppointmentById(id, token, scheduleId);
+                        ValetDriver vDriver = appointment.getValetDriver();
+                        String valetHp = vDriver.getHandphone();
+                        String valetName = vDriver.getName();
+                        ValetRequest vRequest = appointment.getToValet();
+                        int requestId = vRequest.getId();
+                        int offerId = vRequest.getOfferId();
+                        session.setAttribute("requestId", requestId);
+                        Workshop ws = appointment.getWorkshop();
+                        String wsAddress = ws.getAddress();
+                        String wsName = ws.getName().toUpperCase();
+                        String wsOpeningHour = ws.getOpeningHour();
+                        String wsCategory = ws.getCategory();
+                        String wsBrandsCarried = ws.getBrandsCarried();
+                        String wsWebsite = ws.getWebsite();
 
+
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -91,16 +116,7 @@
                                                             </div>
                                                             <div class="row">
                                                                 <center>
-                                                                    Ah Siao
-                                                                </center>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <strong><center>Age</center></strong>
-                                                            </div>
-                                                            <div class="row">
-                                                                <center>
-                                                                    24
+                                                                    <%=valetName%>
                                                                 </center>
                                                             </div>
 
@@ -109,7 +125,7 @@
                                                             </div>
                                                             <div class="row">
                                                                 <center>
-                                                                    91112222
+                                                                    <%=valetHp%>
                                                                 </center>
                                                             </div>
 
@@ -136,30 +152,23 @@
                                                         <%                                                            int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
                                                             int offerStatus = (int) session.getAttribute("offerStatus");
                                                             if (offerStatus == 4) {
+                                                                String finalPrice = appointment.getServiceFinalPrice() + "";
+                                                                finalPrice = finalPrice.substring(0, finalPrice.lastIndexOf("."));
+                                                                Timestamp estCompletionTime = appointment.getServiceEstCompleteTime();
                                                         %>
 
-                                                        <div class="notification">
+                                                        <div>
                                                             <div class="row">
-                                                                <center><h1><strong>$120</strong></h1></center>
-                                                            </div>
-                                                            <div class="row">
-                                                                <center>
-                                                                    <strong>ESTIMATED TIME AND DATE OF COMPLETION</strong>
-
-                                                                </center>
-                                                            </div>
-                                                            <p> </p>
-
-                                                            <div class="row">
-                                                                <center>
-                                                                    11 JULY 2016, 1400HRS
-                                                                </center>
+                                                                <center><h1><strong>$<%=finalPrice%></strong></h1></center>
                                                             </div>
                                                             <p></p>
                                                             <div class="row">                                               
                                                                 <center>
-                                                                    <a href="#" class="btn btn-lg btn-greensea margin-bottom-20" role="button">Accept</a>                                               
-                                                                    <a href="#" class="btn btn-lg btn-red margin-bottom-20" role="button">Decline</a>                                           
+                                                                    <form action="ProcessFinalQuote" method="POST">
+                                                                        <input type="hidden" name="offerId" value="<%=offerId%>"/>
+                                                                        <button type="submit" class="btn btn-lg btn-greensea margin-bottom-20" name="accept" value="accept">Accept</button>
+                                                                        <button type="submit" class="btn btn-lg btn-red margin-bottom-20" name="accept" value="decline">Decline</button>
+                                                                    </form>                                          
                                                                 </center>                                               
                                                             </div>
 
@@ -183,7 +192,7 @@
                                             <div class="tab-pane fade " id="workshopProfile" >
                                                 <section class="tile color transparent-black">
                                                     <div class="tile-header text-center">
-                                                        <h3>AH HUAT WORKSHOP PTE LTD</h3>
+                                                        <h3><%=wsName%></h3>
                                                         <!--<a href="Booking.jsp" class="btn btn-warning" role="button">Book</a>-->
                                                     </div>
                                                     <!--end tile header-->
@@ -196,7 +205,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <center>
-                                                                10am - 7pm (Mon - Sat), By Appt only (Sun). Closed on PHs.
+                                                                <%=wsOpeningHour%>
                                                             </center>
                                                         </div>
 
@@ -205,7 +214,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <center>
-                                                                328 Circuit Road S(379489)
+                                                                <%=wsAddress%>
                                                             </center>
                                                         </div>
 
@@ -214,7 +223,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <center>
-                                                                Maintenence, Repair and servicing
+                                                                <%=wsCategory%>
                                                             </center>
                                                         </div>
 
@@ -223,7 +232,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <center>
-                                                                GlassMechanix
+                                                                <%=wsBrandsCarried%>
                                                             </center>
                                                         </div>
 
@@ -232,7 +241,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <center>
-                                                                www.ahhuatworkshop.com.sg
+                                                                <a href="<%=wsWebsite%>" target="_blank"><%=wsWebsite%></a>
                                                             </center>
                                                         </div>
                                                     </div>
@@ -277,16 +286,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

@@ -57,6 +57,7 @@ public class SelectValetServlet extends HttpServlet {
         OfferDAO oDAO = new OfferDAO();
         
         String isValet = request.getParameter("valet");
+        String driverInitialComment = request.getParameter("comment");
 
         String oId = request.getParameter("offerId");
         int offerId = 0;
@@ -133,12 +134,13 @@ public class SelectValetServlet extends HttpServlet {
             session.setAttribute("workshopId", workshopId);
             session.setAttribute("serviceStartTime", serviceStartTime);
             session.setAttribute("serviceEndTime", serviceEndTime);
+            session.setAttribute("driverInitialComment", driverInitialComment);
 
             response.sendRedirect("ValetForm.jsp");
         } else {
 
             oDAO = new OfferDAO();
-            String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title);
+            String err = oDAO.acceptOfferWithoutValet(false, offerId, user_id, token, workshopId, serviceStartTime, serviceEndTime, title, driverInitialComment);
 
             if (err.length() > 0) {
                 request.setAttribute("fail", err);

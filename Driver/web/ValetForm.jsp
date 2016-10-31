@@ -44,6 +44,7 @@
                         int workshopId = (Integer) session.getAttribute("workshopId");
                         String serviceStartTime = (String) session.getAttribute("serviceStartTime");
                         String serviceEndTime = (String) session.getAttribute("serviceEndTime");
+                        String driverInitialComment = (String) session.getAttribute("driverInitialComment");
 
                         OfferDAO oDAO = new OfferDAO();
                         Offer offer = oDAO.retrieveOfferById(id, token, offerId);
@@ -87,6 +88,7 @@
                                             <input type="hidden" value="<%=wsAddress%>" name="wsAddress">
                                             <input type="hidden" value="<%=workshopId%>" name="workshopId">
                                             <input type="hidden" value="<%=offerId%>" name="offerId">
+                                            <input type="hidden" value="<%=driverInitialComment%>" name="driverInitialComment">
                                             <button type="submit" class="btn btn-primary">Submit</button>
 
                                         </div>
@@ -124,7 +126,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="js/moment.js"></script> 
         <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
@@ -142,5 +144,8 @@
                     ignoreReadonly: true
                 });
             });</script>
+        <script>
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
+        </script>
     </body>
 </html>

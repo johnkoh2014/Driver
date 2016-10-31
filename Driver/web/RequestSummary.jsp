@@ -38,14 +38,14 @@
                                 <%if (service.equals("Maintenance") || service.equals("Tyre/Wheel Service")) {%>
                             <li><a href="ServiceType.jsp.jsp">Service Type</a></li>
                                 <%}%>
-                            <li>Request Summary</li>
+                            <li>Summary</li>
                         </ol>
                     </div>
                     <div class="pageheader">
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>REQUEST SUMMARY</h1>
-                            <h4>Service</h4>
+                            <h5>Step 4 of 4: Submit Request</h5>
                         </div>
                     </div>
                     <!-- /page header -->
@@ -129,16 +129,11 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

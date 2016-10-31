@@ -61,7 +61,7 @@
                                             int requestId = (int) session.getAttribute("requestId");
                                         %>
                                         <!--<form class="form-horizontal" id="payment-form" role="form" action="PaymentServlet" method="POST">-->
-                                        <form class="form-horizontal" id="payment-form" role="form" action="ProxyPaymentServlet" method="POST">
+                                        <form class="form-horizontal" id="payment-form" role="form" action="ProxyPayment" method="POST">
 
                                             <fieldset>
                                                 <!--                                         <legend>Payment</legend>-->
@@ -141,117 +141,9 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-        <script type="text/javascript" src="js/custom.js"></script>
         <script type="text/javascript" src="js/intercom.js"></script>
+        <script type="text/javascript" src="js/custom.js"></script>
         <script src="js/minimal.min.js"></script>
-
-        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-        <script type="text/javascript">
-            Stripe.setPublishableKey('pk_test_U9y8GuuFBVq9pOt4ss9tcGAx');
-        </script>
-        <script>
-
-            $(function () {
-                var $form = $('#payment-form');
-                $form.submit(function (event) {
-                    // Disable the submit button to prevent repeated clicks:
-                    $form.find('.submit').prop('disabled', true);
-
-                    // Request a token from Stripe:
-                    Stripe.card.createToken($form, stripeResponseHandler);
-
-                    // Prevent the form from being submitted:
-                    return false;
-                });
-            });
-
-            function stripeResponseHandler(status, response) {
-                // Grab the form:
-                var $form = $('#payment-form');
-
-                if (response.error) { // Problem!
-
-                    // Show the errors on the form:
-                    $form.find('.payment-errors').text(response.error.message);
-                    $form.find('.submit').prop('disabled', false); // Re-enable submission
-
-                } else { // Token was created!
-
-                    // Get the token ID:
-                    var token = response.id;
-
-                    // Insert the token ID into the form so it gets submitted to the server:
-                    $form.append($('<input type="hidden" name="stripeToken">').val(token));
-
-                    // Submit the form:
-                    $form.get(0).submit();
-                }
-            }
-            ;
-
-            /**
-             $(document).ready(function () {
-             $("#payment-form").submit(function (e) {
-             var form = $(this);
-             //alert("Hello! I am an alert box!!");
-             // No pressing the buy now button more than once
-             $('#submitBtn').hide();
-             //                    $('#submitBtn').prop('disabled', true);
-             // Create the token, based on the form object
-             Stripe.create(form, stripeResponseHandler);
-             
-             // Prevent the form from submitting
-             e.preventDefault();
-             });
-             });
-             
-             
-             var stripeResponseHandler = function (status, response) {
-             var form = $('#payment-form');
-             // Any validation errors?
-             if (response.error) {
-             // Show the user what they did wrong
-             form.find('.payment-errors').text(response.error.message);
-             
-             // Make the submit clickable again
-             form.find('button').prop('disabled', false);
-             } else {
-             // Otherwise, we're good to go! Submit the form.
-             
-             // Insert the unique token into the form
-             $('<input>', {
-             'type': 'hidden',
-             'name': 'stripeToken',
-             'value': response.id
-             }).appendTo(form);
-             
-             // Call the native submit method on the form
-             // to keep the submission from being canceled
-             form.get(0).submit();
-             
-             }
-             };
-             
-             /*
-             // Event Listeners
-             $('#payment-form').on('submit', generateToken);
-             
-             var generateToken = function (e) {
-             var form = $(this);
-             alert("Hello! I am an alert box!!");
-             // No pressing the buy now button more than once
-             form.find('submitBtn').prop('disabled', true);
-             
-             // Create the token, based on the form object
-             Stripe.create(form, stripeResponseHandler);
-             
-             // Prevent the form from submitting
-             e.preventDefault();
-             };
-             */
-
-
-        </script>
         <script>
             intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>

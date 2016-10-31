@@ -114,7 +114,7 @@
                                             </center>    
                                         </div>
                                     </div>
-                                    
+
                                     <div class="tile-footer">
                                         <div class="text-center">
                                             <a href="ValetBookingPayment.jsp" class="btn btn-primary" role="button">Proceed to Payment</a>
@@ -146,16 +146,12 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="s/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
+        <script type="text/javascript" src="js/intercom.js"></script>
+        <script type="text/javascript" src="js/custom.js"></script>
         <script src="js/minimal.min.js"></script>
 
         <script>
-            $(function () {
-
-
-
-            })
-
+            intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
     </body>
 </html>

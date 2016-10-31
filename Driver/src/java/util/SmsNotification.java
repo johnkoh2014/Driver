@@ -25,7 +25,7 @@ public class SmsNotification { //for workshops to receive
     //pass:fixir2016
     
     
-    //note that this is for workshop to receive NOT DONE 
+    //note that this is for workshop to receive 
     public void smsForApptBooking(String custName, String mobileNo, String servDesc, String apptDateTime){
         try {
             // Construct data
@@ -69,7 +69,7 @@ public class SmsNotification { //for workshops to receive
         }  
     }
 
-    //note that this is for workshop to receive NOT DONE 
+    //note that this is for workshop to receive 
     public void smsForAcceptFinal(String custName, String mobileNo, String vNum){
         try {
             // Construct data
