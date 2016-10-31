@@ -81,6 +81,7 @@
                                         String shopCategory = offer.getShopCategory();
                                         String brandsCarried = offer.getBrandsCarried();
                                         String website = offer.getWebsite();
+                                        String wsInitialComment = offer.getWsInitialComment();
 
                                     %>
                                     <!-- /tile body -->
@@ -103,6 +104,8 @@
                                                             <h3>Diagnostic Price: $<%=diagnosticPrice%></h3>
                                                             <% }%>
 
+                                                            <br/>
+                                                            <h5><b>Remark:</b><br/><%=wsInitialComment%></h5>
                                                             <br/>
                                                             <h5><%=serviceName%></h5>
                                                         </div>

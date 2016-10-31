@@ -44,6 +44,7 @@
                         int workshopId = (Integer) session.getAttribute("workshopId");
                         String serviceStartTime = (String) session.getAttribute("serviceStartTime");
                         String serviceEndTime = (String) session.getAttribute("serviceEndTime");
+                        String driverInitialComment = (String) session.getAttribute("driverInitialComment");
 
                         OfferDAO oDAO = new OfferDAO();
                         Offer offer = oDAO.retrieveOfferById(id, token, offerId);
@@ -87,6 +88,7 @@
                                             <input type="hidden" value="<%=wsAddress%>" name="wsAddress">
                                             <input type="hidden" value="<%=workshopId%>" name="workshopId">
                                             <input type="hidden" value="<%=offerId%>" name="offerId">
+                                            <input type="hidden" value="<%=driverInitialComment%>" name="driverInitialComment">
                                             <button type="submit" class="btn btn-primary">Submit</button>
 
                                         </div>

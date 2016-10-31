@@ -82,6 +82,8 @@ public class BookValetServlet extends HttpServlet {
         String wsAddress = request.getParameter("wsAddress");
         
         String wsPostal = request.getParameter("wsPostal");
+        
+        String driverInitialComment = request.getParameter("driverInitialComment");
 
         //for sms details
         Offer offer = oDAO.retrieveOfferById(user_id, token, offerId);

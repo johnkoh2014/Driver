@@ -505,7 +505,7 @@ body .mask #loader { background: url(../images/Loading_gif.gif)center center no-
         background-size: 40%;
         display: inline-block;
         z-index: 9999;
-        position: absolute;
+        position: fixed;
         top: 0;
         left:40%;
     }

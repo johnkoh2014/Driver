@@ -52,6 +52,7 @@ public class SubmitValetServlet extends HttpServlet {
         String serviceEndTime = request.getParameter("serviceEndTime");
         String workshopId = request.getParameter("workshopId");
         String offerId = request.getParameter("offerId");
+        String driverInitialComment = request.getParameter("driverInitialComment");
 
         Validation validation = new Validation();
         String isValidPostal = validation.isValidPostalCode(pickUpPostal);
@@ -81,6 +82,7 @@ public class SubmitValetServlet extends HttpServlet {
             session.setAttribute("wsAddress", wsAddress);
             session.setAttribute("pickUpAddress", pickUpAddress);
             session.setAttribute("pickUpPostal", pickUpPostal);
+            session.setAttribute("driverInitialComment", driverInitialComment);
             response.sendRedirect("BookValet.jsp");
         }
     }

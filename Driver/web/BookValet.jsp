@@ -65,6 +65,7 @@
                         String postal = (String) session.getAttribute("pickUpPostal");
                         String offerId = (String) session.getAttribute("offerId");
                         String workshopId = (String) session.getAttribute("workshopId");
+                        String driverInitialComment = (String) session.getAttribute("driverInitialComment");
                     %>
                     <!-- content main container -->
                     <div class="main">
@@ -136,6 +137,7 @@
                                                 <input type="hidden" name="appointmentTime" value="<%=appointmentTime%>">
                                                 <input type="hidden" name="wsAddress" value="<%=wsAddress%>">
                                                 <input type="hidden" name="wsPostal" value="<%=wsPostal%>">
+                                                <input type="hidden" name="driverInitialComment" value="<%=driverInitialComment%>">
                                                 <input type="hidden" name="price" value="40">
                                                 <button type="submit" class="btn btn-primary">FIND VALET!</button>
                                                 <!--                                                <button type="reset" class="btn btn-default">Reset</button>-->
