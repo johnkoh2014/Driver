@@ -34,7 +34,6 @@
                     <!-- /page header -->
                     <%                        VehicleDAO vDAO = new VehicleDAO();
                         ArrayList<Vehicle> vList = vDAO.getAllVehicles(id, token);
-                        String handphone = driver.getHandphone();
 //                        ArrayList<Vehicle> vList = driver.getVehicles();
 
                     %>
@@ -118,7 +117,7 @@
                                                 String noPlate = vehicle.getPlateNumber();
                                         %>
                                         <div class="carItem">
-                                            <div class="col-xs-7 car">
+                                            <div class="col-xs-7 car1">
                                                 <%=make + " " + model%><br/>
                                                 <%=noPlate%>
                                             </div>

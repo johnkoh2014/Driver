@@ -13,18 +13,18 @@
         <ul class="menu"> 
             <li>
                 <a href="Request.jsp">
-                    <i class="fa fa-pencil"></i> Request
+                    <i class="fa fa-pencil"></i> Get Quotes
                 </a>
             </li>
 
             <li>
                 <a href="ViewAllRequests.jsp">
-                    <i class="fa fa-file-o"></i> Offers
+                    <i class="fa fa-file-o"></i> My Requests
                 </a>
             </li>
             <li>
                 <a href="MyAppointments.jsp">
-                    <i class="fa fa-calendar"></i> Schedule
+                    <i class="fa fa-calendar"></i> My Appointments
                 </a>
             </li>
             <li>

@@ -25,14 +25,14 @@
                         <ol class="breadcrumb">
                             <li><a href="Request.jsp">Select Vehicle</a></li>
                             <li>Service</li>
-                            <li class="active">Request Summary</li>
+                            <li class="active">Summary</li>
                         </ol>
                     </div>
                     <div class="pageheader">
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center" style="color:white">
                             <h1>GET OFFERS</h1>
-                            <h5>Hi, what can we help you with today?</h5>
+                            <h5>Step 2 of 4: Choose a service</h5>
                         </div>
                     </div>
                     <!-- /page header -->

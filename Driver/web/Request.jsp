@@ -28,7 +28,7 @@
                         <ol class="breadcrumb transparent">
                             <li>Select Vehicle</li>
                             <li class="active">Service</li>
-                            <li class="active">Request Summary</li>
+                            <li class="active">Summary</li>
                         </ol>
                     </div>
                     <div class="pageheader">
@@ -37,6 +37,7 @@
 
                         <div class="margin-top-15 text-center">
                             <h1>GET QUOTES</h1>
+                            <h5>Step 1 of 4: Choose a vehicle</h5>
                         </div>
 
                     </div>
@@ -78,9 +79,11 @@
                                                 <!--<a href="Service.jsp?vehicle=<%=vehicle.getId()%>" id="<%=vehicle.getId()%>">-->
                                                 <a href="ProcessRequest?vehicle=<%=vehicle.getId()%>"/>
                                                 <div class="carItem">
-                                                    <div class="col-xs-12 car">
+                                                    <div class="col-xs-6 car">
                                                         <%=vehicle.getMake()%> <%=vehicle.getModel()%> 
-                                                        <br/>
+                                                    </div>
+                                                    <div class="col-xs-6 car">
+
                                                         <%=vehicle.getPlateNumber()%>
                                                     </div>
                                                     <!--<div class="col-xs-12 car">

@@ -138,8 +138,7 @@
 
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                <button type="reset" class="btn btn-default">Reset</button>
+                                                <button type="submit" class="btn btn-primary">Add Vehicle</button>
                                             </div>
                                             <!--end form footer-->
                                         </form>

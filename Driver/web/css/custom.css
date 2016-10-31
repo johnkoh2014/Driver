@@ -133,6 +133,7 @@ ol.breadcrumb > li{
 
 #wrap #content .main {
     margin: 0px 0;
+    margin-bottom: 60px;
 }
 
 ul.inbox {
@@ -398,6 +399,10 @@ textarea.form-control{
 }
 .car {
     height: 100%;
+    line-height: 50px;
+}
+.car1 {
+    height: 100%;
     line-height: 25px;
 }
 .car .btn {
@@ -463,7 +468,11 @@ body .navbar.navbar-default .navbar-collapse .nav.logout {
 body .mask { background-color: white; width: 100%; height: 100%; position: fixed; z-index: 100000; top: -45px; padding-top: 45px; padding-bottom: 45px; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; }
 body .mask #loader { background: url(../images/Loading_gif.gif)center center no-repeat; height: 100%; width: 100%; top:0; left:0; margin: 0 auto;}
 
-
+/*Intercom*/
+.intercom-mobile-messenger-active{
+    overflow: visible !important;
+}
+/*Intercom*/
 
 @media screen and (max-width: 1024px){
     /*    #content{
