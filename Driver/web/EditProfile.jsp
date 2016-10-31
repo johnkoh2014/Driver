@@ -38,7 +38,6 @@
                             newEmail = "";
                         }
                         String hpNo = driver.getHandphone();
-                        String nric = driver.getNric();
                     %>
                     <!-- content main container -->
                     <div class="main">
