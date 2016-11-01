@@ -79,11 +79,11 @@
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="handphone" value="<%=handphone%>" placeholder="Handphone Number">
+                                    <input type="tel" class="form-control" name="handphone" value="<%=handphone%>" placeholder="Handphone Number">
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                 </div> 
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="nric" placeholder="NRIC">
+                                    <input type="text" class="form-control" name="nric" placeholder="NRIC" id="nric" data-toggle="tooltip" data-placement="top" title="" data-original-title="Last 5 characters e.g. 4567D">
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                 </div>
                                 <div class="input-group">
@@ -98,7 +98,7 @@
                             </section>
                             <section class="log-in">
                                 <a href="Login.jsp" class="btn btn-blue">Back</a>
-                                <button class="btn btn-greensea">Submit</button>
+                                <button class="btn btn-greensea">Sign Up</button>
                             </section>
                         </form>
                     </div>
@@ -107,5 +107,10 @@
             </div>
         </div>
         <!-- Wrap all page content end -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+            $('#nric').tooltip();
+        </script>
     </body>
 </html>

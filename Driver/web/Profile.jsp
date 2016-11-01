@@ -86,7 +86,7 @@
                                             </div>
                                                 
                                             <div class="form-group">
-                                                <label for="input04" class="col-sm-2 control-label">NRIC</label>
+                                                <label for="input04" class="col-sm-2 control-label">NRIC (Last 5 characters e.g. 4567D)</label>
                                                 <div class="col-sm-10">
                                                     <input type="tel" class="form-control" id="input04" name="nric" value="<%=nric%>" style="color:white" readonly>
                                                 </div>

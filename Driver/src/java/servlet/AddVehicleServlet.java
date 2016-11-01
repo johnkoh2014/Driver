@@ -60,7 +60,7 @@ public class AddVehicleServlet extends HttpServlet {
         if (errorMsg.size() == 1) {
             try {
                 vid = Integer.parseInt(errorMsg.get(0));
-                session.setAttribute("vid", vid);
+                session.setAttribute("vid", vid+"");
                 response.sendRedirect("Service.jsp");
             } catch (NumberFormatException e) {
                 request.setAttribute("errMsg", errorMsg);

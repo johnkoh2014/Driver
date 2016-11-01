@@ -116,7 +116,7 @@ public class SelectValetServlet extends HttpServlet {
             cal.setTimeInMillis(startTime.getTime());
 
             //Subtract the time taken to reach the drop off point from the appointment time
-            cal.add(Calendar.HOUR, 2);
+            cal.add(Calendar.MINUTE, 30);
 
             //Round down the time to the nearest 15 minute
             later = new Timestamp(cal.getTime().getTime());

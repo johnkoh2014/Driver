@@ -94,15 +94,14 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="input04" class="col-sm-2 control-label">NRIC *</label>
+                                                <label for="input04" class="col-sm-2 control-label">NRIC (Last 5 characters e.g. 4567D) *</label>
                                                 <div class="col-sm-10">
-                                                    <input type="tel" class="form-control" id="input04" name="nric" value="<%=nric%>" required>
+                                                    <input type="text" class="form-control" id="input04" name="nric" value="<%=nric%>" required>
                                                 </div>
                                             </div>
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                <button type="reset" class="btn btn-default">Reset</button>
+                                                <button type="submit" class="btn btn-primary">Edit Profile</button>
                                             </div>
                                             <!--end form footer-->
                                         </form>
