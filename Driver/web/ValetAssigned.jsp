@@ -82,7 +82,7 @@
                                             Please proceed to make payment.
                                             <p></p>
                                             <!--<a href="ValetBookingPayment.jsp" class="btn btn-primary" role="button">Pay to Confirm</a>-->
-                                            <a href="ValetBookingPayment_1.jsp" class="btn btn-primary" role="button">Pay to Confirm</a>
+                                            <a href="ValetBookingPayment_2.jsp" class="btn btn-primary" role="button">Pay to Confirm</a>
                                         </div>
 
                                         <div class="tab-content">
