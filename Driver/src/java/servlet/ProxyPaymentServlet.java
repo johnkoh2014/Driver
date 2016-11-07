@@ -46,14 +46,14 @@ public class ProxyPaymentServlet extends HttpServlet {
         Driver user = (Driver) session.getAttribute("loggedInUser");
         int userId = user.getId();
         String userToken = user.getToken();
-        String rId = request.getParameter("requestId");
+        int rId = (Integer)session.getAttribute("requestId");
         int requestId = 0;
-        if (rId != null && rId.length() > 0) {
-            requestId = Integer.parseInt(rId);
-        }
+//        if (rId != null && rId.length() > 0) {
+//            requestId = Integer.parseInt(rId);
+//        }
         String error = null;
         
-        error = oDAO.confirmValetPayment(userId, userToken, requestId);
+        error = oDAO.confirmValetPayment(userId, userToken, rId);
         if (error.length() == 0) {
             session.setAttribute("successMsg", "Paid");
             response.sendRedirect("ViewValetStatus.jsp");
