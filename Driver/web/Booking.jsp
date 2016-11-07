@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile</title>
+        <title>Booking</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="solid-bg-3">
