@@ -100,7 +100,7 @@
                                         <div class="margin-top-15"><b>Would you like to have Valet?</b></div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <input type="radio"  id="valetYes" value="true" name="valet" >
+                                                <input type="radio"  id="valetYes" value="true" name="valet" disabled="">
                                                 <label for="valetYes" class="control-label">YES (Coming Soon)</label>
                                             </div>
                                             <div class="col-sm-12">

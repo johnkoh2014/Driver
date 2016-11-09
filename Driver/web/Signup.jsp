@@ -45,7 +45,7 @@
                             if (handphone == null || handphone.equals("null")) {
                                 handphone = "";
                             }
-                            
+
                             String nric = (String) request.getAttribute("nric");
                             if (nric == null || nric.equals("null")) {
                                 nric = "";
@@ -75,19 +75,19 @@
                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                 </div>
                                 <div class="input-group">
+                                    <input type="text" class="form-control" name="nric" placeholder="NRIC" id="nric" data-toggle="tooltip" data-placement="top" title="" data-original-title="Last 5 characters e.g. 4567D">
+                                    <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
+                                </div>
+                                <div class="input-group">
                                     <input type="email" class="form-control" name="email" value="<%=email%>" placeholder="Email">
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="tel" class="form-control" name="handphone" value="<%=handphone%>" placeholder="Handphone Number">
+                                    <input type="tel" class="form-control" name="handphone" value="<%=handphone%>" placeholder="Mobile Number">
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                 </div> 
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="nric" placeholder="NRIC" id="nric" data-toggle="tooltip" data-placement="top" title="" data-original-title="Last 5 characters e.g. 4567D">
-                                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                </div>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" placeholder="Password" id="password" data-toggle="tooltip" data-placement="top" title="" data-original-title="Password must be at least 8 characters long">
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                 </div>
                                 <div class="input-group">
@@ -111,6 +111,7 @@
         <script src="js/bootstrap.min.js"></script>
         <script>
             $('#nric').tooltip();
+            $('#password').tooltip();
         </script>
     </body>
 </html>
