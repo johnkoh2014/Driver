@@ -75,10 +75,6 @@
                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="nric" placeholder="NRIC" id="nric" data-toggle="tooltip" data-placement="top" title="" data-original-title="Last 5 characters e.g. 4567D">
-                                    <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-                                </div>
-                                <div class="input-group">
                                     <input type="email" class="form-control" name="email" value="<%=email%>" placeholder="Email">
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                 </div>
@@ -110,7 +106,6 @@
         <script src="https://code.jquery.com/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
-            $('#nric').tooltip();
             $('#password').tooltip();
         </script>
     </body>

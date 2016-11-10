@@ -36,6 +36,16 @@
                         </div>
                     </div>
                     <!-- /page header -->
+                    <%                        
+                        String success = (String) session.getAttribute("success");
+
+                        if (success != null && !(success.equals("null")) && success.length() > 0) {
+                    %>
+                    <div class="alert alert-success"><%=success%></div>
+                    <%
+                            session.setAttribute("success", "");
+                        }
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <!-- row -->
@@ -45,7 +55,7 @@
                                 <%                                    //String vid = request.getParameter("vehicle");
 //                                    String vid = (String)session.getAttribute("vid"); 
 //                                    session.setAttribute("vid", vid);
-                                %>
+%>
                                 <div class="list-group">
                                     <a href="ProcessService?service=Maintenance" class="list-group-item">Maintenance</a>
                                     <a href="ProcessService?service=Tyre/Wheel Service" class="list-group-item">Tyre/Wheel Service</a>

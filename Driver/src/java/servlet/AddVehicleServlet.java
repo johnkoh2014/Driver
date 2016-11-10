@@ -47,6 +47,8 @@ public class AddVehicleServlet extends HttpServlet {
         String plateNumber = request.getParameter("plateNumber");
         String carColor = request.getParameter("carColor");
         String transmission = request.getParameter("transmission");
+        String nric = request.getParameter("nric");
+        String chassisNumber = request.getParameter("chassisNumber");
 
         //Logged in user details
         HttpSession session = request.getSession(true);
@@ -55,12 +57,13 @@ public class AddVehicleServlet extends HttpServlet {
         int user_id = user.getId();
         String token = user.getToken(); 
         
-        ArrayList<String> errorMsg = vDAO.addVehicle(carMake, carModel, manufactureYear, user_id, plateNumber, token, carColor, transmission);
+        ArrayList<String> errorMsg = vDAO.addVehicle(carMake, carModel, manufactureYear, user_id, plateNumber, token, carColor, transmission, nric, chassisNumber);
         int vid = 0;
         if (errorMsg.size() == 1) {
             try {
                 vid = Integer.parseInt(errorMsg.get(0));
                 session.setAttribute("vid", vid+"");
+                session.setAttribute("success", carMake + " " + carModel + " has been created");
                 response.sendRedirect("Service.jsp");
             } catch (NumberFormatException e) {
                 request.setAttribute("errMsg", errorMsg);

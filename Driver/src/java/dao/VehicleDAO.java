@@ -91,7 +91,18 @@ public class VehicleDAO {
             String color = attElement.getAsString();
             attElement = jobj.get("type_of_control_of_car");
             String control = attElement.getAsString();
-            vehicle = new Vehicle(id, make, model, year, plateNumber, customerID, color, control);
+            attElement = jobj.get("owner_nric");
+            String ownerNric = "";
+            if (!attElement.isJsonNull()) {
+                ownerNric = attElement.getAsString();
+            }
+            attElement = jobj.get("chassis_num");
+            String chassisNum = "";
+            if (!attElement.isJsonNull()) {
+                chassisNum = attElement.getAsString();
+            }
+
+            vehicle = new Vehicle(id, make, model, year, plateNumber, customerID, color, control, ownerNric, chassisNum);
             return vehicle;
         }
     }
@@ -252,7 +263,19 @@ public class VehicleDAO {
                 if (!attElement.isJsonNull()) {
                     carControl = attElement.getAsString();
                 }
-                Vehicle vehicle = new Vehicle(id, make, model, year, plate_number, driverId, carColor, carControl);
+
+                attElement = qrObj.get("owner_nric");
+                String ownerNric = "";
+                if (!attElement.isJsonNull()) {
+                    ownerNric = attElement.getAsString();
+                }
+
+                attElement = qrObj.get("chassis_num");
+                String chassisNum = "";
+                if (!attElement.isJsonNull()) {
+                    chassisNum = attElement.getAsString();
+                }
+                Vehicle vehicle = new Vehicle(id, make, model, year, plate_number, driverId, carColor, carControl, ownerNric, chassisNum);
                 vList.add(vehicle);
             }
             return vList;
@@ -298,7 +321,7 @@ public class VehicleDAO {
     }
 
     public ArrayList<String> addVehicle(String make, String model, int year, int user_id, String plate_number,
-            String token, String car_color, String type_of_control_of_car) throws UnsupportedEncodingException, IOException {
+            String token, String car_color, String type_of_control_of_car, String nric, String chassisNumber) throws UnsupportedEncodingException, IOException {
 
         String url = "http://119.81.43.85/car/add_car";
 
@@ -317,6 +340,8 @@ public class VehicleDAO {
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("car_color", car_color));
         urlParameters.add(new BasicNameValuePair("type_of_control_of_car", type_of_control_of_car));
+        urlParameters.add(new BasicNameValuePair("owner_nric", nric));
+        urlParameters.add(new BasicNameValuePair("chassis_num", chassisNumber));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -367,7 +392,7 @@ public class VehicleDAO {
     }
 
     public ArrayList<String> editVehicle(int id, String make, String model, int year, int user_id, String plate_number,
-            String token, String car_color, String type_of_control_of_car) throws UnsupportedEncodingException, IOException {
+            String token, String car_color, String type_of_control_of_car,String owner_nric, String chassis_num) throws UnsupportedEncodingException, IOException {
 
         String url = "http://119.81.43.85/car/edit_car";
 
@@ -378,7 +403,7 @@ public class VehicleDAO {
         post.setHeader("User-Agent", USER_AGENT);
 
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("id", id+""));
+        urlParameters.add(new BasicNameValuePair("id", id + ""));
         urlParameters.add(new BasicNameValuePair("make", make));
         urlParameters.add(new BasicNameValuePair("model", model));
         urlParameters.add(new BasicNameValuePair("year", year + ""));
@@ -387,6 +412,8 @@ public class VehicleDAO {
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("car_color", car_color));
         urlParameters.add(new BasicNameValuePair("type_of_control_of_car", type_of_control_of_car));
+        urlParameters.add(new BasicNameValuePair("owner_nric", owner_nric));
+        urlParameters.add(new BasicNameValuePair("chassis_num", chassis_num));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 

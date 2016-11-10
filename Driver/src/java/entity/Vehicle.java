@@ -19,6 +19,8 @@ public class Vehicle {
     private int customerID;
     private String colour;
     private String control;
+    private String ownerNric;
+    private String chassisNum;
     
     public Vehicle(int id, String make, String model, int year, String plateNumber, String colour, String control) {
         this.id = id;
@@ -28,6 +30,19 @@ public class Vehicle {
         this.plateNumber = plateNumber;
         this.colour = colour;
         this.control = control;
+    }
+    
+    public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control, String ownerNric, String chassisNum) {
+        this.id = id;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.plateNumber = plateNumber;
+        this.customerID = customerID;
+        this.colour = colour;
+        this.control = control;
+        this.ownerNric = ownerNric;
+        this.chassisNum = chassisNum;
     }
     
     public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control) {
@@ -72,4 +87,21 @@ public class Vehicle {
     public String getControl() {
         return control;
     }
+
+    public String getOwnerNric() {
+        return ownerNric;
+    }
+
+    public void setOwnerNric(String ownerNric) {
+        this.ownerNric = ownerNric;
+    }
+
+    public String getChassisNum() {
+        return chassisNum;
+    }
+
+    public void setChassisNum(String chassisNum) {
+        this.chassisNum = chassisNum;
+    }
+    
 }

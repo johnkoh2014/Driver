@@ -46,8 +46,7 @@ public class SignupServlet extends HttpServlet {
         String email = request.getParameter("email");
         String passwordEntered = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
-        String handphone = request.getParameter("handphone");        
-        String nric = request.getParameter("nric");  
+        String handphone = request.getParameter("handphone");      
         
         Validation validation = new Validation();
         String err = validation.isValidPassword(passwordEntered, confirmPassword);
@@ -62,7 +61,7 @@ public class SignupServlet extends HttpServlet {
             view.forward(request, response);
         } else {
             DriverDAO driverDAO = new DriverDAO();
-            errors = driverDAO.addDriver(fullname, email, passwordEntered, handphone, nric);
+            errors = driverDAO.addDriver(fullname, email, passwordEntered, handphone);
             if (errors == null || errors.size() == 0) {
                 Driver user = driverDAO.authenticateUser(email, passwordEntered);
                 session.setAttribute("loggedInUser", user);
