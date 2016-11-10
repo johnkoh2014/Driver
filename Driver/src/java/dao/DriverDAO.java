@@ -226,7 +226,7 @@ public class DriverDAO {
         return driver;
     }
 
-    public ArrayList<String> updateDriver(int user_id, String token, String nName, String nMobile, String nric) throws UnsupportedEncodingException, IOException {
+    public ArrayList<String> updateDriver(int user_id, String token, String nName, String nMobile) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/user/edit_profile";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -239,7 +239,6 @@ public class DriverDAO {
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("nName", nName));
         urlParameters.add(new BasicNameValuePair("nMobile", nMobile));
-        urlParameters.add(new BasicNameValuePair("nric", nric));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
