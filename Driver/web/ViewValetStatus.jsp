@@ -35,9 +35,20 @@
                             <h1>MY APPOINTMENTS</h1>
                         </div>
                         <div class="row">
-                            <%                                    int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
+                            <%                                    
+//                                int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
                                 int offerStatus = (int) session.getAttribute("offerStatus");
                                 String status = "VALET JOB NOT STARTED";
+                                
+
+                                int scheduleId = (int) session.getAttribute("scheduleId");
+                                AppointmentDAO aDAO = new AppointmentDAO();
+                                Appointment appointment = aDAO.getAppointmentById(id, token, scheduleId);
+                                ValetDriver vDriver = appointment.getValetDriver();
+                                String valetHp = vDriver.getHandphone();
+                                String valetName = vDriver.getName();
+                                ValetRequest vRequest = appointment.getToValet();
+                                int valetRequestStatus = vRequest.getStatus();
                                 if (valetRequestStatus == 3) {
                                     status = "VALET JOB NOT STARTED";
                                 } else if (valetRequestStatus == 4) {
@@ -47,14 +58,6 @@
                                 } else if (valetRequestStatus == 6) {
                                     status = "ON THE WAY TO DROP OFF POINT";
                                 }
-
-                                int scheduleId = (int) session.getAttribute("scheduleId");
-                                AppointmentDAO aDAO = new AppointmentDAO();
-                                Appointment appointment = aDAO.getAppointmentById(id, token, scheduleId);
-                                ValetDriver vDriver = appointment.getValetDriver();
-                                String valetHp = vDriver.getHandphone();
-                                String valetName = vDriver.getName();
-                                ValetRequest vRequest = appointment.getToValet();
                                 int requestId = vRequest.getId();
                                 //                    int offerId = vRequest.getOfferId();
                                 session.setAttribute("requestId", requestId);

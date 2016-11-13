@@ -85,22 +85,23 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div style="color:white"><b>Service Time</b></div>
+                                        <div style="color:white"><b>Available Service Time</b></div>
                                         <div class="form-group col-sm-12">
-                                            <div class='input-group date' id='time'>
+                                            <div class='col-sm-12 input-group date' id='time'>
+                                                <select class="chosen-select chosen-transparent form-control" name="time"></select>
                                                 <!--<form id='' action="" role="form">-->
-                                                <input type='text' name="time" class="form-control dt" id="inputTime" readonly style="color: white"/>
+                                                <!--<input type='text' name="time" class="form-control dt" id="inputTime" readonly style="color: white"/>-->
                                                 <!--</form>-->
 
-                                                <span class="input-group-addon">
+<!--                                                <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-time"></span>
-                                                </span>
+                                                </span>-->
                                             </div>
                                         </div>
                                         <div class="margin-top-15"><b>Would you like to have Valet?</b></div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <input type="radio"  id="valetYes" value="true" name="valet" disabled="">
+                                                <input type="radio"  id="valetYes" value="true" name="valet">
                                                 <label for="valetYes" class="control-label">YES (Coming Soon)</label>
                                             </div>
                                             <div class="col-sm-12">
@@ -166,13 +167,6 @@
         </script>
         <!--DATETIME-->
         <script type="text/javascript">
-//            $(".date").each(function () {
-//                $(this).datetimepicker({
-//                    format: 'YYYY-MM-DD HH',
-//                    minDate: new Date(),
-//                    ignoreReadonly: true
-//                });
-//            });
             $("#date").datetimepicker({
                 format: 'YYYY-MM-DD',
                 minDate: new Date(),
@@ -197,6 +191,37 @@
         </script>
         <script>
             intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
+        </script>
+        <script>
+            $('#date').on('dp.show dp.update dp.change', function (e) {
+//                alert(e.date.format());
+                var val = $("#dateInput").val();
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://119.81.43.85/erp/schedule/get_available_timeslots',
+                    crossDomain: true,
+                    data: {
+                        "token": "<%=token%>",
+                        "user_id": "<%=id%>",
+                        "shop_id": "1",
+                        "date": val
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var availTime = '<select class="chosen-select chosen-transparent form-control" name="time">';
+                        $.each(data.payload.available_timeslots, function () {
+                            var time = this.replace(",", " - ");
+                            availTime += '<option value = "' + time + '">' + time + '</option>'
+                        });
+                        availTime += '</select>';
+                        console.log(availTime);
+                        document.getElementById("time").innerHTML = availTime;
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
         </script>
     </body>
 </html>
