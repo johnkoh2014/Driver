@@ -462,13 +462,14 @@ public class AppointmentDAO {
 //        String dropOffPostal = dropOffAddress.substring(dropOffAddress.lastIndexOf(" "));
         String address = pickUpAddress.substring(0, pickUpAddress.lastIndexOf(" "));
         String postal = "Singapore(" + pickUpAddress.substring(pickUpAddress.lastIndexOf(" ") + 1) + ")";
-        
+        String fullAddress = address + "," + postal;
         String wsAddress = dropOffAddress.substring(0, dropOffAddress.lastIndexOf(" "));
         String wsPostal = "Singapore(" + dropOffAddress.substring(dropOffAddress.lastIndexOf(" ") + 1) + ")";
+        String wsFullAddress = wsAddress + "," + wsPostal;
         String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
-                + postal.replace(" ", "+")
+                + fullAddress.replace(" ", "+")
                 + "&destinations="
-                + wsPostal.replace(" ", "+")
+                + wsFullAddress.replace(" ", "+")
                 + "&key=AIzaSyCpdZ3c3twyc93Rv1PL_E6eOvsnUlP3lqg";
 
         HttpClient client = new DefaultHttpClient();
@@ -716,6 +717,12 @@ public class AppointmentDAO {
             valetDriverHandphone = attElement.getAsString();
         }
         
+        attElement = oObj.get("valet_driver_profile_picture");
+        String valetPicture = "";
+        if (attElement != null && !attElement.isJsonNull()) {
+            valetPicture = attElement.getAsString();
+        }
+        
         attElement = oObj.get("workshop_id");
         int workshopId = 0;
         if (attElement != null && !attElement.isJsonNull()) {
@@ -778,13 +785,13 @@ public class AppointmentDAO {
         }
         
         ValetRequest vr = new ValetRequest(valetRequestId, pickUpAddress, pickUpLatitude, pickUpLongitude, dropOffAddress, dropOffLatitude, dropOffLongitude, scheduledPickUpTime, actualPickUpTime, completedTime, valetPrice, offerId, valetRequestStatus);
-        ValetDriver vd = new ValetDriver(valetDriverId, valetDriverEmail, valetDriverName, valetDriverHandphone);
+        ValetDriver vd = new ValetDriver(valetDriverId, valetDriverEmail, valetDriverName, valetDriverHandphone, valetPicture);
         Workshop ws = new Workshop(workshopId, workshopName, workshopOpeningHours, workshopAddress, workshopCategory, workshopBrandsCarried, workshopWebsite);
         appointment = new Appointment(scheduleId, appointmentStartTime, appointmentEndTime, appointmentTitle, vr, vd, ws, finalPrice, estCompletionDateTime);
         return appointment;
 
     }
-            
+     
     public static void main(String[] args) throws ParseException, IOException {
         //getAppointments(374, "edd0b70bd3849edf63c21ffb8d5ed78ef4565bbcffacea8b7a0ee03f2da96063f031cc7d9261baf0138dc0936fae17a8d176cbb7504939aef107c92a403ab6eb9c9c5a0184fb63fab863d48e7ea0b67678e4915b2496bfc742b4883f98a1ebde445f05266ee4517f5a29c3a2e473f4b7fc4537cd74a9eabd293a9126c0d36b85bdf6bd9bd3931ae225ca038f249ba44871cc53e885f6819756f07bde58d65af3cd72c1e2f3a666775a9775e805852deb3c49e750eefeea7814fb05a64b9bf82797a615744725bc146dd5ce58f9940d78f3a457cefaf6867ee485132dc077a870e3c672c7efd18fb635e5eed398e5df28f9383032b16e717f04345fc04b42a2840abf67d661096b6977de90dcc8d1f3e03087f1ccee98f21d2c2cb39b21b72482b757e13447d2951d3d519dcf677e531b187da6e907e8682c67981cce5ac56a757cd0354043b4207c986993e3115dfdeeb9d821addceeea8f4dba57dbf56e5a7c04a82836b4880067a82da742d176729cf257a81348a227b4dddc991584dc2b5034a33462fffc0307b43b7730ad76c5a45758544599662db7562ede00fd609602f7cf9ea13bcf2f159346076b20a45cf236b100b0e3ea483fde8b3391026dbc0f87bdd2572feae9b581f05b2641bc37b727382fc50cd76330215e69227d555730bd89a8b467b47e99c8221f0d5d483021b75327a9edc138a265256a13628de2fe");
         //addAppointment(374, "edd0b70bd3849edf63c21ffb8d5ed78ef4565bbcffacea8b7a0ee03f2da96063f031cc7d9261baf0138dc0936fae17a8d176cbb7504939aef107c92a403ab6eb9c9c5a0184fb63fab863d48e7ea0b67678e4915b2496bfc742b4883f98a1ebde445f05266ee4517f5a29c3a2e473f4b7fc4537cd74a9eabd293a9126c0d36b85bdf6bd9bd3931ae225ca038f249ba44871cc53e885f6819756f07bde58d65af3cd72c1e2f3a666775a9775e805852deb3c49e750eefeea7814fb05a64b9bf82797a615744725bc146dd5ce58f9940d78f3a457cefaf6867ee485132dc077a870e3c672c7efd18fb635e5eed398e5df28f9383032b16e717f04345fc04b42a2840abf67d661096b6977de90dcc8d1f3e03087f1ccee98f21d2c2cb39b21b72482b757e13447d2951d3d519dcf677e531b187da6e907e8682c67981cce5ac56a757cd0354043b4207c986993e3115dfdeeb9d821addceeea8f4dba57dbf56e5a7c04a82836b4880067a82da742d176729cf257a81348a227b4dddc991584dc2b5034a33462fffc0307b43b7730ad76c5a45758544599662db7562ede00fd609602f7cf9ea13bcf2f159346076b20a45cf236b100b0e3ea483fde8b3391026dbc0f87bdd2572feae9b581f05b2641bc37b727382fc50cd76330215e69227d555730bd89a8b467b47e99c8221f0d5d483021b75327a9edc138a265256a13628de2fe", 1, "Test", "2016-12-16 15:00:00", "2016-12-16 15:00:00", 2);

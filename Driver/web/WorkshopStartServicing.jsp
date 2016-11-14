@@ -37,9 +37,12 @@
                     <%                        int scheduleId = (int) session.getAttribute("scheduleId");
                         AppointmentDAO aDAO = new AppointmentDAO();
                         Appointment appointment = aDAO.getAppointmentById(id, token, scheduleId);
+                        int offerStatus = appointment.getOfferStatus();
                         ValetDriver vDriver = appointment.getValetDriver();
                         String valetHp = vDriver.getHandphone();
                         String valetName = vDriver.getName();
+                        String valetPicture = vDriver.getValetPicture();
+                        valetPicture = "http://119.81.43.85/uploads/" + valetPicture;
                         ValetRequest vRequest = appointment.getToValet();
                         int requestId = vRequest.getId();
                         int offerId = vRequest.getOfferId();
@@ -64,8 +67,8 @@
                         <div class="row">
                             <!-- col 12 -->
                             <div>
-                                <%                                    int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
-                                    int offerStatus = (int) session.getAttribute("offerStatus");
+                                <%                                    
+                                    int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
                                     String status = "SERVICE NOT STARTED";
                                     if (offerStatus == 6) {
                                         status = "SERVICING IN PROGRESS";
@@ -118,7 +121,7 @@
                                                         <div class="notification">
 
                                                             <div class="row">
-                                                                <center><img src="images/joshua.jpg" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
+                                                                <center><img src="<%=valetPicture%>" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
                                                             </div>
                                                             <p> </p>
                                                             <div class="row">

@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="css/bootstrap-dropdown-multilevel.css">
 
         <link href="css/minimal.css" rel="stylesheet">
+        <link href="css/custom.css" rel="stylesheet">
         <title>Sign Up</title>
     </head>
     <body class="bg-3">

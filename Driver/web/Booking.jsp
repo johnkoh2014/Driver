@@ -86,8 +86,8 @@
                                             </div>
                                         </div>
                                         <div style="color:white"><b>Available Service Time</b></div>
-                                        <div class="form-group col-sm-12">
-                                            <div class='col-sm-12 input-group date' id='time'>
+                                        <div class="form-group col-xs-12">
+                                            <div class='input-group date' id='time' style="width:100%;">
                                                 <select class="chosen-select chosen-transparent form-control" name="time"></select>
                                                 <!--<form id='' action="" role="form">-->
                                                 <!--<input type='text' name="time" class="form-control dt" id="inputTime" readonly style="color: white"/>-->
@@ -101,11 +101,11 @@
                                         <div class="margin-top-15"><b>Would you like to have Valet?</b></div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <input type="radio"  id="valetYes" value="true" name="valet">
-                                                <label for="valetYes" class="control-label">YES (Coming Soon)</label>
+                                                <input type="radio"  id="valetYes" value="true" name="valet" required>
+                                                <label for="valetYes" class="control-label">YES</label>
                                             </div>
                                             <div class="col-sm-12">
-                                                <input type="radio" id="valetNo" value="false" name="valet" checked="checked">
+                                                <input type="radio" id="valetNo" value="false" name="valet">
                                                 <label for="valetNo" class="control-label">NO</label>
                                             </div>
                                             <div class="col-xs-12">
@@ -172,6 +172,7 @@
                 minDate: new Date(),
                 ignoreReadonly: true
             });
+            
             $("#time").datetimepicker({
                 format: 'LT',
 //                focusOnShow, true,
@@ -193,7 +194,7 @@
             intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
         </script>
         <script>
-            $('#date').on('dp.show dp.update dp.change', function (e) {
+            $('#date').on('dp.update dp.change', function (e) {
 //                alert(e.date.format());
                 var val = $("#dateInput").val();
                 $.ajax({
@@ -221,6 +222,11 @@
                         console.log(data);
                     }
                 });
+            });
+        </script>
+        <script>
+            $(window).load(function(){
+               $("input[type=text].dt").val(''); 
             });
         </script>
     </body>

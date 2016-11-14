@@ -99,13 +99,13 @@
                                                         <div class="text-center">
 
                                                             <% if (dPrice == 0.0) {%>
-                                                            <h3>Quotation Price: $<%=minPrice%> - $<%=maxPrice%></h3>
+                                                            <h3>Quotation Price:<br>$<%=minPrice%> - $<%=maxPrice%></h3>
                                                             <% } else {%>
-                                                            <h3>Diagnostic Price: $<%=diagnosticPrice%></h3>
+                                                            <h3>Diagnostic Price:<br>$<%=diagnosticPrice%></h3>
                                                             <% }%>
 
                                                             <br/>
-                                                            <h5><b>Remark:</b><br/><%=wsInitialComment%></h5>
+                                                            <h5><b>Remarks:</b><br/><%=wsInitialComment%></h5>
                                                             <br/>
                                                             <h5><%=serviceName%></h5>
                                                         </div>

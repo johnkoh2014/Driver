@@ -15,13 +15,15 @@ public class ValetDriver {
     private String email;
     private String handphone;
     private String name;
+    private String valetPicture;
 
     
-    public ValetDriver(int staffId, String email, String name, String handphone) {
+    public ValetDriver(int staffId, String email, String name, String handphone, String valetPicture) {
         this.staffId = staffId;
         this.email = email;
         this.handphone = handphone;
         this.name = name;
+        this.valetPicture = valetPicture;
     }
     
     //getter methods
@@ -50,4 +52,13 @@ public class ValetDriver {
     public String getHandphone() {
         return handphone;
     }
+
+    public String getValetPicture() {
+        return valetPicture;
+    }
+
+    public void setValetPicture(String valetPicture) {
+        this.valetPicture = valetPicture;
+    }
+    
 }

@@ -40,6 +40,8 @@
                         ValetDriver vDriver = appointment.getValetDriver();
                         String valetHp = vDriver.getHandphone();
                         String valetName = vDriver.getName();
+                        String valetPicture = vDriver.getValetPicture();
+                        valetPicture = "http://119.81.43.85/uploads/" + valetPicture;
                         ValetRequest vRequest = appointment.getToValet();
                         int requestId = vRequest.getId();
                         int offerId = vRequest.getOfferId();

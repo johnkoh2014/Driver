@@ -35,11 +35,9 @@
                             <h1>MY APPOINTMENTS</h1>
                         </div>
                         <div class="row">
-                            <%                                    
-//                                int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
+                            <%//                                int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
                                 int offerStatus = (int) session.getAttribute("offerStatus");
                                 String status = "VALET JOB NOT STARTED";
-                                
 
                                 int scheduleId = (int) session.getAttribute("scheduleId");
                                 AppointmentDAO aDAO = new AppointmentDAO();
@@ -47,6 +45,8 @@
                                 ValetDriver vDriver = appointment.getValetDriver();
                                 String valetHp = vDriver.getHandphone();
                                 String valetName = vDriver.getName();
+                                String valetPicture = vDriver.getValetPicture();
+                                valetPicture = "http://119.81.43.85/uploads/" + valetPicture;
                                 ValetRequest vRequest = appointment.getToValet();
                                 int valetRequestStatus = vRequest.getStatus();
                                 if (valetRequestStatus == 3) {
@@ -113,7 +113,7 @@
                                                         <strong><center>VALET DETAILS</center></strong>
                                                     </div>
                                                     <div class="row">
-                                                        <center><img src="images/joshua.jpg" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
+                                                        <center><img src="<%=valetPicture%>" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
                                                     </div>
                                                     <p> </p>
                                                     <div class="row">

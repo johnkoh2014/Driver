@@ -63,7 +63,7 @@ public class SubmitValetServlet extends HttpServlet {
         }
 
         Timestamp appointmentStart = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date parsedDate = dateFormat.parse(appointmentTime);
         appointmentStart = new java.sql.Timestamp(parsedDate.getTime());
 

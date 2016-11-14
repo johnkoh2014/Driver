@@ -3,6 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entity.Driver"%>
+<%@include file="Protect.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,7 +54,8 @@
                     %>
                     --%>
 
-                    <%                        String puTime = (Timestamp) session.getAttribute("pickupTime") + "";
+                    <%  
+                        String puTime = (Timestamp) session.getAttribute("pickupTime") + "";
                         String pickupTime = puTime.substring(0, puTime.lastIndexOf("."));
                         String serviceEndTime = (String) session.getAttribute("serviceEndTime");
                         String appTime = (Timestamp) session.getAttribute("appointmentTime") + "";
@@ -83,19 +85,14 @@
                                     <!--end tile header-->
 
                                     <!-- /tile body -->
-                                    <div class="tile-body text-center"action="#" onsubmit="if (document.getElementById('agree').checked) {
-                                                return true;
-                                            } else {
-                                                alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy');
-                                                return false;
-                                            }">
+                                    <div class="tile-body text-center">
 
 
 
 
                                         <center><b>VALET CHARGE</b></center>
                                         <p></p>
-                                        <h2><center><strong>$40</strong></center></h2>
+                                        <h2><center><strong><span id="valetPrice">$40</span></strong></center></h2>
                                         <p></p>
                                         <center><b>Valet Appointment</b></center>
                                         <p></p>
@@ -122,10 +119,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="notification">
-                                                <center><input type="checkbox" name="checkbox" id="agree" value="check" id="agree" /> <label for="agree">I have read and agree to the terms and conditions</label></center>
+                                            <!--<div class="notification">-->
+                                                <!--<center><input type="checkbox" name="checkbox" id="agree" value="check" id="agree" /> <label for="agree">I have read and agree to the terms and conditions</label></center>-->
                                                 <!--                                                        <input type="submit" name="submit" value="submit" />-->
-                                            </div>
+                                            <!--</div>-->
 
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
@@ -181,12 +178,28 @@
         <script src="js/minimal.min.js"></script>
 
         <script>
-                                        $(function () {
-
-
-
-                                        })
-
+//            $(document).ready(function () {
+//                $.ajax({
+//                    type: 'POST',
+//                    url: 'http://119.81.43.85/erp/settings/retrieve_settings',
+//                    crossDomain: true,
+//                    data: {
+//                        "setting_id": "5",
+//                        "token": "<%=user.getToken()%>",
+//                        "staff_id": "<%//=user.getStaffId()%>"
+//                    },
+//                    dataType: 'json',
+//                    success: function (data) {
+//                        var valetPrice = data.payload.setting.value;
+//                        valetPrice = "$" + valetPrice;
+////                        console.log(picture);
+////                        var image = '<img class="img-thumbnail-small"src="http://119.81.43.85/uploads/' + picture + '"/>';
+//                        $("#valetPrice").html(valetPrice);
+//                    },
+//                    error: function () {
+//                    }
+//                });
+//            });
         </script>
         <script>
             intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
