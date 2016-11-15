@@ -92,7 +92,7 @@
 
                                         <center><b>VALET CHARGE</b></center>
                                         <p></p>
-                                        <h2><center><strong><span id="valetPrice">$40</span></strong></center></h2>
+                                        <h2><center><strong><span id="valetPrice"></span></strong></center></h2>
                                         <p></p>
                                         <center><b>Valet Appointment</b></center>
                                         <p></p>
@@ -178,28 +178,26 @@
         <script src="js/minimal.min.js"></script>
 
         <script>
-//            $(document).ready(function () {
-//                $.ajax({
-//                    type: 'POST',
-//                    url: 'http://119.81.43.85/erp/settings/retrieve_settings',
-//                    crossDomain: true,
-//                    data: {
-//                        "setting_id": "5",
-//                        "token": "<%=user.getToken()%>",
-//                        "staff_id": "<%//=user.getStaffId()%>"
-//                    },
-//                    dataType: 'json',
-//                    success: function (data) {
-//                        var valetPrice = data.payload.setting.value;
-//                        valetPrice = "$" + valetPrice;
-////                        console.log(picture);
-////                        var image = '<img class="img-thumbnail-small"src="http://119.81.43.85/uploads/' + picture + '"/>';
-//                        $("#valetPrice").html(valetPrice);
-//                    },
-//                    error: function () {
-//                    }
-//                });
-//            });
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://119.81.43.85/erp/settings/retrieve_settings',
+                    crossDomain: true,
+                    data: {
+                        "setting_id": "5",
+                        "token": "<%=token%>",
+                        "user_id": "<%=id%>"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var valetPrice = data.payload.setting.value;
+                        valetPrice = "$" + valetPrice;
+                        $("#valetPrice").html(valetPrice);
+                    },
+                    error: function () {
+                    }
+                });
+            });
         </script>
         <script>
             intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");

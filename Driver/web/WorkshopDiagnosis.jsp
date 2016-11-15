@@ -35,7 +35,8 @@
                         </div>
                     </div>
                     <!-- /page header -->
-                    <%                        int scheduleId = (int) session.getAttribute("scheduleId");
+                    <%                        
+                        int scheduleId = (int) session.getAttribute("scheduleId");
                         AppointmentDAO aDAO = new AppointmentDAO();
                         Appointment appointment = aDAO.getAppointmentById(id, token, scheduleId);
                         int offerStatus = appointment.getOfferStatus();
@@ -55,6 +56,15 @@
                         String wsCategory = ws.getCategory();
                         String wsBrandsCarried = ws.getBrandsCarried();
                         String wsWebsite = ws.getWebsite();
+                        
+                        
+                        if (offerStatus == 5 || offerStatus == 6) {
+                            response.sendRedirect("WorkshopStartServicing.jsp");
+                            return;
+                        } else if (offerStatus == 7) {
+                            response.sendRedirect("WorkshopCompleteServicing.jsp");
+                            return;
+                        }
 
 
                     %>

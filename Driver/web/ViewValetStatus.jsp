@@ -36,7 +36,7 @@
                         </div>
                         <div class="row">
                             <%//                                int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
-                                int offerStatus = (int) session.getAttribute("offerStatus");
+//                                int offerStatus = (int) session.getAttribute("offerStatus");
                                 String status = "VALET JOB NOT STARTED";
 
                                 int scheduleId = (int) session.getAttribute("scheduleId");
@@ -48,7 +48,9 @@
                                 String valetPicture = vDriver.getValetPicture();
                                 valetPicture = "http://119.81.43.85/uploads/" + valetPicture;
                                 ValetRequest vRequest = appointment.getToValet();
+                                int offerStatus = appointment.getOfferStatus();
                                 int valetRequestStatus = vRequest.getStatus();
+                                String url = "";
                                 if (valetRequestStatus == 3) {
                                     status = "VALET JOB NOT STARTED";
                                 } else if (valetRequestStatus == 4) {
@@ -57,6 +59,16 @@
                                     status = "REACHED PICK UP POINT";
                                 } else if (valetRequestStatus == 6) {
                                     status = "ON THE WAY TO DROP OFF POINT";
+                                } else if (valetRequestStatus == 7) {
+                                    if (offerStatus == 3 || offerStatus == 4) {
+                                        url = "WorkshopDiagnosis.jsp";
+                                    } else if (offerStatus == 5 || offerStatus == 6) {
+                                        url = "WorkshopStartServicing.jsp";
+                                    } else if (offerStatus == 7) {
+                                        url = "WorkshopCompleteServicing.jsp";
+                                    }
+                                    response.sendRedirect(url);
+                                    return;
                                 }
                                 int requestId = vRequest.getId();
                                 //                    int offerId = vRequest.getOfferId();

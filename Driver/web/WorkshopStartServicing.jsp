@@ -58,7 +58,10 @@
                         finalPrice = finalPrice.substring(0, finalPrice.lastIndexOf("."));
                         String estCompletion = appointment.getServiceEstCompleteTime() + "";
                         estCompletion = estCompletion.substring(0, estCompletion.lastIndexOf("."));
-
+                        if (offerStatus == 7) {
+                            response.sendRedirect("WorkshopCompleteServicing.jsp");
+                            return;
+                        }
 
                     %>
                     <!-- content main container -->

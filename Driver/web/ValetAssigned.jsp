@@ -81,7 +81,7 @@
                                         <div class="text-center">           
                                             <h3>You have been assigned a Valet</h3>   
                                             <p></p>
-                                            <h3>$40</h3>
+                                            <h3><span id="valetPrice"></span></h3>
                                             <p></p>
                                             <h5>Please proceed to make payment</h5>
                                             <p></p>
@@ -238,6 +238,28 @@
 
         <script>
             intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
+        </script>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://119.81.43.85/erp/settings/retrieve_settings',
+                    crossDomain: true,
+                    data: {
+                        "setting_id": "5",
+                        "token": "<%=token%>", 
+                        "user_id": "<%=id%>"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var valetPrice = data.payload.setting.value;
+                        valetPrice = "$" + valetPrice;
+                        $("#valetPrice").html(valetPrice);
+                    },
+                    error: function () {
+                    }
+                });
+            });
         </script>
     </body>
 </html>
