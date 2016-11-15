@@ -693,6 +693,12 @@ public class AppointmentDAO {
             offerId = attElement.getAsInt();
         }
         
+        attElement = oObj.get("offer_status");
+        int offerStatus = 0;
+        if (attElement != null && !attElement.isJsonNull()) {
+            offerStatus = attElement.getAsInt();
+        }
+        
         attElement = oObj.get("valet_driver_id");
         int valetDriverId = 0;
         if (attElement != null && !attElement.isJsonNull()) {
@@ -787,7 +793,7 @@ public class AppointmentDAO {
         ValetRequest vr = new ValetRequest(valetRequestId, pickUpAddress, pickUpLatitude, pickUpLongitude, dropOffAddress, dropOffLatitude, dropOffLongitude, scheduledPickUpTime, actualPickUpTime, completedTime, valetPrice, offerId, valetRequestStatus);
         ValetDriver vd = new ValetDriver(valetDriverId, valetDriverEmail, valetDriverName, valetDriverHandphone, valetPicture);
         Workshop ws = new Workshop(workshopId, workshopName, workshopOpeningHours, workshopAddress, workshopCategory, workshopBrandsCarried, workshopWebsite);
-        appointment = new Appointment(scheduleId, appointmentStartTime, appointmentEndTime, appointmentTitle, vr, vd, ws, finalPrice, estCompletionDateTime);
+        appointment = new Appointment(scheduleId, appointmentStartTime, appointmentEndTime, appointmentTitle, vr, vd, ws, finalPrice, estCompletionDateTime, offerStatus);
         return appointment;
 
     }
