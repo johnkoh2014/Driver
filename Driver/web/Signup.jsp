@@ -72,23 +72,23 @@
                         <form id="form-signin" class="form-signin" action = "SignupServlet" method= "post">
                             <section>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="fullname" value="<%=name%>" placeholder="Fullname">
+                                    <input type="text" class="form-control" name="fullname" value="<%=name%>" placeholder="Fullname" required>
                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="email" class="form-control" name="email" value="<%=email%>" placeholder="Email">
+                                    <input type="email" class="form-control" name="email" value="<%=email%>" placeholder="Email" required>
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="tel" class="form-control" name="handphone" value="<%=handphone%>" placeholder="Mobile Number">
+                                    <input type="tel" class="form-control" name="handphone" value="<%=handphone%>" placeholder="Mobile Number" required>
                                     <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                 </div> 
                                 <div class="input-group">
-                                    <input type="password" class="form-control" name="password" placeholder="Password" id="password" data-toggle="tooltip" data-placement="top" title="" data-original-title="Password must be at least 8 characters long">
+                                    <input type="password" class="form-control" name="password" placeholder="Password" id="password" data-toggle="tooltip" data-placement="top" title="" data-original-title="Password must be at least 8 characters long" required>
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
+                                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required>
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                 </div>
 

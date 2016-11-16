@@ -169,11 +169,16 @@
                                                                 String finalPrice = appointment.getServiceFinalPrice() + "";
                                                                 finalPrice = finalPrice.substring(0, finalPrice.lastIndexOf("."));
                                                                 Timestamp estCompletionTime = appointment.getServiceEstCompleteTime();
+                                                                String finalComment = appointment.getWsFinalComment();
                                                         %>
 
                                                         <div>
                                                             <div class="row">
                                                                 <center><h1><strong>$<%=finalPrice%></strong></h1></center>
+                                                            </div>
+                                                            <p></p>
+                                                            <div class="row">
+                                                                <center>Remarks:<br><%=finalComment%></center>
                                                             </div>
                                                             <p></p>
                                                             <div class="row">                                               

@@ -26,6 +26,9 @@ public class Appointment {
     private Workshop workshop;
     private double serviceFinalPrice;
     private Timestamp serviceEstCompleteTime;
+    private String wsInitialComment;
+    private String driverInitialComment;
+    private String wsFinalComment;
 
     public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, String shopName, int offerStatus) {
         this.id = id;
@@ -57,7 +60,7 @@ public class Appointment {
         this.offerStatus = offerStatus;
     }
 
-    public Appointment(int id, Timestamp appointmentStart, Timestamp appointmentEnd, String appointmentTitle, ValetRequest toValet, ValetDriver valetDriver, Workshop workshop, double serviceFinalPrice, Timestamp serviceEstCompleteTime, int offerStatus) {
+    public Appointment(int id, Timestamp appointmentStart, Timestamp appointmentEnd, String appointmentTitle, ValetRequest toValet, ValetDriver valetDriver, Workshop workshop, double serviceFinalPrice, Timestamp serviceEstCompleteTime, int offerStatus, String wsInitialComment, String driverInitialComment, String wsFinalComment) {
         this.id = id;
         this.appointmentStart = appointmentStart;
         this.appointmentEnd = appointmentEnd;
@@ -68,6 +71,9 @@ public class Appointment {
         this.serviceFinalPrice = serviceFinalPrice;
         this.serviceEstCompleteTime = serviceEstCompleteTime;
         this.offerStatus = offerStatus;
+        this.wsInitialComment = wsInitialComment;
+        this.driverInitialComment = driverInitialComment;
+        this.wsFinalComment = wsFinalComment;
     }
 
     public int getId() {
@@ -149,5 +155,30 @@ public class Appointment {
     public void setServiceEstCompleteTime(Timestamp serviceEstCompleteTime) {
         this.serviceEstCompleteTime = serviceEstCompleteTime;
     }
+
+    public String getWsInitialComment() {
+        return wsInitialComment;
+    }
+
+    public void setWsInitialComment(String wsInitialComment) {
+        this.wsInitialComment = wsInitialComment;
+    }
+
+    public String getDriverInitialComment() {
+        return driverInitialComment;
+    }
+
+    public void setDriverInitialComment(String driverInitialComment) {
+        this.driverInitialComment = driverInitialComment;
+    }
+
+    public String getWsFinalComment() {
+        return wsFinalComment;
+    }
+
+    public void setWsFinalComment(String wsFinalComment) {
+        this.wsFinalComment = wsFinalComment;
+    }
+    
 
 }

@@ -790,10 +790,28 @@ public class AppointmentDAO {
             finalPrice = attElement.getAsDouble();
         }
         
+        attElement = oObj.get("ws_initial_comment");
+        String wsInitialComment = "";
+        if (attElement != null && !attElement.isJsonNull()) {
+            wsInitialComment = attElement.getAsString();
+        }
+        
+        attElement = oObj.get("driver_initial_comment");
+        String driverInitialComment = "";
+        if (attElement != null && !attElement.isJsonNull()) {
+            driverInitialComment = attElement.getAsString();
+        }
+        
+        attElement = oObj.get("ws_final_comment");
+        String wsFinalComment = "";
+        if (attElement != null && !attElement.isJsonNull()) {
+            wsFinalComment = attElement.getAsString();
+        }
+        
         ValetRequest vr = new ValetRequest(valetRequestId, pickUpAddress, pickUpLatitude, pickUpLongitude, dropOffAddress, dropOffLatitude, dropOffLongitude, scheduledPickUpTime, actualPickUpTime, completedTime, valetPrice, offerId, valetRequestStatus);
         ValetDriver vd = new ValetDriver(valetDriverId, valetDriverEmail, valetDriverName, valetDriverHandphone, valetPicture);
         Workshop ws = new Workshop(workshopId, workshopName, workshopOpeningHours, workshopAddress, workshopCategory, workshopBrandsCarried, workshopWebsite);
-        appointment = new Appointment(scheduleId, appointmentStartTime, appointmentEndTime, appointmentTitle, vr, vd, ws, finalPrice, estCompletionDateTime, offerStatus);
+        appointment = new Appointment(scheduleId, appointmentStartTime, appointmentEndTime, appointmentTitle, vr, vd, ws, finalPrice, estCompletionDateTime, offerStatus, wsInitialComment, driverInitialComment, wsFinalComment);
         return appointment;
 
     }
