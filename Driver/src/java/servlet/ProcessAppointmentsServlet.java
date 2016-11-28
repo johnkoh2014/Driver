@@ -5,8 +5,16 @@
  */
 package servlet;
 
+import dao.AppointmentDAO;
+import entity.Appointment;
+import entity.Driver;
+import entity.ValetRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +39,7 @@ public class ProcessAppointmentsServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, UnsupportedEncodingException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
         String vrStatus = request.getParameter("valetRequestStatus");
@@ -50,16 +58,22 @@ public class ProcessAppointmentsServlet extends HttpServlet {
             scheduleId = Integer.parseInt(sId);
         }
 
+        
+        Driver user = (Driver) session.getAttribute("loggedInUser");
+        AppointmentDAO aDAO = new AppointmentDAO();
+        Appointment appointment = aDAO.getAppointmentById(user.getId(), user.getToken(), scheduleId);
+        ValetRequest vr = appointment.getToValet();
+        valetRequestStatus = vr.getStatus();
+        
         session.setAttribute("valetRequestStatus", valetRequestStatus);
         session.setAttribute("offerStatus", offerStatus);
         session.setAttribute("scheduleId", scheduleId);
-        
         String url = "MyAppointments.jsp";
         if (valetRequestStatus == 1) {
             url = "WaitingForValet.jsp";
-        } else if (valetRequestStatus == 2){
+        } else if (valetRequestStatus == 2) {
             url = "ValetAssigned.jsp";
-        }else if(valetRequestStatus == 3 || valetRequestStatus == 4 || valetRequestStatus == 5 || valetRequestStatus == 6) {
+        } else if (valetRequestStatus == 3 || valetRequestStatus == 4 || valetRequestStatus == 5 || valetRequestStatus == 6) {
             url = "ViewValetStatus.jsp";
         } else if (valetRequestStatus == 7) {
             if (offerStatus == 3 || offerStatus == 4) {
@@ -84,8 +98,12 @@ public class ProcessAppointmentsServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException, UnsupportedEncodingException {
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ProcessAppointmentsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -98,8 +116,12 @@ public class ProcessAppointmentsServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException, UnsupportedEncodingException {
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ProcessAppointmentsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

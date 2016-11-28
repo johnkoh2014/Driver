@@ -33,7 +33,7 @@ public class DriverDAO {
 
     private final String USER_AGENT = "Mozilla/5.0";
 
-    public ArrayList<String> addDriver(String name, String email, String password, String handphone, String nric) throws UnsupportedEncodingException, IOException {
+    public ArrayList<String> addDriver(String name, String email, String password, String handphone) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/user/signup";
 
         HttpClient client = new DefaultHttpClient();
@@ -47,7 +47,6 @@ public class DriverDAO {
         urlParameters.add(new BasicNameValuePair("password", password));
         urlParameters.add(new BasicNameValuePair("email", email));
         urlParameters.add(new BasicNameValuePair("handphone", handphone));
-        urlParameters.add(new BasicNameValuePair("nric", nric));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -206,7 +205,19 @@ public class DriverDAO {
                 if (!attElement.isJsonNull()) {
                     control = attElement.getAsString();
                 }
-                Vehicle vehicle = new Vehicle(vid, make, model, year, plate_number, user_id, car_color, control);
+
+                attElement = qrObj.get("owner_nric");
+                String ownerNric = "";
+                if (!attElement.isJsonNull()) {
+                    ownerNric = attElement.getAsString();
+                }
+
+                attElement = qrObj.get("chassis_num");
+                String chassisNum = "";
+                if (!attElement.isJsonNull()) {
+                    chassisNum = attElement.getAsString();
+                }
+                Vehicle vehicle = new Vehicle(vid, make, model, year, plate_number, user_id, car_color, control, ownerNric, chassisNum);
                 vList.add(vehicle);
             }
 
@@ -215,7 +226,7 @@ public class DriverDAO {
         return driver;
     }
 
-    public ArrayList<String> updateDriver(int user_id, String token, String nName, String nMobile, String nric) throws UnsupportedEncodingException, IOException {
+    public ArrayList<String> updateDriver(int user_id, String token, String nName, String nMobile) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/user/edit_profile";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -228,7 +239,6 @@ public class DriverDAO {
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("nName", nName));
         urlParameters.add(new BasicNameValuePair("nMobile", nMobile));
-        urlParameters.add(new BasicNameValuePair("nric", nric));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 

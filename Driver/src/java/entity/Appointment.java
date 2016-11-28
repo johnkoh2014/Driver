@@ -7,13 +7,12 @@ package entity;
 
 import java.sql.Timestamp;
 
-
-
 /**
  *
  * @author User
  */
 public class Appointment {
+
     private int id;
     private int shopId;
     private Timestamp appointmentStart;
@@ -27,8 +26,11 @@ public class Appointment {
     private Workshop workshop;
     private double serviceFinalPrice;
     private Timestamp serviceEstCompleteTime;
-    
-    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd,String shopName,int offerStatus) {
+    private String wsInitialComment;
+    private String driverInitialComment;
+    private String wsFinalComment;
+
+    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, String shopName, int offerStatus) {
         this.id = id;
         this.shopId = shopId;
         this.appointmentStart = appointmentStart;
@@ -36,8 +38,8 @@ public class Appointment {
         this.shopName = shopName;
         this.offerStatus = offerStatus;
     }
-    
-    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, ValetRequest toValet, String shopName,int offerStatus) {
+
+    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, ValetRequest toValet, String shopName, int offerStatus) {
         this.id = id;
         this.shopId = shopId;
         this.appointmentStart = appointmentStart;
@@ -46,8 +48,8 @@ public class Appointment {
         this.shopName = shopName;
         this.offerStatus = offerStatus;
     }
-    
-    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, ValetRequest toValet, ValetRequest returnValet,String shopName,int offerStatus) {
+
+    public Appointment(int id, int shopId, Timestamp appointmentStart, Timestamp appointmentEnd, ValetRequest toValet, ValetRequest returnValet, String shopName, int offerStatus) {
         this.id = id;
         this.shopId = shopId;
         this.appointmentStart = appointmentStart;
@@ -57,8 +59,8 @@ public class Appointment {
         this.shopName = shopName;
         this.offerStatus = offerStatus;
     }
-    
-    public Appointment(int id, Timestamp appointmentStart, Timestamp appointmentEnd, String appointmentTitle, ValetRequest toValet, ValetDriver valetDriver, Workshop workshop, double serviceFinalPrice, Timestamp serviceEstCompleteTime) {
+
+    public Appointment(int id, Timestamp appointmentStart, Timestamp appointmentEnd, String appointmentTitle, ValetRequest toValet, ValetDriver valetDriver, Workshop workshop, double serviceFinalPrice, Timestamp serviceEstCompleteTime, int offerStatus, String wsInitialComment, String driverInitialComment, String wsFinalComment) {
         this.id = id;
         this.appointmentStart = appointmentStart;
         this.appointmentEnd = appointmentEnd;
@@ -68,28 +70,32 @@ public class Appointment {
         this.workshop = workshop;
         this.serviceFinalPrice = serviceFinalPrice;
         this.serviceEstCompleteTime = serviceEstCompleteTime;
+        this.offerStatus = offerStatus;
+        this.wsInitialComment = wsInitialComment;
+        this.driverInitialComment = driverInitialComment;
+        this.wsFinalComment = wsFinalComment;
     }
-        
+
     public int getId() {
         return id;
     }
-    
+
     public int getShopId() {
         return shopId;
     }
-    
+
     public Timestamp getAppointmentStart() {
         return appointmentStart;
     }
-    
+
     public Timestamp getAppointmentEnd() {
         return appointmentEnd;
     }
-    
+
     public ValetRequest getToValet() {
         return toValet;
     }
-    
+
     public ValetRequest getReturnValet() {
         return returnValet;
     }
@@ -149,5 +155,30 @@ public class Appointment {
     public void setServiceEstCompleteTime(Timestamp serviceEstCompleteTime) {
         this.serviceEstCompleteTime = serviceEstCompleteTime;
     }
+
+    public String getWsInitialComment() {
+        return wsInitialComment;
+    }
+
+    public void setWsInitialComment(String wsInitialComment) {
+        this.wsInitialComment = wsInitialComment;
+    }
+
+    public String getDriverInitialComment() {
+        return driverInitialComment;
+    }
+
+    public void setDriverInitialComment(String driverInitialComment) {
+        this.driverInitialComment = driverInitialComment;
+    }
+
+    public String getWsFinalComment() {
+        return wsFinalComment;
+    }
+
+    public void setWsFinalComment(String wsFinalComment) {
+        this.wsFinalComment = wsFinalComment;
+    }
     
+
 }

@@ -35,9 +35,22 @@
                             <h1>MY APPOINTMENTS</h1>
                         </div>
                         <div class="row">
-                            <%                                    int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
-                                int offerStatus = (int) session.getAttribute("offerStatus");
+                            <%//                                int valetRequestStatus = (int) session.getAttribute("valetRequestStatus");
+//                                int offerStatus = (int) session.getAttribute("offerStatus");
                                 String status = "VALET JOB NOT STARTED";
+
+                                int scheduleId = (int) session.getAttribute("scheduleId");
+                                AppointmentDAO aDAO = new AppointmentDAO();
+                                Appointment appointment = aDAO.getAppointmentById(id, token, scheduleId);
+                                ValetDriver vDriver = appointment.getValetDriver();
+                                String valetHp = vDriver.getHandphone();
+                                String valetName = vDriver.getName();
+                                String valetPicture = vDriver.getValetPicture();
+                                valetPicture = "http://119.81.43.85/uploads/" + valetPicture;
+                                ValetRequest vRequest = appointment.getToValet();
+                                int offerStatus = appointment.getOfferStatus();
+                                int valetRequestStatus = vRequest.getStatus();
+                                String url = "";
                                 if (valetRequestStatus == 3) {
                                     status = "VALET JOB NOT STARTED";
                                 } else if (valetRequestStatus == 4) {
@@ -46,15 +59,17 @@
                                     status = "REACHED PICK UP POINT";
                                 } else if (valetRequestStatus == 6) {
                                     status = "ON THE WAY TO DROP OFF POINT";
+                                } else if (valetRequestStatus == 7) {
+                                    if (offerStatus == 3 || offerStatus == 4) {
+                                        url = "WorkshopDiagnosis.jsp";
+                                    } else if (offerStatus == 5 || offerStatus == 6) {
+                                        url = "WorkshopStartServicing.jsp";
+                                    } else if (offerStatus == 7) {
+                                        url = "WorkshopCompleteServicing.jsp";
+                                    }
+                                    response.sendRedirect(url);
+                                    return;
                                 }
-
-                                int scheduleId = (int) session.getAttribute("scheduleId");
-                                AppointmentDAO aDAO = new AppointmentDAO();
-                                Appointment appointment = aDAO.getAppointmentById(id, token, scheduleId);
-                                ValetDriver vDriver = appointment.getValetDriver();
-                                String valetHp = vDriver.getHandphone();
-                                String valetName = vDriver.getName();
-                                ValetRequest vRequest = appointment.getToValet();
                                 int requestId = vRequest.getId();
                                 //                    int offerId = vRequest.getOfferId();
                                 session.setAttribute("requestId", requestId);
@@ -110,7 +125,7 @@
                                                         <strong><center>VALET DETAILS</center></strong>
                                                     </div>
                                                     <div class="row">
-                                                        <center><img src="images/joshua.jpg" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
+                                                        <center><img src="<%=valetPicture%>" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
                                                     </div>
                                                     <p> </p>
                                                     <div class="row">

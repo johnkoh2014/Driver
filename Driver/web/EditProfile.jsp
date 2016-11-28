@@ -93,12 +93,6 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="input04" class="col-sm-2 control-label">NRIC (Last 5 characters e.g. 4567D) *</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input04" name="nric" value="<%=nric%>" required>
-                                                </div>
-                                            </div>
                                             <!--form footer for submit-->
                                             <div class="form-group form-footer text-center">
                                                 <button type="submit" class="btn btn-primary">Edit Profile</button>

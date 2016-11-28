@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Car</title>
+        <title>Edit Car</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="solid-bg-3">
@@ -30,7 +30,7 @@
 
                         <!--<h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Get Quotes</h2>-->
                         <div class="margin-top-15 text-center">
-                            <h2>Add New Car</h2>
+                            <h2>Edit Car</h2>
                         </div>
                     </div>
                     <!-- /page header -->
@@ -46,6 +46,8 @@
                         String plateNumber = vehicle.getPlateNumber();
                         String color = vehicle.getColour();
                         String control = vehicle.getControl();
+                        String ownerNric = vehicle.getOwnerNric();
+                        String chassisNum = vehicle.getChassisNum();
 
                         HashMap<Integer, ArrayList<String>> list = vDAO.retrieveAllCarBrands(id, token);
                         ArrayList<String> carBrands = new ArrayList<String>();
@@ -119,6 +121,20 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="input07" class="col-sm-2 control-label">Owner Nric</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="input07" name="ownerNric" value="<%=ownerNric%>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Last 5 characters e.g. 4567D">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="input08" class="col-sm-2 control-label">Chassis Number</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="input08" name="chassisNum" value="<%=chassisNum%>">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label class="col-sm-2 control-label">Transmission Type</label>
                                                 <div class="col-sm-2">
                                                     <%
@@ -153,7 +169,6 @@
                                             <div class="form-group form-footer text-center">
                                                 <input type="hidden" value="<%=vid%>" name="vid"/>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                                <button type="reset" class="btn btn-default">Reset</button>
                                             </div>
                                             <!--end form footer-->
                                         </form>
@@ -194,6 +209,9 @@
         <script type="text/javascript" src="js/custom.js"></script>
         <script>
             intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
+        </script>
+        <script>
+            $('#input07').tooltip();
         </script>
     </body>
 </html>

@@ -80,20 +80,33 @@ public class SelectValetServlet extends HttpServlet {
         String date = request.getParameter("date");
         String time = request.getParameter("time");
         
-        String hours = time.substring(0, time.indexOf(":"));
-        int hoursInt = Integer.parseInt(hours);
-        String mins = time.substring(time.indexOf(":") + 1, time.lastIndexOf(" "));
-        String ampm = time.substring(time.lastIndexOf(" ") + 1);
-        
-        if(ampm.equals("PM")){
-            hoursInt += 12;
-            hours = hoursInt + "";
-        } else {
-            if(hoursInt < 10){
-                hours = "0" + hours;
-            }
+        String serviceStartTime = null;
+        String serviceEndTime = null;
+        if (time != null) {
+            String startTime = time.substring(0, time.indexOf(" -")) + ":00";
+            startTime = startTime.trim();
+            String endTime = time.substring(time.lastIndexOf(" ") + 1) + ":00";
+            endTime = endTime.trim();
+            serviceStartTime = date + " " + startTime;
+            serviceEndTime = date + " " + endTime;
         }
-        String dateTimeString = date + " " + hours + ":" + mins + ":00";
+        
+        
+        
+//        String hours = time.substring(0, time.indexOf(":"));
+//        int hoursInt = Integer.parseInt(hours);
+//        String mins = time.substring(time.indexOf(":") + 1, time.lastIndexOf(" "));
+//        String ampm = time.substring(time.lastIndexOf(" ") + 1);
+//        
+//        if(ampm.equals("PM")){
+//            hoursInt += 12;
+//            hours = hoursInt + "";
+//        } else {
+//            if(hoursInt < 10){
+//                hours = "0" + hours;
+//            }
+//        }
+//        String dateTimeString = date + " " + hours + ":" + mins + ":00";
 
         //for sms
         Offer offer = oDAO.retrieveOfferById(user_id, token, offerId);
@@ -104,27 +117,27 @@ public class SelectValetServlet extends HttpServlet {
         String wsMobileNo = ws.getContact2();
         
 //        String dateTimeString = request.getParameter("dateTime") + ":00:00";
-        Timestamp startTime = null;
-        Timestamp later = null;
-
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            Date parsedDate = dateFormat.parse(dateTimeString);
-            startTime = new java.sql.Timestamp(parsedDate.getTime());
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(startTime.getTime());
-
-            //Subtract the time taken to reach the drop off point from the appointment time
-            cal.add(Calendar.MINUTE, 30);
-
-            //Round down the time to the nearest 15 minute
-            later = new Timestamp(cal.getTime().getTime());
-        } catch (Exception e) {
-        }
-        String serviceStartTime = dateTimeString;
-        String serviceEndTime = later + "";
-        serviceEndTime = serviceEndTime.substring(0, serviceEndTime.lastIndexOf("."));
+//        Timestamp startTime = null;
+//        Timestamp later = null;
+//
+//        try {
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//            Date parsedDate = dateFormat.parse(dateTimeString);
+//            startTime = new java.sql.Timestamp(parsedDate.getTime());
+//
+//            Calendar cal = Calendar.getInstance();
+//            cal.setTimeInMillis(startTime.getTime());
+//
+//            //Subtract the time taken to reach the drop off point from the appointment time
+//            cal.add(Calendar.MINUTE, 30);
+//
+//            //Round down the time to the nearest 15 minute
+//            later = new Timestamp(cal.getTime().getTime());
+//        } catch (Exception e) {
+//        }
+//        String serviceStartTime = dateTimeString;
+//        String serviceEndTime = later + "";
+//        serviceEndTime = serviceEndTime.substring(0, serviceEndTime.lastIndexOf("."));
         
         String title = user.getName();
 
@@ -150,7 +163,7 @@ public class SelectValetServlet extends HttpServlet {
                 session.setAttribute("success", "Appointment booked at " + serviceStartTime);
                 //add sms here
                 SmsNotification smsNotification = new SmsNotification();
-                smsNotification.smsForApptBooking(user.getName(), wsMobileNo, servName, dateTimeString);
+                smsNotification.smsForApptBooking(user.getName(), wsMobileNo, servName, serviceStartTime);
                 response.sendRedirect("MyAppointments.jsp");
             }
         }

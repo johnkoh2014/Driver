@@ -53,6 +53,8 @@
                         ValetDriver vDriver = appointment.getValetDriver();
                         String valetHp = vDriver.getHandphone();
                         String valetName = vDriver.getName();
+                        String valetPicture = vDriver.getValetPicture();
+                        valetPicture = "http://119.81.43.85/uploads/" + valetPicture;
                         ValetRequest vRequest = appointment.getToValet();
                         int requestId = vRequest.getId();
 //                    int offerId = vRequest.getOfferId();
@@ -77,12 +79,20 @@
                                     <!-- /tile body -->
                                     <div class="tile-body">
                                         <div class="text-center">           
-                                            <h3><b>You have been assigned a Valet!</b></h3>   
+                                            <h3>You have been assigned a Valet</h3>   
                                             <p></p>
-                                            Please proceed to make payment.
+                                            <h3><span id="valetPrice"></span></h3>
+                                            <p></p>
+                                            <h5>Please proceed to make payment</h5>
                                             <p></p>
                                             <!--<a href="ValetBookingPayment.jsp" class="btn btn-primary" role="button">Pay to Confirm</a>-->
-                                            <a href="ValetBookingPayment_2.jsp" class="btn btn-primary" role="button">Pay to Confirm</a>
+                                            <!--<a href="ValetBookingPayment_2.jsp" class="btn btn-primary" role="button">Pay to Confirm</a>-->
+                                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                                                <input type="hidden" name="cmd" value="_s-xclick">
+                                                <input type="hidden" name="hosted_button_id" value="T8FPYA3H42GK2">
+                                                <input type="image" src="https://www.paypalobjects.com/en_GB/SG/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal ? The safer, easier way to pay online!">
+                                                <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+                                            </form>
                                         </div>
 
                                         <div class="tab-content">
@@ -93,7 +103,7 @@
                                                         <strong><center>VALET DETAILS</center></strong>
                                                     </div>
                                                     <div class="row">
-                                                        <center><img src="images/joshua.jpg" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
+                                                        <center><img src="<%=valetPicture%>" class="img-thumbnail-small" alt="Valet Profile Pic" width="304" height="236"></center>
                                                     </div>
                                                     <p> </p>
                                                     <div class="row">
@@ -228,6 +238,28 @@
 
         <script>
             intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");
+        </script>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://119.81.43.85/erp/settings/retrieve_settings',
+                    crossDomain: true,
+                    data: {
+                        "setting_id": "5",
+                        "token": "<%=token%>", 
+                        "user_id": "<%=id%>"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var valetPrice = data.payload.setting.value;
+                        valetPrice = "$" + valetPrice;
+                        $("#valetPrice").html(valetPrice);
+                    },
+                    error: function () {
+                    }
+                });
+            });
         </script>
     </body>
 </html>

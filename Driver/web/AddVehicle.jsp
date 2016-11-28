@@ -83,7 +83,7 @@
                                         <form class="form-horizontal" role="form" action="AddVehicle" method="POST">
 
                                             <div class="form-group">
-                                                <label for="input01" class="col-sm-2 control-label">Make</label>
+                                                <label for="input01" class="col-sm-2 control-label">Make *</label>
                                                 <div class="col-sm-10">
                                                     <!--<input type="text" class="form-control" id="input01" name="carMake" required>-->
                                                     <select class="chosen-select chosen-transparent form-control" id="input01" name="carMake">
@@ -98,29 +98,44 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="input02" class="col-sm-2 control-label">Model</label>
+                                                <label for="input02" class="col-sm-2 control-label">Model *</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" id="input02" name="carModel" required>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="input03" class="col-sm-2 control-label">Year of Manufacture</label>
+                                                <label for="input03" class="col-sm-2 control-label">Year of Manufacture *</label>
                                                 <div class="col-sm-10">
                                                     <input type="number" class="form-control" id="input03" name="manufactureYear" min="1996" max="<%=maxYear%>" required>
                                                 </div>
                                             </div>
+                                                
                                             <div class="form-group">
-                                                <label for="input04" class="col-sm-2 control-label">Plate Number</label>
+                                                <label for="input04" class="col-sm-2 control-label">Plate Number *</label>
                                                 <div class="col-sm-10">
                                                     <input class="form-control" id="input04" name="plateNumber" required>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="form-group">
+                                                <label for="input08" class="col-sm-2 control-label">Owner NRIC</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" id="input08" name="nric" data-toggle="tooltip" data-placement="top" title="" data-original-title="Last 5 characters e.g. 4567D">
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="form-group">
+                                                <label for="input07" class="col-sm-2 control-label">Chassis Number</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" id="input07" name="chassisNumber">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="input05" class="col-sm-2 control-label">Car Color</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="input05" name="carColor" required>
+                                                    <input type="text" class="form-control" id="input05" name="carColor">
                                                 </div>
                                             </div>
 
@@ -183,10 +198,13 @@
 
             $(function () {
 
+                
                 //chosen select input
                 $(".chosen-select").chosen({disable_search_threshold: 10});
-
-            })
+            });
+        </script>
+        <script>
+            $('#input08').tooltip();
         </script>
         <script>
             intercom("<%=name%>", "<%=email%>",<%=id%>, "<%=handphone%>");

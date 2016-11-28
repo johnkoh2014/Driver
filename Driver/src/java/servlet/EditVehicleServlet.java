@@ -51,6 +51,8 @@ public class EditVehicleServlet extends HttpServlet {
         String plateNumber = request.getParameter("plateNumber").trim();
         String carColor = request.getParameter("carColor").trim();
         String transmission = request.getParameter("transmission").trim();
+        String ownerNric = request.getParameter("ownerNric").trim();
+        String chassisNum = request.getParameter("chassisNum").trim();
         String v_id = request.getParameter("vid");
         int vid = 0;
         if (v_id != null && v_id.length() > 0){
@@ -63,7 +65,7 @@ public class EditVehicleServlet extends HttpServlet {
         int user_id = user.getId();
         String token = user.getToken();
 
-        ArrayList<String> errorMsg = vDAO.editVehicle(vid, carMake, carModel, year, user_id, plateNumber, token, carColor, transmission);
+        ArrayList<String> errorMsg = vDAO.editVehicle(vid, carMake, carModel, year, user_id, plateNumber, token, carColor, transmission, ownerNric, chassisNum);
 
         if (errorMsg == null || errorMsg.isEmpty()) {
 //            Vehicle vehicle = new Vehicle(user_id, token, token, user_id, plateNumber, user_id, carColor, token);
