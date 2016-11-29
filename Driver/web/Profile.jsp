@@ -37,13 +37,19 @@
 //                        ArrayList<Vehicle> vList = driver.getVehicles();
 
                     %>
-                    <%                        String success = (String) session.getAttribute("success");
+                    <%                        
+                        String success = (String) session.getAttribute("success");
+                        String fail = (String) request.getAttribute("fail");
 
                         if (success != null && !(success.equals("null")) && success.length() > 0) {
                     %>
                     <div class="alert alert-success"><%=success%></div>
                     <%
-                            session.setAttribute("success", "");
+                        session.setAttribute("success", "");
+                    } else if (fail != null && !(fail.equals("null")) && fail.length() > 0) {
+                    %>
+                    <div class="alert alert-danger"><%=fail%></div>
+                    <%
                         }
                     %>
                     <!-- content main container -->
